@@ -5,21 +5,25 @@ const constants = require("./constants");
 const HOSTURL = "http://" + window.location.host;
 
 var urlarray = window.location.pathname.split('/');
-export const roomId = urlarray[urlarray.length - 1];
+export const roomId = 123;
+
+const socketProtocol = (window.location.protocol.includes('https')) ? 'wss' : 'ws';
+const socketUrl = socketProtocol + "://" + "localhost:3001";
 
 
 
-console.log("roomid: ", roomId);
-export const socket = io(HOSTURL, {
+
+export const socket = io(socketUrl, {
     path: "/socket"
 });
+
 
 
 const connectSocketPromise = new Promise((resolve, reject) => {
     socket.on("connect", () => {
         console.log("connected to server socket server");
         socket.emit(constants.USERJOINROOM, {
-            roomId: roomId
+            roomId: 123
         })
 
         resolve();
@@ -31,8 +35,7 @@ const connectSocketPromise = new Promise((resolve, reject) => {
 
 
 export const connect = () => {
-    connectSocketPromise.then(() => {
-    })
+    return connectSocketPromise;
 }
 
 export const getcurrentState = () => {

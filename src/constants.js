@@ -3,13 +3,14 @@
 
 
 const CONSTS = Object.freeze({
-    USERJOINROOM: "user join room",
-    USERCREATEROOM: "user create room",
-    USERINPUT: "user input",
+    USERJOINROOM: 1,
+    USERCREATEROOM: 2,
+    USERCHANGESONG: 3,
+    USERINPUT: 4,
     controls: {
-        PLAY: "user-play",
-        PAUSE: "user-pause",
-        SEEK:  "user-seek"
+        PLAY: 5,
+        PAUSE: 6,
+        SEEK:  7
     }  
 });
 

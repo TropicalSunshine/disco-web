@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import testmp3 from "../audio/test.mp3";
+import testmp3 from "audio/test.mp3";
 
 
-import {socket, roomId, getcurrentState} from "../network";
-import constants from "../constants";
-import { runInThisContext } from 'vm';
+import {connect, socket, roomId, getcurrentState} from "network.js";
+import { downloadAssets } from "assets";
+import constants from "constants.js";
+
 
 
 export default class MainPlayer extends Component {
@@ -37,7 +38,10 @@ export default class MainPlayer extends Component {
     }
 
     //handlefile
-    componentDidMount(){
+    async componentDidMount(){
+        //await connect();
+        //await downloadAssets();
+
 
         socket.on(constants.USERJOINROOM, this.handleUserJoinRoom.bind(this));
         socket.on(constants.controls.PAUSE, this.handleInput.bind(this));
@@ -66,14 +70,16 @@ export default class MainPlayer extends Component {
         var ctx = canvas.getContext("2d");
     
         src.connect(analyser);
+        console.log(analyser)
         analyser.connect(context.destination);
     
         analyser.fftSize = 256;
     
         var bufferLength = analyser.frequencyBinCount;
         console.log(bufferLength);
-    
+        
         var dataArray = new Uint8Array(bufferLength);
+        
     
         var WIDTH = canvas.width;
         var HEIGHT = canvas.height;
@@ -93,7 +99,8 @@ export default class MainPlayer extends Component {
           ctx.fillRect(0, 0, WIDTH, HEIGHT);
     
           const multiplyer = (window.innerHeight * 0.003);
-
+        
+          
           for (var i = 0; i < bufferLength; i++) {
             barHeight = dataArray[i] * multiplyer;
             
@@ -130,6 +137,7 @@ export default class MainPlayer extends Component {
 
     
     handleAudioSeek(e){
+        return;
         if(!this.isSeekRequest){
             //fire event on last seek
             e.preventDefault();
@@ -160,19 +168,19 @@ export default class MainPlayer extends Component {
     }
 
     handleAudioPause(){
-
+        
         console.log("pausing song");
         socket.emit(constants.USERINPUT, {
-            status: constants.controls.PAUSE,
-            roomId: roomId
+            protocol: constants.controls.PAUSE,
+            roomId: 123
         });
     }
 
     handleAudioPlay(){
         console.log("playing song");
         socket.emit(constants.USERINPUT, {
-            status: constants.controls.PLAY,
-            roomId: roomId
+            protocol: constants.controls.PLAY,
+            roomId: 123
         });
     }
 

@@ -1,4 +1,6 @@
 const AUDIO = [
+    "test.mp3",
+    "test1.mp3"
 ];
 
 const audio_files = {};
@@ -6,14 +8,18 @@ const audio_files = {};
 const downloadAudioFiles = Promise.all(AUDIO.map(downloadAudio));
 
 function downloadAudio(assetName) {
+    console.log(assetName);
     return new Promise(resolve => {
-        const asset = new Image();
-        asset.onload = () => {
-        console.log(`Downloaded ${assetName}`);
-        audio_files[assetName] = asset;
-        resolve();
-        };
-        asset.src = `/audio/${assetName}`;
+        const asset = new Audio(`/audio/${assetName}`);
+
+        
+        asset.addEventListener("canplay", () => {
+            console.log(`Downloaded ${assetName}`);
+            audio_files[assetName] = asset;
+            resolve();
+        });
+        console.log(asset);
+        
     });
 }
 
@@ -41,7 +47,7 @@ function downloadImage(assetName) {
 };
 
 
-export const downloadAssets = () => Promise.all([
-    downloadAudioFiles,
-    downloadImageFiles
-]);
+export const downloadAssets = async () => {
+    await downloadAudioFiles;
+    await downloadImageFiles;
+};
