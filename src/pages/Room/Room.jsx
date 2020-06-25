@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import testmp3 from "audio/test.mp3";
 
+import testmp3 from "../../audio/test.mp3";
 
-import {connect, socket, roomId, getcurrentState} from "network.js";
-import { downloadAssets } from "assets";
-import constants from "constants.js";
+import LoaderPage from "ui/index";
+
+import {connect, socket, roomId, getcurrentState} from "../../network";
+import { downloadAssets } from "../../assets";
+import constants from "../../constants";
 
 
 
@@ -18,7 +20,8 @@ export default class MainPlayer extends Component {
         this.state = {
             paused: false,
             playing: false,
-            songTime: 0
+            songTime: 0,
+            isLoading: true
         }
         
 
