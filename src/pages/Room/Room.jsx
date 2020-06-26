@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 
-import testmp3 from "../../audio/test.mp3";
+import testmp3 from "audio/test.mp3";
 
-import LoaderPage from "ui/index";
+import { LoaderPage } from "ui/index";
 
-import {connect, socket, roomId, getcurrentState} from "../../network";
-import { downloadAssets } from "../../assets";
-import constants from "../../constants";
-
+import {connect, socket, roomId, getcurrentState} from "network";
+import { downloadAssets } from "assets";
+import constants from "constants.js";
 
 
 export default class MainPlayer extends Component {
@@ -21,7 +20,8 @@ export default class MainPlayer extends Component {
             paused: false,
             playing: false,
             songTime: 0,
-            isLoading: true
+            isLoading: true,
+            loadingValue: 0
         }
         
 
@@ -42,8 +42,12 @@ export default class MainPlayer extends Component {
 
     //handlefile
     async componentDidMount(){
-        //await connect();
-        //await downloadAssets();
+        await connect();
+        this.setState({
+            loadingValue: 50
+        });
+        await downloadAssets();
+        
 
 
         socket.on(constants.USERJOINROOM, this.handleUserJoinRoom.bind(this));
@@ -213,17 +217,28 @@ export default class MainPlayer extends Component {
         var time = this.state.songTime;
         
         return (
-            <div>
-                <input type="file" id="thefile" accept="audio/*"
-                    ref = {this.fileRef} />
-                <canvas ref = {this.canvasRef} id="canvas"></canvas>
-                <audio id="audio" controls
-                ref = {this.audioRef}
-                onSeeked = {this.handleAudioSeek}
-                onPause = {this.handleAudioPause}
-                onPlay = {this.handleAudioPlay}>
-                </audio>
-            </div>
+            <React.Fragment>
+                {
+                    this.state.isLoading && (
+                        <LoaderPage value={this.state.loadingValue}/>
+                    )
+                }
+                {
+                    !this.state.isLoading && (
+                        <div>
+                            <input type="file" id="thefile" accept="audio/*"
+                                ref = {this.fileRef} />
+                            <canvas ref = {this.canvasRef} id="canvas"></canvas>
+                            <audio id="audio" controls
+                            ref = {this.audioRef}
+                            onSeeked = {this.handleAudioSeek}
+                            onPause = {this.handleAudioPause}
+                            onPlay = {this.handleAudioPlay}>
+                            </audio>
+                        </div>
+                    )
+                }
+            </React.Fragment>
         )
     }
 }

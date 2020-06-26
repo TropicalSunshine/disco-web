@@ -1,3 +1,22 @@
 .loaderpage-container{
-    \
+    position: absolute;
+    background-color: var(--BLACK);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+}
+
+
+.loaderpage-center-box{
+    margin: 30% auto 25%;
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+}
+
+.loaderpage-center-box h1{
+    color: var(--WHITE);
+    
 }

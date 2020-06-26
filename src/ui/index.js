@@ -1,4 +1,4 @@
-import LoaderPage from "./loaders/LoaderPage";
+import LoaderPage from "./loaders/LoaderPage/LoaderPage"; 
 
 
 export {

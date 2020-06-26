@@ -20,14 +20,16 @@ export const socket = io(socketUrl, {
 
 
 const connectSocketPromise = new Promise((resolve, reject) => {
+    /*
     socket.on("connect", () => {
         console.log("connected to server socket server");
         socket.emit(constants.USERJOINROOM, {
             roomId: 123
         })
 
-        resolve();
     })
+    */
+    resolve();
 })
 
 

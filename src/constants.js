@@ -2,7 +2,7 @@
 
 
 
-const CONSTS = Object.freeze({
+const constants = Object.freeze({
     USERJOINROOM: 1,
     USERCREATEROOM: 2,
     USERCHANGESONG: 3,
@@ -14,5 +14,4 @@ const CONSTS = Object.freeze({
     }  
 });
 
-
-module.exports = CONSTS;
+module.exports = constants;
