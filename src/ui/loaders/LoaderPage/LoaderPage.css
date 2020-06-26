@@ -10,7 +10,7 @@
 
 
 .loaderpage-center-box{
-    margin: 30% auto 25%;
+    margin: 25% auto 0 auto;
     display: flex;
     width: 50%;
     flex-direction: column;
@@ -18,5 +18,5 @@
 
 .loaderpage-center-box h1{
     color: var(--WHITE);
-    
+    color: rgb(0,0,0);    
 }

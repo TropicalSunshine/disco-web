@@ -8,13 +8,13 @@ import {connect, socket, roomId, getcurrentState} from "network";
 import { downloadAssets } from "assets";
 import constants from "constants.js";
 
+const WAIT_TIME = 300;
 
 export default class MainPlayer extends Component {
 
     constructor(){
         super();
-        
-        this.WAIT_TIME = 500;
+    
 
         this.state = {
             paused: false,
@@ -29,7 +29,6 @@ export default class MainPlayer extends Component {
 
         this.audioRef = React.createRef();
         this.canvasRef = React.createRef();
-        this.fileRef = React.createRef();
 
         this.handleSeek = this.handleSeek.bind(this);
         this.handleAudioSeek = this.handleAudioSeek.bind(this);
@@ -44,26 +43,33 @@ export default class MainPlayer extends Component {
     async componentDidMount(){
         await connect();
         this.setState({
-            loadingValue: 50
+            loadingValue: 100,
+            isLoading: false
+        }, () => {
+            this.addSocketListeners();
+            this.initCanvas();
         });
-        await downloadAssets();
+        //await downloadAssets();
         
 
 
+       
+    }
+
+    addSocketListeners = () => {
+        console.log("socket");
         socket.on(constants.USERJOINROOM, this.handleUserJoinRoom.bind(this));
         socket.on(constants.controls.PAUSE, this.handleInput.bind(this));
         socket.on(constants.controls.PLAY, this.handleInput.bind(this));
         socket.on(constants.controls.SEEK, this.handleSeek.bind(this));
-    
+    }
 
-
+    initCanvas = () => {
         var canvas = this.canvasRef.current;
         var audio = this.audioRef.current;
-        var files = this.fileRef.current.files;
+        
 
 
-        //audio.src = URL.createObjectURL(files[0]);
-        console.log(audio.src);
 
         audio.src = testmp3;
     
@@ -105,7 +111,7 @@ export default class MainPlayer extends Component {
           ctx.fillStyle = "#000";
           ctx.fillRect(0, 0, WIDTH, HEIGHT);
     
-          const multiplyer = (window.innerHeight * 0.003);
+          const multiplyer = (window.innerHeight * 0.004);
         
           
           for (var i = 0; i < bufferLength; i++) {
@@ -122,6 +128,7 @@ export default class MainPlayer extends Component {
           }
         }
 
+        /*
         document.addEventListener("click", () => {
 
             this.audioContext.resume().then(
@@ -137,6 +144,7 @@ export default class MainPlayer extends Component {
                     audio.currentTime = json.song.duration;
             }));
         })
+        */
 
 
         renderFrame();
@@ -144,9 +152,10 @@ export default class MainPlayer extends Component {
 
     
     handleAudioSeek(e){
-        return;
+        
         if(!this.isSeekRequest){
             //fire event on last seek
+            console.log("firing seek");
             e.preventDefault();
             e.stopPropagation();
             console.log("seeking");
@@ -161,12 +170,12 @@ export default class MainPlayer extends Component {
                 console.log("emiting socket seeking");
                 
                 socket.emit(constants.USERINPUT, {
-                    status: constants.controls.SEEK,
+                    protocol: constants.controls.SEEK,
                     duration: audio.currentTime,
                     roomId: roomId
                 })
                 
-            }, this.WAIT_TIME);
+            }, WAIT_TIME);
         }
 
         this.isSeekRequest = false;
@@ -197,7 +206,7 @@ export default class MainPlayer extends Component {
         console.log("input from server: ", data);
         if(data.song.paused){
             audio.pause();
-        } else if (data.song.play){
+        } else if (!data.song.paused){
             audio.play();
         }
     }
@@ -226,8 +235,6 @@ export default class MainPlayer extends Component {
                 {
                     !this.state.isLoading && (
                         <div>
-                            <input type="file" id="thefile" accept="audio/*"
-                                ref = {this.fileRef} />
                             <canvas ref = {this.canvasRef} id="canvas"></canvas>
                             <audio id="audio" controls
                             ref = {this.audioRef}
