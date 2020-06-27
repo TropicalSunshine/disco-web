@@ -7,6 +7,7 @@ import { LoaderPage } from "ui/index";
 import {connect, socket, roomId, getcurrentState} from "network";
 import { downloadAssets } from "assets";
 import constants from "constants.js";
+import Axios from 'axios';
 
 const WAIT_TIME = 300;
 
@@ -41,7 +42,9 @@ export default class MainPlayer extends Component {
 
     //handlefile
     async componentDidMount(){
-        await connect();
+        //await connect();
+        //await this.getYoutubeMetaData();
+
         this.setState({
             loadingValue: 100,
             isLoading: false
@@ -50,10 +53,17 @@ export default class MainPlayer extends Component {
             this.initCanvas();
         });
         //await downloadAssets();
-        
+    }
 
-
-       
+    getYoutubeMetaData = async () => {
+        var vid = "3r_Z5AYJJd4";
+        await Axios.get("https://"+vid+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=https%3A%2F%2Fwww.youtube.com%2Fget_video_info%3Fvideo_id%3D" + vid, {
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            }
+        }).then(response => {
+            console.log(response);
+        });
     }
 
     addSocketListeners = () => {
@@ -65,12 +75,31 @@ export default class MainPlayer extends Component {
     }
 
     initCanvas = () => {
+
+        console.log(window["YT"]);
+
+        var player = new window["YT"].Player("player", {
+            videoId: "8L4PAeWXun8",
+            loop: true,
+            events: {
+                onReady: function(e){
+                    console.log("here");
+                    e.target.playVideo();
+                },
+                onStateChange: (e) => {
+                    console.log("aaa");
+                }
+            }
+        });
+
+        console.log(player);
+
         var canvas = this.canvasRef.current;
         var audio = this.audioRef.current;
         
 
 
-
+        audio.crossOrigin = "anonymous";
         audio.src = testmp3;
     
 
@@ -128,12 +157,14 @@ export default class MainPlayer extends Component {
           }
         }
 
-        /*
+        
         document.addEventListener("click", () => {
 
-            this.audioContext.resume().then(
+            this.audioContext.resume()
+            /*
+            .then(
                 getcurrentState().then(resp => resp.json()).then((json) => {
-                    
+                    console.log(json);
                     if(json.song.play){
                         audio.play();
                     } else if(json.song.pause){
@@ -143,10 +174,11 @@ export default class MainPlayer extends Component {
                     this.isSeekRequest = true;
                     audio.currentTime = json.song.duration;
             }));
+            */
         })
-        */
+        
 
-
+        this.audioContext.resume();
         renderFrame();
     }
 
@@ -227,6 +259,7 @@ export default class MainPlayer extends Component {
         
         return (
             <React.Fragment>
+                <div id="player"></div>
                 {
                     this.state.isLoading && (
                         <LoaderPage value={this.state.loadingValue}/>
@@ -237,6 +270,7 @@ export default class MainPlayer extends Component {
                         <div>
                             <canvas ref = {this.canvasRef} id="canvas"></canvas>
                             <audio id="audio" controls
+                            type="audio/mpeg"
                             ref = {this.audioRef}
                             onSeeked = {this.handleAudioSeek}
                             onPause = {this.handleAudioPause}

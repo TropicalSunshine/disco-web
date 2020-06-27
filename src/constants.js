@@ -1,5 +1,6 @@
 
-
+const YOUTUBE_API_KEY="AIzaSyC3uwL4wESiIqK51d4xwQfd5APWxC2H2lo";
+const YOUTUBE_API_URL="https://www.googleapis.com/youtube/v3"; 
 
 
 const constants = Object.freeze({
