@@ -6,7 +6,7 @@ import { LoaderPage } from "ui/index";
 
 import {connect, socket, roomId, getcurrentState} from "network";
 import { downloadAssets } from "assets";
-import constants from "constants.js";
+import { constants } from "constants.js";
 import Axios from 'axios';
 
 const WAIT_TIME = 300;
@@ -79,7 +79,7 @@ export default class MainPlayer extends Component {
         console.log(window["YT"]);
 
         var player = new window["YT"].Player("player", {
-            videoId: "8L4PAeWXun8",
+            videoId: "NkMTKGM-efw",
             loop: true,
             events: {
                 onReady: function(e){
