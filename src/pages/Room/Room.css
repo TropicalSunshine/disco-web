@@ -1,0 +1,28 @@
+
+.room-container{
+    width: 100vw;
+    height: 100vh;    
+    background-color: black;
+}
+
+.room-left-container{
+    background-color: var(--grey-secondary);
+    width: 20%;
+}
+
+.room-central-container{
+    width: 60%
+}
+
+.room-central-holder{
+    height: 80vh;
+}
+
+.player-control-container{
+    height: 20vh;
+}
+
+.room-right-container{
+    width: 20%;
+    background-color: var(--WHITE);
+}

@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 
 import testmp3 from "audio/test.mp3";
 
-import { LoaderPage } from "ui/index";
+import { LoaderPage, MusicControls } from "ui/index";
 
 import {connect, socket, roomId, getcurrentState} from "network";
 import { downloadAssets } from "assets";
 import { constants } from "constants.js";
 import Axios from 'axios';
+
+import "./Room.css"
 
 const WAIT_TIME = 300;
 
@@ -33,11 +35,11 @@ export default class MainPlayer extends Component {
 
         this.handleSeek = this.handleSeek.bind(this);
         this.handleAudioSeek = this.handleAudioSeek.bind(this);
-
         this.seekWaitTimer = null;
         this.isWaitSeek = false;
         this.isSeekRequest = false;
-
+        
+        this.youtubePlayer = null;
     }
 
     //handlefile
@@ -45,12 +47,15 @@ export default class MainPlayer extends Component {
         //await connect();
         //await this.getYoutubeMetaData();
 
+        await this.initYoutubePlayer();
+        
+
         this.setState({
             loadingValue: 100,
             isLoading: false
         }, () => {
-            this.addSocketListeners();
-            this.initCanvas();
+            //this.addSocketListeners();
+            //this.initCanvas();
         });
         //await downloadAssets();
     }
@@ -67,32 +72,36 @@ export default class MainPlayer extends Component {
     }
 
     addSocketListeners = () => {
-        console.log("socket");
+        console.log("initing sockets");
         socket.on(constants.USERJOINROOM, this.handleUserJoinRoom.bind(this));
         socket.on(constants.controls.PAUSE, this.handleInput.bind(this));
         socket.on(constants.controls.PLAY, this.handleInput.bind(this));
         socket.on(constants.controls.SEEK, this.handleSeek.bind(this));
     }
 
+    initYoutubePlayer = () => {
+        console.log(window["YT"]);
+        return new Promise((rej) => {
+            this.youtubePlayer = new window["YT"].Player("player", {
+                videoId: "NkMTKGM-efw",
+                width: 0,
+                height: 0,
+                loop: false,
+                events: {
+                    onReady: (e) => {
+                        rej();
+                        //e.target.playVideo();
+                    },
+                    onStateChange: (e) => {
+                        console.log("aaa");
+                    }
+                }
+            });
+        })
+    }
+
     initCanvas = () => {
 
-        console.log(window["YT"]);
-
-        var player = new window["YT"].Player("player", {
-            videoId: "NkMTKGM-efw",
-            loop: true,
-            events: {
-                onReady: function(e){
-                    console.log("here");
-                    e.target.playVideo();
-                },
-                onStateChange: (e) => {
-                    console.log("aaa");
-                }
-            }
-        });
-
-        console.log(player);
 
         var canvas = this.canvasRef.current;
         var audio = this.audioRef.current;
@@ -215,21 +224,27 @@ export default class MainPlayer extends Component {
 
     }
 
-    handleAudioPause(){
+    handleAudioPause = () => {
         
         console.log("pausing song");
+        this.youtubePlayer.pauseVideo();
+        /*
         socket.emit(constants.USERINPUT, {
             protocol: constants.controls.PAUSE,
             roomId: 123
         });
+        */
     }
 
-    handleAudioPlay(){
+    handleAudioPlay = () => {
         console.log("playing song");
+        this.youtubePlayer.playVideo();
+        /*
         socket.emit(constants.USERINPUT, {
             protocol: constants.controls.PLAY,
             roomId: 123
         });
+        */
     }
 
     handleInput(data){
@@ -267,15 +282,41 @@ export default class MainPlayer extends Component {
                 }
                 {
                     !this.state.isLoading && (
-                        <div>
-                            <canvas ref = {this.canvasRef} id="canvas"></canvas>
-                            <audio id="audio" controls
-                            type="audio/mpeg"
-                            ref = {this.audioRef}
-                            onSeeked = {this.handleAudioSeek}
-                            onPause = {this.handleAudioPause}
-                            onPlay = {this.handleAudioPlay}>
-                            </audio>
+                        <div className="room-container box-row">
+                            <div className="room-left-container">
+                                <div>
+                                </div>
+                                <h1>hi</h1>
+                            </div>
+                            <div className="room-central-container box-column">
+                                {
+                                    //<canvas ref = {this.canvasRef} id="canvas"></canvas>
+                                }
+                                <div className="room-central-holder">
+                                    <h1>asd</h1>
+                                </div>
+                                <div className="player-control-container">
+                                    <MusicControls
+                                    handlePlay={this.handleAudioPlay}
+                                    handlePause={this.handleAudioPause}
+                                    />
+                                </div>
+                            </div>
+                            <div className="room-right-container">
+                                {
+                                    /*
+                                    <audio id="audio" controls
+                                    type="audio/mpeg"
+                                    ref = {this.audioRef}
+                                    onSeeked = {this.handleAudioSeek}
+                                    onPause = {this.handleAudioPause}
+                                    onPlay = {this.handleAudioPlay}>
+                                    </audio>
+                                     */
+                                }
+                                
+                            </div>
+                            
                         </div>
                     )
                 }

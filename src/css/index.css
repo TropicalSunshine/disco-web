@@ -9,9 +9,13 @@
   --grey-secondary: rgb(77, 76, 76);
 
   --green-primary: rgb(28, 255, 47);
+  --red: rgb(228, 68, 68);
 
 
   --box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
+  --font-large: 40px;
+  --font-medium: 25px;
+  --font-small: 15px;
 }
 
 
@@ -29,3 +33,6 @@ code {
     monospace;
 }
 
+#player{
+  display: none;
+}
