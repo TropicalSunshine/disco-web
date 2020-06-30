@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import testmp3 from "audio/test.mp3";
 
+import SearchPanel from "./SearchPanel.jsx";
+
 import { LoaderPage, MusicControls } from "ui/index";
 
 import {connect, socket, roomId, getcurrentState} from "network";
@@ -13,7 +15,7 @@ import "./Room.css"
 
 const WAIT_TIME = 300;
 
-export default class MainPlayer extends Component {
+export default class Room extends Component {
 
     constructor(){
         super();
@@ -269,8 +271,6 @@ export default class MainPlayer extends Component {
 
 
     render() {
-
-        var time = this.state.songTime;
         
         return (
             <React.Fragment>
@@ -284,9 +284,7 @@ export default class MainPlayer extends Component {
                     !this.state.isLoading && (
                         <div className="room-container box-row">
                             <div className="room-left-container">
-                                <div>
-                                </div>
-                                <h1>hi</h1>
+                                <SearchPanel/>
                             </div>
                             <div className="room-central-container box-column">
                                 {

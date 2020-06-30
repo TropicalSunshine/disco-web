@@ -6,7 +6,7 @@
 }
 
 .room-left-container{
-    background-color: var(--grey-secondary);
+    background-color: var(--WHITE);
     width: 20%;
 }
 
@@ -25,4 +25,19 @@
 .room-right-container{
     width: 20%;
     background-color: var(--WHITE);
+}
+
+
+.search-panel{
+    height: 100%;
+}
+
+.search-area{
+    height: 10%;
+    color: white;
+    padding: 10px;
+}
+
+.search-results{
+    height: 90%;
 }
