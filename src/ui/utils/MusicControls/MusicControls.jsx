@@ -17,11 +17,20 @@ props req
  */
 
 export default class MusicPlayer extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
 
         this.state = {
-            play: false 
+            paused: props.paused
+        }
+    }
+
+    componentDidUpdate(prevProps){
+        if(prevProps.paused !== this.props.paused){
+            console.log(this.props.paused);
+            this.setState({
+                paused: this.props.paused
+            })
         }
     }
 
@@ -38,27 +47,20 @@ export default class MusicPlayer extends Component {
                     </div>
                     <div className="music-player-control-button play-button">
                         {
-                            !this.state.play &&
+                            this.state.paused &&
                             (
                             <PlayIcon 
                             onClick={()=>{
                                 this.props.handlePlay();
-                                
-                                this.setState({
-                                    play: true
-                                });
                             }}
                             style={{ fontSize: 50 }}/>
                             )
                         }
                         {
-                            this.state.play && (
+                            !this.state.paused && (
                                 <PauseIcon
                                 onClick={() => {
                                     this.props.handlePause();
-                                    this.setState({
-                                        play: false
-                                    });
                                 }}
                                 style={{ fontSize: 50 }}
                                 />

@@ -2,14 +2,17 @@ import React, { Component } from 'react';
 
 import testmp3 from "audio/test.mp3";
 
-import SearchPanel from "./SearchPanel.jsx";
 
 import { LoaderPage, MusicControls } from "ui/index";
 
 import {connect, socket, roomId, getcurrentState} from "network";
 import { downloadAssets } from "assets";
 import { constants } from "constants.js";
+
+import YoutubePlayer from "services/YoutubePlayer.js";
 import Axios from 'axios';
+
+import SearchPanel from "./SearchPanel.jsx";
 
 import "./Room.css"
 
@@ -22,7 +25,7 @@ export default class Room extends Component {
     
 
         this.state = {
-            paused: false,
+            paused: true,
             playing: false,
             songTime: 0,
             isLoading: true,
@@ -62,6 +65,7 @@ export default class Room extends Component {
         //await downloadAssets();
     }
 
+
     getYoutubeMetaData = async () => {
         var vid = "3r_Z5AYJJd4";
         await Axios.get("https://"+vid+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=https%3A%2F%2Fwww.youtube.com%2Fget_video_info%3Fvideo_id%3D" + vid, {
@@ -81,25 +85,10 @@ export default class Room extends Component {
         socket.on(constants.controls.SEEK, this.handleSeek.bind(this));
     }
 
-    initYoutubePlayer = () => {
+    initYoutubePlayer = async () => {
         console.log(window["YT"]);
-        return new Promise((rej) => {
-            this.youtubePlayer = new window["YT"].Player("player", {
-                videoId: "NkMTKGM-efw",
-                width: 0,
-                height: 0,
-                loop: false,
-                events: {
-                    onReady: (e) => {
-                        rej();
-                        //e.target.playVideo();
-                    },
-                    onStateChange: (e) => {
-                        console.log("aaa");
-                    }
-                }
-            });
-        })
+        this.youtubePlayer = new YoutubePlayer();
+        await this.youtubePlayer.init(); 
     }
 
     initCanvas = () => {
@@ -229,7 +218,10 @@ export default class Room extends Component {
     handleAudioPause = () => {
         
         console.log("pausing song");
-        this.youtubePlayer.pauseVideo();
+        this.youtubePlayer.pause();
+        this.setState({
+            paused: true
+        })
         /*
         socket.emit(constants.USERINPUT, {
             protocol: constants.controls.PAUSE,
@@ -240,13 +232,34 @@ export default class Room extends Component {
 
     handleAudioPlay = () => {
         console.log("playing song");
-        this.youtubePlayer.playVideo();
+        this.youtubePlayer.play();
+        this.setState({
+            paused: false
+        })
         /*
         socket.emit(constants.USERINPUT, {
             protocol: constants.controls.PLAY,
             roomId: 123
         });
         */
+    }
+
+    setPausePromise = (val=true) => {
+        return new Promise((res, rej) => {
+            this.setState({
+                paused:val
+            }, () => {
+                res();
+            });
+        })
+    }
+
+    handleAudioLoad = async (vidId) => {
+        await this.setPausePromise(true);
+        await this.youtubePlayer.loadVideo(vidId);
+        await this.setPausePromise(false)
+        
+        this.youtubePlayer.play();
     }
 
     handleInput(data){
@@ -284,7 +297,9 @@ export default class Room extends Component {
                     !this.state.isLoading && (
                         <div className="room-container box-row">
                             <div className="room-left-container">
-                                <SearchPanel/>
+                                <SearchPanel
+                                onVideoSelect={this.handleAudioLoad}
+                                />
                             </div>
                             <div className="room-central-container box-column">
                                 {
@@ -295,6 +310,7 @@ export default class Room extends Component {
                                 </div>
                                 <div className="player-control-container">
                                     <MusicControls
+                                    paused={this.state.paused}
                                     handlePlay={this.handleAudioPlay}
                                     handlePause={this.handleAudioPause}
                                     />

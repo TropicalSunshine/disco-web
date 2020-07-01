@@ -18,6 +18,15 @@
   --font-small: 15px;
 }
 
+body::-webkit-scrollbar {
+  width: 0px;
+  display: none;
+}
+
+body::-webkit-scrollbar-track {
+  width: 0;
+}
+
 
 body {
   margin: 0;

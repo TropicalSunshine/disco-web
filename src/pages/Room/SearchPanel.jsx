@@ -13,8 +13,8 @@ import SearchIcon from "@material-ui/icons/SearchOutlined";
 
 export default class SearchPanel extends Component {
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
 
         this.state = {
             searchValue: "",
@@ -88,7 +88,9 @@ export default class SearchPanel extends Component {
                     }
                     {
                         !this.state.isSearching && this.state.youtubeSearchResults.map(r => {
-                            return <ResultBlock value={r}/>
+                            return <ResultBlock 
+                            onVideoSelect={this.props.onVideoSelect}
+                            value={r}/>
                         })
                     }
                 </div>
@@ -99,10 +101,28 @@ export default class SearchPanel extends Component {
 
 
 function ResultBlock(props){
+
+    
+    const v = props.value;
+    console.log(props);
+    console.log(v);
+    const thumbnail = v.snippet.thumbnails.default;
+
     return (
-        <div>
+        <div className="box-row">
+            <div className="result-img-container"
+            onClick={() => {
+                props.onVideoSelect(v.id.videoId);
+            }}
+            >
+                <img
+                src={thumbnail.url}
+                width={thumbnail.width}
+                height={thumbnail.height}
+                />
+            </div>
             <div>
-                
+
             </div>
         </div>
     )

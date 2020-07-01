@@ -40,4 +40,13 @@
 
 .search-results{
     height: 90%;
+    overflow-y: auto;
+}
+
+.result-block{
+    height: 100px;
+}
+
+.result-img-container{
+    padding: 5px;
 }
