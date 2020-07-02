@@ -6,8 +6,9 @@
 }
 
 .room-left-container{
-    background-color: var(--WHITE);
+    background-color: var(--grey-primary);
     width: 20%;
+    min-width: 300px;
 }
 
 .room-central-container{
@@ -15,27 +16,34 @@
 }
 
 .room-central-holder{
-    height: 80vh;
+    height: 80%;
 }
 
 .player-control-container{
-    height: 20vh;
+    height: 20%;
 }
 
 .room-right-container{
     width: 20%;
-    background-color: var(--WHITE);
+    background-color: var(--grey-primary);
 }
 
 
 .search-panel{
     height: 100%;
+    min-width: 300px;
 }
 
 .search-area{
+    color: var(--WHITE);
+    width: 90%;
+    padding: 0 10px;
     height: 10%;
-    color: white;
     padding: 10px;
+}
+
+.search-result-list{
+    padding: 0;
 }
 
 .search-results{
@@ -44,9 +52,19 @@
 }
 
 .result-block{
-    height: 100px;
+    color: var(--WHITE);
+    height: 90px;
+    
+    
+    margin: 5px 0;
 }
 
 .result-img-container{
-    padding: 5px;
+    padding: 0 0 5px 0;
+    width: 120px;
+}
+
+.result-desc-container{
+    width: 80vw;
+    padding: 0 5px;
 }

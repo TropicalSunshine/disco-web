@@ -28,10 +28,12 @@ YoutubePlayer.prototype.loadVideo = async function(vidId, startSeconds=0){
         startSeconds: startSeconds
     });
 
-    return new Promise((rej) => {
-        this.player.onReady = () => {
-            rej();
-        }
+    this.player.pauseVideo();
+
+    return new Promise((res) => {
+        this.player.addEventListener("onStateChange", () => {
+            res();
+        })
     });
 }
 

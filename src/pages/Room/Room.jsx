@@ -255,8 +255,11 @@ export default class Room extends Component {
     }
 
     handleAudioLoad = async (vidId) => {
+
         await this.setPausePromise(true);
+        console.log("pausing");
         await this.youtubePlayer.loadVideo(vidId);
+        console.log("playing");
         await this.setPausePromise(false)
         
         this.youtubePlayer.play();

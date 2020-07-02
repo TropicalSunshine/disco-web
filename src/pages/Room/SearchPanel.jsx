@@ -67,18 +67,21 @@ export default class SearchPanel extends Component {
         return (
             <div className="box-column search-panel">
                 <div className="search-area">
-                    <FormControl>
-                        <Input
-                        placeholder="Search"
-                        id="input-with-icon-adornment"
-                        onChange={this.handleOnSearch}
-                        startAdornment={
-                            <InputAdornment position="start">
-                             <SearchIcon />
-                            </InputAdornment>
-                        }
-                        />
-                    </FormControl>
+                    <Input
+                    style={{
+                        color: "white",
+                        borderColor: "white"
+                    }}
+                    fullWidth={true}
+                    placeholder="Search"
+                    id="input-with-icon-adornment"
+                    onChange={this.handleOnSearch}
+                    startAdornment={
+                        <InputAdornment position="start">
+                            <SearchIcon />
+                        </InputAdornment>
+                    }
+                    />
                 </div>
                 <div className="search-results">
                     {
@@ -87,11 +90,17 @@ export default class SearchPanel extends Component {
                         )
                     }
                     {
-                        !this.state.isSearching && this.state.youtubeSearchResults.map(r => {
-                            return <ResultBlock 
-                            onVideoSelect={this.props.onVideoSelect}
-                            value={r}/>
-                        })
+                        !this.state.isSearching && (
+                            <ul className="search-result-list">
+                             {
+                                this.state.youtubeSearchResults.map(r => {
+                                return <ResultBlock 
+                                onVideoSelect={this.props.onVideoSelect}
+                                value={r}/>
+                                })
+                            }
+                            </ul>
+                        )
                     }
                 </div>
             </div>
@@ -104,12 +113,11 @@ function ResultBlock(props){
 
     
     const v = props.value;
-    console.log(props);
-    console.log(v);
     const thumbnail = v.snippet.thumbnails.default;
+    const snippet = v.snippet;
 
     return (
-        <div className="box-row">
+        <li className="box-row result-block">
             <div className="result-img-container"
             onClick={() => {
                 props.onVideoSelect(v.id.videoId);
@@ -121,9 +129,19 @@ function ResultBlock(props){
                 height={thumbnail.height}
                 />
             </div>
-            <div>
-
+            <div className=" result-desc-container box-column">
+                <p style={{
+                    overflow: "hidden",
+                    fontSize: "10pt",
+                    fontWeight: "bold",
+                    marginTop: "5px",
+                    marginBottom: "5px"
+                }}>{snippet.title}</p>
+                <p style={{
+                    fontSize: "8pt",
+                    marginTop: "5px"
+                }}>{snippet.channelTitle}</p>
             </div>
-        </div>
+        </li>
     )
 }
