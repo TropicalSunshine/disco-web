@@ -27,7 +27,7 @@ YoutubePlayer.prototype.init = function(){
                 this.duration = e.target.getDuration();
                 e.target.seekTo(that.time);
 
-                console.log(this.paused)
+                console.log(this.paused);
                 if(this.paused) {
                     console.log("paused loaded")
                     e.target.pauseVideo();

@@ -12,5 +12,6 @@ export const constants = Object.freeze({
         SEEK:  7
     },
     JOINSUCCESS: 8,
-    UPDATE: 9
+    UPDATE: 9,
+    SUCCESS: 10
 });
