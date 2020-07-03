@@ -5,7 +5,7 @@ import testmp3 from "audio/test.mp3";
 
 import { LoaderPage, MusicControls } from "ui/index";
 
-import {connect, socket, roomId, getcurrentState} from "network";
+import {connect, joinSuccess , socket, emitPause, emitPlay, emitChangeSong } from "services/socket";
 import { downloadAssets } from "assets";
 import { constants } from "constants.js";
 
@@ -23,23 +23,25 @@ export default class Room extends Component {
     constructor(){
         super();
     
-
+        console.log();
         this.state = {
             paused: true,
             playing: false,
             songTime: 0,
             isLoading: true,
-            loadingValue: 0
+            loadingValue: 0,
+            
         }
         
-
+        this.roomId = window.location.pathname.split("/")[2];
+        
         this.audioContext = new AudioContext();
 
         this.audioRef = React.createRef();
         this.canvasRef = React.createRef();
 
-        this.handleSeek = this.handleSeek.bind(this);
-        this.handleAudioSeek = this.handleAudioSeek.bind(this);
+        
+        
         this.seekWaitTimer = null;
         this.isWaitSeek = false;
         this.isSeekRequest = false;
@@ -49,20 +51,50 @@ export default class Room extends Component {
 
     //handlefile
     async componentDidMount(){
-        //await connect();
+        await connect();
         //await this.getYoutubeMetaData();
-
-        await this.initYoutubePlayer();
         
+        var data = {
+            songId: null,
+            time: 0,
+            paused: true 
+        };
 
         this.setState({
+            loadingValue: 25
+        });
+
+        await joinSuccess().then(d => {
+            data = d;
+            console.log("data on join success", data);
+        });
+
+        this.setState({
+            loadingValue: 50
+        });
+        console.log(data);
+        await this.initYoutubePlayer(data.songId, data.time, data.paused);
+
+        this.setState({
+            loadingValue: 75
+        });
+
+        this.addSocketListeners();
+        
+        this.setState({
             loadingValue: 100,
-            isLoading: false
-        }, () => {
-            //this.addSocketListeners();
-            //this.initCanvas();
+            isLoading: false,
+            paused: data.paused
         });
         //await downloadAssets();
+    }
+
+    socketFirstUpdate = () => {
+        return new Promise((res, rej) => {
+            socket.on(constants.UPDATE, (data) => {
+
+            })
+        })
     }
 
 
@@ -79,15 +111,43 @@ export default class Room extends Component {
 
     addSocketListeners = () => {
         console.log("initing sockets");
-        socket.on(constants.USERJOINROOM, this.handleUserJoinRoom.bind(this));
-        socket.on(constants.controls.PAUSE, this.handleInput.bind(this));
-        socket.on(constants.controls.PLAY, this.handleInput.bind(this));
-        socket.on(constants.controls.SEEK, this.handleSeek.bind(this));
+        //socket.on(constants.USERJOINROOM, this.handleUserJoinRoom.bind(this));
+        socket.on(constants.UPDATE, (data) => {
+            this.loadAudio(data.songId, data.time, !data.paused);
+        });
+
+        socket.on(constants.USERCHANGESONG, (data) => {
+            this.loadAudio(data.songId);
+        });
+
+        socket.on(constants.controls.SEEK, (data) => {
+            this.isSeekRequest = true;
+            this.audioRef.current.currentTime = data.song.duration;
+        });
+        
+        socket.on(constants.controls.PAUSE, this.handleSocketInput);
+        socket.on(constants.controls.PLAY, this.handleSocketInput);
+        
     }
 
-    initYoutubePlayer = async () => {
+
+    handleSocketInput = (data) => {
+        console.log("input from server: ", data);
+
+        this.setState({
+            paused: data.paused
+        });
+
+        if(data.song.paused){
+            this.youtubePlayer.pause();
+        } else if (!data.song.paused){
+            this.youtubePlayer.play();
+        }
+    }
+
+    initYoutubePlayer = async (songId=null, startTime=0, paused=true) => {
         console.log(window["YT"]);
-        this.youtubePlayer = new YoutubePlayer();
+        this.youtubePlayer = new YoutubePlayer(songId, startTime, paused);
         await this.youtubePlayer.init(); 
     }
 
@@ -183,7 +243,7 @@ export default class Room extends Component {
     }
 
     
-    handleAudioSeek(e){
+    handleAudioSeek = (e) => {
         
         if(!this.isSeekRequest){
             //fire event on last seek
@@ -204,7 +264,7 @@ export default class Room extends Component {
                 socket.emit(constants.USERINPUT, {
                     protocol: constants.controls.SEEK,
                     duration: audio.currentTime,
-                    roomId: roomId
+                    roomId: this.roomId
                 })
                 
             }, WAIT_TIME);
@@ -218,6 +278,8 @@ export default class Room extends Component {
     handleAudioPause = () => {
         
         console.log("pausing song");
+
+        emitPause(this.roomId);
         this.youtubePlayer.pause();
         this.setState({
             paused: true
@@ -232,10 +294,13 @@ export default class Room extends Component {
 
     handleAudioPlay = () => {
         console.log("playing song");
+
+        emitPlay(this.roomId);
         this.youtubePlayer.play();
         this.setState({
             paused: false
         })
+
         /*
         socket.emit(constants.USERINPUT, {
             protocol: constants.controls.PLAY,
@@ -254,32 +319,22 @@ export default class Room extends Component {
         })
     }
 
-    handleAudioLoad = async (vidId) => {
+    loadAudio = async (vidId, startSecond=0, play=true) => {
 
         await this.setPausePromise(true);
         console.log("pausing");
-        await this.youtubePlayer.loadVideo(vidId);
+        await this.youtubePlayer.loadVideo(vidId, startSecond);
         console.log("playing");
-        await this.setPausePromise(false)
-        
-        this.youtubePlayer.play();
-    }
 
-    handleInput(data){
-        var audio = this.audioRef.current;
-
-        console.log("input from server: ", data);
-        if(data.song.paused){
-            audio.pause();
-        } else if (!data.song.paused){
-            audio.play();
+        if(play){
+            await this.setPausePromise(false)
+            this.youtubePlayer.play();
+        } else {
+            this.youtubePlayer.pause();
         }
+        
     }
 
-    handleSeek(data){
-        this.isSeekRequest = true;
-        this.audioRef.current.currentTime = data.song.duration;
-    }
 
     handleUserJoinRoom(data){
                 
@@ -301,7 +356,12 @@ export default class Room extends Component {
                         <div className="room-container box-row">
                             <div className="room-left-container">
                                 <SearchPanel
-                                onVideoSelect={this.handleAudioLoad}
+                                onVideoSelect={(vidId) => {
+                                    this.loadAudio(vidId);
+
+                                    //call socket to emit that the song has changed
+                                    emitChangeSong(this.roomId, this.youtubePlayer);
+                                }}
                                 />
                             </div>
                             <div className="room-central-container box-column">

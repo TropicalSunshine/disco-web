@@ -1,37 +1,79 @@
 
-function YoutubePlayer(){
+function YoutubePlayer(videoId=null,startSeconds=0, paused=true){
     this.player = null;
+    this.videoId = videoId;
+    this.duration = 0;
+    this.paused = paused;
+    this.time = startSeconds;
 }
 
 YoutubePlayer.prototype.init = function(){
 
-    return new Promise((rej) => {
-        this.player = new window["YT"].Player("player", {
-            videoId: "NkMTKGM-efw",
-            width: 0,
-            height: 0,
-            loop: false,
-            events: {
-                onReady: (e) => {
-                    rej();
-                    //e.target.playVideo();
+    var constructConfigs = {
+        width: 0,
+        height: 0,
+        loop: false
+    };
+
+    if(this.videoId !== null){
+        constructConfigs["videoId"] = this.videoId;
+    }
+
+    var that = this;
+    return new Promise((res) => {
+        constructConfigs.events = {
+            onReady: (e) => {
+                
+                this.duration = e.target.getDuration();
+                e.target.seekTo(that.time);
+
+                console.log(this.paused)
+                if(this.paused) {
+                    console.log("paused loaded")
+                    e.target.pauseVideo();
+                } else {
+                    console.log("paused loaded")
+                    e.target.playVideo();
+                }
+
+                res();
+
+                //e.target.playVideo();
+            },
+            onStateChange: (e) => {
+                switch(e.data){
+                    case window["YT"].PlayerState.PAUSED:
+                        console.log("pausing")
+                        that.paused = true;
+                        break;
+                    case window["YT"].PlayerState.PLAYING:
+                        console.log("play")
+                        that.paused = false;
+                        break;
                 }
             }
-        });
+        }
+
+        console.log(constructConfigs);
+
+        this.player = new window["YT"].Player("player", constructConfigs );
     })
 
 }
 
-YoutubePlayer.prototype.loadVideo = async function(vidId, startSeconds=0){
+YoutubePlayer.prototype.loadVideo = function(vidId, startSeconds=0){
     this.player.loadVideoById({
         videoId: vidId,
         startSeconds: startSeconds
     });
 
-    this.player.pauseVideo();
+    this.videoId = vidId;
 
+    this.player.pauseVideo();
+    
     return new Promise((res) => {
-        this.player.addEventListener("onStateChange", () => {
+        this.player.addEventListener("onStateChange", (e) => {
+            this.duration = e.target.getDuration();
             res();
         })
     });
@@ -45,5 +87,19 @@ YoutubePlayer.prototype.pause = function(){
     this.player.pauseVideo();
 }
 
+YoutubePlayer.prototype.getState = function(){
+
+    var that = this;
+    return {
+        duration:  that.duration,
+        songId: that.videoId,
+        paused: that.paused,
+        time: that.player.getCurrentTime()
+    }
+}
+
+YoutubePlayer.prototype.destroy = function(){
+    this.player.destroy();
+}
 
 export default YoutubePlayer;
