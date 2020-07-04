@@ -60,5 +60,5 @@ export const emitPlay = (roomId) => {
 export const emitChangeSong = (roomId, player) => {
     var data = player.getState();
     data.roomId = roomId;
-    socket.emit(constants.USERCHANGESONG, data);
+    socket.emit(constants.USERCHANGESONG, data);    
 }
