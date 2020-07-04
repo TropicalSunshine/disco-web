@@ -319,12 +319,14 @@ export default class Room extends Component {
         })
     }
 
-    loadAudio = async (vidId, startSecond=0, play=true) => {
+    loadAudio = async (vidId, startSecond=0, play=true, emit=false) => {
 
         await this.setPausePromise(true);
         console.log("pausing");
         await this.youtubePlayer.loadVideo(vidId, startSecond);
         console.log("playing");
+
+        if(emit) emitChangeSong(this.roomId, this.youtubePlayer);
 
         if(play){
             await this.setPausePromise(false)
@@ -357,10 +359,10 @@ export default class Room extends Component {
                             <div className="room-left-container">
                                 <SearchPanel
                                 onVideoSelect={(vidId) => {
-                                    this.loadAudio(vidId);
+                                    this.loadAudio(vidId, 0, true, true);
 
                                     //call socket to emit that the song has changed
-                                    emitChangeSong(this.roomId, this.youtubePlayer);
+                                    
                                 }}
                                 />
                             </div>

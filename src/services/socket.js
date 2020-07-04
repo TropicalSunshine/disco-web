@@ -58,5 +58,7 @@ export const emitPlay = (roomId) => {
 }
 
 export const emitChangeSong = (roomId, player) => {
-    socket.emit(constants.USERCHANGESONG, player.getCurrenttime());
+    var data = player.getState();
+    data.roomId = roomId;
+    socket.emit(constants.USERCHANGESONG, data);
 }

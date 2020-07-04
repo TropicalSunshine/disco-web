@@ -89,12 +89,12 @@ YoutubePlayer.prototype.pause = function(){
 
 YoutubePlayer.prototype.getState = function(){
 
-    var that = this;
+    
     return {
-        duration:  that.duration,
-        songId: that.videoId,
-        paused: that.paused,
-        time: that.player.getCurrentTime()
+        duration:  this.duration,
+        songId: this.videoId,
+        paused: this.paused,
+        time: this.player.getCurrentTime()
     }
 }
 
