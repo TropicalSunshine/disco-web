@@ -138,9 +138,9 @@ export default class Room extends Component {
             paused: data.paused
         });
 
-        if(data.song.paused){
+        if(data.paused){
             this.youtubePlayer.pause();
-        } else if (!data.song.paused){
+        } else if (!data.paused){
             this.youtubePlayer.play();
         }
     }
