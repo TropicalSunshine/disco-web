@@ -69,12 +69,17 @@ YoutubePlayer.prototype.loadVideo = function(vidId, startSeconds=0){
 
     this.videoId = vidId;
 
-    this.player.pauseVideo();
+    this.player.playVideo();
     
     return new Promise((res) => {
         this.player.addEventListener("onStateChange", (e) => {
-            this.duration = e.target.getDuration();
-            res();
+
+            if(e.data === window["YT"].PlayerState.BUFFERING){
+                console.log("buffering");
+                console.log(e.target.getDuration());
+                this.duration = e.target.getDuration();
+                res();
+            }
         })
     });
 }
