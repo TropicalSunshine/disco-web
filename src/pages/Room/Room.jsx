@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import testmp3 from "audio/test.mp3";
 
 
-import { LoaderPage, MusicControls } from "ui/index";
+import { LoaderPage, MusicControls } from "shared/ui/index";
 
 import {connect, joinSuccess , socket, emitPause, emitPlay, emitChangeSong } from "services/socket";
 import { downloadAssets } from "assets";
