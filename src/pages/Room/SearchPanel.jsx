@@ -93,8 +93,9 @@ export default class SearchPanel extends Component {
                         !this.state.isSearching && (
                             <ul className="search-result-list">
                              {
-                                this.state.youtubeSearchResults.map(r => {
+                                this.state.youtubeSearchResults.map((r, i) => {
                                 return <ResultBlock 
+                                key={"search-result-" + i}
                                 onVideoSelect={this.props.onVideoSelect}
                                 value={r}/>
                                 })
@@ -120,7 +121,7 @@ function ResultBlock(props){
         <li className="box-row result-block">
             <div className="result-img-container"
             onClick={() => {
-                props.onVideoSelect(v.id.videoId);
+                props.onVideoSelect(v.id.videoId, v);
             }}
             >
                 <img

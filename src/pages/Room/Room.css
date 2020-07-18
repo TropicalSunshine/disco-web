@@ -15,12 +15,41 @@
     width: 60%
 }
 
-.room-central-holder{
-    height: 80%;
+.player-display-box{
+    height: 83%;
 }
 
 .player-control-container{
-    height: 20%;
+
+    height: 17%;
+    background-color: var(--grey-primary);
+}
+
+.player-disk{
+    height: 230px;
+    width: 230px;
+    background-color: #f0f;
+    border-radius: 50%;
+    margin: auto;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    animation-name: spin;
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear; 
+
+}
+
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
 }
 
 .room-right-container{

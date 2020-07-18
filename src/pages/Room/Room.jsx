@@ -5,11 +5,13 @@ import testmp3 from "audio/test.mp3";
 
 import { LoaderPage, MusicControls } from "shared/ui/index";
 
-import {connect, joinSuccess , socket, emitPause, emitPlay, emitChangeSong } from "services/socket";
+import {connectSocket, joinSuccess , socket, emitPause, emitPlay, emitChangeSong } from "services/socket";
 import { downloadAssets } from "assets";
 import { constants } from "constants.js";
 
 import YoutubePlayer from "services/YoutubePlayer.js";
+import { getVideoInfoData } from "services/youtubeApi";
+
 import Axios from 'axios';
 
 import SearchPanel from "./SearchPanel.jsx";
@@ -30,17 +32,11 @@ export default class Room extends Component {
             songTime: 0,
             isLoading: true,
             loadingValue: 0,
+            songImage : null
             
         }
         
         this.roomId = window.location.pathname.split("/")[2];
-        
-        this.audioContext = new AudioContext();
-
-        this.audioRef = React.createRef();
-        this.canvasRef = React.createRef();
-
-        
         
         this.seekWaitTimer = null;
         this.isWaitSeek = false;
@@ -51,8 +47,7 @@ export default class Room extends Component {
 
     //handlefile
     async componentDidMount(){
-        await connect();
-        //await this.getYoutubeMetaData();
+        await connectSocket();
         
         var data = {
             songId: null,
@@ -64,17 +59,16 @@ export default class Room extends Component {
             loadingValue: 25
         });
 
-        await joinSuccess().then(d => {
-            data = d;
-            console.log("data on join success", data);
-        });
+        data = await joinSuccess();
+        console.log(data);
 
         this.setState({
             loadingValue: 50
         });
+
         console.log(data);
         await this.initYoutubePlayer(data.songId, data.time, data.paused);
-
+        await this.loadVideoData(data.songId);
         this.setState({
             loadingValue: 75
         });
@@ -122,7 +116,6 @@ export default class Room extends Component {
 
         socket.on(constants.controls.SEEK, (data) => {
             this.isSeekRequest = true;
-            this.audioRef.current.currentTime = data.song.duration;
         });
         
         socket.on(constants.controls.PAUSE, this.handleSocketInput);
@@ -151,96 +144,18 @@ export default class Room extends Component {
         await this.youtubePlayer.init(); 
     }
 
-    initCanvas = () => {
+    loadVideoData = async (vidId) => {
+            if (vidId === null) return;
 
-
-        var canvas = this.canvasRef.current;
-        var audio = this.audioRef.current;
-        
-
-
-        audio.crossOrigin = "anonymous";
-        audio.src = testmp3;
-    
-
-        var context = this.audioContext;
-        var src = context.createMediaElementSource(audio);
-        var analyser = context.createAnalyser();
-    
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        var ctx = canvas.getContext("2d");
-    
-        src.connect(analyser);
-        console.log(analyser)
-        analyser.connect(context.destination);
-    
-        analyser.fftSize = 256;
-    
-        var bufferLength = analyser.frequencyBinCount;
-        console.log(bufferLength);
-        
-        var dataArray = new Uint8Array(bufferLength);
-        
-    
-        var WIDTH = canvas.width;
-        var HEIGHT = canvas.height;
-    
-        var barWidth = (WIDTH / bufferLength) * 2.5;
-        var barHeight;
-        var x = 0;
-    
-        function renderFrame() {
-          requestAnimationFrame(renderFrame);
-    
-          x = 0;
-    
-          analyser.getByteFrequencyData(dataArray);
-    
-          ctx.fillStyle = "#000";
-          ctx.fillRect(0, 0, WIDTH, HEIGHT);
-    
-          const multiplyer = (window.innerHeight * 0.004);
-        
-          
-          for (var i = 0; i < bufferLength; i++) {
-            barHeight = dataArray[i] * multiplyer;
-            
-            var r = barHeight + (25 * (i/bufferLength));
-            var g = 250 * (i/bufferLength);
-            var b = 50;
-    
-            ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
-            ctx.fillRect(x, HEIGHT - barHeight, barWidth, barHeight);
-    
-            x += barWidth + 1;
-          }
-        }
-
-        
-        document.addEventListener("click", () => {
-
-            this.audioContext.resume()
-            /*
-            .then(
-                getcurrentState().then(resp => resp.json()).then((json) => {
-                    console.log(json);
-                    if(json.song.play){
-                        audio.play();
-                    } else if(json.song.pause){
-                        audio.pause();
-                    }
-
-                    this.isSeekRequest = true;
-                    audio.currentTime = json.song.duration;
-            }));
-            */
-        })
-        
-
-        this.audioContext.resume();
-        renderFrame();
+            const data = await getVideoInfoData(vidId);
+            console.log(data);
+            if(data.snippet.thumbnails.high.url){
+                this.setState({
+                    songImage : data.snippet.thumbnails.high.url
+                });
+            }
     }
+
 
     
     handleAudioSeek = (e) => {
@@ -358,20 +273,29 @@ export default class Room extends Component {
                         <div className="room-container box-row">
                             <div className="room-left-container">
                                 <SearchPanel
-                                onVideoSelect={(vidId) => {
+                                onVideoSelect={(vidId, v) => {
                                     this.loadAudio(vidId, 0, true, true);
+                                    console.log("v", v);
+                                    if(v.snippet.thumbnails.high.url){
 
+                                        this.setState({
+                                            songImage : v.snippet.thumbnails.high.url
+                                        });
+                                    }
                                     //call socket to emit that the song has changed
                                     
                                 }}
                                 />
                             </div>
                             <div className="room-central-container box-column">
-                                {
-                                    //<canvas ref = {this.canvasRef} id="canvas"></canvas>
-                                }
-                                <div className="room-central-holder">
-                                    <h1>asd</h1>
+                                
+                                <div className="box-center player-display-box">
+                                    <div className="player-disk" style={{
+                                        backgroundImage : `url(${this.state.songImage})`,
+                                        animationPlayState : (!this.state.paused) ? "running" : "paused"
+                                    }}>
+                                        asd
+                                    </div>
                                 </div>
                                 <div className="player-control-container">
                                     <MusicControls
@@ -380,6 +304,7 @@ export default class Room extends Component {
                                     handlePause={this.handleAudioPause}
                                     />
                                 </div>
+                            
                             </div>
                             <div className="room-right-container">
                                 {

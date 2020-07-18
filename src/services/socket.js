@@ -33,7 +33,7 @@ const joinSuccessPromise = new Promise((res, rej) => {
     })
 })
 
-export const connect = () => {
+export const connectSocket = () => {
     return connectSocketPromise;
 }
 
