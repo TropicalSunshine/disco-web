@@ -145,15 +145,15 @@ export default class Room extends Component {
     }
 
     loadVideoData = async (vidId) => {
-            if (vidId === null) return;
+        if (vidId === null) return;
 
-            const data = await getVideoInfoData(vidId);
-            console.log(data);
-            if(data.snippet.thumbnails.high.url){
-                this.setState({
-                    songImage : data.snippet.thumbnails.high.url
-                });
-            }
+        const data = await getVideoInfoData(vidId);
+        console.log(data);
+        if(data.snippet.thumbnails.high.url){
+            this.setState({
+                songImage : data.snippet.thumbnails.high.url
+            });
+        }
     }
 
 
