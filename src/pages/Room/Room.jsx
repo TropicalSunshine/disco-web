@@ -294,7 +294,7 @@ export default class Room extends Component {
                                         backgroundImage : `url(${this.state.songImage})`,
                                         animationPlayState : (!this.state.paused) ? "running" : "paused"
                                     }}>
-                                        asd
+                                        <i/>
                                     </div>
                                 </div>
                                 <div className="player-control-container">

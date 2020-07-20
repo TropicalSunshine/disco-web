@@ -40,6 +40,7 @@ export default class MusicPlayer extends Component {
                 <div className="box-center">
                     <div className="music-player-control-button rewind-button">
                         <FastRewindIcon
+                        style={{ fontSize: 45 }}
                         onClick={(e)=> {
                             this.props.handlePrev(e);
                         }}
@@ -62,13 +63,14 @@ export default class MusicPlayer extends Component {
                                 onClick={() => {
                                     this.props.handlePause();
                                 }}
-                                style={{ fontSize: 50 }}
+                                style={{ fontSize: 45 }}
                                 />
                             )
                         }
                     </div>
                     <div className="music-player-control-button foward-button">
                         <FastForwardIcon
+                        style={{ fontSize: 50 }}
                         onClick={(e) => {
                             this.props.handleNext(e);
                         }}

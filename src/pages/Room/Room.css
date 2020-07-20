@@ -40,6 +40,12 @@
     animation-iteration-count: infinite;
     animation-timing-function: linear; 
 
+    box-shadow: 
+    0 0 3rem #fff,
+    0 0 5rem #f0f,
+    0 0 7rem rgb(0, 17, 255),
+    0 0 10rem #f0f
+
 }
 
 
