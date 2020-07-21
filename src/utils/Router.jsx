@@ -1,8 +1,8 @@
 import React, { Component, Suspense, lazy } from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-const Room = lazy(() => import("../pages/Room/Room.jsx"));
-const Login = lazy(() => import("../pages/Login/Login.jsx"));
+const Room = lazy(() => import("pages/Room"));
+const Login = lazy(() => import("pages/Login"));
 
 export default class Router extends Component {
 

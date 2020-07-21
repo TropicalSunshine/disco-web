@@ -16,7 +16,7 @@ import Axios from 'axios';
 
 import SearchPanel from "./SearchPanel.jsx";
 
-import "./Room.css"
+import "./style.css"
 
 const WAIT_TIME = 300;
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Button from '@material-ui/core/Button';
 
-import "./Login.css";
+import "./style.css";
 
 export default class Login extends Component {
     constructor(props){
