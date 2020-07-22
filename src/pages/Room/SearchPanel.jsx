@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 
-import { searchVideoByKeyword } from "services/youtubeApi";
+import { searchVideoByKeyword } from "shared/utils/services/youtube";
 import TextField from "@material-ui/core/TextField";
 
-import { Spinner } from "shared/ui/index";
+import { Spinner } from "shared/components/index";
 
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';

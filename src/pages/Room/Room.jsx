@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
+import { LoaderPage, MusicControls } from "shared/components/index";
 
-import testmp3 from "audio/test.mp3";
+import { constants, connectSocket, joinSuccess,
+         socket, emitPause, emitPlay,
+          emitChangeSong } from "shared/utils/services/socket";
 
 
-import { LoaderPage, MusicControls } from "shared/ui/index";
 
-import {connectSocket, joinSuccess , socket, emitPause, emitPlay, emitChangeSong } from "services/socket";
-import { downloadAssets } from "assets";
-import { constants } from "constants.js";
-
-import YoutubePlayer from "services/YoutubePlayer.js";
-import { getVideoInfoData } from "services/youtubeApi";
+import YoutubePlayer from "shared/utils/services/YoutubePlayer.js";
+import { getVideoInfoData } from "shared/utils/services/youtube";
 
 import Axios from 'axios';
 
