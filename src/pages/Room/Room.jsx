@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
+
 import { LoaderPage, MusicControls } from "shared/components/index";
 
 import { constants, connectSocket, joinSuccess,
          socket, emitPause, emitPlay,
           emitChangeSong } from "shared/utils/services/socket";
 
-
-
 import YoutubePlayer from "shared/utils/services/YoutubePlayer.js";
 import { getVideoInfoData } from "shared/utils/services/youtube";
 
 import Axios from 'axios';
 
-import SearchPanel from "./SearchPanel.jsx";
+import SearchPanel from "./SearchPanel/SearchPanel.jsx";
 
 import "./style.css"
 
@@ -268,7 +267,7 @@ export default class Room extends Component {
                 }
                 {
                     !this.state.isLoading && (
-                        <div className="room-container box-row">
+                        <div className="box-row room-container">
                             <div className="room-left-container">
                                 <SearchPanel
                                 onVideoSelect={(vidId, v) => {
@@ -285,7 +284,7 @@ export default class Room extends Component {
                                 }}
                                 />
                             </div>
-                            <div className="room-central-container box-column">
+                            <div className=" box-column room-central-container">
                                 
                                 <div className="box-center player-display-box">
                                     <div className="player-disk" style={{

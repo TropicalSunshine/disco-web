@@ -1,11 +1,9 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
+import Button from '@material-ui/core/Button';
 
 import "./style.css";
 
-import Button from '@material-ui/core/Button';
-import { BoxCenter } from "shared/styles/common";
-
-export default class Login extends Component {
+export default class Login extends PureComponent {
     constructor(props){
         super(props);
         
@@ -20,14 +18,14 @@ export default class Login extends Component {
         return (
             <div>
                 <div className="login-container">
-                    <BoxCenter>
+                    <div className="box-center">
                         <h1>Login</h1>
-                    </BoxCenter>
-                    <BoxCenter>
+                    </div>
+                    <div className="box-center">
                         <Button variant="contained" color="primary">
                             Login with Spotify
                         </Button>
-                    </BoxCenter>
+                    </div>
                 </div>
             </div>
         )
