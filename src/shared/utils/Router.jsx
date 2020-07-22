@@ -1,10 +1,10 @@
-import React, { Component, Suspense, lazy } from 'react';
+import React, { PureComponent, Suspense, lazy } from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 const Room = lazy(() => import("pages/Room"));
 const Login = lazy(() => import("pages/Login"));
 
-export default class Router extends Component {
+export default class Router extends PureComponent {
 
     render() {
         return (
