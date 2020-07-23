@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import styles from "./styles.module.css";
 
 import { searchVideoByKeyword } from "shared/utils/services/youtube";
 import TextField from "@material-ui/core/TextField";
@@ -9,6 +10,7 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
+import FormGroup from "@material-ui/core/FormGroup";
 import SearchIcon from "@material-ui/icons/SearchOutlined";
 
 export default class SearchPanel extends Component {
@@ -65,8 +67,8 @@ export default class SearchPanel extends Component {
 
     render() {
         return (
-            <div className="box-column search-panel">
-                <div className="search-area">
+            <div className={`box-column ${styles["search-panel"]}`}>
+                <FormGroup className={styles["search-area"]}>
                     <Input
                     style={{
                         color: "white",
@@ -74,7 +76,6 @@ export default class SearchPanel extends Component {
                     }}
                     fullWidth={true}
                     placeholder="Search"
-                    id="input-with-icon-adornment"
                     onChange={this.handleOnSearch}
                     startAdornment={
                         <InputAdornment position="start">
@@ -82,8 +83,8 @@ export default class SearchPanel extends Component {
                         </InputAdornment>
                     }
                     />
-                </div>
-                <div className="search-results">
+                </FormGroup>
+                <div className={styles["search-results"]}>
                     {
                         this.state.isSearching && (
                             <Spinner/>
@@ -91,7 +92,7 @@ export default class SearchPanel extends Component {
                     }
                     {
                         !this.state.isSearching && (
-                            <ul className="search-result-list">
+                            <ul className={styles["search-result-list"]}>
                              {
                                 this.state.youtubeSearchResults.map((r, i) => {
                                 return <ResultBlock 
@@ -118,8 +119,8 @@ function ResultBlock(props){
     const snippet = v.snippet;
 
     return (
-        <li className="box-row result-block">
-            <div className="result-img-container"
+        <li className={`box-row ${styles["result-block"]}`}>
+            <div className={styles["result-img-container"]}
             onClick={() => {
                 props.onVideoSelect(v.id.videoId, v);
             }}
@@ -130,7 +131,7 @@ function ResultBlock(props){
                 height={thumbnail.height}
                 />
             </div>
-            <div className=" result-desc-container box-column">
+            <div className={`${styles["result-desc-container"]} box-column`}>
                 <p style={{
                     overflow: "hidden",
                     fontSize: "10pt",

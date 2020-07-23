@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import "./MusicControls.css";
+import styles from "./styles.module.css";
 
 import PlayIcon from "@material-ui/icons/PlayArrowSharp"
 import PauseIcon from "@material-ui/icons/PauseSharp";
@@ -36,9 +36,9 @@ export default class MusicPlayer extends Component {
 
     render() {
         return (
-            <div className="music-player-container">
+            <div className={styles["music-player-container"]}>
                 <div className="box-center">
-                    <div className="music-player-control-button rewind-button">
+                    <div className={`${styles["music-player-control-button"]} ${styles["rewind-button"]}`}>
                         <FastRewindIcon
                         style={{ fontSize: 45 }}
                         onClick={(e)=> {
@@ -46,7 +46,7 @@ export default class MusicPlayer extends Component {
                         }}
                         />
                     </div>
-                    <div className="music-player-control-button play-button">
+                    <div className={`${styles["music-player-control-button"]} ${styles["rewind-button"]}`}>
                         {
                             this.state.paused &&
                             (
@@ -68,7 +68,7 @@ export default class MusicPlayer extends Component {
                             )
                         }
                     </div>
-                    <div className="music-player-control-button foward-button">
+                    <div className={`${styles["music-player-control-button"]} ${styles["rewind-button"]}`}>
                         <FastForwardIcon
                         style={{ fontSize: 50 }}
                         onClick={(e) => {

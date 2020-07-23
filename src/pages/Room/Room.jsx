@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
-import { LoaderPage, MusicControls } from "shared/components/index";
+import { LoaderPage } from "shared/components/index";
 
 import { constants, connectSocket, joinSuccess,
          socket, emitPause, emitPlay,
@@ -12,16 +12,18 @@ import { getVideoInfoData } from "shared/utils/services/youtube";
 import Axios from 'axios';
 
 import SearchPanel from "./SearchPanel/SearchPanel.jsx";
+import MusicControls from "./MusicControls/MusicControls.jsx";
 
-import "./style.css"
+import styles from "./style.module.css"
 
 const WAIT_TIME = 300;
 
-export default class Room extends Component {
-
+export default class Room extends PureComponent {
+    
     constructor(){
         super();
-    
+        
+        console.log("styles", styles);
         console.log();
         this.state = {
             paused: true,
@@ -267,8 +269,8 @@ export default class Room extends Component {
                 }
                 {
                     !this.state.isLoading && (
-                        <div className="box-row room-container">
-                            <div className="room-left-container">
+                        <div className={`box-row ${styles["room-container"]}`}>
+                            <div className={styles["room-left-container"]}>
                                 <SearchPanel
                                 onVideoSelect={(vidId, v) => {
                                     this.loadAudio(vidId, 0, true, true);
@@ -284,17 +286,17 @@ export default class Room extends Component {
                                 }}
                                 />
                             </div>
-                            <div className=" box-column room-central-container">
+                            <div className={`box-column ${styles["room-central-container"]}`}>
                                 
-                                <div className="box-center player-display-box">
-                                    <div className="player-disk" style={{
+                                <div className={`box-center ${styles["player-display-box"]}`}>
+                                    <div className={styles["player-disk"]} style={{
                                         backgroundImage : `url(${this.state.songImage})`,
-                                        animationPlayState : (!this.state.paused) ? "running" : "paused"
+                                        animationPlayState : (!this.state.paused) ? styles["running"] : styles["paused"]
                                     }}>
                                         <i/>
                                     </div>
                                 </div>
-                                <div className="player-control-container">
+                                <div className={styles["player-control-container"]}>
                                     <MusicControls
                                     paused={this.state.paused}
                                     handlePlay={this.handleAudioPlay}
@@ -303,7 +305,7 @@ export default class Room extends Component {
                                 </div>
                             
                             </div>
-                            <div className="room-right-container">
+                            <div className={styles["room-right-container"]}>
                                 {
                                     /*
                                     <audio id="audio" controls
