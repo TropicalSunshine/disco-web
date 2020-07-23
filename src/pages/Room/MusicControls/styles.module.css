@@ -2,11 +2,30 @@
     height: 150px;
 }
 
+
 .music-player-control-button{ 
     color: var(--WHITE);
+    display: block;
+    margin: auto 0;
+}
+
+.play-button{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--WHITE);
+    padding: auto;
+    text-align: center;
+}
+
+.icon{
+    font-size: 12pt;
 }
 
 .play-button:hover{
-    background-color: var(--red);
+    transition: 0.5s;
+    background-color: var(--grey-secondary);
     cursor: pointer;
 }

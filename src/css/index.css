@@ -18,6 +18,7 @@
   --font-small: 15px;
 }
 
+
 ::-webkit-scrollbar {
   width: 2px;
   color: transparent;
@@ -28,8 +29,8 @@
 }
 
 
-
 body {
+  scrollbar-width: thin;
   margin: 0;
   font-family: 'Nunito', sans-serif !important;
   -webkit-font-smoothing: antialiased;

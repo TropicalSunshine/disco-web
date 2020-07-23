@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
+import PropTypes from "prop-types";
 import styles from "./styles.module.css";
 
 import PlayIcon from "@material-ui/icons/PlayArrowSharp"
@@ -16,21 +17,11 @@ props req
     handlePrev
  */
 
-export default class MusicPlayer extends Component {
+export default class MusicControls extends PureComponent {
     constructor(props){
         super(props);
 
         this.state = {
-            paused: props.paused
-        }
-    }
-
-    componentDidUpdate(prevProps){
-        if(prevProps.paused !== this.props.paused){
-            console.log(this.props.paused);
-            this.setState({
-                paused: this.props.paused
-            })
         }
     }
 
@@ -40,37 +31,40 @@ export default class MusicPlayer extends Component {
                 <div className="box-center">
                     <div className={`${styles["music-player-control-button"]} ${styles["rewind-button"]}`}>
                         <FastRewindIcon
-                        style={{ fontSize: 45 }}
+                        className={`${styles.icon}`}
+                        
                         onClick={(e)=> {
                             this.props.handlePrev(e);
                         }}
                         />
                     </div>
-                    <div className={`${styles["music-player-control-button"]} ${styles["rewind-button"]}`}>
+                    <div className={`${styles["music-player-control-button"]} ${styles["play-button"]}`}>
                         {
-                            this.state.paused &&
+                            this.props.paused &&
                             (
                             <PlayIcon 
+                            className={`${styles.icon}`}
                             onClick={()=>{
                                 this.props.handlePlay();
                             }}
-                            style={{ fontSize: 50 }}/>
+                            />
                             )
                         }
                         {
-                            !this.state.paused && (
+                            !this.props.paused && (
                                 <PauseIcon
+                                className={`${styles.icon}`}
                                 onClick={() => {
                                     this.props.handlePause();
                                 }}
-                                style={{ fontSize: 45 }}
                                 />
                             )
                         }
                     </div>
                     <div className={`${styles["music-player-control-button"]} ${styles["rewind-button"]}`}>
                         <FastForwardIcon
-                        style={{ fontSize: 50 }}
+                        className={`${styles.icon}`}
+                        
                         onClick={(e) => {
                             this.props.handleNext(e);
                         }}
@@ -81,3 +75,9 @@ export default class MusicPlayer extends Component {
         )
     }
 }
+
+
+MusicControls.propTypes = {
+    paused : PropTypes.bool.isRequired,
+    handlePause : PropTypes.func.isRequired
+} 
