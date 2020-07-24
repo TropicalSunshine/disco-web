@@ -1,5 +1,8 @@
 import io from "socket.io-client";
 
+import { socketUrl } from "../../constants";
+
+
 export const constants = Object.freeze({
     USERJOINROOM: 1,
     USERCREATEROOM: 2,
@@ -15,9 +18,6 @@ export const constants = Object.freeze({
     SUCCESS: 10
 });
 
-
-const socketProtocol = (window.location.protocol.includes('https')) ? 'wss' : 'ws';
-const socketUrl = socketProtocol + "://" + "localhost:3001";
 
 
 

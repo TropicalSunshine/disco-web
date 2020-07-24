@@ -23,8 +23,6 @@ export default class Room extends PureComponent {
     constructor(){
         super();
         
-        console.log("styles", styles);
-        console.log();
         this.state = {
             paused: true,
             playing: false,
