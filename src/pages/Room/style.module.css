@@ -8,20 +8,29 @@
 .room-left-container{
     background-color: var(--grey-primary);
     width: 20%;
-    min-width: 300px;
+    min-width: 350px;
+    max-width: 500px;
+    overflow: hidden;
 }
 
 .room-central-container{
-    width: 60%
+    width: 60%;
+    overflow: hidden;
+}
+
+.room-right-container{
+    width: 20%;
+    overflow: hidden;
+    background-color: var(--grey-primary);
 }
 
 .player-display-box{
-    height: 83%;
+    height: 85%;
 }
 
 .player-control-container{
 
-    height: 17%;
+    height: 15%;
     background-color: var(--grey-primary);
 }
 
@@ -29,7 +38,7 @@
     height: 230px;
     width: 230px;
     background-color: #f0f;
-    border-radius: 50%;
+    border-radius: 230px;
     margin: auto;
 
     background-repeat: no-repeat;
@@ -56,9 +65,4 @@
     to {
         transform:rotate(360deg);
     }
-}
-
-.room-right-container{
-    width: 20%;
-    background-color: var(--grey-primary);
 }

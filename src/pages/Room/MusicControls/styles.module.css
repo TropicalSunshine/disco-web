@@ -1,5 +1,6 @@
 .music-player-container{
     height: 150px;
+    padding: 20px 0;
 }
 
 
@@ -7,6 +8,7 @@
     color: var(--WHITE);
     display: block;
     margin: auto 0;
+    font-size: var(--font-small);
 }
 
 .play-button{
@@ -22,6 +24,7 @@
 
 .icon{
     font-size: 12pt;
+    margin: 12px 10px;
 }
 
 .play-button:hover{

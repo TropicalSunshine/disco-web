@@ -10,6 +10,7 @@ import YoutubePlayer from "shared/utils/services/YoutubePlayer.js";
 import { getVideoInfoData } from "shared/utils/services/youtube";
 
 import Axios from 'axios';
+import * as Vibrant from "node-vibrant";
 
 import SearchPanel from "./SearchPanel/SearchPanel.jsx";
 import MusicControls from "./MusicControls/MusicControls.jsx";
@@ -254,6 +255,22 @@ export default class Room extends PureComponent {
                 
     }
 
+    handleVideoSelect = async (vidId, v) => {
+        this.loadAudio(vidId, 0, true, true);
+                                    
+        if(v.snippet.thumbnails.high.url){
+            //console.log(v.snippet.thumbnails.default.url);
+            // const pal = Vibrant.from(v.snippet.thumbnails.medium.url).getPalette();
+            //console.log("pallette", pal);
+
+            this.setState({
+                songImage : v.snippet.thumbnails.high.url
+            });
+        }
+
+        //call socket to emit that the song has changed
+    }
+
 
     render() {
         
@@ -270,26 +287,15 @@ export default class Room extends PureComponent {
                         <div className={`box-row ${styles["room-container"]}`}>
                             <div className={styles["room-left-container"]}>
                                 <SearchPanel
-                                onVideoSelect={(vidId, v) => {
-                                    this.loadAudio(vidId, 0, true, true);
-                                    console.log("v", v);
-                                    if(v.snippet.thumbnails.high.url){
-
-                                        this.setState({
-                                            songImage : v.snippet.thumbnails.high.url
-                                        });
-                                    }
-                                    //call socket to emit that the song has changed
-                                    
-                                }}
+                                onVideoSelect={this.handleVideoSelect}
                                 />
                             </div>
                             <div className={`box-column ${styles["room-central-container"]}`}>
                                 
                                 <div className={`box-center ${styles["player-display-box"]}`}>
                                     <div className={styles["player-disk"]} style={{
-                                        backgroundImage : `url(${this.state.songImage})`,
-                                        animationPlayState : (!this.state.paused) ? styles["running"] : styles["paused"]
+                                        animationPlayState : ((!this.state.paused) ? "running" : "paused"),
+                                        backgroundImage : `url(${this.state.songImage})`
                                     }}>
                                         <i/>
                                     </div>

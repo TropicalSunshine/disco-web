@@ -1,15 +1,14 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import CircularProgress from "@material-ui/core/CircularProgress"; 
 import "./LoaderPage.css";
 
-export default class LoaderPage extends Component {
+export default class LoaderPage extends PureComponent {
     constructor(props){
 
         super(props);
 
         this.interval = null;
         this.state = {
-            value: props.value,
             message: "",
             messageIndex: 0
         }
@@ -47,14 +46,6 @@ export default class LoaderPage extends Component {
         clearInterval(this.interval);
     }
 
-    componentDidUpdate(prevProps){
-        if(prevProps.value !== this.props.value){
-            
-            this.setState({
-                value: this.props.value
-            });
-        }
-    }
 
     
     render() {
@@ -62,7 +53,7 @@ export default class LoaderPage extends Component {
             <div className="loaderpage-container">
                 <div className="loaderpage-center-box">
                     <div className="box-center">
-                        <CircularProgress variant="static" value={this.state.value} />
+                        <CircularProgress variant="static" value={this.props.value} />
                     </div>
                     <div className="box-center">
                         <h1>{this.state.message}</h1>

@@ -2,16 +2,18 @@ import React, { Component } from 'react'
 import styles from "./styles.module.css";
 
 import { searchVideoByKeyword } from "shared/utils/services/youtube";
-import TextField from "@material-ui/core/TextField";
 
 import { Spinner } from "shared/components/index";
 
 import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import FormControl from '@material-ui/core/FormControl';
-import FormGroup from "@material-ui/core/FormGroup";
-import SearchIcon from "@material-ui/icons/SearchOutlined";
+import IconButton from "@material-ui/core/IconButton";
+
+
+import { SearchOutlined as SearchIcon, 
+         AddOutlined as AddIcon,
+         FavoriteOutlined as FavoriteIcon } from "@material-ui/icons";
+
 
 export default class SearchPanel extends Component {
 
@@ -68,7 +70,7 @@ export default class SearchPanel extends Component {
     render() {
         return (
             <div className={`box-column ${styles["search-panel"]}`}>
-                <FormGroup className={styles["search-area"]}>
+                <form className={styles["search-area"]}>
                     <Input
                     style={{
                         color: "white",
@@ -83,7 +85,7 @@ export default class SearchPanel extends Component {
                         </InputAdornment>
                     }
                     />
-                </FormGroup>
+                </form>
                 <div className={styles["search-results"]}>
                     {
                         this.state.isSearching && (
@@ -121,9 +123,6 @@ function ResultBlock(props){
     return (
         <li className={`box-row ${styles["result-block"]}`}>
             <div className={styles["result-img-container"]}
-            onClick={() => {
-                props.onVideoSelect(v.id.videoId, v);
-            }}
             >
                 <img
                 src={thumbnail.url}
@@ -131,18 +130,37 @@ function ResultBlock(props){
                 height={thumbnail.height}
                 />
             </div>
-            <div className={`${styles["result-desc-container"]} box-column`}>
-                <p style={{
-                    overflow: "hidden",
-                    fontSize: "10pt",
-                    fontWeight: "bold",
-                    marginTop: "5px",
-                    marginBottom: "5px"
-                }}>{snippet.title}</p>
-                <p style={{
-                    fontSize: "8pt",
-                    marginTop: "5px"
-                }}>{snippet.channelTitle}</p>
+            <div className={`${styles["result-desc-container"]} box-row`}>
+                <div className={`box-column ${styles["result-desc-text"]}`}>
+                    <p style={{
+                        overflow: "hidden",
+                        fontSize: "10pt",
+                        marginTop: "5px",
+                        marginBottom: "5px"
+                    }}>{snippet.title}</p>
+                    <p style={{
+                        fontSize: "6.5pt",
+                        marginTop: "5px"
+                    }}>{snippet.channelTitle}</p>
+                </div>
+                <div className={`box-row ${styles["result-desc-button"]}`}>
+                    <IconButton 
+                    onClick={() => {
+                        props.onVideoSelect(v.id.videoId, v);
+                    }} 
+                    color="primary">
+                        <AddIcon/>
+                    </IconButton>
+                </div>
+                <div className={`box-row ${styles["result-desc-button"]}`}>
+                    <IconButton 
+                    onClick={() => {
+                        props.onVideoSelect(v.id.videoId, v);
+                    }} 
+                    color="secondary">
+                        <FavoriteIcon/>
+                    </IconButton>
+                </div>
             </div>
         </li>
     )

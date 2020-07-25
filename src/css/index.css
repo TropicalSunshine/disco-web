@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Caption&display=swap');
 
 
 :root{
@@ -20,8 +20,7 @@
 
 
 ::-webkit-scrollbar {
-  width: 2px;
-  color: transparent;
+  display: none;
 }
 
 ::-webkit-scrollbar-track {
@@ -30,9 +29,10 @@
 
 
 body {
-  scrollbar-width: thin;
+  scrollbar-width: none;
   margin: 0;
-  font-family: 'Nunito', sans-serif !important;
+  font-family: 'PT Sans Caption', sans-serif !important;
+  -ms-overflow-style: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 

@@ -7,7 +7,7 @@
     color: var(--WHITE);
     width: 90%;
     padding: 0 10px;
-    height: 10%;
+    height: 5%;
     padding: 10px;
 }
 
@@ -16,16 +16,19 @@
 }
 
 .search-results{
-    height: 90%;
+    height: 95%;
     overflow-y: auto;
+    scrollbar-width: none;
+}
+
+.search-results .result-block:nth-child(2n){
+    background-color: var(--grey-secondary);
 }
 
 .result-block{
     color: var(--WHITE);
     height: 90px;
-    
-    
-    margin: 5px 0;
+    margin: 0;
 }
 
 .result-img-container{
@@ -34,6 +37,21 @@
 }
 
 .result-desc-container{
-    width: 80vw;
+
+    width: 100%;
     padding: 0 5px;
+}
+
+.result-desc-text{
+    width: 120px;
+}
+
+.result-desc-text p{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.result-desc-button{
+    padding: 20px 0;
 }
