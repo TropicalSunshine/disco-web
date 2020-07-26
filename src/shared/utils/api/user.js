@@ -1,6 +1,6 @@
-import Api from "./Api";
+import api from "./api";
 
-export const login = (email, password) => Api.post("", {
+export const login = (email, password) => api.post("", {
     query : `query login($email : String!, $password : String!){
         login(email : $email, password : $password){
             status
@@ -13,7 +13,7 @@ export const login = (email, password) => Api.post("", {
 })
 
 
-export const register = (email, password, username) => Api.post("", {
+export const register = (email, password, username) => api.post("", {
     query : `mutation register($email : String!, $password : String!, $username : String!){
         register (email : $email, password : $password, username : $username){
             message
