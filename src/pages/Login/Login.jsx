@@ -1,13 +1,13 @@
 import React, { PureComponent } from 'react'
 import Button from '@material-ui/core/Button';
 
-import "./style.css";
+import styles from "./style.css";
 
 
-export default class Login extends PureComponent {
+class Login extends PureComponent {
     constructor(props){
         super(props);
-        
+        console.log(props);
         this.state = {
             
         }   
@@ -18,7 +18,7 @@ export default class Login extends PureComponent {
     render() {
         return (
             <div>
-                <div className="login-container">
+                <div className={styles["login-container"]}>
                     <div className="box-center">
                         <h1>Login</h1>
                     </div>
@@ -32,3 +32,5 @@ export default class Login extends PureComponent {
         )
     }
 }
+
+export default Login;

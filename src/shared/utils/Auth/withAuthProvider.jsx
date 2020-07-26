@@ -1,4 +1,4 @@
-import { PureComponent } from "react";
+import React, { PureComponent } from "react";
 
 import AuthConsumer from "./AuthConsumer";
 import AuthProvider from "./AuthProvider"; 
@@ -6,13 +6,13 @@ import AuthProvider from "./AuthProvider";
 const withAuth = Component => class extends PureComponent {
 
     render() {
-        return(
+        
+        return (
             <AuthProvider>
                 <AuthConsumer {...this.props}>
                     <Component {...this.props} />
                 </AuthConsumer>
             </AuthProvider>
-
         ) 
     }   
 }

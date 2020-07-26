@@ -1,4 +1,4 @@
-import withProviderAuth from "./withProviderAuth";
+import withProviderAuth from "./withAuthProvider";
 
 
 export {

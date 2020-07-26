@@ -3,12 +3,11 @@ import { useState, useEffect } from "react";
 import { user as userStore } from "../storage"; 
 import { user as userApi } from "../api";
 
-function useAuth(props){
+function useAuth(){
 
     const [userId, setUserId] = useState(null);
     const [token, setToken] = useState(null);
-    console.debug(userId);
-    console.debug(setUserId);
+
 
     const login = async (email, password) => {
         const result = await userApi.login(email, password);
@@ -37,7 +36,7 @@ function useAuth(props){
         const response = result.data.data.register;
 
         if(response.error !== null) {
-            console.error(repsonse.error);
+            console.error(response.error);
             throw new Error(response.error);
         }
 
@@ -71,7 +70,6 @@ function useAuth(props){
         userId,
         token
     }
-
 
 }
 

@@ -1,3 +1,4 @@
 import Login from "./Login";
+import { withProviderAuth } from "shared/utils/auth";
 
-export default Login;
+export default withProviderAuth(Login);
