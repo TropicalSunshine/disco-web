@@ -1,8 +1,8 @@
-import account from "./account";
+import * as user from "./user";
 import sessionStorage from "./sessionStorage";
 
 export {
-    account
+    user
 }
 
 export default sessionStorage;

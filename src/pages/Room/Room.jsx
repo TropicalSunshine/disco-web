@@ -10,7 +10,6 @@ import YoutubePlayer from "shared/utils/services/YoutubePlayer.js";
 import { getVideoInfoData } from "shared/utils/services/youtube";
 
 import Axios from 'axios';
-import * as Vibrant from "node-vibrant";
 
 import SearchPanel from "./SearchPanel/SearchPanel.jsx";
 import MusicControls from "./MusicControls/MusicControls.jsx";
@@ -21,8 +20,8 @@ const WAIT_TIME = 300;
 
 export default class Room extends PureComponent {
     
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         
         this.state = {
             paused: true,
