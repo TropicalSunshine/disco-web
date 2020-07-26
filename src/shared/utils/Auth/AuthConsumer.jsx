@@ -1,7 +1,6 @@
 import React from "react";
 
-import PropTypes from "prop-types";
-import HistoryPropTypes from "shared/types";
+import { HistoryPropTypes } from "shared/types";
 import AuthContext from "./AuthContext";
 
 function AuthConsumer(props){
@@ -21,7 +20,7 @@ function AuthConsumer(props){
 }
 
 AuthConsumer.propTypes = {
-    history :
+    ...HistoryPropTypes
 }
 
 export default AuthConsumer;

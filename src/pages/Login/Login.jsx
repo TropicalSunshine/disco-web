@@ -1,16 +1,26 @@
 import React, { PureComponent } from 'react'
-import Button from '@material-ui/core/Button';
 
-import styles from "./style.css";
+import { Button, TextField } from '@material-ui/core';
+
+import { HistoryPropTypes } from "shared/types"; 
+
+import styles from "./style.module.css";
 
 
 class Login extends PureComponent {
     constructor(props){
+
         super(props);
-        console.log(props);
+
         this.state = {
             
         }   
+    }
+
+    handleInputChange = (e) => {
+        const { name, value } = e.target;
+
+
     }
 
 
@@ -22,15 +32,26 @@ class Login extends PureComponent {
                     <div className="box-center">
                         <h1>Login</h1>
                     </div>
-                    <div className="box-center">
+                    <form className="box-center">
+                        <TextField
+                        name="email"
+                        type="email"
+                        
+                        />
+
                         <Button variant="contained" color="primary">
                             Login with Spotify
                         </Button>
-                    </div>
+                    </form>
                 </div>
             </div>
         )
     }
 }
+
+Login.propTypes = {
+    ...HistoryPropTypes
+}
+
 
 export default Login;
