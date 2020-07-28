@@ -9,13 +9,21 @@
   --grey-secondary: rgb(77, 76, 76);
 
   --green-primary: rgb(28, 255, 47);
-  --red: rgb(228, 68, 68);
-
-
+  
+  
   --box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
+
+  --font-family : 'PT Sans Caption', sans-serif !important;
   --font-large: 40px;
   --font-medium: 25px;
   --font-small: 15px;
+
+
+  --border-radius: 10px;
+  
+  --red:#e32359;
+  --yellow : #f5a72f;
+  --dark-blue: #131646;
 }
 
 
@@ -36,7 +44,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  background-color: var(--BLACK);
+  background-color: var(--dark-blue);
 }
 
 code {

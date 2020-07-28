@@ -9,9 +9,9 @@ function AuthConsumer(props){
     return (
         <AuthContext.Consumer>
             {
-                authContext => {
+                auth=> {
                     return React.Children.map(children, child => React.cloneElement(child, {
-                        authContext
+                        auth
                     }));
                 }
             }
