@@ -7,6 +7,7 @@ import Navbar from "pages/Navbar";
 
 const Room = lazy(() => import("pages/Room"));
 const Login = lazy(() => import("pages/Login"));
+const HomePage = lazy(() => import("pages/HomePage"));
 
 export default class Router extends PureComponent {
 
@@ -18,6 +19,7 @@ export default class Router extends PureComponent {
                 <div>
                     <Navbar/>
                     <Switch>   
+                        <Route exact path="/" component={HomePage}/>
                         <Route exact path="/login" component={Login}/>
                         <Route exact path="/room/:id" component={Room}/>
                     </Switch>

@@ -1,0 +1,41 @@
+.main-container{
+
+}
+
+
+.title-message{
+    font-weight: bold;
+    font-size: 40pt;
+    color: var(--WHITE);
+    width: 70%;
+    
+    margin-top: 5%;
+}
+
+.title-section{
+    padding: 200px 0;
+}
+
+.title-message span{
+    margin: auto;
+    text-align: center;
+    width: 80%;
+
+    display: block;
+}
+
+.title-message button{
+    margin: auto;
+    margin-top: 20px;
+    display: block;
+    text-overflow: initial;
+    width: 200px;
+}
+
+.title-img{
+    width: 30%;
+}
+
+.title-section{
+    height: 100%;
+}
