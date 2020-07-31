@@ -4,36 +4,36 @@ import PropType from "prop-types";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import styles from "./styles.module.css";
 
-function InputSubmit(props){
-    const {loading, value }  = props;
+function InputSubmit({loading, value, disabled}){
+    
 
-    const defaultDisabled = props.disabled || false;
+    const defaultDisabled = disabled || false;
 
     const [isLoading, setIsLoading] = useState(loading);
-    const [disabled, setDisabled ] = useState(defaultDisabled);
+    const [isDisabled, setDisabled ] = useState(defaultDisabled);
 
     useEffect(() => {
-        
+
         setIsLoading(loading);
         setDisabled(disabled);
-    }, [props])
+    }, [loading, disabled])
 
 
     return (
-        <div>
+        <React.Fragment>
             <button
-            disabled={true}
+            disabled={isDisabled}
             className={`${styles.input}`}
             type="submit"
             >
                 {
-                    !isLoading && value
+                    (!isLoading) && value
                 }
                 {
-                    isLoading && <CircularProgress disableShrink={true}/>
+                    (isLoading) && <CircularProgress disableShrink={true}/>
                 }
             </button>
-        </div>
+        </React.Fragment>
     )
     
 }

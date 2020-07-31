@@ -40,7 +40,7 @@ class Login extends PureComponent {
         })
 
         const { auth } = this.props;
-        console.log(this.props);
+        
         try{
             const { email, password } = this.state;
             var result = await auth.login(email, password);    
@@ -102,7 +102,6 @@ class Login extends PureComponent {
                             <InputSubmit
                             disabled={this.state.isSubmitting}
                             loading={this.state.isSubmitting}
-                            type="submit"
                             value="Login"
                             />
                         </div>
