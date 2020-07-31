@@ -43,6 +43,7 @@ class Login extends PureComponent {
         
         try{
             const { email, password } = this.state;
+            console.log(email, password);
             var result = await auth.login(email, password);    
 
 
@@ -50,7 +51,7 @@ class Login extends PureComponent {
 
             console.log(err.message);
             this.setState({
-
+                errorMessage: true
             })
         }
 
@@ -75,6 +76,7 @@ class Login extends PureComponent {
                     onSubmit={this.handleSubmit}>    
                         <div className={styles["input-container"]}>
                             <TextField
+                            onChange={this.handleInputChange}
                             disabled={this.state.isSubmitting}
                             variant="outlined"
                             label="Email"
@@ -87,6 +89,7 @@ class Login extends PureComponent {
                         </div>
                         <div className={styles["input-container"]}>
                             <TextField
+                            onChange={this.handleInputChange}
                             disabled={this.state.isSubmitting}
                             variant="outlined"
                             label="Password"
