@@ -7,6 +7,7 @@ function useAuth(){
 
     const [userId, setUserId] = useState(null);
     const [token, setToken] = useState(null);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 
     const login = async (email, password) => {
@@ -27,6 +28,8 @@ function useAuth(){
         setToken(response.token);
         userStore.userId.set(response.userId);
         setUserId(response.userId);
+
+        setIsLoggedIn(true);
 
         return response;
     }
@@ -68,7 +71,8 @@ function useAuth(){
         login,
         register,
         userId,
-        token
+        token,
+        isLoggedIn
     }
 
 }

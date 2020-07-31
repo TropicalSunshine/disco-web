@@ -2,7 +2,8 @@ import React from "react";
 
 const default_auth = {
     userId : null,
-    token : null
+    token : null,
+    isLoggedIn : false
 };
 
 const AuthContext = React.createContext(default_auth);
