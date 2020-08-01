@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 
 import { TextField } from '@material-ui/core';
 
-import { HistoryPropTypes } from "shared/types"; 
+import { HistoryPropTypes, AuthPropTypes } from "shared/types"; 
 
 import { InputSubmit } from "shared/components";
 
@@ -11,20 +11,18 @@ import styles from "./styles.module.css";
 
 
 class Login extends PureComponent {
-    constructor(props){
 
-        super(props);
-        this.state = {
-            email: "",
-            password : "",
-            isSubmitting: false,
-            isError : false,
-            errorMessage : "error"
-        }   
-    }
+    state = {
+        email: "",
+        password : "",
+        isSubmitting: false,
+        isError : false,
+        errorMessage : ""
+    }   
 
     handleInputChange = (e) => {
         const { name, value } = e.target;
+        
         this.setState({
             [name] : value
         });
@@ -51,8 +49,8 @@ class Login extends PureComponent {
 
             console.log(err.message);
             this.setState({
-                errorMessage: true
-            })
+                errorMessage: err.message
+            });
         }
 
         this.setState({
@@ -69,6 +67,13 @@ class Login extends PureComponent {
                 <div>
                     <div className="box-center">
                         <h1>Login</h1>
+                    </div>
+                    <div className="box-center">
+                        {
+                            (this.state.errorMessage !== "") && (
+                            <h4 className="red">{this.state.errorMessage}</h4>
+                            )
+                        }
                     </div>
                     <form 
                     className="box-center box-column" 
@@ -118,7 +123,8 @@ class Login extends PureComponent {
 
 
 Login.propTypes = {
-    ...HistoryPropTypes
+    ...HistoryPropTypes,
+    ...AuthPropTypes
 }
 
 

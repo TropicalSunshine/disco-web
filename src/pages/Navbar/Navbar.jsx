@@ -1,7 +1,7 @@
 import React from "react";
 import { PureComponent } from "react";
 
-import { Login as LoginDialog } from "shared/components/dialog";
+import { Login as LoginDialog, Register as RegisterDialog } from "shared/components/dialog";
 
 import { Button } from "@material-ui/core";
 
@@ -10,12 +10,9 @@ import styles from "./styles.module.css";
 
 class Navbar extends PureComponent{
 
-    constructor(props){
-        super(props);
-
-        this.state = { 
-            showLoginDialog: true
-        }
+    state = { 
+        showLoginDialog: false,
+        showRegisterDialog: false
     }
 
     render(){
@@ -26,6 +23,14 @@ class Navbar extends PureComponent{
                 handleClose={() => {
                     this.setState({
                         showLoginDialog: false
+                    })
+                }}
+                />
+                <RegisterDialog
+                show={this.state.showRegisterDialog}
+                handleClose={()=> {
+                    this.setState({
+                        showRegisterDialog: false
                     })
                 }}
                 />
@@ -41,7 +46,14 @@ class Navbar extends PureComponent{
                             </h1>
                         </div>
                         <div className={styles["button-container"]}>
-                            <Button variant="contained">
+                            <Button 
+                            variant="contained"
+                            onClick={() => {
+                                this.setState({
+                                    showRegisterDialog: true
+                                })
+                            }}
+                            >
                                 Sign Up
                             </Button>
                             <Button 

@@ -5,8 +5,8 @@ import { user as userApi } from "../api";
 
 function useAuth(){
 
-    const [userId, setUserId] = useState(null);
-    const [token, setToken] = useState(null);
+    const [userId, setUserId] = useState(false);
+    const [token, setToken] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 

@@ -1,8 +1,8 @@
 import React from "react";
 
 const default_auth = {
-    userId : null,
-    token : null,
+    userId : false,
+    token : false,
     isLoggedIn : false
 };
 

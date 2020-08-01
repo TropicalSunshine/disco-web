@@ -15,13 +15,6 @@
     margin : 20px 0;
 }
 
-.login-box{
-    border-radius: var(--border-radius);
-    background-color: var(--yellow);
-    padding: 10px 20px;
-}
-
-
 .error-container-active{
     background-color: var(--red);
 }

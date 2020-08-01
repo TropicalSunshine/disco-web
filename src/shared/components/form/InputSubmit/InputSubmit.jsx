@@ -40,7 +40,7 @@ function InputSubmit({loading, value, disabled}){
 
 InputSubmit.propTypes = {
     value : PropType.string.isRequired,
-    isLoading: PropType.bool.isRequired
+    loading: PropType.bool.isRequired
 };
 
 export default InputSubmit;
