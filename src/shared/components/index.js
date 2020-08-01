@@ -2,20 +2,15 @@ import LoaderPage from "./loaders/LoaderPage/LoaderPage.jsx";
 import Spinner from "./loaders/Spinner";
 
 import InputSubmit from "./form/InputSubmit";
+import IconButton from "./control/IconButton";
 
-const Components = {};
+
 
 export {
+    IconButton,
     InputSubmit,
     LoaderPage,
     Spinner
 }
-
-Components.InputSubmit = InputSubmit;
-Components.LoaderPage = LoaderPage;
-Components.Spinner = Spinner;
-
-export default Components;
-
 
 

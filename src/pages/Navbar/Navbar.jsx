@@ -1,7 +1,10 @@
 import React from "react";
 import { PureComponent } from "react";
 
-import { Login as LoginDialog, Register as RegisterDialog } from "shared/components/dialog";
+import { 
+    Login as LoginDialog, 
+    Register as RegisterDialog 
+} from "shared/components/dialog";
 
 import { Button } from "@material-ui/core";
 

@@ -1,0 +1,9 @@
+.button{
+    display: inline;
+    color: var(--grey-primary);
+}
+
+.button:hover{
+    cursor: pointer;
+    color: var(--grey-secondary);
+}
