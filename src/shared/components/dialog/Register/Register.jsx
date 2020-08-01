@@ -20,7 +20,6 @@ class Register extends PureComponent {
 
     
     handleInputChange = (e) => {
-        console.log(this.props.auth);
         var { name, value } = e.target;
         
         this.setState({
@@ -28,7 +27,11 @@ class Register extends PureComponent {
         });
     }
 
-    handleSubmit = (e) => {
+    handleSubmit = async (e) => {
+
+        this.setState({
+            isSubmitting: true
+        });
 
         e.preventDefault();
         e.stopPropagation();
@@ -37,12 +40,25 @@ class Register extends PureComponent {
         console.log(auth);
 
         try{
+            var { password, passwordConfirm, email, username } = this.state;
+
+            if(password !== passwordConfirm){
+                throw new Error("Passwords do not match");
+            }
+
+            var response = await auth.register(email, password, username);
+            console.log(response);
+            this.props.handleClose();
 
         } catch(err) {
             this.setState({
                 errorMessage: err.message
             });
         }
+
+        this.setState({
+            isSubmitting: false
+        });
     }
 
     render(){
@@ -53,7 +69,9 @@ class Register extends PureComponent {
                 </div>
                 <div className="box-center">
                     {
-                        (this.state.errorMessage !== "")
+                        (this.state.errorMessage !== "") && (
+                        <h3 className="red">{this.state.errorMessage}</h3>
+                        )
                     }
                 </div>
                 <form

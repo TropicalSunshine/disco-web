@@ -6,6 +6,7 @@ import useAuthProvider from "./useAuthProvider"
 
 function AuthProvider({children}){
     const auth = useAuthProvider();
+    
 
     return (
         <AuthContext.Provider value={auth}>
