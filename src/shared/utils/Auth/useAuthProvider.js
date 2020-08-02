@@ -31,6 +31,7 @@ function useAuth(){
 
         setIsLoggedIn(true);
 
+        console.log("setting values");
         return response;
     }
 
@@ -59,6 +60,10 @@ function useAuth(){
         setToken(token);
         const userId = userStore.userId.get();
         setUserId(userId);
+
+        if(token && userId){
+            setIsLoggedIn(true);
+        }
 
     }
 

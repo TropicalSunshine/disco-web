@@ -10,5 +10,5 @@ export const token = {
 
 export const userId = {
     get : () => sessionStorage.getItem(userIdKey),
-    set : userId => sessionStorage.getItem(userId, token)
+    set : userId => sessionStorage.setItem(userIdKey, userId)
 }

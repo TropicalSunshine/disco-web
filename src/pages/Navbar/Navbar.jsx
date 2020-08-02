@@ -1,13 +1,14 @@
-import React from "react";
-import { PureComponent } from "react";
+import React, { PureComponent } from "react";
 
 import { 
     Login as LoginDialog, 
     Register as RegisterDialog 
 } from "shared/components/dialog";
 
-import { Button } from "@material-ui/core";
+import { useAuth } from "shared/utils/auth";
 
+import { Link } from "react-router-dom";
+import { Button } from "@material-ui/core";
 
 import styles from "./styles.module.css";
 
@@ -19,6 +20,9 @@ class Navbar extends PureComponent{
     }
 
     render(){
+        var { auth } = this.props;
+
+
         return(
             <React.Fragment>
                 <LoginDialog 
@@ -49,27 +53,42 @@ class Navbar extends PureComponent{
                             </h1>
                         </div>
                         <div className={styles["button-container"]}>
-                            <Button 
-                            variant="contained"
-                            onClick={() => {
-                                this.setState({
-                                    showRegisterDialog: true
-                                })
-                            }}
-                            >
-                                Sign Up
-                            </Button>
-                            <Button 
-                            variant="contained" 
-                            color="primary"
-                            onClick={() => {
-                                this.setState({
-                                    showLoginDialog: true
-                                })
-                            }}
-                            >
-                                Sign In
-                            </Button>
+                            {
+                                ( !auth.isLoggedIn ) && (
+                                    <React.Fragment>
+                                        <Button 
+                                        variant="contained"
+                                        onClick={() => {
+                                            this.setState({
+                                                showRegisterDialog: true
+                                            })
+                                        }}
+                                        >
+                                            Sign Up
+                                        </Button>
+                                        <Button 
+                                        variant="contained" 
+                                        color="primary"
+                                        onClick={() => {
+                                            this.setState({
+                                                showLoginDialog: true
+                                            })
+                                        }}
+                                        >
+                                            Sign In
+                                        </Button>
+                                    </React.Fragment>
+                                )
+                            }
+                            {
+                                ( auth.isLoggedIn ) && (
+                                    <React.Fragment>
+                                        <Link to="explore">
+                                            Explore
+                                        </Link>
+                                    </React.Fragment>
+                                )
+                            }
                         </div>
                     </header>
                 </div>
