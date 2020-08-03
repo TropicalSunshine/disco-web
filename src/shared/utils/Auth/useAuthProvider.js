@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 
-import { user as userStore } from "../storage"; 
-import { user as userApi } from "../api";
+import { User as userStore } from "../storage"; 
+import { User as userApi } from "../api";
+import { setAuthHeader } from "../api/Api";
 
 function useAuth(){
 
@@ -26,6 +27,7 @@ function useAuth(){
 
         userStore.token.set(response.token);
         setToken(response.token);
+        setAuthHeader(response.token);
         userStore.userId.set(response.userId);
         setUserId(response.userId);
 

@@ -1,18 +1,8 @@
-.login-container{
-    margin: 10% auto;
-    max-width: 448px;
-    
-    color: var(--WHITE);
-}
 
 .button-container{
     color: var(--WHITE);
     margin: 10px auto;
     width: 100%;
-}
-
-.input-container{
-    margin : 20px 0;
 }
 
 .error-container-active{

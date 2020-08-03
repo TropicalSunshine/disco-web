@@ -7,7 +7,7 @@ import { HistoryPropTypes, AuthPropTypes } from "shared/types";
 import { InputSubmit } from "shared/components";
 
 import styles from "./styles.module.css";
-
+import commonStyles from "../styles.module.css";
 
 
 class Login extends PureComponent {
@@ -81,7 +81,7 @@ class Login extends PureComponent {
                     className="box-center box-column" 
                     autoComplete="on" 
                     onSubmit={this.handleSubmit}>    
-                        <div className={styles["input-container"]}>
+                        <div className={commonStyles["input-container"]}>
                             <TextField
                             onChange={this.handleInputChange}
                             disabled={this.state.isSubmitting}
@@ -94,7 +94,7 @@ class Login extends PureComponent {
                             required={true}
                             />
                         </div>
-                        <div className={styles["input-container"]}>
+                        <div className={commonStyles["input-container"]}>
                             <TextField
                             onChange={this.handleInputChange}
                             disabled={this.state.isSubmitting}
@@ -107,7 +107,7 @@ class Login extends PureComponent {
                             required={true}
                             />
                         </div>                        
-                        <div className={styles["button-container"]}>
+                        <div className={commonStyles["button-container"]}>
                             
                             <InputSubmit
                             disabled={this.state.isSubmitting}

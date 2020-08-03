@@ -1,3 +1,4 @@
 import ExplorePage from "./ExplorePage";
+import { withAuthCheck } from "shared/utils/auth";
 
-export default ExplorePage;
+export default withAuthCheck(ExplorePage);

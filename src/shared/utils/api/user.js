@@ -1,4 +1,4 @@
-import api from "./api";
+import api from "./Api";
 
 export const login = (email, password) => api.post("", {
     query : `query login($email : String!, $password : String!){

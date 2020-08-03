@@ -1,6 +1,8 @@
 import React from "react";
 import { PureComponent } from "react";
 
+import styles from "./styles.module.css";
+
 class ExplorePage extends PureComponent{
 
     constructor(props){
@@ -9,10 +11,6 @@ class ExplorePage extends PureComponent{
         this.state = {
 
         }
-    }
-
-    componentDidMount(){
-
     }
 
     render(){

@@ -1,10 +1,13 @@
-import withProviderAuth from "./withAuthProvider";
+import withAuthProvider from "./withAuthProvider";
+import withAuthCheck from "./withAuthCheck";
 import AuthContext from "./AuthContext";
 import useAuth from "./useAuth";
 import AuthProvider from "./AuthProvider";
 
+
 export {
-    withProviderAuth,
+    withAuthCheck,
+    withAuthProvider,
     AuthContext,
     AuthProvider,
     useAuth

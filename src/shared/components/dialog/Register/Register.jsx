@@ -6,6 +6,7 @@ import { TextField } from '@material-ui/core';
 import { HistoryPropTypes, AuthPropTypes } from "shared/types"; 
 
 import styles from "./styles.module.css";
+import commonStyles from "../styles.module.css";
 
 class Register extends PureComponent {
 
@@ -78,7 +79,7 @@ class Register extends PureComponent {
                 className="box-center box-column"
                 onSubmit={this.handleSubmit}
                 >
-                    <div className={`${styles["input-container"]}`}>
+                    <div className={`${commonStyles["input-container"]}`}>
                         <TextField
                         onChange={this.handleInputChange}
                         disabled={this.state.isSubmitting}
@@ -90,7 +91,7 @@ class Register extends PureComponent {
                         required={true}
                         />
                     </div>
-                    <div className={`${styles["input-container"]}`}>
+                    <div className={`${commonStyles["input-container"]}`}>
                         <TextField
                         onChange={this.handleInputChange}
                         disabled={this.state.isSubmitting}
@@ -102,7 +103,7 @@ class Register extends PureComponent {
                         required={true}
                         />
                     </div>
-                    <div className={`${styles["input-container"]}`}>
+                    <div className={`${commonStyles["input-container"]}`}>
                         <TextField
                         onChange={this.handleInputChange}
                         disabled={this.state.isSubmitting}
@@ -114,7 +115,7 @@ class Register extends PureComponent {
                         required={true}
                         />
                     </div>
-                    <div className={`${styles["input-container"]}`}>
+                    <div className={`${commonStyles["input-container"]}`}>
                         <TextField
                         onChange={this.handleInputChange}
                         disabled={this.state.isSubmitting}

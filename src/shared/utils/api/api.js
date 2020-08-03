@@ -12,7 +12,7 @@ const Api = Axios.create({
 });
 
 const setAuthHeader = token => {
-    Axios.defaults.headers.common["Authorization"] = token;
+    Api.defaults.headers.common["Authorization"] = token;
 }
 
 export {

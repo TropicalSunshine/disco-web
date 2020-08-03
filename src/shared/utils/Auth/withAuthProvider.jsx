@@ -14,7 +14,7 @@ const withAuth = Component => class extends PureComponent {
                             auth: auth
                         };
 
-                        return <Component {...props} />
+                        return <Component {...props} />;
                     }
                 }
             </AuthContext.Consumer>

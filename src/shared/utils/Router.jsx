@@ -1,6 +1,6 @@
-import React, { PureComponent, Suspense, lazy } from 'react';
+import React, { Suspense, lazy } from 'react';
 
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { Spinner } from "shared/components/index";
 
 import Navbar from "pages/Navbar";
@@ -10,11 +10,9 @@ const Room = lazy(() => import("pages/Room"));
 const HomePage = lazy(() => import("pages/HomePage"));
 const ExplorePage = lazy(() => import("pages/ExplorePage"));
 
-export default class Router extends PureComponent {
-
-    render() {
-        return (
+function Router(props) {
     
+    return (
         <BrowserRouter>
             <Suspense fallback={<Spinner/>}>
                 <div>
@@ -22,14 +20,15 @@ export default class Router extends PureComponent {
                         <Navbar/>
                         <Switch>   
                             <Route exact path="/" component={HomePage}/>
-                            <Route exact path="/explore" component={ExplorePage}/> 
+                            <Route exact path="/explore" component={ExplorePage}/>
                             <Route exact path="/room/:id" component={Room}/>
                         </Switch>
                     </AuthProvider>
                 </div>
             </Suspense>
         </BrowserRouter>
-            
-        )
-    }
+    )
+    
 }
+
+export default Router;

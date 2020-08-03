@@ -1,10 +1,12 @@
-import api from "./api";
-import * as user from "./user";
+import Api from "./Api";
+import * as User from "./User";
+import * as Room from "./Room";
 
 export {
-    user
+    User,
+    Room
 }
 
-api.user = user;
+Api.User = User;
 
-export default api;
+export default Api;

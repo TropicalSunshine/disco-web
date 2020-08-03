@@ -1,8 +1,8 @@
-import * as user from "./user";
+import * as User from "./User";
 import sessionStorage, { clearStorage } from "./sessionStorage";
 
 export {
-    user,
+    User,
     clearStorage
 }
 
