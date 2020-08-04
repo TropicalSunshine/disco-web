@@ -9,6 +9,7 @@ import { AuthProvider } from "shared/utils/auth";
 const Room = lazy(() => import("pages/Room"));
 const HomePage = lazy(() => import("pages/HomePage"));
 const ExplorePage = lazy(() => import("pages/ExplorePage"));
+const CreateRoomPage = lazy(() => import("pages/CreateRoomPage"));
 
 function Router(props) {
     
@@ -21,6 +22,7 @@ function Router(props) {
                         <Switch>   
                             <Route exact path="/" component={HomePage}/>
                             <Route exact path="/explore" component={ExplorePage}/>
+                            <Route exact path="/room/create" component={CreateRoomPage}/>
                             <Route exact path="/room/:id" component={Room}/>
                         </Switch>
                     </AuthProvider>

@@ -1,7 +1,7 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import AuthContext from "./AuthContext";
 
-const withAuth = Component => class extends PureComponent {
+const withAuth = Component => class extends React.Component {
 
     render() {
         

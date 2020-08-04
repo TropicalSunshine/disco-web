@@ -14,6 +14,8 @@
 .navbar-container{
     
     top: 0;
+    position: absolute;
+    z-index: var(--dialog-z); 
     width: 100%;
     color: var(--WHITE);
     padding: 0 10px;

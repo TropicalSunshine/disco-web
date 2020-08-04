@@ -1,9 +1,9 @@
 
-import React, { PureComponent } from "react";
+import React from "react";
 import AuthContext from "./AuthContext";
 import { Redirect } from "react-router-dom";
 
-const withAuthCheck = Component => class extends PureComponent {
+const withAuthCheck = Component => class extends React.Component {
 
     render() {
         return (
@@ -14,12 +14,12 @@ const withAuthCheck = Component => class extends PureComponent {
                             ...this.props,
                             auth: auth
                         }
-                        //send a checksession request to server for check
 
+                        //send a checksession req uest to server for check
                         return (auth.isLoggedIn) ? <Component {...props}/> : <Redirect to="/" />;
                     }
                 }
-            </AuthContext.Consumer>   
+            </AuthContext.Consumer>
         )
     }
 }
