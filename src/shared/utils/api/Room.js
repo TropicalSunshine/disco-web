@@ -9,11 +9,13 @@ export const createRoom = (
                                 creator = User.userId.get()
                             } = {}
                         ) => api.post("", {
-    query : `mutation createRoom($name : String!, $private: !Boolean,
+    query : `mutation createRoom($name : String!, $private: Boolean!,
             $description : String! , $creator : String!){
-                createRoom({
-                    name : $name,
+                createRoom(input : {
+                    name : $name
                     private : $private
+                    description : $description
+                    creator : $creator
                 }){
                     roomId
                     error

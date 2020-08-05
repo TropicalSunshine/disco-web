@@ -1,6 +1,6 @@
 .loaderpage-container{
     position: absolute;
-    background-color: var(--BLACK);
+    background-color: var(--black);
     top: 0;
     bottom: 0;
     left: 0;
@@ -17,5 +17,5 @@
 }
 
 .loaderpage-center-box h1{
-    color: var(--WHITE);
+    color: var(--white);
 }

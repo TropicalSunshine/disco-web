@@ -8,7 +8,7 @@ import styles from "./styles.module.css";
 
 const StyledCircularProgress = withStyles({
     colorPrimary: {
-        color: "var(--WHITE)"
+        color: "var(--white)"
     }
 })(CircularProgress);
 

@@ -2,22 +2,19 @@
 
 .container{
     width: 100%;
-    
-    height: 100%;
     height: 50px;
     position: relative;
     border-bottom-style: none;
     border-width: 1px;
-    border-color: var(--WHITE);
+    border-color: var(--white);
 }
 
 .navbar-container{
     
-    top: 0;
-    position: absolute;
+   
     z-index: var(--dialog-z); 
     width: 100%;
-    color: var(--WHITE);
+    color: var(--white);
     padding: 0 10px;
 }
 

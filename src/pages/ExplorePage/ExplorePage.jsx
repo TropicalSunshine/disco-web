@@ -20,8 +20,6 @@ class ExplorePage extends PureComponent{
             <div className={`${styles["explore-container"]} box-column`}>
                 <div className={`${styles["category-container"]}`}>
                     <Button onClick={() => {
-                        console.log("hererere");
-                        console.log(this.props);
                         this.props.history.push("/room/create");
                     }} variant="contained" color="primary">
                         Create Room

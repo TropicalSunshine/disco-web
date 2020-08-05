@@ -4,7 +4,7 @@
 }
 
 .search-area{
-    color: var(--WHITE);
+    color: var(--white);
     width: 90%;
     padding: 0 10px;
     height: 5%;
@@ -26,7 +26,7 @@
 }
 
 .result-block{
-    color: var(--WHITE);
+    color: var(--white);
     height: 90px;
     margin: 0;
 }

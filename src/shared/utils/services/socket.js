@@ -21,33 +21,33 @@ export const constants = Object.freeze({
 
 
 
-export const socket = io(socketUrl, {
-    path: "/socket"
-});
+export var socket = null;
 
-const connectSocketPromise = new Promise((res, rej) => {  
-    socket.on("connect", () => {
-        console.log("connected to server socket server");
-        socket.emit(constants.USERJOINROOM, {
-            roomId: 123
-        })
-        res();
-    });
-})
-
-const joinSuccessPromise = new Promise((res, rej) => {
-    socket.on(constants.JOINSUCCESS, (data) => {
-        res(data);
-    })
-})
 
 export const connectSocket = () => {
-    return connectSocketPromise;
+    return new Promise((res, rej) => {  
+        socket = io(socketUrl, {
+            path: "/socket"
+        });
+    
+        socket.on("connect", () => {
+            console.trace();
+            console.log("connected to server socket server");
+            socket.emit(constants.USERJOINROOM, {
+                roomId: 123
+            })
+            res();
+        });
+    });
 }
 
 
 export const joinSuccess = () => {
-    return joinSuccessPromise;
+    return new Promise((res, rej) => {
+        socket.on(constants.JOINSUCCESS, (data) => {
+            res(data);
+        })
+    });
 }
 
 
