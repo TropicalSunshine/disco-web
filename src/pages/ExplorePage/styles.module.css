@@ -1,3 +1,10 @@
 .explore-container{
     padding: 20px;
 }
+
+
+.room-container{
+    width: 100%;
+    
+    margin: auto;
+}
