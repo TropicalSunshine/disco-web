@@ -1,6 +1,6 @@
 import * as youtube from "./youtube";
 import YoutubePlayer from "./YoutubePlayer"
-import * as socket from "./socket";
+import * as socket from "../socket/socket";
 
 export {
     youtube,

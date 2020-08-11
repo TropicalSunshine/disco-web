@@ -3,6 +3,7 @@ import io from "socket.io-client";
 import { socketUrl } from "../../constants";
 
 
+//remove after changing
 export const constants = Object.freeze({
     USERJOINROOM: 1,
     USERCREATEROOM: 2,
@@ -15,30 +16,50 @@ export const constants = Object.freeze({
     },
     JOINSUCCESS: 8,
     UPDATE: 9,
-    SUCCESS: 10
+    SUCCESS: 10,
+    USERLEAVEROOM : 11
 });
 
 
 
 
 export var socket = null;
+export var roomId = null;
+
+var defaultData = {
+    songId: null,
+    time: 0,
+    paused: true 
+};
 
 
-export const connectSocket = () => {
+export const connectSocket = (rId) => {
+
+    roomId = rId;
+
     return new Promise((res, rej) => {  
         socket = io(socketUrl, {
             path: "/socket"
         });
     
         socket.on("connect", () => {
-            console.trace();
             console.log("connected to server socket server");
             socket.emit(constants.USERJOINROOM, {
                 roomId: 123
             })
-            res();
         });
-    });
+
+        socket.on(constants.JOINSUCCESS, (data) => {
+            res({
+                ...defaultData,
+                ...data
+            });
+        })
+    }); 
+}
+
+export const disconnectSocket = () => {
+    socket.disconnect();
 }
 
 
@@ -50,7 +71,7 @@ export const joinSuccess = () => {
     });
 }
 
-
+// remove later
 export const emitPause = (roomId) => {
     socket.emit(constants.USERINPUT, {
         type: constants.controls.PAUSE,
@@ -58,6 +79,8 @@ export const emitPause = (roomId) => {
     });
 }
 
+
+//remove after finished with room HOC
 export const emitPlay = (roomId) => {
     socket.emit(constants.USERINPUT, {
         type: constants.controls.PLAY,

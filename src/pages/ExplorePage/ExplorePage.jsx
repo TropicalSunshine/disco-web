@@ -50,6 +50,9 @@ class ExplorePage extends Component{
     }
 
     render(){
+
+        const { history } = this.props;
+
         return (
             
             <div className={`${styles["explore-container"]} box-column`}>
@@ -61,7 +64,7 @@ class ExplorePage extends Component{
                     </Button>
                 </div>
                 <div className={`${styles["room-container"]}`}>
-                    <RoomsList/>
+                    <RoomsList history={history} />
                 </div>
             </div>
         )

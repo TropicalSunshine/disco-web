@@ -8,7 +8,7 @@ import styles from "./styles.module.css";
 
 const LIMIT = 10;
 
-function RoomsList(){
+function RoomsList(props){
 
     const [lastId, setLastId] = useState('0');
 
@@ -18,6 +18,8 @@ function RoomsList(){
         hasMore,
         hasError
     } = useRoomsQuery(LIMIT, lastId);
+
+    const { history } = props;
 
     const observer = useRef();
     const lastRoomElement = useCallback( element => {
@@ -45,10 +47,17 @@ function RoomsList(){
                     var key = `room-${i}`;
 
                     if(i === (rooms.length - 1)){
-                        return <RoomBox ref={lastRoomElement} room={r} 
-                        key={key} />
+                        return <RoomBox 
+                        history={history}
+                        key={key}
+                        ref={lastRoomElement} 
+                        room={r} />
                     }
-                    return <RoomBox room={r} key={key}/>
+                    
+                    return <RoomBox 
+                            history={history}
+                            key={key}
+                            room={r} />
                 })
             }
             {

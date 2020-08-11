@@ -1,8 +1,6 @@
 import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
 
-import { withRouter } from "react-router-dom";
-
 import styles from "./styles.module.css";
 
 const RoomBox = forwardRef((props, ref) => {
@@ -26,4 +24,4 @@ RoomBox.propTypes = {
     room : PropTypes.object.isRequired
 }
 
-export default withRouter(RoomBox);
+export default RoomBox;

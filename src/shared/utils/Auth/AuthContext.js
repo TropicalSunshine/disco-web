@@ -1,11 +1,11 @@
 import React from "react";
 
-const default_auth = {
+const DEFAULT_AUTH = {
     userId : null,
     token : null,
     isLoggedIn : false
 };
 
-const AuthContext = React.createContext(default_auth);
+const AuthContext = React.createContext(DEFAULT_AUTH);
 
 export default AuthContext;

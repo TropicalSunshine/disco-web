@@ -7,9 +7,11 @@ import ErrorBoudary from "./shared/utils/ErrorBoundary";
 export default class App extends Component{
   render(){
     return (
-      <ErrorBoudary>
-        <Router/>
-      </ErrorBoudary>
+        <React.StrictMode>
+          <ErrorBoudary>
+            <Router/>
+          </ErrorBoudary>
+        </React.StrictMode>
     )
   }
 }

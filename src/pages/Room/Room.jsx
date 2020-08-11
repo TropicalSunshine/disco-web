@@ -4,7 +4,7 @@ import { LoaderPage } from "shared/components/index";
 
 import { constants, connectSocket, joinSuccess,
          socket, emitPause, emitPlay,
-          emitChangeSong } from "shared/utils/services/socket";
+          emitChangeSong } from "shared/utils/socket/socket";
 
 import YoutubePlayer from "shared/utils/services/YoutubePlayer.js";
 import { getVideoInfoData } from "shared/utils/services/youtube";
@@ -16,7 +16,6 @@ import MusicControls from "./MusicControls/MusicControls.jsx";
 
 import styles from "./style.module.css"
 
-const WAIT_TIME = 300;
 
 export default class Room extends PureComponent {
     
@@ -46,17 +45,23 @@ export default class Room extends PureComponent {
     async componentDidMount(){
         await connectSocket();
         
-        var data = {
+        var defaultData = {
             songId: null,
             time: 0,
             paused: true 
         };
 
+
         this.setState({
             loadingValue: 25
         });
 
-        data = await joinSuccess();
+        var data = await joinSuccess();
+
+        data = {
+            ...defaultData,
+            ...data
+        }; 
         console.log(data);
 
         this.setState({
@@ -88,33 +93,18 @@ export default class Room extends PureComponent {
         })
     }
 
-
-    getYoutubeMetaData = async () => {
-        var vid = "3r_Z5AYJJd4";
-        await Axios.get("https://"+vid+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=https%3A%2F%2Fwww.youtube.com%2Fget_video_info%3Fvideo_id%3D" + vid, {
-            headers: {
-                'Access-Control-Allow-Origin': '*'
-            }
-        }).then(response => {
-            console.log(response);
-        });
-    }
-
     addSocketListeners = () => {
         console.log("initing sockets");
         //socket.on(constants.USERJOINROOM, this.handleUserJoinRoom.bind(this));
         socket.on(constants.UPDATE, (data) => {
             this.loadAudio(data.songId, data.time, !data.paused);
         });
-
         socket.on(constants.USERCHANGESONG, (data) => {
             this.loadAudio(data.songId);
         });
-
         socket.on(constants.controls.SEEK, (data) => {
             this.isSeekRequest = true;
         });
-        
         socket.on(constants.controls.PAUSE, this.handleSocketInput);
         socket.on(constants.controls.PLAY, this.handleSocketInput);
         
@@ -145,46 +135,12 @@ export default class Room extends PureComponent {
         if (vidId === null) return;
 
         const data = await getVideoInfoData(vidId);
-        console.log(data);
+        
         if(data.snippet.thumbnails.high.url){
             this.setState({
                 songImage : data.snippet.thumbnails.high.url
             });
         }
-    }
-
-
-    
-    handleAudioSeek = (e) => {
-        
-        if(!this.isSeekRequest){
-            //fire event on last seek
-            console.log("firing seek");
-            e.preventDefault();
-            e.stopPropagation();
-            console.log("seeking");
-            const audio = this.audioRef.current;
-            //current time audio.currentTime
-    
-    
-            clearTimeout(this.seekWaitTimer);
-        
-    
-            this.seekWaitTimer = setTimeout( function() {
-                console.log("emiting socket seeking");
-                
-                socket.emit(constants.USERINPUT, {
-                    protocol: constants.controls.SEEK,
-                    duration: audio.currentTime,
-                    roomId: this.roomId
-                })
-                
-            }, WAIT_TIME);
-        }
-
-        this.isSeekRequest = false;
-        
-
     }
 
     handleAudioPause = () => {
