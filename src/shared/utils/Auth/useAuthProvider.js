@@ -57,7 +57,7 @@ function useAuth(){
     const logout = async () => null
 
     const fetchState = () => {
-
+        console.log("fetch state use auth hook");
         const token = userStore.token.get();
         setToken(token);
         const userId = userStore.userId.get();
@@ -71,7 +71,7 @@ function useAuth(){
 
 
 
-    useEffect(fetchState, []);
+    useEffect(() => {}, []);
 
 
     return {

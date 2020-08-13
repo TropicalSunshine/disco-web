@@ -3,8 +3,7 @@ import React, { useState } from "react";
 function usePlayer(setters){    
     
     const { 
-        setPlay,
-        setPause
+        setPaused
     } = setters;
 
 
@@ -22,6 +21,10 @@ function usePlayer(setters){
 
     const changeSong = () => {
          
+    }
+
+    const getSongData = () => {
+        
     }
 
     return {

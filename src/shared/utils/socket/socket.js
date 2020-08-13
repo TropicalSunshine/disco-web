@@ -23,7 +23,11 @@ export const constants = Object.freeze({
 
 
 
-export var socket = null;
+export var socket = io(socketUrl, {
+    path: "/socket",
+    autoConnect : false
+});
+
 export var roomId = null;
 
 var defaultData = {
@@ -38,9 +42,7 @@ export const connectSocket = (rId) => {
     roomId = rId;
 
     return new Promise((res, rej) => {  
-        socket = io(socketUrl, {
-            path: "/socket"
-        });
+        socket.connect();
     
         socket.on("connect", () => {
             console.log("connected to server socket server");
@@ -59,7 +61,7 @@ export const connectSocket = (rId) => {
 }
 
 export const disconnectSocket = () => {
-    socket.disconnect();
+    socket.disconnect();        
 }
 
 

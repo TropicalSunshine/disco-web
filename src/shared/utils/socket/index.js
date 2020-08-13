@@ -1,7 +1,9 @@
 import constants from "./constants";
 import * as Socket from "./socket";
+import * as Controls from "./controls";
 
-export { 
+export {
     constants,
-    Socket
+    Socket,
+    Controls
 }

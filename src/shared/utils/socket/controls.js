@@ -9,7 +9,7 @@ export const emitPause = () => {
     });
 }
 
-export const addPauseListener = (fn) => {
+export const addPauseListener = fn => {
     socket.on(constants.controls.PAUSE, fn);
 }
 
@@ -20,6 +20,10 @@ export const emitPlay = () => {
     })
 }
 
-export const addPlayListener = (fn) => {
+export const addPlayListener = fn => {
     socket.on(constants.controls.PLAY, fn);
+}
+
+export const addUpdateListener = fn => {
+    socket.on(constants.UPDATE, fn);
 }

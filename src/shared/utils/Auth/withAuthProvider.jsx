@@ -9,6 +9,7 @@ const withAuth = Component => class extends React.Component {
             <AuthContext.Consumer>
                 {
                     (auth) => {
+
                         var props = {
                             ...this.props,
                             auth: auth

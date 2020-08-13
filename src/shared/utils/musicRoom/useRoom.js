@@ -3,13 +3,14 @@ import { Socket } from "shared/socket"
 
 
 
-function useRoom(setters){
+function useRoom(setters, player, isPlayerInitialized){
     const { 
         setIsConnected,
         setIsLoading,
         setHasError,
-        setPlay,
-        setPause
+        setPaused,
+        setSongId,
+        setIsPlayerInitialized
     } = setters;
 
     const join = async (roomId) => {
@@ -17,12 +18,12 @@ function useRoom(setters){
 
         try {
             const { songId, time, paused } = await Socket.connectSocket(roomId);
-            
-            setPlay(!paused);
-            setPause(paused);
+
+            setPaused(paused);
             setSongId(null);
             setIsConnected(true);
-
+            
+            setSongId(songId);
 
         } catch (err) {
             console.error(err);

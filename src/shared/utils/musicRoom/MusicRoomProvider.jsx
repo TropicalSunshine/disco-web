@@ -1,43 +1,67 @@
 import React, { useState, useEffect } from "react";
 
-import usePlayer from "";
-import useRoom from "";
+import { YoutubePlayer } from "shared/utils/services";
+
+
 import MusicRoomContext from "./MusicRoomContext";
+import usePlayer from "./usePlayer";
+import useRoom from "./useRoom";
+import attachListeners from "./attachListeners";
+
 
 
 function MusicRoomProvider({children}){
 
     const [ isConnected, setIsConnected ] = useState(false);
     const [ isLoading, setIsLoading ] = useState(true);
-    const [ play, setPlay ] = useState(false);
-    const [ pause, setPause ] = useState(true);
+    const [ paused , setPaused ] = useState(true);
+    const [ songId, setSongId ] = useState(null);
     const [ songImage, setSongImage ] = useState(null);
-    const [ songId, setSongId ] = useState("");
+    const [ songStartTime, setSongStartTime ] = useState(0);
     const [ hasError, setHasError ] = useState(false);
+
+    const [ isPlayerInitialized, setIsPlayerInitialized ] = useState(false);
+    
+    const youtubePlayer = new YoutubePlayer();
 
     const setters = {
         setIsConnected,
-        setPlay,
-        setPause,
+        setPaused,
+        setSongId,
         setSongImage,
+        setSongStartTime,
         setIsLoading,
-        setHasError
+        setHasError,
+        setSongStartTime,
+        setIsPlayerInitialized
     }
 
+    //called only once
     useEffect(() => {
 
-    }, [isConnected])
+        (async () => {
+            setIsLoading(true);
+
+            //attach socket listeners
+            attachListeners(setters);
+
+
+            setIsLoading(false);
+        })();
+        
+
+
+    }, [])
 
     
 
-    const roomMethods = useRoom(setters);
+    const roomMethods = useRoom(setters );
     const playerMethods = usePlayer(setters);
 
     var value = {
         isConnected,
         isLoading,
-        play,
-        pause,
+        paused,
         songImage,
         hasError
 
@@ -54,3 +78,5 @@ function MusicRoomProvider({children}){
         </MusicRoomContext.Provider>
     )
 }
+
+export default MusicRoomProvider;
