@@ -1,3 +1,4 @@
+import { InfoRounded } from "@material-ui/icons";
 
 function YoutubePlayer(videoId=null,startSeconds=0, paused=true){
     this.player = null;
@@ -7,7 +8,11 @@ function YoutubePlayer(videoId=null,startSeconds=0, paused=true){
     this.time = startSeconds;
 }
 
-YoutubePlayer.prototype.init = function(){
+YoutubePlayer.prototype.init = function(videoId=null, startSeconds= 0, paused=true){
+
+    this.videoId = videoId;
+    this.startSeconds = startSeconds;
+    this.paused = paused;
 
     var constructConfigs = {
         width: 0,
@@ -23,9 +28,9 @@ YoutubePlayer.prototype.init = function(){
     return new Promise((res) => {
         constructConfigs.events = {
             onReady: (e) => {
-                
-                this.duration = e.target.getDuration();
-                e.target.seekTo(that.time);
+                const { target } = e;
+                this.duration = target.getDuration();
+                target.seekTo(this.time);
 
                 console.log(this.paused);
                 if(this.paused) {
@@ -44,11 +49,13 @@ YoutubePlayer.prototype.init = function(){
                 switch(e.data){
                     case window["YT"].PlayerState.PAUSED:
                         console.log("pausing")
-                        that.paused = true;
+                        this.paused = true;
                         break;
                     case window["YT"].PlayerState.PLAYING:
                         console.log("play")
-                        that.paused = false;
+                        this.paused = false;
+                        break;
+                    default: 
                         break;
                 }
             }
@@ -61,7 +68,7 @@ YoutubePlayer.prototype.init = function(){
 
 }
 
-YoutubePlayer.prototype.loadVideo = function(vidId, startSeconds=0){
+YoutubePlayer.prototype.loadVideo = function(vidId, startSeconds=0, paused=false){
     this.player.loadVideoById({
         videoId: vidId,
         startSeconds: startSeconds
@@ -69,7 +76,11 @@ YoutubePlayer.prototype.loadVideo = function(vidId, startSeconds=0){
 
     this.videoId = vidId;
 
-    this.player.playVideo();
+    if(paused){
+        this.player.pauseVideo();
+    } else {
+        this.player.playVideo();
+    }
     
     return new Promise((res) => {
         this.player.addEventListener("onStateChange", (e) => {
@@ -92,6 +103,10 @@ YoutubePlayer.prototype.pause = function(){
     this.player.pauseVideo();
 }
 
+YoutubePlayer.prototype.stop = function(){
+    this.player.stopVideo();
+}
+
 YoutubePlayer.prototype.getState = function(){
 
     
@@ -101,6 +116,10 @@ YoutubePlayer.prototype.getState = function(){
         paused: this.paused,
         time: this.player.getCurrentTime()
     }
+}
+
+YoutubePlayer.prototype.isInitialized = function(){
+    return (this.player !== null );
 }
 
 YoutubePlayer.prototype.destroy = function(){

@@ -1,7 +1,7 @@
 import React from "react";
 import AuthContext from "./AuthContext";
 
-const withAuth = Component => class extends React.Component {
+const withAuthProvider = Component => class extends React.Component {
 
     render() {
         
@@ -23,4 +23,4 @@ const withAuth = Component => class extends React.Component {
     }   
 }
 
-export default withAuth;
+export default withAuthProvider;

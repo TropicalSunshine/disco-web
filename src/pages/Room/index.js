@@ -1,3 +1,4 @@
 import Room from "./Room";
+import { withMusicRoomProvider } from "shared/utils/musicRoom";
 
-export default Room;
+export default withMusicRoomProvider(Room);

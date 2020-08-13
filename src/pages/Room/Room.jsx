@@ -9,8 +9,6 @@ import { constants, connectSocket, joinSuccess,
 import YoutubePlayer from "shared/utils/services/YoutubePlayer.js";
 import { getVideoInfoData } from "shared/utils/services/youtube";
 
-import Axios from 'axios';
-
 import SearchPanel from "./SearchPanel/SearchPanel.jsx";
 import MusicControls from "./MusicControls/MusicControls.jsx";
 
@@ -20,6 +18,9 @@ import styles from "./style.module.css"
 export default class Room extends PureComponent {
     
     constructor(props){
+
+        console.log(props.musicRoom);
+        
         super(props);
         
         this.state = {

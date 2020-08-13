@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 import { User as userStore } from "../storage"; 
 import { User as userApi } from "../api";
@@ -57,7 +57,7 @@ function useAuth(){
     const logout = async () => null
 
     const fetchState = () => {
-        console.log("fetch state use auth hook");
+        
         const token = userStore.token.get();
         setToken(token);
         const userId = userStore.userId.get();
@@ -71,16 +71,16 @@ function useAuth(){
 
 
 
-    useEffect(() => {}, []);
+    useEffect(fetchState, []);
 
 
-    return {
+    return useMemo(() => ({ 
         login,
         register,
         userId,
         token,
         isLoggedIn
-    }
+    }), [userId, token, isLoggedIn]);
 
 }
 

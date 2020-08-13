@@ -27,3 +27,15 @@ export const addPlayListener = fn => {
 export const addUpdateListener = fn => {
     socket.on(constants.UPDATE, fn);
 }
+
+
+export const emitChangeSong = (playerState) => {
+    
+    
+    var data = {
+        ...playerState,
+        roomId
+    }
+    
+    socket.emit(constants.USERCHANGESONG, data);    
+}

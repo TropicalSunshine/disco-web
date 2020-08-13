@@ -1,28 +1,48 @@
 import React from "react";
-import { Socket } from "shared/socket"
+import useAttachListeners from "./useAttachListeners";
+import { Socket } from "shared/utils/socket"
+import { youtube } from "shared/utils/services";
 
 
-
-function useRoom(setters, player, isPlayerInitialized){
+function useRoom(setters, YoutubePlayer){
     const { 
         setIsConnected,
         setIsLoading,
         setHasError,
         setPaused,
         setSongId,
-        setIsPlayerInitialized
+        setSongImage
     } = setters;
 
+    const { 
+        bind,
+        unbind
+    }  = useAttachListeners(setters, YoutubePlayer);
+
     const join = async (roomId) => {
+
         setIsLoading(true);
 
         try {
             const { songId, time, paused } = await Socket.connectSocket(roomId);
 
-            setPaused(paused);
+            if(songId !== null){
+
+                const data = await youtube.getVideoInfoData();
+
+                setSongImage(data.snippet.thumbnails.high.url);
+
+                if(YoutubePlayer.isInitialized){
+                    await YoutubePlayer.init(songId, time, paused);
+                } else {
+                    await YoutubePlayer.loadVideo(songId, time, paused);
+                }
+            }
+
+            bind();
+            setPaused((songId !== null) ? paused : true);
             setSongId(null);
             setIsConnected(true);
-            
             setSongId(songId);
 
         } catch (err) {
@@ -35,18 +55,17 @@ function useRoom(setters, player, isPlayerInitialized){
     }
 
     const leave = () => {
-        
-        setIsLoading(true);
-
+    
         try {
-            await Socket.disconnectSocket();
+            Socket.disconnectSocket();
+            setPaused(true);
             setIsConnected(false);
+            YoutubePlayer.stopVideo();
+            unbind();
         } catch (err) {
             console.error(err);
-
+            setHasError(true);
         }
-
-        setIsLoading(false);
 
     }
 

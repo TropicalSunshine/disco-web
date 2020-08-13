@@ -1,4 +1,4 @@
-export const constants = Object.freeze({
+const constants = Object.freeze({
     USERJOINROOM: 1,
     USERCREATEROOM: 2,
     USERCHANGESONG: 3,
@@ -13,3 +13,6 @@ export const constants = Object.freeze({
     SUCCESS: 10,
     USERLEAVEROOM : 11
 });
+
+
+export default constants;
