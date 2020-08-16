@@ -17,67 +17,56 @@ props req
     handlePrev
  */
 
-export default class MusicControls extends PureComponent {
-    constructor(props){
-        super(props);
+function MusicControls(props){
 
-        this.state = {
-        }
-    }
+    const { musicRoom } = props;
 
-    render() {
-        return (
-            <div className={styles["music-player-container"]}>
-                <div className="box-center">
-                    <div className={`${styles["music-player-control-button"]} ${styles["rewind-button"]}`}>
-                        <FastRewindIcon
-                        className={`${styles.icon}`}
-                        
-                        onClick={(e)=> {
-                            this.props.handlePrev(e);
-                        }}
-                        />
-                    </div>
-                    <div className={`${styles["music-player-control-button"]} ${styles["play-button"]}`}>
-                        {
-                            this.props.paused &&
-                            (
+    const {
+        paused,
+        pause,
+        play
+    } = musicRoom;
+
+    return (
+        <div className={styles["music-player-container"]}>
+            <div className="box-center">
+                <div className={`${styles["music-player-control-button"]} ${styles["rewind-button"]}`}>
+                    <FastRewindIcon
+                    className={`${styles.icon}`}
+                    />
+                </div>
+                <div className={`${styles["music-player-control-button"]} ${styles["play-button"]}`}>
+                    {
+                        (paused) &&
+                        (
                             <PlayIcon 
                             className={`${styles.icon}`}
                             onClick={()=>{
-                                this.props.handlePlay();
+                                play();
                             }}
                             />
-                            )
-                        }
-                        {
-                            !this.props.paused && (
-                                <PauseIcon
-                                className={`${styles.icon}`}
-                                onClick={() => {
-                                    this.props.handlePause();
-                                }}
-                                />
-                            )
-                        }
-                    </div>
-                    <div className={`${styles["music-player-control-button"]} ${styles["rewind-button"]}`}>
-                        <FastForwardIcon
-                        className={`${styles.icon}`}
-                        
-                        onClick={(e) => {
-                            this.props.handleNext(e);
-                        }}
-                        />
-                    </div>
+                        )
+                    }
+                    {
+                        (!paused) && (
+                            <PauseIcon
+                            className={`${styles.icon}`}
+                            onClick={() => {
+                                pause();
+                            }}
+                            />
+                        )
+                    }
+                </div>
+                <div className={`${styles["music-player-control-button"]} ${styles["rewind-button"]}`}>
+                    <FastForwardIcon
+                    className={`${styles.icon}`}
+                    />
                 </div>
             </div>
-        )
-    }
+        </div>
+    )
 }
 
+export default MusicControls;
 
-MusicControls.propTypes = {
-    paused : PropTypes.bool.isRequired,
-    handlePause : PropTypes.func.isRequired
-} 

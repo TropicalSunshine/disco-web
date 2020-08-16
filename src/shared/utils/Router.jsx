@@ -25,7 +25,7 @@ function Router(props) {
                                 <Route exact path="/" component={HomePage}/>
                                 <Route exact path="/explore" component={ExplorePage}/>
                                 <Route exact path="/room/create" component={CreateRoomPage}/>
-                                <Route exact path="/room/:id" component={Room}/>
+                                <Route exact path="/room/:roomId" component={Room}/>
                             </Switch>
                         </MusicRoomProvider>
                     </AuthProvider>

@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, useEffect, useState } from 'react';
 
 import { LoaderPage } from "shared/components/index";
 
@@ -9,12 +9,90 @@ import { constants, connectSocket, joinSuccess,
 import YoutubePlayer from "shared/utils/services/YoutubePlayer.js";
 import { getVideoInfoData } from "shared/utils/services/youtube";
 
-import SearchPanel from "./SearchPanel/SearchPanel.jsx";
-import MusicControls from "./MusicControls/MusicControls.jsx";
+import SearchPanel from "./SearchPanel";
+import MusicControls from "./MusicControls";
+
+
+
+import { useParams } from "react-router-dom";
 
 import styles from "./style.module.css"
 
 
+function Room(props){
+
+    const { roomId } = useParams();
+    const { musicRoom } = props;
+
+    const { 
+        isConnected,
+        isLoading,
+        paused,
+        songImage
+    } = musicRoom;
+    
+    const [ loadingValue, setLoadingValue ] = useState(0);
+
+    useEffect(() => {
+
+        (async () => {
+            
+
+            await musicRoom.join(roomId);
+            setLoadingValue(100);
+            
+        })()
+
+    }, []);
+
+    return (
+        <React.Fragment>
+            <div id="player"></div>
+            {
+                isLoading && (
+                    <LoaderPage value={loadingValue}/>
+                )
+            }
+            {
+                !isLoading && (
+                    <div className={`box-row ${styles["room-container"]}`}>
+                        <div className={styles["room-left-container"]}>
+                            <SearchPanel/>
+                        </div>
+                        <div className={`box-column ${styles["room-central-container"]}`}>
+                            
+                            <div className={`box-center ${styles["player-display-box"]}`}>
+                                <div className={styles["player-disk"]} style={{
+                                    animationPlayState : ((paused) ? "running" : "paused"),
+                                    backgroundImage : `url(${songImage})`
+                                }}>
+                                    <i/>
+                                </div>
+                            </div>
+                            <div className={styles["player-control-container"]}>
+                                <MusicControls/>
+                            </div>
+                        
+                        </div>
+                        <div className={styles["room-right-container"]}>
+                                {
+                                    /*
+
+                                    */
+                                }
+                            
+                        </div>
+                        
+                    </div>
+                )
+            }
+        </React.Fragment>
+    )
+}
+
+export default Room;
+
+/*
 export default class Room extends PureComponent {
     
     constructor(props){
@@ -153,12 +231,12 @@ export default class Room extends PureComponent {
         this.setState({
             paused: true
         })
-        /*
+        
         socket.emit(constants.USERINPUT, {
             protocol: constants.controls.PAUSE,
             roomId: 123
         });
-        */
+        
     }
 
     handleAudioPlay = () => {
@@ -170,12 +248,12 @@ export default class Room extends PureComponent {
             paused: false
         })
 
-        /*
+        
         socket.emit(constants.USERINPUT, {
             protocol: constants.controls.PLAY,
             roomId: 123
         });
-        */
+        
     }
 
     setPausePromise = (val=true) => {
@@ -275,7 +353,7 @@ export default class Room extends PureComponent {
                                     onPause = {this.handleAudioPause}
                                     onPlay = {this.handleAudioPlay}>
                                     </audio>
-                                     */
+                                     
                                 }
                                 
                             </div>
@@ -287,3 +365,4 @@ export default class Room extends PureComponent {
         )
     }
 }
+*/

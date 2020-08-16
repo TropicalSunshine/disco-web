@@ -25,15 +25,17 @@ function useRoom(setters, YoutubePlayer){
 
         try {
             const { songId, time, paused } = await Socket.connectSocket(roomId);
-
+            console.log("songId", songId);
             if(songId !== null){
 
-                const data = await youtube.getVideoInfoData();
+                const data = await youtube.getVideoInfoData(songId);
 
                 setSongImage(data.snippet.thumbnails.high.url);
 
                 if(YoutubePlayer.isInitialized){
                     await YoutubePlayer.init(songId, time, paused);
+                    console.log("initialized");
+                    console.log(YoutubePlayer);
                 } else {
                     await YoutubePlayer.loadVideo(songId, time, paused);
                 }

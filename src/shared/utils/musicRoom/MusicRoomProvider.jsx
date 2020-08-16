@@ -36,6 +36,8 @@ function MusicRoomProvider({children}){
         setSongStartTime
     }
 
+    console.log(youtubePlayer);
+    
     const roomMethods = useRoom(setters, youtubePlayer);
     const playerMethods = usePlayer(setters, youtubePlayer);
 
