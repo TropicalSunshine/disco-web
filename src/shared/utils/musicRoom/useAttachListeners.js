@@ -1,7 +1,7 @@
 import { Controls } from "shared/utils/socket";
-import { youtube } from "shared/utils/services";
+import { youtube, YoutubePlayer } from "shared/utils/services";
 
-function useAttachListeners(setters, YoutubePlayer){
+function useAttachListeners(setters){
 
     const { 
         setPaused,

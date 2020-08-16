@@ -1,10 +1,10 @@
 import React from "react";
 import useAttachListeners from "./useAttachListeners";
 import { Socket } from "shared/utils/socket"
-import { youtube } from "shared/utils/services";
+import { youtube, YoutubePlayer } from "shared/utils/services";
 
 
-function useRoom(setters, YoutubePlayer){
+function useRoom(setters){
     const { 
         setIsConnected,
         setIsLoading,
@@ -17,7 +17,7 @@ function useRoom(setters, YoutubePlayer){
     const { 
         bind,
         unbind
-    }  = useAttachListeners(setters, YoutubePlayer);
+    }  = useAttachListeners(setters);
 
     const join = async (roomId) => {
 
@@ -25,20 +25,20 @@ function useRoom(setters, YoutubePlayer){
 
         try {
             const { songId, time, paused } = await Socket.connectSocket(roomId);
-            console.log("songId", songId);
+            
             if(songId !== null){
 
                 const data = await youtube.getVideoInfoData(songId);
 
                 setSongImage(data.snippet.thumbnails.high.url);
 
-                if(YoutubePlayer.isInitialized){
+                if(!YoutubePlayer.isInitialized()) {
                     await YoutubePlayer.init(songId, time, paused);
-                    console.log("initialized");
-                    console.log(YoutubePlayer);
                 } else {
                     await YoutubePlayer.loadVideo(songId, time, paused);
                 }
+
+                
             }
 
             bind();
@@ -62,7 +62,7 @@ function useRoom(setters, YoutubePlayer){
             Socket.disconnectSocket();
             setPaused(true);
             setIsConnected(false);
-            YoutubePlayer.stopVideo();
+            YoutubePlayer.stop();
             unbind();
         } catch (err) {
             console.error(err);

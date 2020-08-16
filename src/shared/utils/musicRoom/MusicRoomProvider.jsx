@@ -22,8 +22,6 @@ function MusicRoomProvider({children}){
     const [ songStartTime, setSongStartTime ] = useState(0);
     const [ hasError, setHasError ] = useState(false);
 
-    const youtubePlayer = new YoutubePlayer();
-
     const setters = {
         setIsLoadingSong,
         setIsConnected,
@@ -36,10 +34,8 @@ function MusicRoomProvider({children}){
         setSongStartTime
     }
 
-    console.log(youtubePlayer);
-    
-    const roomMethods = useRoom(setters, youtubePlayer);
-    const playerMethods = usePlayer(setters, youtubePlayer);
+    const roomMethods = useRoom(setters);
+    const playerMethods = usePlayer(setters);
 
     var value = {
         isConnected,

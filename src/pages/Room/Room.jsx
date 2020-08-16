@@ -6,7 +6,7 @@ import { constants, connectSocket, joinSuccess,
          socket, emitPause, emitPlay,
           emitChangeSong } from "shared/utils/socket/socket";
 
-import YoutubePlayer from "shared/utils/services/YoutubePlayer.js";
+//import YoutubePlayer from "shared/objects/YoutubePlayer.js";
 import { getVideoInfoData } from "shared/utils/services/youtube";
 
 import SearchPanel from "./SearchPanel";
@@ -63,7 +63,7 @@ function Room(props){
                             
                             <div className={`box-center ${styles["player-display-box"]}`}>
                                 <div className={styles["player-disk"]} style={{
-                                    animationPlayState : ((paused) ? "running" : "paused"),
+                                    animationPlayState : ((!paused) ? "running" : "paused"),
                                     backgroundImage : `url(${songImage})`
                                 }}>
                                     <i/>

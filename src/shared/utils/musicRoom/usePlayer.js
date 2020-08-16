@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Controls } from "shared/utils/socket";
-import { youtube } from "shared/utils/services";
+import { youtube, YoutubePlayer } from "shared/utils/services";
 
-function usePlayer(setters, YoutubePlayer){    
+function usePlayer(setters){    
     
     const { 
         setPaused,
