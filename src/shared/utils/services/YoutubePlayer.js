@@ -23,10 +23,9 @@ export const init = async (videoId=null, startSeconds=0, paused=true) => {
                     console.log("paused loaded")
                     e.target.pauseVideo();
                 } else {
-                    console.log("paused loaded")
+                    console.log("play loaded")
                     e.target.playVideo();
                 }
-
                 res();
 
                 //e.target.playVideo();
@@ -49,6 +48,7 @@ export const init = async (videoId=null, startSeconds=0, paused=true) => {
 
 
         player = new window["YT"].Player("player", constructConfigs );
+        
     })
 }
 
@@ -95,4 +95,15 @@ export const isInitialized = () => {
 
 export const destroy = () => {
     player.destroy();
+}
+
+export const getState = () => {
+
+    const { video_id } = player.getVideoData();
+
+    return {
+        duration : player.getDuration(),
+        songId : video_id,
+        time : player.getCurrentTime()
+    }
 }

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useCallback } from "react";
 import { Controls } from "shared/utils/socket";
 import { youtube, YoutubePlayer } from "shared/utils/services";
 
-function usePlayer(setters){    
+function usePlayer(setters, paused){    
     
     const { 
         setPaused,
@@ -30,7 +30,7 @@ function usePlayer(setters){
 
     }
 
-    const changeSong = async (songId) => {
+    const changeSong = useCallback( async (songId) => {
         setIsLoadingSong(true);
         setSongId(songId);
 
@@ -38,9 +38,13 @@ function usePlayer(setters){
         const data = await youtube.getVideoInfoData(songId);
         setSongImage(data.snippet.thumbnails.high.url);
         
-        Controls.emitChangeSong(YoutubePlayer.getState());
+        Controls.emitChangeSong({
+            ...(YoutubePlayer.getState()),
+            paused
+        });
+
         setIsLoadingSong(false);
-    }
+    }, [paused]);
 
 
 

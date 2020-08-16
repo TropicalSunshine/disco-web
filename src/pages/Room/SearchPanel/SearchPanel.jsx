@@ -24,7 +24,7 @@ function SearchPanel(props){
     const [ searchResults, setSearchResults ] = useState([]);
     const [ searchValue, setSearchValue ] = useState(null);
 
-    const searchInterval = null;
+    var searchInterval = null;
 
     const onSearch = (e) => {
         const { value } = e.target;
@@ -39,7 +39,7 @@ function SearchPanel(props){
                 setIsSearching(true);
 
                 await new Promise(resolve => {
-                    searchInterval = setTimeout(resolve, 300);
+                    searchInterval = setTimeout(resolve, 500);
                 });
 
                 await searchVideoByKeyword(searchValue).then( response => {

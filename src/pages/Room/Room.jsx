@@ -28,7 +28,9 @@ function Room(props){
         isConnected,
         isLoading,
         paused,
-        songImage
+        songImage,
+        join,
+        leave
     } = musicRoom;
     
     const [ loadingValue, setLoadingValue ] = useState(0);
@@ -38,16 +40,19 @@ function Room(props){
         (async () => {
             
 
-            await musicRoom.join(roomId);
+            await join(roomId);
             setLoadingValue(100);
             
         })()
+
+        return () => {
+            leave();
+        }
 
     }, []);
 
     return (
         <React.Fragment>
-            <div id="player"></div>
             {
                 isLoading && (
                     <LoaderPage value={loadingValue}/>

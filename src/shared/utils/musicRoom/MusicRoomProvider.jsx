@@ -35,7 +35,7 @@ function MusicRoomProvider({children}){
     }
 
     const roomMethods = useRoom(setters);
-    const playerMethods = usePlayer(setters);
+    const playerMethods = usePlayer(setters, paused);
 
     var value = {
         isConnected,
