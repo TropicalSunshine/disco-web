@@ -56,7 +56,9 @@ function useAttachListeners(setters){
     }
 
     const unbind = () => {
-
+        Controls.removePauseListener();
+        Controls.removePlayListener();
+        Controls.removeUpdateListener();
     }
 
     return {

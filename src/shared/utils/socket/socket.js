@@ -28,7 +28,7 @@ export var socket = io(socketUrl, {
     autoConnect : false
 });
 
-export var roomId = null;
+export var roomId = 123;
 
 var defaultData = {
     songId: null,
@@ -39,7 +39,7 @@ var defaultData = {
 
 export const connectSocket = (rId) => {
 
-    roomId = rId;
+    //roomId = rId;
     console.log(`connecting to ${rId}`);
     return new Promise((res, rej) => {  
         socket.connect();
