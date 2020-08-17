@@ -33,7 +33,7 @@ function useAuth(){
 
         setIsLoggedIn(true);
 
-        console.log("setting values");
+        
         return response;
     }
 

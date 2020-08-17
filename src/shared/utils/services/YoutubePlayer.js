@@ -68,7 +68,7 @@ export const loadVideo = (vidId, startSeconds=0, paused=false) => {
         player.addEventListener("onStateChange", (e) => {
 
             if(e.data === window["YT"].PlayerState.BUFFERING){
-                console.log("buffering");
+                
                 console.log(e.target.getDuration());
                 
                 res();

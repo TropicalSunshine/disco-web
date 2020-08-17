@@ -40,12 +40,12 @@ var defaultData = {
 export const connectSocket = (rId) => {
 
     //roomId = rId;
-    console.log(`connecting to ${rId}`);
+    
     return new Promise((res, rej) => {  
         socket.connect();
     
         socket.on("connect", () => {
-            console.log("connected to server socket server");
+            
             socket.emit(constants.USERJOINROOM, {
                 roomId: 123
             });

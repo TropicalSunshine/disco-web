@@ -11,7 +11,7 @@ function useRoomsQuery(limit, lastId){
         (async () => {
             setIsLoading(true);
 
-            console.log("lastID", lastId);
+            
             try {  
                 const response = await Room.Rooms(limit, lastId);
 

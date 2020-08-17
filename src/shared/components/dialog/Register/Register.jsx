@@ -38,7 +38,7 @@ class Register extends PureComponent {
         e.stopPropagation();
 
         const { auth } = this.props;
-        console.log(auth);
+        
 
         try{
             var { password, passwordConfirm, email, username } = this.state;
@@ -48,7 +48,7 @@ class Register extends PureComponent {
             }
 
             var response = await auth.register(email, password, username);
-            console.log(response);
+            
             this.props.handleClose();
 
         } catch(err) {

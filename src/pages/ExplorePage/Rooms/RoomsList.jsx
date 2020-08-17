@@ -30,8 +30,8 @@ function RoomsList(props){
 
         observer.current = new IntersectionObserver(entries => {
             if(entries[0].isIntersecting && hasMore){
-                console.log("visible");
-                console.log(rooms[rooms.length - 1].id);
+                
+                
                 setLastId(rooms[rooms.length - 1]._id);
             }
         })

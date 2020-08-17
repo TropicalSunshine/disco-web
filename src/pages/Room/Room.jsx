@@ -102,7 +102,7 @@ export default class Room extends PureComponent {
     
     constructor(props){
 
-        console.log(props.musicRoom);
+        
         
         super(props);
         
@@ -146,13 +146,13 @@ export default class Room extends PureComponent {
             ...defaultData,
             ...data
         }; 
-        console.log(data);
+        
 
         this.setState({
             loadingValue: 50
         });
 
-        console.log(data);
+        
         await this.initYoutubePlayer(data.songId, data.time, data.paused);
         await this.loadVideoData(data.songId);
         this.setState({
@@ -178,7 +178,7 @@ export default class Room extends PureComponent {
     }
 
     addSocketListeners = () => {
-        console.log("initing sockets");
+        
         //socket.on(constants.USERJOINROOM, this.handleUserJoinRoom.bind(this));
         socket.on(constants.UPDATE, (data) => {
             this.loadAudio(data.songId, data.time, !data.paused);
@@ -196,7 +196,7 @@ export default class Room extends PureComponent {
 
 
     handleSocketInput = (data) => {
-        console.log("input from server: ", data);
+        
 
         this.setState({
             paused: data.paused
@@ -210,7 +210,7 @@ export default class Room extends PureComponent {
     }
 
     initYoutubePlayer = async (songId=null, startTime=0, paused=true) => {
-        console.log(window["YT"]);
+        
         this.youtubePlayer = new YoutubePlayer(songId, startTime, paused);
         await this.youtubePlayer.init(); 
     }
@@ -229,7 +229,7 @@ export default class Room extends PureComponent {
 
     handleAudioPause = () => {
         
-        console.log("pausing song");
+        
 
         emitPause(this.roomId);
         this.youtubePlayer.pause();
@@ -245,7 +245,7 @@ export default class Room extends PureComponent {
     }
 
     handleAudioPlay = () => {
-        console.log("playing song");
+        
 
         emitPlay(this.roomId);
         this.youtubePlayer.play();
@@ -274,9 +274,9 @@ export default class Room extends PureComponent {
     loadAudio = async (vidId, startSecond=0, play=true, emit=false) => {
 
         await this.setPausePromise(true);
-        console.log("pausing");
+        
         await this.youtubePlayer.loadVideo(vidId, startSecond);
-        console.log("playing");
+        
 
         if(emit) emitChangeSong(this.roomId, this.youtubePlayer);
 
@@ -298,9 +298,9 @@ export default class Room extends PureComponent {
         this.loadAudio(vidId, 0, true, true);
                                     
         if(v.snippet.thumbnails.high.url){
-            //console.log(v.snippet.thumbnails.default.url);
+            //
             // const pal = Vibrant.from(v.snippet.thumbnails.medium.url).getPalette();
-            //console.log("pallette", pal);
+            //
 
             this.setState({
                 songImage : v.snippet.thumbnails.high.url

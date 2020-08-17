@@ -41,7 +41,7 @@ class Login extends PureComponent {
         
         try{
             const { email, password } = this.state;
-            console.log(email, password);
+            
             var result = await auth.login(email, password);    
 
             this.props.handleClose();
@@ -49,7 +49,7 @@ class Login extends PureComponent {
 
         } catch(err) {
 
-            console.log(err.message);
+            
             this.setState({
                 errorMessage: err.message
             });
