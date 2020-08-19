@@ -34,6 +34,7 @@ function usePlayer(setters, paused){
         setIsLoadingSong(true);
         setSongId(songId);
 
+        setPaused(false);
         await YoutubePlayer.loadVideo(songId, 0, false);
         const data = await youtube.getVideoInfoData(songId);
         setSongImage(data.snippet.thumbnails.high.url);

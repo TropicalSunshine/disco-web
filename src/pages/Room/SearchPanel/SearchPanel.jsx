@@ -22,15 +22,29 @@ function SearchPanel(props){
 
     const [ isSearching, setIsSearching ] = useState(false);
     const [ searchResults, setSearchResults ] = useState([]);
-    const [ searchValue, setSearchValue ] = useState(null);
 
     var searchInterval = null;
 
-    const onSearch = (e) => {
+    const onSearch = async (e) => {
         const { value } = e.target;
-        setSearchValue(value);
+
+        clearInterval(searchInterval);
+
+        setIsSearching(true);
+
+        await new Promise(resolve => {
+            searchInterval = setTimeout(resolve, 500);
+        });
+
+        await searchVideoByKeyword(value).then( response => {
+            setSearchResults(response.data.items);
+        });
+
+        setIsSearching(false);
+        
     }
 
+    /*
     useEffect(() => {
         clearInterval(searchInterval);
         if(searchValue !== null){
@@ -50,6 +64,7 @@ function SearchPanel(props){
             })();
         }
     }, [searchValue])
+    */
 
 
     return (

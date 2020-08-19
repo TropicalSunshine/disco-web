@@ -14,11 +14,11 @@ export const init = async (videoId=null, startSeconds=0, paused=true) => {
 
     await new Promise((res) => {
         constructConfigs.events = {
-            onReady: (e) => {
+            "onReady": (e) => {
+                console.log(videoId, startSeconds, paused);
                 const { target } = e;
                 target.seekTo(startSeconds);
 
-                
                 if(paused) {
                     console.log("paused loaded")
                     e.target.pauseVideo();
@@ -45,7 +45,6 @@ export const init = async (videoId=null, startSeconds=0, paused=true) => {
                 }
             }
         }
-
 
         player = new window["YT"].Player("player", constructConfigs );
         

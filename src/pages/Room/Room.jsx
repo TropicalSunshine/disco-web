@@ -36,14 +36,13 @@ function Room(props){
     const [ loadingValue, setLoadingValue ] = useState(0);
 
     useEffect(() => {
-
+        console.log(musicRoom);
         (async () => {
             
-
             await join(roomId);
             setLoadingValue(100);
             
-        })()
+        })();
 
         return () => {
             leave();
@@ -53,6 +52,9 @@ function Room(props){
 
     return (
         <React.Fragment>
+            <div id="player">
+
+            </div>
             {
                 isLoading && (
                     <LoaderPage value={loadingValue}/>

@@ -26,20 +26,20 @@ function useRoom(setters){
         try {
             const { songId, time, paused } = await Socket.connectSocket(roomId);
             
+            if(!YoutubePlayer.isInitialized()) {
+                await YoutubePlayer.init(songId, time, paused);
+                console.log("here");
+            } else {
+                await YoutubePlayer.loadVideo(songId, time, paused);
+            }
+            
             if(songId !== null){
 
                 const data = await youtube.getVideoInfoData(songId);
-
-                setSongImage(data.snippet.thumbnails.high.url);
-
-                if(!YoutubePlayer.isInitialized()) {
-                    await YoutubePlayer.init(songId, time, paused);
-                } else {
-                    await YoutubePlayer.loadVideo(songId, time, paused);
-                }
-
-                
+                setSongImage(data.snippet.thumbnails.high.url);    
             }
+
+
 
             bind();
             setPaused((songId !== null) ? paused : true);

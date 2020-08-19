@@ -22,7 +22,7 @@ export const constants = Object.freeze({
 
 
 
-
+console.log("socketUrl", socketUrl);
 export var socket = io(socketUrl, {
     path: "/socket",
     autoConnect : false

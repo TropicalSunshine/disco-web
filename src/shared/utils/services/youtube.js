@@ -1,6 +1,6 @@
 import Axios from "axios";
 
-const YOUTUBE_API_KEY            =  "AIzaSyC3uwL4wESiIqK51d4xwQfd5APWxC2H2lo";
+const YOUTUBE_API_KEY            =  "AIzaSyAwqryCo-XPWewUlnT19wJ3AfPQuyFaVDE";
 const YOUTUBE_API_BASE_URL       =  "https://www.googleapis.com/youtube/v3"; 
 
 const YOUTUBE_SEARCH = `${YOUTUBE_API_BASE_URL}/search`
