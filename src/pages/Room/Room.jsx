@@ -9,8 +9,9 @@ import { constants, connectSocket, joinSuccess,
 //import YoutubePlayer from "shared/objects/YoutubePlayer.js";
 import { getVideoInfoData } from "shared/utils/services/youtube";
 
-import SearchPanel from "./SearchPanel";
+import MessagePanel from "./MessagePanel";
 import MusicControls from "./MusicControls";
+import SearchPanel from "./SearchPanel";
 
 
 
@@ -39,7 +40,7 @@ function Room(props){
         console.log(musicRoom);
         (async () => {
             
-            await join(roomId);
+            //await join(roomId);
             setLoadingValue(100);
             
         })();
@@ -56,17 +57,17 @@ function Room(props){
 
             </div>
             {
-                isLoading && (
+                (false) && (
                     <LoaderPage value={loadingValue}/>
                 )
             }
             {
-                !isLoading && (
-                    <div className={`box-row ${styles["room-container"]}`}>
-                        <div className={styles["room-left-container"]}>
+                !(false) && (
+                    <div className={`box-row ${styles["room"]}`}>
+                        <div className={styles["room__room-left"]}>
                             <SearchPanel/>
                         </div>
-                        <div className={`box-column ${styles["room-central-container"]}`}>
+                        <div className={`box-column ${styles["room__room-central"]}`}>
                             
                             <div className={`box-center ${styles["player-display-box"]}`}>
                                 <div className={styles["player-disk"]} style={{
@@ -81,13 +82,8 @@ function Room(props){
                             </div>
                         
                         </div>
-                        <div className={styles["room-right-container"]}>
-                                {
-                                    /*
-
-                                    */
-                                }
-                            
+                        <div className={styles["room__room-right"]}>
+                                <MessagePanel/>
                         </div>
                         
                     </div>

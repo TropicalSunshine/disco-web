@@ -20,8 +20,6 @@ export const constants = Object.freeze({
     USERLEAVEROOM : 11
 });
 
-
-
 console.log("socketUrl", socketUrl);
 export var socket = io(socketUrl, {
     path: "/socket",

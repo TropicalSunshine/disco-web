@@ -11,7 +11,9 @@ const constants = Object.freeze({
     JOINSUCCESS: 8,
     UPDATE: 9,
     SUCCESS: 10,
-    USERLEAVEROOM : 11
+    USERLEAVEROOM : 11,
+    SEND_MESSAGE : 12,
+    RECIEVE_MESSAGE : 13
 });
 
 

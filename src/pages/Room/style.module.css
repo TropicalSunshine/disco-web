@@ -1,24 +1,25 @@
 
-.room-container{
+.room{
     height: calc(100vh - 50px);
+    width: 100%;
     background-color: black;
 }
 
-.room-left-container{
+.room__room-left{
     background-color: var(--grey-primary);
-    width: 20%;
-    min-width: 350px;
-    max-width: 500px;
+    width: 20vw;
+    min-width: 300px;
+    
     overflow: hidden;
 }
 
-.room-central-container{
-    width: 60%;
+.room__room-central{
+    width: 60vw;
     overflow: hidden;
 }
 
-.room-right-container{
-    width: 20%;
+.room__room-right{
+    width: 20vw;
     overflow: hidden;
     background-color: var(--grey-primary);
 }
