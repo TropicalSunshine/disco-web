@@ -71,33 +71,7 @@ export const joinSuccess = () => {
     });
 }
 
-// remove later
-export const emitPause = (roomId) => {
-    socket.emit(constants.USERINPUT, {
-        type: constants.controls.PAUSE,
-        roomId: roomId
-    });
-}
-
-
-//remove after finished with room HOC
-export const emitPlay = (roomId) => {
-    socket.emit(constants.USERINPUT, {
-        type: constants.controls.PLAY,
-        roomId: roomId
-    })
-}
-
-export const emitChangeSong = (roomId, player) => {
-    var data = player.getState();
-    data.roomId = roomId;
-    socket.emit(constants.USERCHANGESONG, data);    
-}
-
 export default {
-    emitPlay,
-    emitChangeSong,
-    emitPause,
     joinSuccess,
     constants,
     socket

@@ -10,6 +10,12 @@
 }
 
 .textarea__input-container{
+
+    font-family: var(--font-family);
+    border-style: none;
+    resize: none;
+    
+    width: 90%;
     margin: 0 3px;
     margin-bottom : 1px;
     padding: 10px;
@@ -21,5 +27,6 @@
 
 .textarea__input-container--default{
     font-weight: none;
-
+    color: var(--white);
+    
 }

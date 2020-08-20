@@ -41,6 +41,7 @@ export const removeUpdateListener = () => {
 }
 
 
+
 export const emitChangeSong = (playerState) => {
     
     
@@ -50,4 +51,12 @@ export const emitChangeSong = (playerState) => {
     }
     
     socket.emit(constants.USERCHANGESONG, data);    
+}
+
+export const addChangeSongListener = (fn) => {
+    socket.on(constants.USERCHANGESONG, fn);
+}
+
+export const removeChangeSongListener = () => {
+    socket.off(constants.USERCHANGESONG);
 }

@@ -32,8 +32,9 @@ function useAttachListeners(setters){
                 YoutubePlayer.play();
             }
         });
+
     
-        Controls.addUpdateListener(data => {
+        Controls.addUpdateListener( data => {
             
             (async () => {
                 const { songId, time, paused } = data;
@@ -53,12 +54,32 @@ function useAttachListeners(setters){
 
     
         });
+
+        Controls.addChangeSongListener( data => {
+
+            (async () => {
+                const { songId } = data;
+                setIsLoadingSong(true);
+
+                await YoutubePlayer.loadVideo(songId, 0, false);
+                setSongId(songId);
+                setSongStartTime(0);
+                setPaused(false); 
+
+                const data = await youtube.getVideoInfoData(songId);
+                setSongImage(data.snippet.thumbnails.high.url);
+
+                setIsLoadingSong(false);
+            })();
+
+        })
     }
 
     const unbind = () => {
         Controls.removePauseListener();
         Controls.removePlayListener();
         Controls.removeUpdateListener();
+        Controls.removeChangeSongListener();
     }
 
     return {

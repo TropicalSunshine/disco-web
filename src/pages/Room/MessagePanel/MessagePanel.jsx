@@ -1,17 +1,25 @@
 import React from 'react'
 
-import MessageChat from "./MessageChat";
+
 import { TextArea } from "shared/components";
 import styles from "./styles.module.css";
 
 function MessagePanel() {
+
+
+    const onMessageEnter = (content) => {
+        console.log(content);
+    }
+
     return (
         <div className={`${styles["message-panel"]} box-column`}>
             <div className={`${styles["message-panel__messages"]}`}>
-                <MessageChat/>
+                <p>asd</p>
             </div>
             <div className={`${styles["message-panel__input"]}`}>
-                <TextArea/>
+                <TextArea
+                onEnter={onMessageEnter}
+                />
             </div>
         </div>
     )
