@@ -37,14 +37,14 @@ function MessagePanel() {
         if(lastMessageObserver.current) lastMessageObserver.current.disconnect();
 
         lastMessageObserver.current = new IntersectionObserver( entries => {
-            console.log("intersecting");
+
             if(entries[0].isIntersecting && hasMore){
                 setLastId(messages[0].id);
             }
         }, {
             threshold : 0.5
         })
-
+        
         if(element) lastMessageObserver.current.observe(element);
 
     }, [ isLoading, hasMore ])
