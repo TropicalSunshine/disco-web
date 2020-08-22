@@ -1,10 +1,11 @@
 import { socket, roomId } from "./socket";
 import constants from "./constants";
-import { User as UserAccount } from "shared/utils/storage";
+import { User as UserStorage } from "shared/utils/storage";
 
-export const sendMessage = (content="") => {
+export const sendMessage = (content=null) => {
 
-    const userId = UserAccount.userId.get();
+    if(!content) return;
+    const userId = UserStorage.userId.get();
 
     socket.emit(constants.SEND_MESSAGE, {
         roomId,
@@ -12,7 +13,6 @@ export const sendMessage = (content="") => {
         content
     });
 }
-
 
 export const addRecieveMessageListener = fn => {
     socket.on(constants.RECIEVE_MESSAGE, fn);

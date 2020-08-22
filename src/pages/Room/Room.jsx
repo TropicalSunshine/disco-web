@@ -1,13 +1,6 @@
-import React, { PureComponent, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { LoaderPage } from "shared/components/index";
-
-import { constants, connectSocket, joinSuccess,
-         socket, emitPause, emitPlay,
-          emitChangeSong } from "shared/utils/socket/socket";
-
-//import YoutubePlayer from "shared/objects/YoutubePlayer.js";
-import { getVideoInfoData } from "shared/utils/services/youtube";
 
 import MessagePanel from "./MessagePanel";
 import MusicControls from "./MusicControls";
@@ -25,9 +18,10 @@ function Room(props){
     const { roomId } = useParams();
     const { musicRoom } = props;
 
+    const [ isLoading, setIsLoading ] = useState(true);
+
     const { 
         isConnected,
-        isLoading,
         paused,
         songImage,
         join,
@@ -39,10 +33,11 @@ function Room(props){
     useEffect(() => {
         console.log(musicRoom);
         (async () => {
-            
-            //await join(roomId);
+            setIsLoading(true);
+            await join(roomId);
             setLoadingValue(100);
             
+            setIsLoading(false);
         })();
 
         return () => {
@@ -57,12 +52,12 @@ function Room(props){
 
             </div>
             {
-                (false) && (
+                (isLoading) && (
                     <LoaderPage value={loadingValue}/>
                 )
             }
             {
-                !(false) && (
+                (!isLoading) && (
                     <div className={`box-row ${styles["room"]}`}>
                         <div className={styles["room__room-left"]}>
                             <SearchPanel/>

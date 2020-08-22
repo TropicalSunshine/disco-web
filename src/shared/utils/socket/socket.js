@@ -26,7 +26,7 @@ export var socket = io(socketUrl, {
     autoConnect : false
 });
 
-export var roomId = 123;
+export var roomId = "5f2afb2c57632700170db74f";
 
 var defaultData = {
     songId: null,
@@ -45,7 +45,7 @@ export const connectSocket = (rId) => {
         socket.on("connect", () => {
             
             socket.emit(constants.USERJOINROOM, {
-                roomId: 123
+                roomId: roomId
             });
         });
 

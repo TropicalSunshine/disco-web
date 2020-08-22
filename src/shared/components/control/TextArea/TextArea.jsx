@@ -9,7 +9,7 @@ function TextArea({ onEnter }) {
     const [ text, setText ] = useState("");
 
     const handleOnKeyPress = (e) => {
-        if(e.key === "Enter"){
+        if(e.key === "Enter" && text !== ""){
             e.preventDefault();
             e.stopPropagation();
             const { value } = e.target;

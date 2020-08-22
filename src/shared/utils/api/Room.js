@@ -6,8 +6,7 @@ export const createRoom = (
                             {
                                 name = "room", 
                                 isPrivate = false, 
-                                description = "", 
-                                creator = User.userId.get()
+                                description = ""
                             } = {}
                         ) => api.post("", {
     query : `mutation createRoom($name : String!, $private: Boolean!,
@@ -28,7 +27,7 @@ export const createRoom = (
         name,
         private : isPrivate,
         description,
-        creator
+        creator : User.userId.get()
     }
 })
 

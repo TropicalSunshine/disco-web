@@ -5,8 +5,38 @@
 
 .message-panel__messages{
     height: 85%;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    flex-wrap: none;
+    padding: 0;
+    margin: 0;
 }
 
 .message-panel__input{
     height: 15%;
+}
+
+
+.message-box{
+    list-style-type: none;
+    margin-top: 1rem;
+
+    padding : 3px 20px;
+}
+
+.message-box--default{
+    color : var(--white);
+}
+
+.message-box__content{
+    user-select: text;
+}
+
+.message-box__timestamp{
+    user-select: none;
+}
+
+.message-box__timestamp--default{
+    color: var(--text-muted);
 }

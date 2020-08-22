@@ -7,7 +7,6 @@ import { youtube, YoutubePlayer } from "shared/utils/services";
 function useRoom(setters){
     const { 
         setIsConnected,
-        setIsLoading,
         setHasError,
         setPaused,
         setSongId,
@@ -21,14 +20,12 @@ function useRoom(setters){
 
     const join = async (roomId) => {
 
-        setIsLoading(true);
 
         try {
             const { songId, time, paused } = await Socket.connectSocket(roomId);
             
             if(!YoutubePlayer.isInitialized()) {
                 await YoutubePlayer.init(songId, time, paused);
-                console.log("here");
             } else {
                 await YoutubePlayer.loadVideo(songId, time, paused);
             }
@@ -51,8 +48,6 @@ function useRoom(setters){
             console.error(err);
             setHasError(true);
         }
-
-        setIsLoading(false);
 
     }
 
