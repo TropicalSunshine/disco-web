@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { useParams } from "react-router-dom";
 
 import { TextArea, Spinner } from "shared/components";
@@ -9,7 +9,6 @@ import { Message as MessageSocket } from "shared/utils/socket";
 import useRoomMessage from "../hooks/useRoomMessage";
 import MessageBlock from "./MessageBlock";
 import styles from "./styles.module.css";
-import { Message } from '@material-ui/icons';
 
 const DEFAULT_ID = '0';
 
@@ -24,15 +23,34 @@ function MessagePanel() {
         hasMore,
         hasError,
         messages,
+        initialLoad,
 
         setMessages
     } = useRoomMessage(roomId, lastId);
 
     const messageContainer = useRef(null);
+    const lastMessageObserver = useRef(null);
+
+    const lastRoomElement = useCallback(element => {
+        if(isLoading) return;
+
+        if(lastMessageObserver.current) lastMessageObserver.current.disconnect();
+
+        lastMessageObserver.current = new IntersectionObserver( entries => {
+            console.log("intersecting");
+            if(entries[0].isIntersecting && hasMore){
+                setLastId(messages[0].id);
+            }
+        }, {
+            threshold : 0.5
+        })
+
+        if(element) lastMessageObserver.current.observe(element);
+
+    }, [ isLoading, hasMore ])
 
     const onMessageEnter = (content) => {
-        console.log(messageContainer);
-        messageContainer.current.scrollTop = messageContainer.current.scrollHeight - messageContainer.current.clientHeight;
+        
         
         setMessages( prevMessages => [
             ...prevMessages,
@@ -43,14 +61,16 @@ function MessagePanel() {
                 time_created : (new Date(Date.now())).toISOString()
             }
         ])
-        
+
         MessageSocket.sendMessage(content);
     }
 
     useEffect(() => {
         //set the scroll bar to bottom whenever the message.length changes
-        messageContainer.current.scrollTop = messageContainer.current.scrollHeight - messageContainer.current.clientHeight;
-    }, [messages.length])
+        var { current } = messageContainer;
+        current.scrollTop = current.scrollHeight - current.clientHeight;
+        
+    }, [messages.length]);
 
     return (
         <div className={`${styles["message-panel"]} box-column`}>
@@ -65,6 +85,14 @@ function MessagePanel() {
                 }
                 {
                     messages.map( (m, i) => {
+                        if(i === 0) return (
+                            <MessageBlock
+                            key={`${i}-${m.id}`}
+                            message={m}
+                            ref={lastRoomElement}
+                            />
+                        )
+
                         return (
                             <MessageBlock
                             key={`${i}-${m.id}`}

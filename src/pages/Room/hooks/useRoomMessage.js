@@ -11,6 +11,11 @@ function useRoomMessage(roomId, lastId){
     const [ isLoading, setIsLoading ] = useState(true);
     const [ hasMore, setHasMore ] = useState(true);
     const [ hasError, setHasError ] = useState(false);
+
+    //keeps track of the intial load of messages in a room
+    //used to check initial renders that are dependent on the intially
+    //loaded messages in a room
+    const [ initialLoad, setInitialLoad ] = useState(false);
     
     useEffect(() => {
         (async () => {
@@ -23,7 +28,7 @@ function useRoomMessage(roomId, lastId){
                     ...(response.reverse()),
                     ...prevMessages
                 ]);
-
+                if(!initialLoad) setInitialLoad(true);
                 setIsLoading(false);
             } catch (err) {
                 setHasError(true)
@@ -57,6 +62,7 @@ function useRoomMessage(roomId, lastId){
         hasMore,
         hasError,
         messages,
+        initialLoad,
 
         //methods
         setMessages

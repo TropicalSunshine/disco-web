@@ -32,7 +32,7 @@ function RoomsList(props){
             if(entries[0].isIntersecting && hasMore){
                 
                 
-                setLastId(rooms[rooms.length - 1]._id);
+                setLastId(rooms[rooms.length - 1].id);
             }
         })
 
