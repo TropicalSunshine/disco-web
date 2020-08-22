@@ -1,29 +1,17 @@
 import io from "socket.io-client";
+import { User as UserStorage } from "shared/utils/storage";
 
 import { socketUrl } from "../../constants";
+import constants from "./constants";
 
-
-//remove after changing
-export const constants = Object.freeze({
-    USERJOINROOM: 1,
-    USERCREATEROOM: 2,
-    USERCHANGESONG: 3,
-    USERINPUT: 4,
-    controls: {
-        PLAY: 5,
-        PAUSE: 6,
-        SEEK:  7
-    },
-    JOINSUCCESS: 8,
-    UPDATE: 9,
-    SUCCESS: 10,
-    USERLEAVEROOM : 11
-});
-
-console.log("socketUrl", socketUrl);
+console.log(UserStorage.token.get());
+console.log("herere");
 export var socket = io(socketUrl, {
     path: "/socket",
-    autoConnect : false
+    autoConnect : false,
+    query : {
+        token : null
+    }
 });
 
 export var roomId = "5f2afb2c57632700170db74f";
@@ -40,6 +28,11 @@ export const connectSocket = (rId) => {
     //roomId = rId;
     
     return new Promise((res, rej) => {  
+
+        //add token
+        const token = UserStorage.token.get();
+        if(!token) console.error("trying to connect to server while user is not logged in")
+        socket.io.opts.query.token = token;
         socket.connect();
     
         socket.on("connect", () => {

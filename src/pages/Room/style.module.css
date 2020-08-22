@@ -7,19 +7,20 @@
 
 .room__room-left{
     background-color: var(--grey-primary);
-    width: 20%;
+    width: 25%;
     min-width: 300px;
     
     overflow: hidden;
 }
 
 .room__room-central{
-    width: 60%;
+    width: 50%;
     overflow: hidden;
 }
 
 .room__room-right{
-    width: 20%;
+    min-width: 300px;
+    width: 25%;
     overflow: hidden;
     background-color: var(--grey-primary);
 }
