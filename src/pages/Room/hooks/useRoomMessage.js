@@ -42,13 +42,13 @@ function useRoomMessage(roomId, lastId){
             const { content, userId } = data;
 
             setMessages( prevMessages => [
+                ...prevMessages,
                 {
                     id : '0',
                     sender : userId,
                     content : content,
                     time_created : (new Date(Date.now())).toISOString()
-                },
-                ...prevMessages
+                }
             ]);
         })
 

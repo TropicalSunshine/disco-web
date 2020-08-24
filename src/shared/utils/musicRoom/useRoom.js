@@ -24,7 +24,8 @@ function useRoom(setters){
         try {
             const { songId, time, paused } = await Socket.connectSocket(roomId);
             
-            /*
+            console.log("[ROOM SONG DATA] : ", songId, time, paused);
+
             if(!YoutubePlayer.isInitialized()) {
                 await YoutubePlayer.init(songId, time, paused);
             } else {
@@ -36,9 +37,6 @@ function useRoom(setters){
                 const data = await youtube.getVideoInfoData(songId);
                 setSongImage(data.snippet.thumbnails.high.url);    
             }
-            
-            */
-
 
             bind();
             setPaused((songId !== null) ? paused : true);

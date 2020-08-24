@@ -57,12 +57,6 @@ export const loadVideo = (vidId, startSeconds=0, paused=false) => {
         startSeconds: startSeconds
     });
 
-    if(paused){
-        player.pauseVideo();
-    } else {
-        player.playVideo();
-    }
-
     return new Promise((res) => {
         player.addEventListener("onStateChange", (e) => {
 
@@ -71,6 +65,12 @@ export const loadVideo = (vidId, startSeconds=0, paused=false) => {
                 console.log(e.target.getDuration());
                 
                 res();
+            }
+
+            if(paused){
+                player.pauseVideo();
+            } else {
+                player.playVideo();
             }
         })
     });

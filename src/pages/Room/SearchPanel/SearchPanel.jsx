@@ -10,12 +10,10 @@ import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
 
-//remove
-import IconButton from "@material-ui/core/IconButton";
-import { SearchOutlined as SearchIcon, 
-    AddOutlined as AddIcon,
-    FavoriteOutlined as FavoriteIcon } from "@material-ui/icons";
+import { SearchOutlined as SearchIcon } from "@material-ui/icons";
 
+
+const SEARCH_WAIT_INTERVAL = 500;
 
 
 function SearchPanel(props){
@@ -25,22 +23,29 @@ function SearchPanel(props){
 
     var searchInterval = null;
 
-    const onSearch = async (e) => {
+    const onSearch = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
         const { value } = e.target;
 
-        clearInterval(searchInterval);
-
+        if(value === "") return;
+        if(searchInterval) clearTimeout(searchInterval);
+        console.log("[search interval] : ", searchInterval);
         setIsSearching(true);
 
-        await new Promise(resolve => {
-            searchInterval = setTimeout(resolve, 500);
-        });
+        searchInterval = setTimeout(async () => {
+            console.log("searching");
+            await searchVideoByKeyword(value).then( response => {
+                if(response){
+                    setSearchResults(response.data.items);
+                }
+            });
 
-        await searchVideoByKeyword(value).then( response => {
-            setSearchResults(response.data.items);
-        });
+            setIsSearching(false);
+        }, SEARCH_WAIT_INTERVAL);
+    
 
-        setIsSearching(false);
         
     }
 
@@ -69,7 +74,10 @@ function SearchPanel(props){
 
     return (
         <div className={`box-column ${styles["search-panel"]}`}>
-            <form className={styles["search-area"]}>
+            <form onSubmit={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+            }}  className={styles["search-area"]}>
                 <Input
                 style={{
                     color: "white",

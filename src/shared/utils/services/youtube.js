@@ -7,7 +7,8 @@ const YOUTUBE_SEARCH = `${YOUTUBE_API_BASE_URL}/search`
 const YOUTUBE_VIDEO = `${YOUTUBE_API_BASE_URL}/videos`
 
 
-export const searchVideoByKeyword = (q) => {
+export const searchVideoByKeyword = async (q) => {
+
     return Axios.get(YOUTUBE_SEARCH, {
         params: {
             key: YOUTUBE_API_KEY,
@@ -16,7 +17,10 @@ export const searchVideoByKeyword = (q) => {
             type: "video",
             q: q
         }
-    });
+    }).catch(err => {
+        console.error(err);
+    })
+
 }
 
 export const getVideoInfo = (vidId) => {

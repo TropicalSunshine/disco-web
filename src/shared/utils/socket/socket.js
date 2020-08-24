@@ -4,8 +4,7 @@ import { User as UserStorage } from "shared/utils/storage";
 import { socketUrl } from "../../constants";
 import constants from "./constants";
 
-console.log(UserStorage.token.get());
-console.log("herere");
+
 export var socket = io(socketUrl, {
     path: "/socket",
     autoConnect : false,
@@ -14,7 +13,7 @@ export var socket = io(socketUrl, {
     }
 });
 
-export var roomId = "5f2afb2c57632700170db74f";
+export var roomId;
 
 var defaultData = {
     songId: null,
@@ -22,10 +21,11 @@ var defaultData = {
     paused: true 
 };
 
+const DEFAULT_ROOM_ID = '0';
+export const connectSocket = (rId = DEFAULT_ROOM_ID) => {
 
-export const connectSocket = (rId) => {
-
-    //roomId = rId;
+    console.log(`[ROOM ID] : ${rId}`);
+    roomId = rId;
     
     return new Promise((res, rej) => {  
 
