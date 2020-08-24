@@ -15,8 +15,7 @@ function RoomsList(props){
     const { 
         rooms,
         isLoading,
-        hasMore,
-        hasError
+        hasMore
     } = useRoomsQuery(LIMIT, lastId);
 
     const { history } = props;
@@ -38,7 +37,7 @@ function RoomsList(props){
 
         if(element) observer.current.observe(element);
 
-    }, [isLoading, hasMore])
+    }, [isLoading, hasMore, rooms])
     
     return (
         <div className={`${styles["rooms-container"]}`}>

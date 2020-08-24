@@ -6,7 +6,7 @@ import { HistoryPropTypes, AuthPropTypes } from "shared/types";
 
 import { InputSubmit } from "shared/components";
 
-import styles from "./styles.module.css";
+
 import commonStyles from "../styles.module.css";
 
 
@@ -42,7 +42,7 @@ class Login extends PureComponent {
         try{
             const { email, password } = this.state;
             
-            var result = await auth.login(email, password);    
+            await auth.login(email, password);    
 
             this.props.handleClose();
             this.props.history.push("/explore");

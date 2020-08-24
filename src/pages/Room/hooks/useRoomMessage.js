@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import { Message as MessageSocket } from "shared/utils/socket";
 import { Message as MessageApi } from "shared/utils/api";
@@ -17,6 +17,7 @@ function useRoomMessage(roomId, lastId){
     //loaded messages in a room
     const [ initialLoad, setInitialLoad ] = useState(false);
     
+    /* eslint-disable */
     useEffect(() => {
         (async () => {
             try {
@@ -35,6 +36,7 @@ function useRoomMessage(roomId, lastId){
             }
         })();
     }, [lastId]);
+    /* eslint-enable */
 
     useEffect(() => {
 

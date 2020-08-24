@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-
-import { YoutubePlayer } from "shared/utils/services";
+import React, { useState } from "react";
 
 import MusicRoomContext from "./MusicRoomContext";
 import usePlayer from "./usePlayer";
@@ -29,14 +27,14 @@ function MusicRoomProvider({children}){
         setSongId,
         setSongImage,
         setSongStartTime,
-        setHasError,
-        setSongStartTime
+        setHasError
     }
 
     const roomMethods = useRoom(setters);
     const playerMethods = usePlayer(setters, paused);
 
     var value = {
+        songId,
         isConnected,
         isLoadingSong,
         paused,

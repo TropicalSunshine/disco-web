@@ -33,7 +33,7 @@ function useRoomsQuery(limit, lastId){
             }
         })();
         
-    }, [lastId])
+    }, [lastId, limit])
 
     return {
         rooms,

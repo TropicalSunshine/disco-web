@@ -2,7 +2,7 @@ import React from "react";
 import { withMusicRoomProvider } from "shared/utils/musicRoom";
 
 import IconButton from "@material-ui/core/IconButton";
-import { SearchOutlined as SearchIcon, 
+import {
     AddOutlined as AddIcon,
     FavoriteOutlined as FavoriteIcon } from "@material-ui/icons";
 
@@ -26,6 +26,7 @@ function SearchResultBlock(props){
             <div className={styles["result-img-container"]}
             >
                 <img
+                alt={"thumbnail"}
                 src={thumbnail.url}
                 width={thumbnail.width}
                 height={thumbnail.height}

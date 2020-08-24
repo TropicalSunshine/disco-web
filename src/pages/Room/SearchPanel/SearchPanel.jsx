@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styles from "./styles.module.css";
 
 import SearchResultBlock from "./SearchResultBlock";

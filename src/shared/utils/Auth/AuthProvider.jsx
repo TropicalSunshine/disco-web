@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 
 import AuthContext from "./AuthContext";
 import useAuthProvider from "./useAuthProvider"

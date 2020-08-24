@@ -36,7 +36,7 @@ function useAttachListeners(setters){
     
         Controls.addUpdateListener( data => {
             
-            (async () => {
+            (async (data) => {
                 const { songId, time, paused } = data;
                 setIsLoadingSong(true);
 
@@ -45,19 +45,19 @@ function useAttachListeners(setters){
                 setSongStartTime(time);
                 setPaused(paused);
     
-                const data = await youtube.getVideoInfoData(songId);
-                setSongImage(data.snippet.thumbnails.high.url);
+                const response = await youtube.getVideoInfoData(songId);
+                setSongImage(response.snippet.thumbnails.high.url);
     
                 setIsLoadingSong(false);
 
-            })();
+            })(data);
 
     
         });
 
         Controls.addChangeSongListener( data => {
 
-            (async () => {
+            (async (data) => {
                 const { songId } = data;
                 setIsLoadingSong(true);
 
@@ -66,11 +66,11 @@ function useAttachListeners(setters){
                 setSongStartTime(0);
                 setPaused(false); 
 
-                const data = await youtube.getVideoInfoData(songId);
-                setSongImage(data.snippet.thumbnails.high.url);
+                const response = await youtube.getVideoInfoData(songId);
+                setSongImage(response.snippet.thumbnails.high.url);
 
                 setIsLoadingSong(false);
-            })();
+            })(data);
 
         })
     }

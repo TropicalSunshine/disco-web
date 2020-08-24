@@ -1,5 +1,4 @@
 import api from "./Api";
-import { User as UserStorage } from "shared/utils/storage";
 
 const DEFAULT_ROOM_ID = "0";
 const DEFAULT_LAST_ID = "0";

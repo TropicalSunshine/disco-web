@@ -76,7 +76,9 @@ function useAuth(){
 
     return useMemo(() => ({ 
         login,
+        logout,
         register,
+
         userId,
         token,
         isLoggedIn

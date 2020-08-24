@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Spinner } from "shared/components/index";
 
 import Navbar from "pages/Navbar";

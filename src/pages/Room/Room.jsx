@@ -20,8 +20,7 @@ function Room(props){
 
     const [ isLoading, setIsLoading ] = useState(true);
 
-    const { 
-        isConnected,
+    const {
         paused,
         songImage,
         join,
@@ -30,6 +29,7 @@ function Room(props){
     
     const [ loadingValue, setLoadingValue ] = useState(0);
 
+    /* eslint-disable */
     useEffect(() => {
         console.log(musicRoom);
         (async () => {
@@ -45,6 +45,7 @@ function Room(props){
         }
 
     }, []);
+    /* eslint-enable */
 
     return (
         <React.Fragment>

@@ -21,9 +21,9 @@ function MessagePanel() {
     const {
         isLoading,
         hasMore,
-        hasError,
+        
         messages,
-        initialLoad,
+        
 
         setMessages
     } = useRoomMessage(roomId, lastId);
@@ -47,7 +47,7 @@ function MessagePanel() {
         
         if(element) lastMessageObserver.current.observe(element);
 
-    }, [ isLoading, hasMore ])
+    }, [ isLoading, hasMore, messages])
 
     const onMessageEnter = (content) => {
         

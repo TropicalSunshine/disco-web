@@ -47,7 +47,7 @@ class Register extends PureComponent {
                 throw new Error("Passwords do not match");
             }
 
-            var response = await auth.register(email, password, username);
+            await auth.register(email, password, username);
             
             this.props.handleClose();
 

@@ -5,8 +5,6 @@ import {
     Register as RegisterDialog 
 } from "shared/components/dialog";
 
-import { useAuth } from "shared/utils/auth";
-
 import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 

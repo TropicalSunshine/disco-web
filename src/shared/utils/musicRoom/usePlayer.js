@@ -1,4 +1,3 @@
-import React, { useCallback } from "react";
 import { Controls } from "shared/utils/socket";
 import { youtube, YoutubePlayer } from "shared/utils/services";
 
@@ -30,7 +29,7 @@ function usePlayer(setters, paused){
 
     }
 
-    const changeSong = useCallback( async (songId) => {
+    const changeSong = async (songId) => {
         setIsLoadingSong(true);
         setSongId(songId);
 
@@ -45,7 +44,7 @@ function usePlayer(setters, paused){
         });
 
         setIsLoadingSong(false);
-    }, [paused]);
+    };
 
 
 
