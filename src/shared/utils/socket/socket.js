@@ -42,6 +42,18 @@ export const connectSocket = (rId = DEFAULT_ROOM_ID) => {
             });
         });
 
+        socket.on("connect_error", err => {
+            console.error(err);
+        })
+
+        socket.on("connect_failed", err => {
+            console.error(err);
+        });
+
+        socket.on("error", err=> {
+            console.error(err);
+        })
+
         socket.on(constants.JOINSUCCESS, (data) => {
             res({
                 ...defaultData,

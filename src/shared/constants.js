@@ -1,7 +1,5 @@
 const socketProtocol    = (window.location.protocol.includes('https')) ? 'wss' : 'ws';
 export const socketUrl  = `${socketProtocol}://${process.env.REACT_APP_SOCKET_URL}`;
-//`${socketProtocol}://disco-socket-server.herokuapp.com/`;
-//`${socketProtocol}://localhost:5001/`;
 
 export const baseApiUrl         = "https://disco-gateway.herokuapp.com";
 export const graphqlEndpoint    = "/api/v1/graphql";
