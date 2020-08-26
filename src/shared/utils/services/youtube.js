@@ -5,8 +5,8 @@ const YOUTUBE_API_BASE_URL       =  "https://www.googleapis.com/youtube/v3";
 
 const YOUTUBE_SEARCH = `${YOUTUBE_API_BASE_URL}/search`
 const YOUTUBE_VIDEO = `${YOUTUBE_API_BASE_URL}/videos`
-const MUSIC_CATEGORY_ID = 10;
 
+const MUSIC_CATEGORY_ID = 10;
 const MAX_RESULTS = 15;
 
 export const searchVideoByKeyword = async (q) => {
@@ -54,5 +54,6 @@ export const getMostPopularVideos = async () => {
             maxResults: MAX_RESULTS
         }
     }).catch(err => console.error(err));
+
     return response.data.items;
 }

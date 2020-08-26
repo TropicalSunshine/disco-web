@@ -12,17 +12,19 @@ function usePlayer(setters, paused){
 
 
     const pause = () => {
-        
+
         setPaused(true);
         Controls.emitPause();
         YoutubePlayer.pause();
+
     }
 
     const play = () => {
-        
+
         setPaused(false);
         Controls.emitPlay();
         YoutubePlayer.play();
+        
     }
 
     const queue = (songId) => {

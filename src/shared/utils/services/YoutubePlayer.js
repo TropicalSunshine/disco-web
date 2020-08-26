@@ -33,11 +33,11 @@ export const init = async (videoId=null, startSeconds=0, paused=true) => {
             onStateChange: (e) => {
                 switch(e.data){
                     case window["YT"].PlayerState.PAUSED:
-                        console.log("pausing")
+                        //console.log("pausing")
                         
                         break;
                     case window["YT"].PlayerState.PLAYING:
-                        console.log("play")
+                        //console.log("play")
                         
                         break;
                     default: 
@@ -59,12 +59,10 @@ export const loadVideo = (vidId, startSeconds=0, paused=false) => {
 
     return new Promise((res) => {
         player.addEventListener("onStateChange", (e) => {
-
+            console.log("state changed");
+            
             if(e.data === window["YT"].PlayerState.BUFFERING){
-                
                 console.log(e.target.getDuration());
-                
-                res();
             }
 
             if(paused){
@@ -72,6 +70,9 @@ export const loadVideo = (vidId, startSeconds=0, paused=false) => {
             } else {
                 player.playVideo();
             }
+
+            player.removeEventListener("onStateChange");
+            res();
         })
     });
 }

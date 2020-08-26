@@ -29,9 +29,9 @@ export const connectSocket = (rId = DEFAULT_ROOM_ID) => {
     
     return new Promise((res, rej) => {  
 
-        //add token
+        //add token 
         const token = UserStorage.token.get();
-        if(!token) console.error("trying to connect to server while user is not logged in")
+        if(!token) throw new Error("User not signed in can't connect to room");
         socket.io.opts.query.token = token;
         socket.connect();
     

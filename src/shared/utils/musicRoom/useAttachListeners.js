@@ -13,7 +13,8 @@ function useAttachListeners(setters){
 
     const bind = () => {
         Controls.addPauseListener(data => {
-    
+            
+            console.log(`[socket event] : pause`);
             const { paused } = data;
             
             
@@ -25,6 +26,8 @@ function useAttachListeners(setters){
         });
     
         Controls.addPlayListener(data => {
+
+            console.log(`[socket event] : play`);
             const { paused } = data;
             
             if(!paused) {
@@ -35,7 +38,7 @@ function useAttachListeners(setters){
 
     
         Controls.addUpdateListener( data => {
-            
+            console.log(`[socket event] : update`);
             (async (data) => {
                 const { songId, time, paused } = data;
                 setIsLoadingSong(true);
@@ -56,6 +59,8 @@ function useAttachListeners(setters){
         });
 
         Controls.addChangeSongListener( data => {
+
+            console.log(`[socket event] : change song`);
 
             (async (data) => {
                 const { songId } = data;
