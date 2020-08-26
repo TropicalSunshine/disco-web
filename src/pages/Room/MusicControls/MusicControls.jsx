@@ -26,6 +26,15 @@ function MusicControls(props){
         play
     } = musicRoom;
 
+
+    const handlePausePlay = () => {
+        if(paused) {
+            play();
+        } else {
+            pause();
+        }
+    }
+
     return (
         <div className={styles["music-player-container"]}>
             <div className="box-center">
@@ -34,15 +43,16 @@ function MusicControls(props){
                     className={`${styles.icon}`}
                     />
                 </div>
-                <div className={`${styles["music-player-control-button"]} ${styles["play-button"]}`}>
+                <div 
+                className={`${styles["music-player-control-button"]} 
+                ${styles["play-button"]}`}
+                onClick={handlePausePlay}
+                >
                     {
                         (paused) &&
                         (
                             <PlayIcon 
                             className={`${styles.icon}`}
-                            onClick={()=>{
-                                play();
-                            }}
                             />
                         )
                     }
@@ -50,9 +60,6 @@ function MusicControls(props){
                         (!paused) && (
                             <PauseIcon
                             className={`${styles.icon}`}
-                            onClick={() => {
-                                pause();
-                            }}
                             />
                         )
                     }

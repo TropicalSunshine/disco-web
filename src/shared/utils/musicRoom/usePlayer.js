@@ -19,7 +19,7 @@ function usePlayer(setters, paused){
     }
 
     const play = () => {
-
+        
         setPaused(false);
         Controls.emitPlay();
         YoutubePlayer.play();

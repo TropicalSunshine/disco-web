@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from "./styles.module.css";
 
 import SearchResultBlock from "./SearchResultBlock";
-import { searchVideoByKeyword } from "shared/utils/services/youtube";
+import { searchVideoByKeyword, getMostPopularVideos } from "shared/utils/services/youtube";
 
 import { Spinner } from "shared/components/index";
 
@@ -36,11 +36,12 @@ function SearchPanel(props){
 
         searchInterval = setTimeout(async () => {
             console.log("searching");
-            await searchVideoByKeyword(value).then( response => {
-                if(response){
-                    setSearchResults(response.data.items);
-                }
-            });
+            const response = await searchVideoByKeyword(value);
+
+            console.log(response);
+            if(response){
+                setSearchResults(response);
+            }
 
             setIsSearching(false);
         }, SEARCH_WAIT_INTERVAL);
@@ -49,27 +50,13 @@ function SearchPanel(props){
         
     }
 
-    /*
     useEffect(() => {
-        clearInterval(searchInterval);
-        if(searchValue !== null){
-            (async () => {
-
-                setIsSearching(true);
-
-                await new Promise(resolve => {
-                    searchInterval = setTimeout(resolve, 500);
-                });
-
-                await searchVideoByKeyword(searchValue).then( response => {
-                    setSearchResults(response.data.items);
-                })
-
-                setIsSearching(false);
-            })();
-        }
-    }, [searchValue])
-    */
+        (async () => {
+            const response = await getMostPopularVideos();
+            console.log(response);
+            setSearchResults(response);
+        })();
+    }, [])
 
 
     return (

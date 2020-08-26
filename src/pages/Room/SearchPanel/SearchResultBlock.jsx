@@ -48,7 +48,9 @@ function SearchResultBlock(props){
                 <div className={`box-row ${styles["result-desc-button"]}`}>
                     <IconButton 
                     onClick={() => {
-                        changeSong(v.id.videoId);
+                        if(v.id.videoId) changeSong(v.id.videoId);
+                        if(v.id) changeSong(v.id);
+                        
                     }} 
                     color="primary">
                         <AddIcon/>
