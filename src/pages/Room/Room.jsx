@@ -49,9 +49,6 @@ function Room(props){
 
     return (
         <React.Fragment>
-            <div id="player">
-
-            </div>
             {
                 (isLoading) && (
                     <LoaderPage value={loadingValue}/>

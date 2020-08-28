@@ -93,6 +93,7 @@ export const isInitialized = () => {
     return (player !== null);
 }
 
+//dont call this function unless display is turned on for #player
 export const destroy = () => {
     player.destroy();
 }

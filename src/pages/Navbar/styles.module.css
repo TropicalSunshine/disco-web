@@ -29,6 +29,11 @@
     margin-top: 6px;
 }
 
+.logo:hover {
+    cursor: pointer;
+}
+
+
 .button-container{
     margin-top: 6px;
     position: absolute;

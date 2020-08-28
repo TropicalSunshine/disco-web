@@ -17,6 +17,12 @@ class Navbar extends PureComponent{
         showRegisterDialog: false
     }
 
+    redirectToHome = () => {
+        const { history } = this.props;
+
+        history.push("/");
+    }
+
     render(){
         var { auth } = this.props;
 
@@ -42,7 +48,9 @@ class Navbar extends PureComponent{
                 <div className={`${styles.container}`}>
                     <header className={`box-row ${styles["navbar-container"]}`}>
                         <div>
-                            <h1 className={styles.logo}>
+                            <h1 
+                            onClick={this.redirectToHome}
+                            className={styles.logo}>
                                 <span>d</span>
                                 <span className="purple">i</span>
                                 <span className="pink">s</span>
