@@ -7,7 +7,7 @@
     color: var(--white);
     width: 90%;
     padding: 0 10px;
-    height: 5%;
+    height: 2.6%;
     padding: 10px;
 }
 
@@ -25,33 +25,46 @@
     background-color: var(--grey-secondary);
 }
 
-.result-block{
+.result{
     color: var(--white);
     height: 90px;
     margin: 0;
 }
 
-.result-img-container{
+.result__img{
     padding: 0 0 5px 0;
-    width: 120px;
+    width: 35%;
 }
 
-.result-desc-container{
+.result__desc{
 
-    width: 100%;
+    width: 65%;
     padding: 0 5px;
 }
 
-.result-desc-text{
-    width: 120px;
+.result__desc__text{
+    min-width: 120px;
+    width: 80%;
 }
 
-.result-desc-text p{
+.result__desc__text__title{
+    overflow: hidden;
+    font-size: 10pt;
+    margin-top: 5px;
+    margin-bottom:  5px;
+}
+
+.result__desc__text__channel-name{
+    font-size: 6.5pt;
+    margin-top: 5px;
+}
+
+.result__desc__text p{
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
-.result-desc-button{
-    padding: 20px 0;
+.result__desc__button{
+    width: 20%;
 }

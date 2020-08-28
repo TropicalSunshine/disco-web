@@ -32,6 +32,7 @@ function Room(props){
     /* eslint-disable */
     useEffect(() => {
         console.log(musicRoom);
+
         (async () => {
             setIsLoading(true);
             await join(roomId);
@@ -62,8 +63,8 @@ function Room(props){
                         </div>
                         <div className={`box-column ${styles["room__room-central"]}`}>
                             
-                            <div className={`box-center ${styles["player-display-box"]}`}>
-                                <div className={styles["player-disk"]} style={{
+                            <div className={`box-center ${styles["room__player-display-box"]}`}>
+                                <div className={styles["room__player-disk"]} style={{
                                     animationPlayState : ((!paused) ? "running" : "paused"),
                                     backgroundImage : `url(${songImage})`
                                 }}>

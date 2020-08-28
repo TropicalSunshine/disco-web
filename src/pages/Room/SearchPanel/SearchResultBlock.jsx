@@ -2,9 +2,7 @@ import React from "react";
 import { withMusicRoomProvider } from "shared/utils/musicRoom";
 
 import IconButton from "@material-ui/core/IconButton";
-import {
-    AddOutlined as AddIcon,
-    FavoriteOutlined as FavoriteIcon } from "@material-ui/icons";
+import { AddOutlined as AddIcon } from "@material-ui/icons";
 
 import styles from "./styles.module.css";
 
@@ -22,8 +20,8 @@ function SearchResultBlock(props){
     const snippet = v.snippet;
 
     return (
-        <li className={`box-row ${styles["result-block"]}`}>
-            <div className={styles["result-img-container"]}
+        <li className={`box-row ${styles["result"]}`}>
+            <div className={styles["result__img"]}
             >
                 <img
                 alt={"thumbnail"}
@@ -32,20 +30,16 @@ function SearchResultBlock(props){
                 height={thumbnail.height}
                 />
             </div>
-            <div className={`${styles["result-desc-container"]} box-row`}>
-                <div className={`box-column ${styles["result-desc-text"]}`}>
-                    <p style={{
-                        overflow: "hidden",
-                        fontSize: "10pt",
-                        marginTop: "5px",
-                        marginBottom: "5px"
-                    }}>{snippet.title}</p>
-                    <p style={{
-                        fontSize: "6.5pt",
-                        marginTop: "5px"
-                    }}>{snippet.channelTitle}</p>
+            <div className={`${styles["result__desc"]} box-row`}>
+                <div className={`box-column ${styles["result__desc__text"]}`}>
+                    <p className={styles["result__desc__text__title"]}>
+                        {snippet.title}
+                    </p>
+                    <p className={styles["result__desc__text__channel-name"]}>
+                        {snippet.channelTitle}
+                    </p>
                 </div>
-                <div className={`box-row ${styles["result-desc-button"]}`}>
+                <div className={`box-row ${styles["result__desc__button"]}`}>
                     <IconButton 
                     onClick={() => {
                         if(v.id.videoId) changeSong(v.id.videoId);
@@ -54,15 +48,6 @@ function SearchResultBlock(props){
                     }} 
                     color="primary">
                         <AddIcon/>
-                    </IconButton>
-                </div>
-                <div className={`box-row ${styles["result-desc-button"]}`}>
-                    <IconButton 
-                    onClick={() => {
-                        changeSong(v.id.videoId);
-                    }} 
-                    color="secondary">
-                        <FavoriteIcon/>
                     </IconButton>
                 </div>
             </div>
