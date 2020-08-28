@@ -15,6 +15,7 @@ export default class LoaderPage extends PureComponent {
     }
 
     componentDidMount(){
+        /*
         this.interval = setInterval(() => {
             var { messageIndex } = this.state;
 
@@ -34,6 +35,7 @@ export default class LoaderPage extends PureComponent {
             
 
         }, 1500);
+        */
     }
 
     componentWillUnmount(){
@@ -47,7 +49,7 @@ export default class LoaderPage extends PureComponent {
             <div className="loaderpage-container">
                 <div className="loaderpage-center-box">
                     <div className="box-center">
-                        <CircularProgress variant="static"/>
+                        <CircularProgress/>
                     </div>
                 </div>
             </div>

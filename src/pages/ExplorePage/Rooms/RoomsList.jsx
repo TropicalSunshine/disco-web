@@ -40,7 +40,7 @@ function RoomsList(props){
     }, [isLoading, hasMore, rooms])
     
     return (
-        <div className={`${styles["rooms-container"]}`}>
+        <div className={`${styles["rooms-list"]}`}>
             {
                 rooms.map((r, i) => {
                     var key = `room-${i}`;

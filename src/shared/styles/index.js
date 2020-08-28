@@ -1,5 +1,7 @@
-import * as textStyles from "./text.module.css";
+import textStyles from "./text.module.css";
+import * as colors from "./randomColors";
 
-export { 
+export {
+    colors, 
     textStyles
 }
