@@ -46,52 +46,60 @@ class Navbar extends PureComponent{
                 }}
                 />
                 <div className={`${styles.container}`}>
-                    <header className={`box-row ${styles["navbar-container"]}`}>
+                    <header className={`box-row ${styles["navbar"]}`}>
                         <div>
                             <h1 
                             onClick={this.redirectToHome}
                             className={styles.logo}>
-                                <span>d</span>
+                                <span className="light-blue">d</span>
                                 <span className="purple">i</span>
                                 <span className="pink">s</span>
                                 <span className="yellow">c</span>
                                 <span className="aqua">o</span>
                             </h1>
                         </div>
-                        <div className={styles["button-container"]}>
+                        <div className={`box-row ${styles["navbar__item-container"]}`}>
                             {
                                 ( !auth.isLoggedIn ) && (
                                     <React.Fragment>
-                                        <Button 
-                                        variant="contained"
-                                        onClick={() => {
-                                            this.setState({
-                                                showRegisterDialog: true
-                                            })
-                                        }}
-                                        >
-                                            Sign Up
-                                        </Button>
-                                        <Button 
-                                        variant="contained" 
-                                        color="primary"
-                                        onClick={() => {
-                                            this.setState({
-                                                showLoginDialog: true
-                                            })
-                                        }}
-                                        >
-                                            Sign In
-                                        </Button>
+                                        <div className={styles["navbar__item"]}>
+                                            <Button 
+                                            variant="contained"
+                                            onClick={() => {
+                                                this.setState({
+                                                    showRegisterDialog: true
+                                                })
+                                            }}
+                                            >
+                                                Sign Up
+                                            </Button>
+                                        </div>
+                                        <div className={styles["navbar__item"]}>
+                                            <Button 
+                                            variant="contained" 
+                                            color="primary"
+                                            onClick={() => {
+                                                this.setState({
+                                                    showLoginDialog: true
+                                                })
+                                            }}
+                                            >
+                                                Sign In
+                                            </Button>
+                                        </div>
                                     </React.Fragment>
                                 )
                             }
                             {
                                 ( auth.isLoggedIn ) && (
                                     <React.Fragment>
-                                        <Link to="explore">
-                                            Explore
-                                        </Link>
+                                        <div  className={styles["navbar__menu-item"]}>
+                                            <div>
+                                                <Link to="/explore">
+                                                    Explore
+                                                </Link>
+                                            </div>
+                                        </div>
                                     </React.Fragment>
                                 )
                             }

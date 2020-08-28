@@ -12,12 +12,6 @@ export default class LoaderPage extends PureComponent {
             message: "",
             messageIndex: 0
         }
-
-        this.messages = [
-            "loading boga from server",
-            "authorizing",
-            "dededededde...."
-        ]
     }
 
     componentDidMount(){
@@ -53,10 +47,7 @@ export default class LoaderPage extends PureComponent {
             <div className="loaderpage-container">
                 <div className="loaderpage-center-box">
                     <div className="box-center">
-                        <CircularProgress variant="static" value={this.props.value} />
-                    </div>
-                    <div className="box-center">
-                        <h1>{this.state.message}</h1>
+                        <CircularProgress variant="static"/>
                     </div>
                 </div>
             </div>
