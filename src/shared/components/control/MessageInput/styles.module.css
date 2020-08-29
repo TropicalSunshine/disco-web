@@ -1,17 +1,17 @@
-.textarea{
+.message-input{
     height: 100%;
-    width: 100%;
+    width: 93%;
     
     position: relative;
 }
 
-.textarea--white{
+.message-input--white{
     color: var(--white);
 }
 
-.textarea__input-container{
-
+.message-input__input{
     font-family: var(--font-family);
+    
     border-style: none;
     resize: none;
     
@@ -20,12 +20,14 @@
     margin-bottom : 1px;
     padding: 10px;
     background-color: var(--grey-secondary);
-    border-radius: var(--border-radius);
-    min-height: 85%;
+    border-radius: 20px;
 }
 
+.message-input__input:focus{
+    outline: none;
+}
 
-.textarea__input-container--default{
+.message-input__input--default{
     font-weight: none;
     color: var(--white);
 }

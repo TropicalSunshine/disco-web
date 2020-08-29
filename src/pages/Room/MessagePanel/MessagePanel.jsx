@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { useParams } from "react-router-dom";
 
-import { TextArea, Spinner } from "shared/components";
+import { MessageInput, Spinner } from "shared/components";
 
 import { User as UserStorage } from "shared/utils/storage"; 
 import { Message as MessageSocket } from "shared/utils/socket";
@@ -103,7 +103,11 @@ function MessagePanel() {
                 }
             </ul>
             <div className={`${styles["message-panel__input"]}`}>
-                <TextArea
+                <div className={`${styles["message-panel__input__line"]}`}>
+                    <i/>
+                </div>
+                <MessageInput
+                placeholder={"Send Message"}
                 onEnter={onMessageEnter}
                 />
             </div>

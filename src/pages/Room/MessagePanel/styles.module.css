@@ -4,7 +4,7 @@
 }
 
 .message-panel__messages{
-    height: 85%;
+    height: 92%;
     overflow-x: hidden;
     overflow-y: auto;
 
@@ -14,8 +14,18 @@
 }
 
 .message-panel__input{
-    height: 15%;
-    width: 93%;
+    height: 8%;
+    width: 95%;
+}
+
+.message-panel__input__line{
+    height: 0px;
+    width: 97%;
+    margin: 10px auto;
+
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-color: var(--text-muted);
 }
 
 

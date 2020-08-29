@@ -37,6 +37,7 @@ function useRoom(setters){
                 const data = await youtube.getVideoInfoData(songId);
                 setSongImage(data.snippet.thumbnails.high.url);    
             }
+            
 
             bind();
             setPaused((songId !== null) ? paused : true);
