@@ -2,5 +2,11 @@
     "compilerOptions": {
         "baseUrl": "src"
     },
+    "paths" : {
+        "shared/" : ["src/shared"],
+        "pages/" : ["src/pages"],
+        "css/" : ["src/css"],
+        "assets/" : ["src/assets"]
+    },
     "include": ["src"]
 }
