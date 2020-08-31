@@ -2,7 +2,6 @@
   "name": "room",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/public/room/build",
   "engines": {
     "npm": "6.14.5",
     "node": "14.4.0"
