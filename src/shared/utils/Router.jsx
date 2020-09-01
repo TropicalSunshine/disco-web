@@ -5,7 +5,7 @@ import { Spinner } from "shared/components/index";
 
 import Navbar from "pages/Navbar";
 import { MusicRoomProvider } from "shared/utils/musicRoom";
-import { AuthProvider } from "shared/utils/auth";
+import { AuthProvider } from "shared/utils/asb";
  
 const Room = lazy(() => import("pages/Room"));
 const HomePage = lazy(() => import("pages/HomePage"));
