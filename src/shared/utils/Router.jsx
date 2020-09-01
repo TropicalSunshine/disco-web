@@ -4,8 +4,8 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Spinner } from "shared/components/index";
 
 import Navbar from "pages/Navbar";
-import { AuthProvider } from "shared/utils/auth";
 import { MusicRoomProvider } from "shared/utils/musicRoom";
+import { AuthProvider } from "shared/utils/auth";
  
 const Room = lazy(() => import("pages/Room"));
 const HomePage = lazy(() => import("pages/HomePage"));
