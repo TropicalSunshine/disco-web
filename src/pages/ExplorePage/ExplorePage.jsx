@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-
 import { Button } from "@material-ui/core";
+
 import RoomsList from "./Rooms";
-
 import { Room } from "shared/utils/Api";
-
 import styles from "./styles.module.css";
 
 
