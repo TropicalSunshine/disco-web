@@ -8,7 +8,7 @@ import { InputSubmit } from "shared/components";
 import styles from "./styles.module.css";
 import { textStyles } from "shared/styles";
 
-import { Room as RoomApi } from "shared/utils/Api";
+import { Room as RoomApi } from "shared/utils/api";
 
 
 class CreateRoomPage extends Component {

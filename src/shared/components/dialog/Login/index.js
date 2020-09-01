@@ -1,7 +1,7 @@
 import Login from "./Login";
 
 import withDialog from "../withDialog";
-import { withAuthProvider } from "shared/utils/Auth";
+import { withAuthProvider } from "shared/utils/auth";
 import { withRouter } from "react-router-dom";
 
 

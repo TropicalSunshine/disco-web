@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 import { Message as MessageSocket } from "shared/utils/socket";
-import { Message as MessageApi } from "shared/utils/Api";
+import { Message as MessageApi } from "shared/utils/api";
 
 const MESSAGE_LIMIT = 20;
 

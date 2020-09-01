@@ -1,8 +1,8 @@
 import { useState, useEffect, useMemo } from "react";
 
 import { User as userStore } from "../storage"; 
-import { User as userApi } from "../Api";
-import { setAuthHeader } from "shared/utils/Api/Api";
+import { User as userApi } from "../api";
+import { setAuthHeader } from "shared/utils/api/Api";
 
 function useAuth(){
 
