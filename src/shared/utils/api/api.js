@@ -1,4 +1,4 @@
-import Axios from "axios";
+import Axios from "shared/utils/Api/node_modules/axios";
 import { apiUrl } from "../../constants";
 
 const headers = {

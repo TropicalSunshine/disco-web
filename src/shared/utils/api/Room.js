@@ -1,5 +1,5 @@
 import api from "./Api";
-import { User } from "shared/utils/storage";
+import { User } from "shared/utils/Api/node_modules/shared/utils/storage";
 
 
 export const createRoom = (

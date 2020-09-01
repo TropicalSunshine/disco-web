@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Room } from "shared/utils/api";
+import { Room } from "shared/utils/Api";
 
 function useRoomsQuery(limit, lastId){
     const [ rooms, setRooms ] = useState([]);
