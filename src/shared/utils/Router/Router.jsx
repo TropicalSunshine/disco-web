@@ -1,9 +1,9 @@
 import React, { Suspense, lazy } from "react";
 
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { Spinner } from "shared/components/index";
 
-import Navbar from "pages/Navbar";
+import NavbarRoute from "./NavbarRoute";
+import { Spinner } from "shared/components/index";
 import { MusicRoomProvider } from "shared/utils/musicRoom";
 import { AuthProvider } from "shared/utils/auth";
 
@@ -12,6 +12,7 @@ const HomePage = lazy(() => import("pages/HomePage"));
 const ExplorePage = lazy(() => import("pages/ExplorePage"));
 const CreateRoomPage = lazy(() => import("pages/CreateRoomPage"));
 
+
 function Router(props) {
   return (
     <BrowserRouter>
@@ -19,11 +20,10 @@ function Router(props) {
         <div>
           <AuthProvider>
             <MusicRoomProvider>
-              <Navbar />
               <Switch>
-                <Route exact path="/" component={HomePage} />
-                <Route exact path="/explore" component={ExplorePage} />
-                <Route exact path="/room/create" component={CreateRoomPage} />
+                <NavbarRoute exact path="/" component={HomePage} />
+                <NavbarRoute exact path="/explore" component={ExplorePage} />
+                <NavbarRoute exact path="/room/create" component={CreateRoomPage} />
                 <Route exact path="/room/:roomId" component={Room} />
               </Switch>
             </MusicRoomProvider>
