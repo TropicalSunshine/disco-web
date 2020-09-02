@@ -45,17 +45,16 @@ function SearchPanel(props){
 
             setIsSearching(false);
         }, SEARCH_WAIT_INTERVAL);
-    
-
-        
-    }
+    };
 
     useEffect(() => {
+        /*
         (async () => {
             const response = await getMostPopularVideos();
             console.log(response);
             setSearchResults(response);
         })();
+        */
     }, [])
 
 

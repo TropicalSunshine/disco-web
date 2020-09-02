@@ -19,6 +19,7 @@
     height: 95%;
     overflow-y: auto;
     scrollbar-width: none;
+    padding-left: 5px;
 }
 
 .search-results .result-block:nth-child(2n){

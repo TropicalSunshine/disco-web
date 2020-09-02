@@ -1,7 +1,7 @@
 .message-input{
-    height: 100%;
-    width: 93%;
     
+    width: 100%;
+    text-align: center;
     position: relative;
 }
 
@@ -15,8 +15,8 @@
     border-style: none;
     resize: none;
     
-    width: 100%;
-    margin: 0 3px;
+    width: 91%;
+    margin: auto;
     margin-bottom : 1px;
     padding: 10px;
     background-color: var(--grey-secondary);

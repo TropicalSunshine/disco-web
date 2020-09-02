@@ -1,12 +1,21 @@
 
 .room{
-    height: calc(100vh - 61px);
+    height: calc(100vh - 46px);
     width: 100%;
     background-color: black;
 }
 
-.room__room-left{
+.room__room-main{
+    height: 92%;
+}
+
+.room__player-control-container{
+    height: 8%;
     background-color: var(--grey-primary);
+}
+
+.room__room-left{
+    background-color: var(--black);
     width: 20%;
     min-width: 345px;
     
@@ -16,23 +25,21 @@
 .room__room-central{
     width: 60%;
     overflow: hidden;
+    background-color: var(--dark-blue);
 }
 
 .room__room-right{
-    min-width: 300px;
+    min-width: 345px;
     width: 20%;
     overflow: hidden;
-    background-color: var(--grey-primary);
+    background-color: var(--black);
 }
 
 .room__player-display-box{
     height: 90%;
 }
 
-.player-control-container{
-    height: 10%;
-    background-color: var(--grey-primary);
-}
+
 
 .room__player-disk{
     height: 260px;
@@ -48,8 +55,6 @@
     animation-duration: 20s;
     animation-iteration-count: infinite;
     animation-timing-function: linear; 
-
-
 }
 
 

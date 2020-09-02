@@ -13,11 +13,9 @@ import styles from "./style.module.css";
 function Room(props) {
   const { roomId } = useParams();
   const { musicRoom } = props;
-
-  const [isLoading, setIsLoading] = useState(true);
-
   const { paused, songImage, join, leave } = musicRoom;
 
+  const [isLoading, setIsLoading] = useState(true);
   const [loadingValue, setLoadingValue] = useState(0);
 
   /* eslint-disable */
@@ -42,30 +40,39 @@ function Room(props) {
     <React.Fragment>
       {isLoading && <LoaderPage value={loadingValue} />}
       {!isLoading && (
-        <div className={`box-row ${styles["room"]}`}>
-          <div className={styles["room__room-left"]}>
-            <SearchPanel />
-          </div>
-          <div className={`box-column ${styles["room__room-central"]}`}>
-            <div className={`box-center ${styles["room__player-display-box"]}`}>
-              <div
-                className={styles["room__player-disk"]}
-                style={{
-                  animationPlayState: !paused ? "running" : "paused",
-                  backgroundImage: `url(${songImage})`,
-                }}
-              >
-                <i />
+        <>
+          <div className={`${styles["room"]}`}>
+
+            <div className={`box-row ${styles["room__room-main"]}`}>
+              <div className={styles["room__room-left"]}>
+                <SearchPanel />
+              </div>
+              <div className={`box-column ${styles["room__room-central"]}`}>
+                <div
+                  className={`box-center ${styles["room__player-display-box"]}`}
+                >
+                  <div
+                    className={styles["room__player-disk"]}
+                    style={{
+                      animationPlayState: !paused ? "running" : "paused",
+                      backgroundImage: `url(${songImage})`,
+                    }}
+                  >
+                    <i />
+                  </div>
+                </div>
+              </div>
+              <div className={styles["room__room-right"]}>
+                <MessagePanel />
               </div>
             </div>
-            <div className={styles["player-control-container"]}>
+
+            <div className={styles["room__player-control-container"]}>
               <MusicControls />
             </div>
+
           </div>
-          <div className={styles["room__room-right"]}>
-            <MessagePanel />
-          </div>
-        </div>
+        </>
       )}
     </React.Fragment>
   );

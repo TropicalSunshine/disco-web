@@ -20,7 +20,7 @@ function SearchResultBlock(props){
     const snippet = v.snippet;
 
     return (
-        <li className={`box-row ${styles["result"]}`}>
+        <li className={`box-row ${styles["result-block"]} ${styles["result"]}`}>
             <div className={styles["result__img"]}
             >
                 <img
