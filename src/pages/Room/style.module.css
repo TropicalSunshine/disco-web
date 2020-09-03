@@ -34,9 +34,4 @@
     width: 20%;
     overflow: hidden;
     background-color: var(--b2);
-}
-
-.room__player-display-box{
-    height: 90%;
-}
-
+};

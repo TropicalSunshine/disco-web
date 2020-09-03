@@ -5,6 +5,7 @@ import { LoaderPage } from "shared/components/index";
 import MessagePanel from "./MessagePanel";
 import MusicControls from "./MusicControls";
 import SearchPanel from "./SearchPanel";
+import CenterPanel from "./CenterPanel";
 
 import { useParams } from "react-router-dom";
 
@@ -46,11 +47,7 @@ function Room(props) {
                 <SearchPanel />
               </div>
               <div className={`box-column ${styles["room__room-central"]}`}>
-                <div
-                  className={`box-center ${styles["room__player-display-box"]}`}
-                >
-                  <i />
-                </div>
+                <CenterPanel/>
               </div>
               <div className={styles["room__room-right"]}>
                 <MessagePanel />

@@ -27,10 +27,8 @@ function MusicControls(props) {
 
   const handlePausePlay = () => {
     if (paused) {
-      console.log("playing");
       play();
     } else {
-      console.log("pausing");
       pause();
     }
   };

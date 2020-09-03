@@ -1,0 +1,19 @@
+.center-panel{
+    height: 100%;
+    width: 100%;
+}
+
+.center-panel__navbar{
+    min-height: 70px;
+    padding: 5px 10px;
+}
+
+.center-panel__navbar__back-button{
+    color: var(--text-muted);
+    transition: 0.2s;
+}
+
+.center-panel__navbar__back-button:hover{
+    color: var(--white);
+    cursor: pointer;
+}
