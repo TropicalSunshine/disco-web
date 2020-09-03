@@ -1,5 +1,9 @@
 import React from "react";
+
+import SpinningVinyl from "./SpinningVinyl";
 import styles from "./styles.module.css";
+
+import { textStyles } from "shared/styles";
 
 import PlayIcon from "@material-ui/icons/PlayArrowSharp";
 import PauseIcon from "@material-ui/icons/PauseSharp";
@@ -13,12 +17,13 @@ props req
     handlePlay
     handleNext
     handlePrev
- */
+
+*/
 
 function MusicControls(props) {
   const { musicRoom } = props;
 
-  const { paused, pause, play } = musicRoom;
+  const { paused, pause, play, songTitle, songArtist } = musicRoom;
 
   const handlePausePlay = () => {
     if (paused) {
@@ -32,6 +37,13 @@ function MusicControls(props) {
 
   return (
     <div className={styles["music-player-container"]}>
+      <div className={`box-row ${styles["music-controls__vinyl"]}`}>
+          <SpinningVinyl/>
+          <div className={styles["music-controls__song-info"]}>
+              <p className={textStyles["text-4"]}>{songTitle}</p>
+              <p className={textStyles["text-5"]}>{songArtist}</p>
+          </div>
+      </div>
       <div className="box-center">
         <div
           className={`${styles["music-player-control-button"]} ${styles["rewind-button"]}`}

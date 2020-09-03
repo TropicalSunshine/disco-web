@@ -20,7 +20,6 @@ function Room(props) {
 
   /* eslint-disable */
   useEffect(() => {
-    console.log(musicRoom);
 
     (async () => {
       setIsLoading(true);
@@ -42,7 +41,6 @@ function Room(props) {
       {!isLoading && (
         <>
           <div className={`${styles["room"]}`}>
-
             <div className={`box-row ${styles["room__room-main"]}`}>
               <div className={styles["room__room-left"]}>
                 <SearchPanel />
@@ -51,15 +49,7 @@ function Room(props) {
                 <div
                   className={`box-center ${styles["room__player-display-box"]}`}
                 >
-                  <div
-                    className={styles["room__player-disk"]}
-                    style={{
-                      animationPlayState: !paused ? "running" : "paused",
-                      backgroundImage: `url(${songImage})`,
-                    }}
-                  >
-                    <i />
-                  </div>
+                  <i />
                 </div>
               </div>
               <div className={styles["room__room-right"]}>
@@ -70,7 +60,6 @@ function Room(props) {
             <div className={styles["room__player-control-container"]}>
               <MusicControls />
             </div>
-
           </div>
         </>
       )}

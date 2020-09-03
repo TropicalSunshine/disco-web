@@ -8,8 +8,12 @@ function useAttachListeners(setters){
         setSongId,
         setSongStartTime,
         setIsLoadingSong,
-        setSongImage
+        setSongImage,
+        setSongTitle,
+        setSongArtist
     } = setters;
+
+
 
     const bind = () => {
         Controls.addPauseListener(data => {
@@ -49,8 +53,10 @@ function useAttachListeners(setters){
                 setPaused(paused);
     
                 const response = await youtube.getVideoInfoData(songId);
-                setSongImage(response.snippet.thumbnails.high.url);
-    
+                const { snippet } = response;
+                setSongImage(snippet.thumbnails);
+                setSongTitle(snippet.title);
+                setSongArtist(snippet.channelTitle);
                 setIsLoadingSong(false);
 
             })(data);
@@ -72,7 +78,10 @@ function useAttachListeners(setters){
                 setPaused(false); 
 
                 const response = await youtube.getVideoInfoData(songId);
-                setSongImage(response.snippet.thumbnails.high.url);
+                const { snippet } = response;
+                setSongImage(snippet.thumbnails);
+                setSongTitle(snippet.title);
+                setSongArtist(snippet.channelTitle);
 
                 setIsLoadingSong(false);
             })(data);

@@ -15,8 +15,11 @@ function MusicRoomProvider({children}){
 
     const [ isLoadingSong, setIsLoadingSong ] = useState(false);
     const [ paused , setPaused ] = useState(true);
-    const [ songId, setSongId ] = useState(null);
-    const [ songImage, setSongImage ] = useState(null);
+    const [ songId, setSongId ] = useState("");
+    const [ songImage, setSongImage ] = useState("");
+    const [ songArtist, setSongArtist ] = useState("");
+    const [ songTitle, setSongTitle ] = useState("");
+
     const [ songStartTime, setSongStartTime ] = useState(0);
     const [ hasError, setHasError ] = useState(false);
 
@@ -26,6 +29,8 @@ function MusicRoomProvider({children}){
         setPaused,
         setSongId,
         setSongImage,
+        setSongArtist,
+        setSongTitle,
         setSongStartTime,
         setHasError
     }
@@ -40,6 +45,8 @@ function MusicRoomProvider({children}){
         paused,
         songImage,
         songStartTime,
+        songTitle,
+        songArtist,
         hasError,
         isProviderInitialized: true,
 

@@ -20,13 +20,14 @@
   --b1 : #1d1f23;
   --b2 : #121218;
   --b3 : #0d1436;
-  --b4 : #0e1648;
+  --b4 : #2d2e33;
 
   --light-blue: #00bbf9;
   --box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
   --font-family : 'PT Sans Caption', sans-serif !important;
   --border-radius: 8px;
   --dialog-z: 10;
+  --below-dialog : 5;
 }
 
 .red{

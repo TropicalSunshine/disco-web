@@ -10,5 +10,7 @@ export {
 }
 
 Api.User = User;
+Api.Room = Room;
+Api.Message = Message;
 
 export default Api;

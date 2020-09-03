@@ -10,7 +10,9 @@ function useRoom(setters){
         setHasError,
         setPaused,
         setSongId,
-        setSongImage
+        setSongImage,
+        setSongTitle,
+        setSongArtist
     } = setters;
 
     const { 
@@ -34,8 +36,11 @@ function useRoom(setters){
             
             if(songId !== null){
                 
-                const data = await youtube.getVideoInfoData(songId);
-                setSongImage(data.snippet.thumbnails.high.url);    
+                const response = await youtube.getVideoInfoData(songId);
+                const { snippet } = response;
+                setSongImage(snippet.thumbnails);
+                setSongTitle(snippet.title);
+                setSongArtist(snippet.channelTitle); 
             }
             
 

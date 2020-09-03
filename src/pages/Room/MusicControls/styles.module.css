@@ -1,6 +1,20 @@
 .music-player-container{
     padding-top: 8px;
     min-height: 68px;
+    position: relative;
+}
+
+
+.music-controls__vinyl{
+    position: absolute;
+    left : 10px;
+    bottom : -5px;
+    overflow: hidden;
+}
+
+.music-controls__song-info{
+    margin-left: 5px;
+    color : var(--white);
 }
 
 
@@ -24,11 +38,37 @@
 
 .icon{
     font-size: 12pt;
-    margin: 12px 10px;
+    margin: 15px 10px;
 }
 
 .play-button:hover{
     transition: 0.5s;
     background-color: var(--grey-secondary);
     cursor: pointer;
+}
+
+
+.music-controls__player-disk{
+    height: 65px;
+    width: 65px;       
+    background-color: var(--b4);
+    border-radius: 230px;
+    margin: auto;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    animation-name: spin;
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear; 
+}
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
 }
