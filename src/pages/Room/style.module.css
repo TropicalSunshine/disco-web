@@ -11,11 +11,11 @@
 
 .room__player-control-container{
     height: 8%;
-    background-color: var(--grey-primary);
+    background-color: var(--b1);
 }
 
 .room__room-left{
-    background-color: var(--black);
+    background-color: var(--b2);
     width: 20%;
     min-width: 345px;
     
@@ -25,14 +25,14 @@
 .room__room-central{
     width: 60%;
     overflow: hidden;
-    background-color: var(--dark-blue);
+    background-color: #2d2e33;
 }
 
 .room__room-right{
     min-width: 345px;
     width: 20%;
     overflow: hidden;
-    background-color: var(--black);
+    background-color: var(--b2);
 }
 
 .room__player-display-box{
