@@ -5,6 +5,10 @@ import {
     Register as RegisterDialog 
 } from "shared/components/dialog";
 
+import { 
+    UserProfileIcon
+} from "shared/components";
+
 import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 
@@ -99,6 +103,11 @@ class Navbar extends PureComponent{
                                                     Explore
                                                 </Link>
                                             </div>
+                                        </div>
+                                        <div>
+                                            <UserProfileIcon
+                                            height={"40px"}
+                                            />
                                         </div>
                                     </React.Fragment>
                                 )

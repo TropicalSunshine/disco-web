@@ -1,0 +1,12 @@
+.user-profile{
+    display: inline-block;
+}
+
+.user-profile__circle{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--purple);
+    border-radius: 50%;
+    border-radius: 50%;
+}
