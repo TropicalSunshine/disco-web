@@ -3,7 +3,7 @@ import { HistoryPropTypes } from "shared/types";
 import { Button } from "@material-ui/core";
 
 import styles from "./styles.module.css";
-import discoImage from "assets/images/discoball.png";
+import discoImage from "static/images/discoball.png";
 
 
 class HomePage extends Component{
