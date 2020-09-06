@@ -8,7 +8,7 @@ function SpinningVinyl(props){
 
     return (
         <div
-        className={styles["music-controls__player-disk"]}
+        className={styles["music-controls__vinyl__player-disk"]}
         style={{
             animationPlayState: !paused ? "running" : "paused",
             backgroundImage: `url(${songImage.default.url})`,

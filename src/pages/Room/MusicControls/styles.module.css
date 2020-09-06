@@ -1,21 +1,36 @@
 .music-player-container{
-    padding-top: 8px;
+    padding-top: 2px;
     min-height: 68px;
     position: relative;
+    width: 100%;
 }
 
 
-.music-controls__vinyl{
-    position: absolute;
-    left : 10px;
-    bottom : -5px;
+.music-controls__left{
+    width: 30%;
     overflow: hidden;
 }
 
-.music-controls__song-info{
-    margin-left: 5px;
-    color : var(--white);
+.music-controls__center{
+    width: 40%;
 }
+
+.music-controls__right{
+    width: 30%;
+}
+
+.music-controls__vinyl__image{
+    min-width: 80px;
+    width: 20%;
+    margin: auto;
+}
+
+.music-controls__vinyl__song-info{
+    color : var(--white);
+    margin: auto;
+    width: 80%;
+}
+
 
 
 .music-player-control-button{ 
@@ -48,7 +63,7 @@
 }
 
 
-.music-controls__player-disk{
+.music-controls__vinyl__player-disk{
     height: 65px;
     width: 65px;       
     background-color: var(--b4);

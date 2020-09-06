@@ -34,17 +34,33 @@ function MusicControls(props) {
   };
 
   return (
-    <div className={styles["music-player-container"]}>
-      <div className={`box-row ${styles["music-controls__vinyl"]}`}>
-          <SpinningVinyl/>
-          <div className={styles["music-controls__song-info"]}>
-              <p className={textStyles["text-4"]}>{songTitle}</p>
-              <p className={textStyles["text-5"]}>{songArtist}</p>
-          </div>
-      </div>
-      <div className="box-center">
+    <div className={`${styles["music-player-container"]} box-row`}>
+      <div className={`box-row ${styles["music-controls__left"]}`}>
+        <div className={`${styles["music-controls__vinyl__image"]}`}>
+          <SpinningVinyl />
+        </div>
         <div
-          className={`${styles["music-player-control-button"]} ${styles["rewind-button"]}`}
+          className={` 
+          ${styles["music-controls__vinyl__song-info"]}`}
+        >
+          <p
+            className={`${textStyles["text-ellipsis"]} 
+              ${textStyles["text-4"]}`}
+          >
+            {songTitle}
+          </p>
+          <p
+            className={`${textStyles["text-ellipsis"]}
+               ${textStyles["text-5"]}`}
+          >
+            {songArtist}
+          </p>
+        </div>
+      </div>
+      <div className={`box-center ${styles["music-controls__center"]}`}>
+        <div
+          className={`${styles["music-player-control-button"]} 
+          ${styles["rewind-button"]}`}
         >
           <FastRewindIcon className={`${styles.icon}`} />
         </div>
@@ -61,6 +77,9 @@ function MusicControls(props) {
         >
           <FastForwardIcon className={`${styles.icon}`} />
         </div>
+      </div>
+      <div className={`${styles["music-controls__right"]}`}>
+        <i />
       </div>
     </div>
   );
