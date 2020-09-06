@@ -1,25 +1,32 @@
 
 .room{
-    height: 100vh;
+    height: 100%;
     width: 100%;
     background-color: black;
     overflow: hidden;
+    display: grid;
+    grid-template-rows: 92vh 8vh;
 }
 
 .room__room-main{
-    height: 92%;
+    grid-row-start: 1;
+    grid-row-end : 2;
+
+    grid-template-columns: 20% 60% 20%;
 }
 
 .room__player-control-container{
-    height: 8%;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    
     background-color: var(--b1);
 }
 
 .room__room-left{
-    background-color: var(--b2);
+
     width: 20%;
+    background-color: var(--b2);
     min-width: 345px;
-    
     overflow: hidden;
 }
 
@@ -30,8 +37,9 @@
 }
 
 .room__room-right{
-    min-width: 345px;
+
     width: 20%;
+    min-width: 345px;
     overflow: hidden;
     background-color: var(--b2);
 };

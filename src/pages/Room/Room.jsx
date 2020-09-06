@@ -14,7 +14,7 @@ import styles from "./style.module.css";
 function Room(props) {
   const { roomId } = useParams();
   const { musicRoom } = props;
-  const { paused, songImage, join, leave } = musicRoom;
+  const { join, leave } = musicRoom;
 
   const [isLoading, setIsLoading] = useState(true);
   const [loadingValue, setLoadingValue] = useState(0);
