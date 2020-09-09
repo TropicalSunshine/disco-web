@@ -1,5 +1,5 @@
 import api from "./Api";
-import { User } from "shared/utils/storage";
+import { User as UserStorage } from "shared/utils/storage";
 
 
 export const createRoom = (
@@ -27,7 +27,7 @@ export const createRoom = (
         name,
         private : isPrivate,
         description,
-        creator : User.userId.get()
+        creator : UserStorage.userId.get()
     }
 })
 
@@ -71,3 +71,45 @@ export const Rooms = async (
             throw new Error("Server error");
         }
 } 
+
+export const joinRoom = (roomId) => api.post("", {
+    query : `
+    mutation joinRoom( $roomId : String!, $userId : String! ) {
+        joinRoom(userId : $userId, roomId : $roomId){
+          _id
+          name
+          time_created
+          num_listeners
+          creator {
+            _id
+            username
+          }
+          members {
+            _id
+            username
+          }
+          description
+        }
+      }
+    `,
+    variables : {
+        userId : UserStorage.userId.get(),
+        roomId
+    }
+});
+
+export const leaveRoom = (roomId) => api.post("", {
+    query : `
+    mutation leaveRoom ($userId : String!, $roomId : String!) {
+        leaveRoom(userId : $userId, roomId : $roomId ) {
+          status
+          message
+          error
+        }
+      }
+    `,
+    variables : {
+        userId : UserStorage.userId.get(),
+        roomId
+    }
+});
