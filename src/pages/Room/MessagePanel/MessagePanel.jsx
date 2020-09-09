@@ -39,7 +39,7 @@ function MessagePanel() {
         lastMessageObserver.current = new IntersectionObserver( entries => {
 
             if(entries[0].isIntersecting && hasMore){
-                setLastId(messages[0].id);
+                setLastId(messages[0]._id);
             }
         }, {
             threshold : 0.5
@@ -55,7 +55,7 @@ function MessagePanel() {
         setMessages( prevMessages => [
             ...prevMessages,
             {
-                id : '0',
+                _id : DEFAULT_ID,
                 sender : UserStorage.userId.get(),
                 content : content,
                 time_created : (new Date(Date.now())).toISOString()
@@ -87,7 +87,7 @@ function MessagePanel() {
                     messages.map( (m, i) => {
                         if(i === 0) return (
                             <MessageBlock
-                            key={`${i}-${m.id}`}
+                            key={`${i}-${m._id}`}
                             message={m}
                             ref={lastRoomElement}
                             />
@@ -95,7 +95,7 @@ function MessagePanel() {
 
                         return (
                             <MessageBlock
-                            key={`${i}-${m.id}`}
+                            key={`${i}-${m._id}`}
                             message={m}
                             />
                         )

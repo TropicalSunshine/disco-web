@@ -3,7 +3,7 @@ import React, { forwardRef, useMemo} from "react";
 import { textStyles } from "shared/styles";
 import styles from "./styles.module.css";
 
-const MessageBlock = forwardRef(({ message }, ref) => {
+function MessageBlock ({ message }, ref) {
 
     const { content, time_created } = message;
     const messageDate = useMemo(() => {
@@ -23,6 +23,6 @@ const MessageBlock = forwardRef(({ message }, ref) => {
             </div>
         </li>
     )
-});
+};
 
-export default MessageBlock;
+export default forwardRef(MessageBlock);
