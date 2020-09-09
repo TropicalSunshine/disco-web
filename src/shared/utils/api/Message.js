@@ -19,9 +19,12 @@ export const getRoomMessage = async (
                         last_id : $last_id,
                         limit : $limit
                     ){
-                        id
+                        _id
                         content
-                        sender
+                        sender {
+                            _id
+                            username
+                        }
                         time_created
                     }
             }

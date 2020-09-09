@@ -40,7 +40,7 @@ export const rooms = (limit = DEFAULT_LIMIT,
         `
         query rooms( $limit : Int! , $last_id : String! ) {
             rooms( limit : $limit, last_id : $last_id ){ 
-                id
+                _id
                 name
                 description
                 num_listeners
