@@ -11,22 +11,6 @@ function usePlayer(setters, paused){
     } = setters;
 
 
-    const pause = () => {
-
-        setPaused(true);
-        Controls.emitPause();
-        YoutubePlayer.pause();
-
-    }
-
-    const play = () => {
-
-        setPaused(false);
-        Controls.emitPlay();
-        YoutubePlayer.play();
-        
-    }
-
     const queue = (songId) => {
 
     }
@@ -41,8 +25,7 @@ function usePlayer(setters, paused){
         setSongImage(data.snippet.thumbnails.high.url);
         
         Controls.emitChangeSong({
-            ...(YoutubePlayer.getState()),
-            paused
+            ...(YoutubePlayer.getState())
         });
 
         setIsLoadingSong(false);
@@ -51,8 +34,6 @@ function usePlayer(setters, paused){
 
 
     return {
-        pause,
-        play,
         queue,
         changeSong
     }

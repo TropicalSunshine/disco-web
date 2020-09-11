@@ -14,7 +14,7 @@ function MusicRoomProvider({children}){
     const [ isConnected, setIsConnected ] = useState(false);
 
     const [ isLoadingSong, setIsLoadingSong ] = useState(false);
-    const [ paused , setPaused ] = useState(true);
+    
     const [ songId, setSongId ] = useState("");
     const [ songImage, setSongImage ] = useState("");
     const [ songArtist, setSongArtist ] = useState("");
@@ -26,7 +26,6 @@ function MusicRoomProvider({children}){
     const setters = {
         setIsLoadingSong,
         setIsConnected,
-        setPaused,
         setSongId,
         setSongImage,
         setSongArtist,
@@ -36,13 +35,12 @@ function MusicRoomProvider({children}){
     }
 
     const roomMethods = useRoom(setters);
-    const playerMethods = usePlayer(setters, paused);
+    const playerMethods = usePlayer(setters);
 
     var value = {
         songId,
         isConnected,
         isLoadingSong,
-        paused,
         songImage,
         songStartTime,
         songTitle,

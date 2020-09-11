@@ -38,7 +38,8 @@ export const connectSocket = (rId = DEFAULT_ROOM_ID) => {
         socket.on("connect", () => {
             
             socket.emit(constants.USERJOINROOM, {
-                roomId: roomId
+                roomId: roomId,
+                userId: UserStorage.userId.get()
             });
         });
 

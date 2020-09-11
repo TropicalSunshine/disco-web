@@ -13,7 +13,6 @@ import styles from "./styles.module.css";
 const DEFAULT_ID = '0';
 
 function MessagePanel() {
-
     const { roomId } = useParams();
 
     const [ lastId, setLastId ] = useState(DEFAULT_ID);

@@ -8,7 +8,6 @@ function useRoom(setters){
     const { 
         setIsConnected,
         setHasError,
-        setPaused,
         setSongId,
         setSongImage,
         setSongTitle,
@@ -24,15 +23,13 @@ function useRoom(setters){
 
 
         try {
+
+            if(!YoutubePlayer.isInitialized()) await YoutubePlayer.init(); //init player if not initialized already
             const { songId, time, paused } = await Socket.connectSocket(roomId);
-            
+
             console.log("[ROOM SONG DATA] : ", songId, time, paused);
 
-            if(!YoutubePlayer.isInitialized()) {
-                await YoutubePlayer.init(songId, time, paused);
-            } else {
-                await YoutubePlayer.loadVideo(songId, time, paused);
-            }
+            await YoutubePlayer.loadVideo(songId, time, false);
             
             if(songId !== null){
                 
@@ -45,7 +42,6 @@ function useRoom(setters){
             
 
             bind();
-            setPaused((songId !== null) ? paused : true);
             setSongId(null);
             setIsConnected(true);
             setSongId(songId);
@@ -61,7 +57,7 @@ function useRoom(setters){
     
         try {
             Socket.disconnectSocket();
-            setPaused(true);
+
             setIsConnected(false);
             YoutubePlayer.stop();
             unbind();

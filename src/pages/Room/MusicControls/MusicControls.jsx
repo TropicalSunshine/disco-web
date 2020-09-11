@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
+import { YoutubePlayer } from "shared/utils/services";
 import SpinningVinyl from "./SpinningVinyl";
-import styles from "./styles.module.css";
 
 import { textStyles } from "shared/styles";
 
-import PlayIcon from "@material-ui/icons/PlayArrowSharp";
-import PauseIcon from "@material-ui/icons/PauseSharp";
+import VolumeUpIcon from "@material-ui/icons/VolumeUpRounded";
+import VolumeOffIcon from "@material-ui/icons/VolumeOffRounded";
 import FastForwardIcon from "@material-ui/icons/FastForwardSharp";
 import FastRewindIcon from "@material-ui/icons/FastRewindSharp";
 
+import styles from "./styles.module.css";
 /*
 
 props req
@@ -23,21 +24,29 @@ props req
 function MusicControls(props) {
   const { musicRoom } = props;
 
-  const { paused, pause, play, songTitle, songArtist } = musicRoom;
+  const { songTitle, songArtist } = musicRoom;
 
-  const handlePausePlay = () => {
-    if (paused) {
-      play();
+  const [ mute, setMute ] = useState(false);
+
+  const handleMute = () => {
+    setMute(!mute);
+  }
+
+  useEffect(() => {
+    if(mute) {
+      YoutubePlayer.mute();
     } else {
-      pause();
+      YoutubePlayer.unMute();
     }
-  };
+  }, [mute])
 
   return (
     <div className={`${styles["music-player-container"]} box-row`}>
       <div className={`box-row ${styles["music-controls__left"]}`}>
         <div className={`${styles["music-controls__vinyl__image"]}`}>
-          <SpinningVinyl />
+          <SpinningVinyl 
+            mute={mute}
+          />
         </div>
         <div
           className={` 
@@ -67,10 +76,10 @@ function MusicControls(props) {
         <div
           className={`${styles["music-player-control-button"]} 
                 ${styles["play-button"]}`}
-          onClick={handlePausePlay}
+          onClick={handleMute}
         >
-          {paused && <PlayIcon className={`${styles.icon}`} />}
-          {!paused && <PauseIcon className={`${styles.icon}`} />}
+          {mute && <VolumeUpIcon className={`${styles.icon}`} />}
+          {!mute && <VolumeOffIcon className={`${styles.icon}`} />}
         </div>
         <div
           className={`${styles["music-player-control-button"]} ${styles["rewind-button"]}`}

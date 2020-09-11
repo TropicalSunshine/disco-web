@@ -89,6 +89,14 @@ export const stop = () => {
     player.stopVideo();
 }
 
+export const mute = () => {
+    player.mute();
+}
+
+export const unMute = () => {
+    player.unMute();
+}
+
 export const isInitialized = () => {
     return (player !== null);
 }
