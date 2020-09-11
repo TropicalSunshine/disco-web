@@ -10,11 +10,6 @@ function usePlayer(setters, paused){
         setSongImage
     } = setters;
 
-
-    const queue = (songId) => {
-
-    }
-
     const changeSong = async (songId) => {
         setIsLoadingSong(true);
         setSongId(songId);

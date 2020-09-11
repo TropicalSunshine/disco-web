@@ -15,13 +15,6 @@ function useAttachListeners(setters){
 
 
     const bind = () => {
-        Controls.addPauseListener(data => {
-            console.log(`[socket event] : pause`);
-        });
-    
-        Controls.addPlayListener(data => {
-            console.log(`[socket event] : play`);
-        });
 
     
         Controls.addUpdateListener( data => {
@@ -73,8 +66,6 @@ function useAttachListeners(setters){
     }
 
     const unbind = () => {
-        Controls.removePauseListener();
-        Controls.removePlayListener();
         Controls.removeUpdateListener();
         Controls.removeChangeSongListener();
     }
