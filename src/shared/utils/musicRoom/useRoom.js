@@ -1,5 +1,3 @@
-
-import useAttachListeners from "./useAttachListeners";
 import { Socket } from "shared/utils/socket"
 import { youtube, YoutubePlayer } from "shared/utils/services";
 import { Room as RoomApi } from "shared/utils/api";
@@ -10,44 +8,46 @@ function useRoom(setters){
         setIsConnected
     } = setters;
 
-    const { 
-        bind,
-        unbind
-    }  = useAttachListeners(setters);
+
 
     const join = async (roomId) => {
 
         try {
-            if(!YoutubePlayer.isInitialized()) await YoutubePlayer.init(); //init player if not initialized already
+            
             const socketResponse = await Socket.connectSocket(roomId);
-            console.log(socketResponse);
+            
             const { songId, time, djs } = socketResponse;
 
             console.log("[ROOM SONG DATA] : ", songId, time );
-    
-            await YoutubePlayer.loadVideo(songId, time, false);
+        
 
             var song = {
                 songImage : null,
                 songTitle : null,
-                songArtist : null
+                songArtist : null,
+                duration: 0,
+                startTime : time
             };
 
             if(songId !== null){
                 
-                const response = await youtube.getVideoInfoData(songId);
-                console.log(response);
-                var { snippet } = response;
+                const { thumbnails, 
+                        title, 
+                        channelTitle, 
+                        duration } = await youtube.getVideoInfoFormated(songId);
                 
-                song.songImage = snippet.thumbnails;
-                song.songTitle = snippet.title;
-                song.songArtist = snippet.channelTitle; 
-    
+                
+                song.songImage = thumbnails;
+                song.songTitle = title;
+                song.songArtist = channelTitle; 
+                song.duration = duration;
             }
             
             const roomData = await RoomApi.joinRoom(roomId);
-    
-            bind();
+
+            if(!YoutubePlayer.isInitialized()) await YoutubePlayer.init(songId, time, false); //init player if not initialized already
+            await YoutubePlayer.loadVideo(songId, time, false);
+            
             setIsConnected(true);
     
             return {
@@ -66,7 +66,6 @@ function useRoom(setters){
             Socket.disconnectSocket();
             setIsConnected(false);
             YoutubePlayer.stop();
-            unbind();
             
             await RoomApi.leaveRoom(roomId);
         } catch (err) {

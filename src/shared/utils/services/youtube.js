@@ -1,4 +1,5 @@
 import Axios from "axios";
+import { duration, ISO_8601 } from "moment";
 
 const YOUTUBE_API_KEY            =  process.env.REACT_APP_YOUTUBE_API_KEY;
 const YOUTUBE_API_BASE_URL       =  "https://www.googleapis.com/youtube/v3"; 
@@ -33,14 +34,23 @@ export const getVideoInfo = (vidId) => {
         params : {
             key : YOUTUBE_API_KEY,
             id : vidId,
-            part : "id,snippet"
+            part : "id,snippet,contentDetails"
         }
     })
 }
 
-export const getVideoInfoData = async (vidId) => {
+export const getVideoInfoFormated = async (vidId) => {
+
     const response = await getVideoInfo(vidId);
-    return response.data.items[0];
+    var val = response.data.items[0]; 
+    console.log(val);
+
+    return {
+        thumbnails : val.snippet.thumbnails,
+        title : val.snippet.title,
+        channelTitle : val.snippet.channelTitle,
+        duration : duration(val.contentDetails.duration, ISO_8601).asSeconds()
+    };
 }
 
 export const getMostPopularVideos = async () => {
