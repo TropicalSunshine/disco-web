@@ -69,16 +69,7 @@ export const disconnectSocket = () => {
 }
 
 
-export const joinSuccess = () => {
-    return new Promise((res, rej) => {
-        socket.on(constants.JOINSUCCESS, (data) => {
-            res(data);
-        })
-    });
-}
-
 export default {
-    joinSuccess,
     constants,
     socket
 }

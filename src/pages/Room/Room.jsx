@@ -28,7 +28,6 @@ function Room(props) {
 
       if(!isConnected){
         const roomData = await join(roomId);
-        console.log(roomData);
 
         const members = roomData.members;
 
@@ -36,8 +35,7 @@ function Room(props) {
         for(var m of members){
           map[m._id] = m;
         }
-        console.log(map);
-
+  
         setMembersMap(map);
       }
 

@@ -1,19 +1,24 @@
 const constants = Object.freeze({
     USERJOINROOM: 1,
-    USERCREATEROOM: 2,
-    USERCHANGESONG: 3,
-    USERINPUT: 4,
+    USERCHANGESONG: 2,
+    USERINPUT: 3,
     controls: {
-        PLAY: 5,
-        PAUSE: 6,
-        SEEK:  7
+        PLAY: 4,
+        PAUSE: 5,
+        SEEK:  6
     },
-    JOINSUCCESS: 8,
-    UPDATE: 9,
-    SUCCESS: 10,
-    USERLEAVEROOM : 11,
-    SEND_MESSAGE : 12,
-    RECIEVE_MESSAGE : 13
+    JOINSUCCESS: 7,
+    UPDATE: 8,
+    USERLEAVEROOM : 9,
+    SEND_MESSAGE : 10,
+    RECIEVE_MESSAGE : 11,
+    ERROR : 12,
+    DJ : {
+        REQUEST: 13,
+        RESPOND : 14,
+        STEP_DOWN : 15,
+        STEP_UP : 16
+    }
 });
 
 
