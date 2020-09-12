@@ -21,17 +21,12 @@ props req
 
 */
 
-function MusicControls(props) {
-  const { musicRoom } = props;
-
-  const { songTitle, songArtist } = musicRoom;
-
+function MusicControls({ song }) {
+  
   const [ mute, setMute ] = useState(false);
+  const { songImage, songTitle, songArtist } = song;
 
-  const handleMute = () => {
-    setMute(!mute);
-  }
-
+  
   useEffect(() => {
     if(mute) {
       YoutubePlayer.mute();
@@ -39,12 +34,17 @@ function MusicControls(props) {
       YoutubePlayer.unMute();
     }
   }, [mute])
-
+  
+  const handleMute = () => {
+    setMute(!mute);
+  }
+  
   return (
     <div className={`${styles["music-player-container"]} box-row`}>
       <div className={`box-row ${styles["music-controls__left"]}`}>
         <div className={`${styles["music-controls__vinyl__image"]}`}>
           <SpinningVinyl 
+            songImage={songImage}
             mute={mute}
           />
         </div>

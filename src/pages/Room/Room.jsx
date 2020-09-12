@@ -11,14 +11,21 @@ import { useParams } from "react-router-dom";
 
 import styles from "./style.module.css";
 
-function Room(props) {
+const DEFAULT_SONG = {
+  songId : null,
+  time : null,
+  songImage : null
+}
+
+function Room({ musicRoom }) {
+  
   const { roomId } = useParams();
-  const { musicRoom } = props;
   const { join, leave, isConnected } = musicRoom;
 
   const [isLoading, setIsLoading] = useState(true);
-
   const [membersMap, setMembersMap] = useState({});
+  const [ song, setSong ] = useState({...DEFAULT_SONG});
+  const [ djs, setDjs ] = useState([]);
 
   /* eslint-disable */
   useEffect(() => {
@@ -27,16 +34,18 @@ function Room(props) {
       setIsLoading(true);
 
       if(!isConnected){
-        const roomData = await join(roomId);
+        const {room ,song ,djs } = await join(roomId);
 
-        const members = roomData.members;
+        const { members } = room;
 
         var map = {};
         for(var m of members){
           map[m._id] = m;
         }
-  
+        
+        setDjs(djs);
         setMembersMap(map);
+        setSong(song);
       }
 
       setIsLoading(false);
@@ -73,7 +82,9 @@ function Room(props) {
             </div>
 
             <div className={styles["room__player-control-container"]}>
-              <MusicControls />
+              <MusicControls 
+                song={song}
+              />
             </div>
           </div>
         </>

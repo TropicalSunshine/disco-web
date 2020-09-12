@@ -16,14 +16,12 @@ function MusicRoomProvider({children}){
     const [ isLoadingSong, setIsLoadingSong ] = useState(false);
     
     const [ songId, setSongId ] = useState("");
+    
     const [ songImage, setSongImage ] = useState("");
     const [ songArtist, setSongArtist ] = useState("");
     const [ songTitle, setSongTitle ] = useState("");
-
-    const [ initialDjs, setInitialDjs ] = useState([]);
-    const [ currentDj, setCurrentDj ] = useState(null);
-
     const [ songStartTime, setSongStartTime ] = useState(0);
+
     const [ hasError, setHasError ] = useState(false);
 
     const setters = {

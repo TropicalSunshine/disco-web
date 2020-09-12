@@ -5,13 +5,9 @@ import { youtube, YoutubePlayer } from "shared/utils/services";
 import { Room as RoomApi } from "shared/utils/api";
 
 function useRoom(setters){
-    const { 
-        setIsConnected,
-        setHasError,
-        setSongId,
-        setSongImage,
-        setSongTitle,
-        setSongArtist
+
+    const {
+        setIsConnected
     } = setters;
 
     const { 
@@ -23,28 +19,42 @@ function useRoom(setters){
 
         try {
             if(!YoutubePlayer.isInitialized()) await YoutubePlayer.init(); //init player if not initialized already
-            const { songId, time, paused } = await Socket.connectSocket(roomId);
-    
-            console.log("[ROOM SONG DATA] : ", songId, time, paused);
+            const socketResponse = await Socket.connectSocket(roomId);
+            console.log(socketResponse);
+            const { songId, time, djs } = socketResponse;
+
+            console.log("[ROOM SONG DATA] : ", songId, time );
     
             await YoutubePlayer.loadVideo(songId, time, false);
-            
+
+            var song = {
+                songImage : null,
+                songTitle : null,
+                songArtist : null
+            };
+
             if(songId !== null){
                 
                 const response = await youtube.getVideoInfoData(songId);
-                const { snippet } = response;
-                setSongImage(snippet.thumbnails);
-                setSongTitle(snippet.title);
-                setSongArtist(snippet.channelTitle); 
+                console.log(response);
+                var { snippet } = response;
+                
+                song.songImage = snippet.thumbnails;
+                song.songTitle = snippet.title;
+                song.songArtist = snippet.channelTitle; 
+    
             }
             
             const roomData = await RoomApi.joinRoom(roomId);
     
             bind();
             setIsConnected(true);
-            setSongId(songId);
     
-            return roomData.data.data.joinRoom;
+            return {
+                djs,
+                room : roomData.data.data.joinRoom,
+                song
+            }
         } catch (err) {
             console.error(err);
         }
@@ -61,7 +71,6 @@ function useRoom(setters){
             await RoomApi.leaveRoom(roomId);
         } catch (err) {
             console.error(err);
-            setHasError(true);
         }
 
     }
