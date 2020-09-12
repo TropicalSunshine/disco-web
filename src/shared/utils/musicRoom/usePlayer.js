@@ -29,7 +29,6 @@ function usePlayer(setters, paused){
 
 
     return {
-        queue,
         changeSong
     }
 

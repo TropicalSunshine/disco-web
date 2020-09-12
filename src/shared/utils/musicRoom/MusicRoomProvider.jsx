@@ -20,6 +20,9 @@ function MusicRoomProvider({children}){
     const [ songArtist, setSongArtist ] = useState("");
     const [ songTitle, setSongTitle ] = useState("");
 
+    const [ initialDjs, setInitialDjs ] = useState([]);
+    const [ currentDj, setCurrentDj ] = useState(null);
+
     const [ songStartTime, setSongStartTime ] = useState(0);
     const [ hasError, setHasError ] = useState(false);
 

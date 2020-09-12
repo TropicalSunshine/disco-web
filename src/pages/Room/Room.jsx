@@ -14,31 +14,47 @@ import styles from "./style.module.css";
 function Room(props) {
   const { roomId } = useParams();
   const { musicRoom } = props;
-  const { join, leave } = musicRoom;
+  const { join, leave, isConnected } = musicRoom;
 
   const [isLoading, setIsLoading] = useState(true);
-  const [loadingValue, setLoadingValue] = useState(0);
+
+  const [membersMap, setMembersMap] = useState({});
 
   /* eslint-disable */
   useEffect(() => {
 
     (async () => {
       setIsLoading(true);
-      await join(roomId);
-      setLoadingValue(100);
+
+      if(!isConnected){
+        const roomData = await join(roomId);
+        console.log(roomData);
+
+        const members = roomData.members;
+
+        var map = {};
+        for(var m of members){
+          map[m._id] = m;
+        }
+        console.log(map);
+
+        setMembersMap(map);
+      }
 
       setIsLoading(false);
     })();
 
     return () => {
-      leave();
+      leave(roomId); //change this later useEffect is not async 
+      //ref: https://dev.to/n1ru4l/homebrew-react-hooks-useasynceffect-or-how-to-handle-async-operations-with-useeffect-1fa8#:~:text=An%20async%20function%20always%20returns,changes%20or%20the%20component%20unmounts.
     };
+
   }, []);
   /* eslint-enable */
 
   return (
     <React.Fragment>
-      {isLoading && <LoaderPage value={loadingValue} />}
+      {isLoading && <LoaderPage/>}
       {!isLoading && (
         <>
           <div className={`${styles["room"]}`}>
@@ -47,10 +63,14 @@ function Room(props) {
                 <SearchPanel />
               </div>
               <div className={`box-column ${styles["room__room-central"]}`}>
-                <CenterPanel/>
+                <CenterPanel
+                  members={membersMap}
+                />
               </div>
               <div className={styles["room__room-right"]}>
-                <MessagePanel />
+                <MessagePanel 
+                  members={membersMap}
+                />
               </div>
             </div>
 
