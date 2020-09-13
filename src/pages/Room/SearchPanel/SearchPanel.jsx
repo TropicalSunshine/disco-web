@@ -3,6 +3,7 @@ import React, { useState, useEffect, useReducer } from 'react'
 import PanelTabs from "./PanelTabs";
 import SongItem from "./SongItem";
 import useSongQueueReducer, { ACTIONS } from "./hooks/useSongQueueReducer";
+import useAttachSearchPanelListeners from "./hooks/useAttachSearchPanelListeners";
 
 import { searchVideoByKeyword, getMostPopularVideos } from "shared/utils/services/youtube";
 import { Spinner } from "shared/components/index";
@@ -31,14 +32,21 @@ const TAB_OPTIONS = [
 
 
 function SearchPanel(){
-
+    
+    
     const [ isSearching, setIsSearching ] = useState(false);
     const [ searchResults, setSearchResults ] = useState([]);
     const [ tab, setTab ] = useState(0);
+    
     const { 
         songQueue,
         songQueueDispatch
     } = useSongQueueReducer();
+
+    const {
+        bind,
+        unbind
+    } = useAttachSearchPanelListeners(songQueue, songQueueDispatch);
 
     var searchInterval = null;
 
@@ -68,11 +76,17 @@ function SearchPanel(){
     useEffect(() => {
         /*
         (async () => {
+            bind();
             const response = await getMostPopularVideos();
             console.log(response);
             setSearchResults(response);
         })();
         */
+
+        return () => {
+            unbind();
+        }
+        
     }, [])
 
     const handleTabSelect = (i) => {

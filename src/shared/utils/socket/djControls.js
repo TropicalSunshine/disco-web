@@ -21,6 +21,10 @@ export const addRequestListener = fn => {
     socket.on(constants.DJ.REQUEST, fn);
 }
 
+export const removeRequestListener = _ => {
+    socket.off(constants.DJ.REQUEST);
+}
+
 export const emitResponse = (data) => {
     socket.emit(constants.DJ.RESPOND, data);
 }

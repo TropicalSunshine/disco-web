@@ -6,7 +6,7 @@ import { MessageInput, Spinner } from "shared/components";
 import { User as UserStorage } from "shared/utils/storage"; 
 import { Message as MessageSocket } from "shared/utils/socket";
 
-import useRoomMessage from "../hooks/useRoomMessage";
+import useRoomMessage from "./hooks/useRoomMessage";
 import MessageBlock from "./MessageBlock";
 import styles from "./styles.module.css";
 
@@ -20,10 +20,7 @@ function MessagePanel() {
     const {
         isLoading,
         hasMore,
-        
         messages,
-        
-
         setMessages
     } = useRoomMessage(roomId, lastId);
 
