@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "@material-ui/core";
 
 import { HistoryPropTypes } from "shared/types";
-import PropTypes from "prop-types";
+
 import RoomsList from "./Rooms";
 
 import styles from "./styles.module.css";

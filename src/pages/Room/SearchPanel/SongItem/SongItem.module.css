@@ -1,0 +1,43 @@
+.result{
+    color: var(--white);
+    height: 90px;
+    margin: 0;
+}
+
+.result__img{
+    padding: 0 0 5px 0;
+    width: 35%;
+}
+
+.result__desc{
+
+    width: 65%;
+    padding: 0 5px;
+}
+
+.result__desc__text{
+    min-width: 120px;
+    width: 80%;
+}
+
+.result__desc__text__title{
+    overflow: hidden;
+    font-size: 10pt;
+    margin-top: 5px;
+    margin-bottom:  5px;
+}
+
+.result__desc__text__channel-name{
+    font-size: 6.5pt;
+    margin-top: 5px;
+}
+
+.result__desc__text p{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.result__desc__button{
+    width: 20%;
+}

@@ -1,15 +1,22 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useReducer } from 'react'
 
 import PanelTabs from "./PanelTabs";
-import SearchResultBlock from "./SearchResultBlock";
+import SongItem from "./SongItem";
+import useSongQueueReducer, { ACTIONS } from "./hooks/useSongQueueReducer";
+
 import { searchVideoByKeyword, getMostPopularVideos } from "shared/utils/services/youtube";
 import { Spinner } from "shared/components/index";
 
 import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import { SearchOutlined as SearchIcon } from "@material-ui/icons";
+import { 
+    SearchOutlined as SearchIcon,
+    DeleteOutlineRounded as DeleteIcon,
+    AddOutlined as AddIcon
+} from "@material-ui/icons";
 
 import styles from "./styles.module.css";
+import { DEFAULT_SONG } from '../DEFAULTS';
 
 const SEARCH_WAIT_INTERVAL = 500;
 
@@ -22,11 +29,16 @@ const TAB_OPTIONS = [
     }
 ]
 
-function SearchPanel(props){
+
+function SearchPanel(){
 
     const [ isSearching, setIsSearching ] = useState(false);
     const [ searchResults, setSearchResults ] = useState([]);
     const [ tab, setTab ] = useState(0);
+    const { 
+        songQueue,
+        songQueueDispatch
+    } = useSongQueueReducer();
 
     var searchInterval = null;
 
@@ -45,7 +57,6 @@ function SearchPanel(props){
             console.log("searching");
             const response = await searchVideoByKeyword(value);
 
-            console.log(response);
             if(response){
                 setSearchResults(response);
             }
@@ -86,10 +97,7 @@ function SearchPanel(props){
                                 e.stopPropagation();
                             }}  className={styles["search-area"]}>
                                 <Input
-                                style={{
-                                    color: "white",
-                                    borderColor: "white"
-                                }}
+                                className={styles["search-area__input"]}
                                 fullWidth={true}
                                 placeholder="Search"
                                 onChange={onSearch}
@@ -110,11 +118,37 @@ function SearchPanel(props){
                                 (!isSearching) && (
                                     <ul className={styles["search-result-list"]}>
                                     {
-                                        searchResults.map((r, i) => (
-                                            <SearchResultBlock
-                                            key={"search-result-" + i}
-                                            value={r}/>
-                                        ))
+                                        searchResults.map((r, i) => {
+                                            
+                                            const { snippet, id } = r;
+                                            
+                                            var value = {
+                                                ...DEFAULT_SONG,
+                                                songId : id.videoId,
+                                                songImage : snippet.thumbnails,
+                                                songTitle : snippet.title,
+                                                songArtist : snippet.channelTitle
+                                            }
+                                            
+                                            return (
+                                                <SongItem
+                                                key={"search-result-" + i}
+                                                value={value}
+                                                actions={[
+                                                    {
+                                                        Icon : AddIcon,
+                                                        onClick : () => {
+                                                            songQueueDispatch({
+                                                                type : ACTIONS.ADD_SONG,
+                                                                payload : value
+                                                            })
+                                                        }
+                                                    }
+                                                ]}
+                                                />
+                                            );   
+                                            }
+                                        )
                                     }
                                     </ul>
                                 )
@@ -122,6 +156,36 @@ function SearchPanel(props){
                             </div>
                         </>
                     )   
+                }
+                {
+                    (tab === 1) && (
+                        <>
+                            <ul className={styles["search-results"]} >
+                                {
+                                    songQueue.map((v, i) => {
+
+                                        return (
+                                                <SongItem
+                                                key={"search-result-" + i}
+                                                value={v}
+                                                actions={[
+                                                    {
+                                                        Icon : DeleteIcon,
+                                                        onClick : () => {
+                                                            songQueueDispatch({
+                                                                type : ACTIONS.REMOVE_SONG,
+                                                                payload : v
+                                                            })
+                                                        }
+                                                    }
+                                                ]}
+                                                />
+                                            );
+                                    })
+                                }
+                            </ul>
+                        </>
+                    )
                 }
 
             </div>
