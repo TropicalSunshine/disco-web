@@ -1,0 +1,22 @@
+.tab-container {
+    width: 100%;
+    color: var(--white);
+}
+
+.tab-container__item {
+    flex-grow: 1;
+    flex-shrink: 1;
+    text-align: center;
+}
+
+.tab-container__item--default{
+    background-color: var(--b1);
+}
+
+.tab-container__item--selected{
+    background-color: var(--b2);
+}
+
+.tab-container__item:hover {
+    cursor: pointer;
+}

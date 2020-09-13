@@ -69,3 +69,11 @@
 .result__desc__button{
     width: 20%;
 }
+
+.search-panel__content{
+    height: 95%;
+}
+
+.search-panel__tabs{
+    height: 5%;
+}
