@@ -9,7 +9,9 @@ function UserProfileIcon({ height }) {
         <div className={`${styles["user-profile"]}`}
         style={{
             height : height,
-            width : height
+            width : height,
+            minHeight: height,
+            minWidth : height
         }}
         >
             <div className={`${styles["user-profile__circle"]}`}>

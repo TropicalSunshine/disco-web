@@ -22,12 +22,13 @@ function Room({ musicRoom }) {
   const [isLoading, setIsLoading] = useState(true);
   const [membersMap, setMembersMap] = useState({});
   const [ song, setSong ] = useState({...DEFAULT_SONG});
-  const [ djs, setDjs ] = useState([]);
+  const [ room, setRoom ] = useState({});
+  const [ initialDjs, setInitialDjs ] = useState([]);
   const [ currentDj, setCurrentDj ] = useState(null);
   
   const setters = {
-    setDjs,
     setCurrentDj,
+    setInitialDjs,
     setSong
   };
 
@@ -53,13 +54,15 @@ function Room({ musicRoom }) {
         map[m._id] = m;
       }
       
-      setDjs(djs);
+      setInitialDjs(djs);
       setMembersMap(map);
 
       setSong({
         ...DEFAULT_SONG,
         ...song
       });
+
+      setRoom(room);
       
       bind();
 
@@ -87,6 +90,9 @@ function Room({ musicRoom }) {
               </div>
               <div className={`box-column ${styles["room__room-central"]}`}>
                 <CenterPanel
+                  room={room}
+                  initialDjs={initialDjs}
+                  currentDj={currentDj}
                   members={membersMap}
                 />
               </div>
