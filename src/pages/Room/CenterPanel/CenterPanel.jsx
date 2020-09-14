@@ -12,12 +12,12 @@ import useCenterPanelListeners from "./hooks/useCenterPanelListeners";
 
 import styles from "./CenterPanel.module.css";
 
-function CenterPanel({members, currentDj, 
-                    initialDjs, room}) {
+function CenterPanel({ members, currentDj,
+    initialDjs, room }) {
     const history = useHistory();
 
-    const [ djs, setDjs ] = useState(initialDjs || [1, 2, 3]);
-    const [ isStepUp, setIsStepUp ] = useState(false);
+    const [djs, setDjs] = useState(initialDjs || [1, 2, 3]);
+    const [isStepUp, setIsStepUp] = useState(false);
 
     const {
         bind,
@@ -58,10 +58,10 @@ function CenterPanel({members, currentDj,
         <div className={`${styles["center-panel"]} box-column`}>
             <header className={`${styles["center-panel__navbar"]} box-row`}>
                 <div
-                className={`box-row 
+                    className={`box-row 
                 ${styles["center-panel__navbar__back-button"]}
                 ${textStyles["text-4"]}`}
-                onClick={handleBackClick}
+                    onClick={handleBackClick}
                 >
                     <p><ArrowBackIcon /></p>
                     <p>Back</p>
@@ -84,8 +84,10 @@ function CenterPanel({members, currentDj,
                     djs.map(dj => {
                         return (
                             <div className={`
-                            ${styles["center-panel__dj-booth__dj-icon--playing"]}
-                            ${styles["center-panel__dj-booth__dj-icon"]}`}>
+                            ${(dj === currentDj) ? styles["center-panel__dj-booth__dj-icon--playing"] : ""}
+                            ${styles["center-panel__dj-booth__dj-icon"]}`}
+                                key={dj}
+                            >
                                 <UserProfileIcon
                                     height={"100px"}
                                 />
@@ -96,19 +98,19 @@ function CenterPanel({members, currentDj,
             </div>
             <div className="box-center">
                 {(!isStepUp) && (
-                    <Button 
-                    variant="contained"
-                    color="primary"
-                    onClick={handleStepUp}
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleStepUp}
                     >
                         Step Up
                     </Button>
                 )}
                 {(isStepUp) && (
                     <Button
-                    variant="contained"
-                    color="secondary"
-                    onClick={handleStepDown}
+                        variant="contained"
+                        color="secondary"
+                        onClick={handleStepDown}
                     >
                         Step Down
                     </Button>

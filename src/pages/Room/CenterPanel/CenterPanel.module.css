@@ -31,6 +31,22 @@
 
 .center-panel__dj-booth__dj-icon{
     margin: 15px;
+    height: 100px;
+    width: 100px;
+    
+}
+
+.center-panel__dj-booth__dj-icon--playing{
+    border-style: solid;
+    border-width: 10px;
+    border-color: var(--white);
+    border-radius: 50%;
+}
+
+@keyframes pulsate {
+    0% {border-width: 10px; opacity: 0.0;}
+    50% {opacity: 1.0;}
+    100% {border-width: 20px; opacity: 0.0;}
 }
 
 

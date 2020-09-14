@@ -1,33 +1,25 @@
-
+import React, { useCallback } from "react";
 import { DjControls } from "shared/utils/socket";
 import { ACTIONS } from "./useSongQueueReducer";
 
-function useAttachSearchPanelListeners(songQueue, songQueueDispatch){
-
+function useAttachSearchPanelListeners(songQueue, songQueueDispatch) {
     const bind = () => {
         DjControls.addRequestListener(() => {
-            var song = null;
-            if(songQueue.length > 0){
-                song = songQueue[0];
-                songQueueDispatch({
-                    type : ACTIONS.REMOVE_TOP
-                });
-            }
-
-            DjControls.emitResponse(song);
-        })
-    }
+            console.log("requesting song");
+            songQueueDispatch({
+                type: ACTIONS.REMOVE_TOP_AND_RESPOND,
+            });
+        });
+    };
 
     const unbind = () => {
         DjControls.removeRequestListener();
-    }
+    };
 
     return {
         bind,
-        unbind
-    }
-};
+        unbind,
+    };
+}
 
 export default useAttachSearchPanelListeners;
-
-

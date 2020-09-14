@@ -16,8 +16,8 @@ function useRoom(setters){
             
             const socketResponse = await Socket.connectSocket(roomId);
             
-            const { songId, time, djs } = socketResponse;
-
+            const { songId, time, djs, currentDj } = socketResponse;
+            console.log("socket response", socketResponse);
             console.log("[ROOM SONG DATA] : ", songId, time );
         
 
@@ -51,6 +51,7 @@ function useRoom(setters){
             setIsConnected(true);
     
             return {
+                currentDj,
                 djs,
                 room : roomData.data.data.joinRoom,
                 song

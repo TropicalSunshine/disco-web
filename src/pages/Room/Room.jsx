@@ -45,7 +45,7 @@ function Room({ musicRoom }) {
       setIsLoading(true);
 
       
-      const { room ,song ,djs } = await join(roomId);
+      const { room ,song ,djs, currentDj } = await join(roomId);
 
       const { members } = room;
 
@@ -55,6 +55,7 @@ function Room({ musicRoom }) {
       }
       
       setInitialDjs(djs);
+      setCurrentDj(currentDj);
       setMembersMap(map);
 
       setSong({

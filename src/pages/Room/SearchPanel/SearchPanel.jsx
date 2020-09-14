@@ -1,52 +1,49 @@
-import React, { useState, useEffect, useReducer } from 'react'
+import React, { useState, useEffect, useReducer } from "react";
 
 import PanelTabs from "./PanelTabs";
 import SongItem from "./SongItem";
 import useSongQueueReducer, { ACTIONS } from "./hooks/useSongQueueReducer";
 import useAttachSearchPanelListeners from "./hooks/useAttachSearchPanelListeners";
 
-import { searchVideoByKeyword, getMostPopularVideos } from "shared/utils/services/youtube";
+import {
+    searchVideoByKeyword,
+    getMostPopularVideos,
+} from "shared/utils/services/youtube";
 import { Spinner } from "shared/components/index";
 
-import Input from '@material-ui/core/Input';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import { 
+import Input from "@material-ui/core/Input";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import {
     SearchOutlined as SearchIcon,
     DeleteOutlineRounded as DeleteIcon,
-    AddOutlined as AddIcon
+    AddOutlined as AddIcon,
 } from "@material-ui/icons";
 
 import styles from "./styles.module.css";
-import { DEFAULT_SONG } from '../DEFAULTS';
+import { DEFAULT_SONG } from "../DEFAULTS";
 
 const SEARCH_WAIT_INTERVAL = 500;
 
 const TAB_OPTIONS = [
     {
-        name : "Search"
+        name: "Search",
     },
     {
-        name : "Queue"
-    }
-]
+        name: "Queue",
+    },
+];
 
+function SearchPanel() {
+    const [isSearching, setIsSearching] = useState(false);
+    const [searchResults, setSearchResults] = useState([]);
+    const [tab, setTab] = useState(0);
 
-function SearchPanel(){
-    
-    
-    const [ isSearching, setIsSearching ] = useState(false);
-    const [ searchResults, setSearchResults ] = useState([]);
-    const [ tab, setTab ] = useState(0);
-    
-    const { 
+    const { songQueue, songQueueDispatch } = useSongQueueReducer();
+
+    const { bind, unbind } = useAttachSearchPanelListeners(
         songQueue,
         songQueueDispatch
-    } = useSongQueueReducer();
-
-    const {
-        bind,
-        unbind
-    } = useAttachSearchPanelListeners(songQueue, songQueueDispatch);
+    );
 
     var searchInterval = null;
 
@@ -56,8 +53,8 @@ function SearchPanel(){
 
         const { value } = e.target;
 
-        if(value === "") return;
-        if(searchInterval) clearTimeout(searchInterval);
+        if (value === "") return;
+        if (searchInterval) clearTimeout(searchInterval);
         console.log("[search interval] : ", searchInterval);
         setIsSearching(true);
 
@@ -65,7 +62,7 @@ function SearchPanel(){
             console.log("searching");
             const response = await searchVideoByKeyword(value);
 
-            if(response){
+            if (response) {
                 setSearchResults(response);
             }
 
@@ -74,138 +71,123 @@ function SearchPanel(){
     };
 
     useEffect(() => {
+        //need to rebind the sockets each time since
+        //songQueue is stored in a closure
+        bind();
+    }, [songQueue]);
+
+    useEffect(() => {
+        bind();
         /*
-        (async () => {
-            bind();
-            const response = await getMostPopularVideos();
-            console.log(response);
-            setSearchResults(response);
-        })();
-        */
+            (async () => {
+                const response = await getMostPopularVideos();
+                console.log(response);
+                setSearchResults(response);
+            })();
+            */
 
         return () => {
             unbind();
-        }
-        
-    }, [])
+        };
+    }, []);
 
     const handleTabSelect = (i) => {
         setTab(i);
-    }
-
+    };
 
     return (
         <div className={`box-column ${styles["search-panel"]}`}>
             <div className={`${styles["search-panel__tabs"]}`}>
-                <PanelTabs
-                    onChange={handleTabSelect}
-                    options={TAB_OPTIONS}
-                />
+                <PanelTabs onChange={handleTabSelect} options={TAB_OPTIONS} />
             </div>
             <div className={`${styles["search-panel__content"]}`}>
-                {
-                    (tab === 0) && (
-                        <>
-                            <form onSubmit={(e) => {
+                {tab === 0 && (
+                    <>
+                        <form
+                            onSubmit={(e) => {
                                 e.preventDefault();
                                 e.stopPropagation();
-                            }}  className={styles["search-area"]}>
-                                <Input
+                            }}
+                            className={styles["search-area"]}
+                        >
+                            <Input
                                 className={styles["search-area__input"]}
                                 fullWidth={true}
                                 placeholder="Search"
                                 onChange={onSearch}
                                 startAdornment={
-                                <InputAdornment position="start">
-                                    <SearchIcon />
-                                </InputAdornment>
+                                    <InputAdornment position="start">
+                                        <SearchIcon />
+                                    </InputAdornment>
                                 }
-                                />
-                            </form>
-                            <div className={styles["search-results"]}>
-                                {
-                                    isSearching && (
-                                        <Spinner/>
-                                    )
-                                }
-                                {
-                                (!isSearching) && (
-                                    <ul className={styles["search-result-list"]}>
-                                    {
-                                        searchResults.map((r, i) => {
-                                            
-                                            const { snippet, id } = r;
-                                            
-                                            var value = {
-                                                ...DEFAULT_SONG,
-                                                songId : id.videoId,
-                                                songImage : snippet.thumbnails,
-                                                songTitle : snippet.title,
-                                                songArtist : snippet.channelTitle
-                                            }
-                                            
-                                            return (
-                                                <SongItem
+                            />
+                        </form>
+                        <div className={styles["search-results"]}>
+                            {isSearching && <Spinner />}
+                            {!isSearching && (
+                                <ul className={styles["search-result-list"]}>
+                                    {searchResults.map((r, i) => {
+                                        const { snippet, id } = r;
+
+                                        var value = {
+                                            ...DEFAULT_SONG,
+                                            songId: id.videoId,
+                                            songImage: snippet.thumbnails,
+                                            songTitle: snippet.title,
+                                            songArtist: snippet.channelTitle,
+                                        };
+
+                                        return (
+                                            <SongItem
                                                 key={"search-result-" + i}
                                                 value={value}
                                                 actions={[
                                                     {
-                                                        Icon : AddIcon,
-                                                        onClick : () => {
+                                                        Icon: AddIcon,
+                                                        onClick: () => {
                                                             songQueueDispatch({
-                                                                type : ACTIONS.ADD_SONG,
-                                                                payload : value
-                                                            })
-                                                        }
-                                                    }
+                                                                type: ACTIONS.ADD_SONG,
+                                                                payload: value,
+                                                            });
+                                                        },
+                                                    },
                                                 ]}
-                                                />
-                                            );   
-                                            }
-                                        )
-                                    }
-                                    </ul>
-                                )
-                                }
-                            </div>
-                        </>
-                    )   
-                }
-                {
-                    (tab === 1) && (
-                        <>
-                            <ul className={styles["search-results"]} >
-                                {
-                                    songQueue.map((v, i) => {
-
-                                        return (
-                                                <SongItem
-                                                key={"search-result-" + i}
-                                                value={v}
-                                                actions={[
-                                                    {
-                                                        Icon : DeleteIcon,
-                                                        onClick : () => {
-                                                            songQueueDispatch({
-                                                                type : ACTIONS.REMOVE_SONG,
-                                                                payload : v
-                                                            })
-                                                        }
-                                                    }
-                                                ]}
-                                                />
-                                            );
-                                    })
-                                }
-                            </ul>
-                        </>
-                    )
-                }
-
+                                            />
+                                        );
+                                    })}
+                                </ul>
+                            )}
+                        </div>
+                    </>
+                )}
+                {tab === 1 && (
+                    <>
+                        <ul className={styles["search-results"]}>
+                            {songQueue.map((v, i) => {
+                                return (
+                                    <SongItem
+                                        key={"search-result-" + i}
+                                        value={v}
+                                        actions={[
+                                            {
+                                                Icon: DeleteIcon,
+                                                onClick: () => {
+                                                    songQueueDispatch({
+                                                        type: ACTIONS.REMOVE_SONG,
+                                                        payload: v,
+                                                    });
+                                                },
+                                            },
+                                        ]}
+                                    />
+                                );
+                            })}
+                        </ul>
+                    </>
+                )}
             </div>
         </div>
-    )
+    );
 }
-
 
 export default SearchPanel;
