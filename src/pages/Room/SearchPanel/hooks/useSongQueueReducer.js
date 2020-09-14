@@ -12,13 +12,13 @@ function songQueueReducer(songQueue, action){
 
     switch(action.type){
         case ACTIONS.ADD_SONG : 
-            songQueue.push(payload);
-            return songQueue;
+            return [...songQueue, payload];
         case ACTIONS.REMOVE_SONG :
             return songQueue.filter(s => s.songId !== payload.songId);
         case ACTIONS.REMOVE_TOP :
-            songQueue.shift();
-            return songQueue;
+            var copy = [...songQueue];
+            copy.shift();
+            return copy;
         default: 
             return songQueue;
     }

@@ -1,20 +1,57 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 
+import { Button } from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
+import { useAuth } from "shared/utils/auth";
 import { UserProfileIcon } from "shared/components";
 import { textStyles } from "shared/styles";
+
+import useCenterPanelListeners from "./hooks/useCenterPanelListeners";
+
 import styles from "./CenterPanel.module.css";
 
 function CenterPanel({members, currentDj, 
                     initialDjs, room}) {
     const history = useHistory();
 
-    const [ djs, setDjs ] = useState([1, 2, 3]);
-    console.log(room);
+    const [ djs, setDjs ] = useState(initialDjs || [1, 2, 3]);
+    const [ isStepUp, setIsStepUp ] = useState(false);
+
+    const {
+        bind,
+        unbind,
+        emitStepDown,
+        emitStepUp
+    } = useCenterPanelListeners(setDjs);
+
+    const {
+        userId
+    } = useAuth();
+
+    useEffect(() => {
+        bind();
+
+        return () => {
+            unbind();
+        }
+    }, []);
+
     const handleBackClick = () => {
         history.go(-1);
+    }
+
+    const handleStepUp = () => {
+        emitStepUp();
+        setIsStepUp(true);
+        setDjs(prevArray => [...prevArray, userId]);
+    }
+
+    const handleStepDown = () => {
+        emitStepDown();
+        setIsStepUp(false);
+        setDjs(prevDjs => prevDjs.filter(id => id !== userId));
     }
 
     return (
@@ -56,6 +93,26 @@ function CenterPanel({members, currentDj,
                         )
                     })
                 }
+            </div>
+            <div className="box-center">
+                {(!isStepUp) && (
+                    <Button 
+                    variant="contained"
+                    color="primary"
+                    onClick={handleStepUp}
+                    >
+                        Step Up
+                    </Button>
+                )}
+                {(isStepUp) && (
+                    <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={handleStepDown}
+                    >
+                        Step Down
+                    </Button>
+                )}
             </div>
         </div>
     );

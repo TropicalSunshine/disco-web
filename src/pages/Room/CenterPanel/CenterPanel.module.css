@@ -25,7 +25,8 @@
 
 
 .center-panel__dj-booth {
-    
+    overflow-x: auto;
+    scrollbar-width: none;
 }
 
 .center-panel__dj-booth__dj-icon{

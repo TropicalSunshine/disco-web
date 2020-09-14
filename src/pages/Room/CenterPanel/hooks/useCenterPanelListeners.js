@@ -1,7 +1,7 @@
 import { DjControls } from "shared/utils/socket";
 
 
-function useAttachCenterPanelListeners(setDjs) {
+function useCenterPanelListeners(setDjs) {
     
     const bind = () => {
         DjControls.addStepUpListener(({ userId }) => {
@@ -21,11 +21,23 @@ function useAttachCenterPanelListeners(setDjs) {
     const unbind = () => {
         DjControls.removeStepUpListener();
         DjControls.removeStepDownListener();
+    };
+
+    const emitStepUp = () => {
+        DjControls.emitStepUp();
+    }
+
+    const emitStepDown = () => {
+        DjControls.emitStepDown();
     }
 
 
     return {
         bind,
-        unbind
+        unbind,
+        emitStepDown,
+        emitStepUp
     }
 }
+
+export default useCenterPanelListeners;

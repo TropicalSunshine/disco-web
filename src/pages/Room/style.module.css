@@ -5,6 +5,7 @@
     background-color: black;
     overflow: hidden;
     display: grid;
+    max-width: 100vw;
     grid-template-rows: 92vh 8vh;
 }
 
@@ -33,6 +34,8 @@
 .room__room-central{
     width: 60%;
     overflow: hidden;
+    max-width: 60vw;
+    white-space: nowrap;
     background-color: var(--b4);
 }
 
