@@ -9,12 +9,20 @@ export const addStepUpListener = fn => {
     socket.on(constants.DJ.STEP_UP, fn);
 }
 
+export const removeStepUpListener = () => {
+    socket.off(constants.DJ.STEP_UP);
+}
+
 export const emitStepDown = _ => {
     socket.emit(constants.DJ.STEP_DOWN, { roomId });
 }
 
 export const addStepDownListener = fn => {
     socket.on(constants.DJ.STEP_DOWN, fn);
+}
+
+export const removeStepDownListener = _ => {
+    socket.off(constants.DJ.STEP_DOWN);
 }
 
 export const addRequestListener = fn => {
