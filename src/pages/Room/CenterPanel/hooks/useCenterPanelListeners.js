@@ -1,5 +1,4 @@
 import { DjControls } from "shared/utils/socket";
-import { useAuth } from "shared/utils/auth";
 
 function useCenterPanelListeners(setters, currentUserId) {
 
