@@ -1,19 +1,26 @@
 import { DjControls } from "shared/utils/socket";
+import { useAuth } from "shared/utils/auth";
 
+function useCenterPanelListeners(setters, currentUserId) {
 
-function useCenterPanelListeners(setDjs) {
-    
+    const {
+        setDjs,
+        setIsStepUp
+    } = setters;
+
     const bind = () => {
         DjControls.addStepUpListener(({ userId }) => {
-            setDjs( prevDjs => {
+            setDjs(prevDjs => {
                 prevDjs.push(userId);
                 return prevDjs;
             });
         });
 
-        DjControls.addStepDownListener( ({ userId }) => {
+        DjControls.addStepDownListener(({ userId }) => {
+            console.log("recieving step down");
+            if (userId === currentUserId) setIsStepUp(false);
             setDjs(prevDjs => {
-                return prevDjs.filter( id => id !== userId);
+                return prevDjs.filter(id => id !== userId);
             });
         });
     }

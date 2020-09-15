@@ -12,23 +12,28 @@ import useCenterPanelListeners from "./hooks/useCenterPanelListeners";
 
 import styles from "./CenterPanel.module.css";
 
-function CenterPanel({ members, currentDj,
-    initialDjs, room }) {
+function CenterPanel({ members, currentDj, initialDjs, room }) {
     const history = useHistory();
 
     const [djs, setDjs] = useState(initialDjs || [1, 2, 3]);
     const [isStepUp, setIsStepUp] = useState(false);
 
     const {
+        userId
+    } = useAuth();
+
+    const setters = {
+        setDjs,
+        setIsStepUp
+    };
+
+    const {
         bind,
         unbind,
         emitStepDown,
         emitStepUp
-    } = useCenterPanelListeners(setDjs);
+    } = useCenterPanelListeners(setters, userId);
 
-    const {
-        userId
-    } = useAuth();
 
     useEffect(() => {
         bind();
