@@ -22,28 +22,28 @@ props req
 */
 
 function MusicControls({ song }) {
-  
-  const [ mute, setMute ] = useState(false);
-  const { songImage, songTitle, songArtist } = song;
 
-  
+  const [mute, setMute] = useState(false);
+  const { songImage, songTitle, songArtist } = song;
+  console.log(song);
+
   useEffect(() => {
-    if(mute) {
+    if (mute) {
       YoutubePlayer.mute();
     } else {
       YoutubePlayer.unMute();
     }
   }, [mute])
-  
+
   const handleMute = () => {
     setMute(!mute);
   }
-  
+
   return (
     <div className={`${styles["music-player-container"]} box-row`}>
       <div className={`box-row ${styles["music-controls__left"]}`}>
         <div className={`${styles["music-controls__vinyl__image"]}`}>
-          <SpinningVinyl 
+          <SpinningVinyl
             songImage={songImage}
             mute={mute}
           />
