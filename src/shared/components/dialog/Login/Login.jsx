@@ -8,7 +8,7 @@ import { InputSubmit } from "shared/components";
 
 
 import commonStyles from "../styles.module.css";
-
+import styles from "./Login.module.css";
 
 class Login extends PureComponent {
 
@@ -107,7 +107,7 @@ class Login extends PureComponent {
                             required={true}
                             />
                         </div>                        
-                        <div className={commonStyles["button-container"]}>
+                        <div className={styles["button-container"]}>
                             
                             <InputSubmit
                             disabled={this.state.isSubmitting}

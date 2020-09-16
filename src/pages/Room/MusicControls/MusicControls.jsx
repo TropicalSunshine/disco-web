@@ -25,7 +25,7 @@ function MusicControls({ song }) {
 
   const [mute, setMute] = useState(false);
   const { songImage, songTitle, songArtist } = song;
-  console.log(song);
+
 
   useEffect(() => {
     if (mute) {

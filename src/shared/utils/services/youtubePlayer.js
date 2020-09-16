@@ -1,14 +1,14 @@
 var player = null;
 
 
-export const init = async (videoId=null, startSeconds=0, paused=true) => {
+export const init = async (videoId = null, startSeconds = 0, paused = true) => {
     var constructConfigs = {
         width: 0,
         height: 0,
         loop: false
     };
 
-    if(videoId !== null){
+    if (videoId !== null) {
         constructConfigs["videoId"] = videoId;
     }
 
@@ -19,7 +19,7 @@ export const init = async (videoId=null, startSeconds=0, paused=true) => {
                 const { target } = e;
                 target.seekTo(startSeconds);
 
-                if(paused) {
+                if (paused) {
                     console.log("paused loaded")
                     e.target.pauseVideo();
                 } else {
@@ -31,27 +31,27 @@ export const init = async (videoId=null, startSeconds=0, paused=true) => {
                 //e.target.playVideo();
             },
             onStateChange: (e) => {
-                switch(e.data){
+                switch (e.data) {
                     case window["YT"].PlayerState.PAUSED:
                         //console.log("pausing")
-                        
+
                         break;
                     case window["YT"].PlayerState.PLAYING:
                         //console.log("play")
-                        
+
                         break;
-                    default: 
+                    default:
                         break;
                 }
             }
         }
 
-        player = new window["YT"].Player("player", constructConfigs );
-        
+        player = new window["YT"].Player("player", constructConfigs);
+
     })
 }
 
-export const loadVideo = (vidId, startSeconds=0, paused=false) => { 
+export const loadVideo = (vidId, startSeconds = 0, paused = false) => {
     player.loadVideoById({
         videoId: vidId,
         startSeconds: startSeconds
@@ -60,12 +60,12 @@ export const loadVideo = (vidId, startSeconds=0, paused=false) => {
     return new Promise((res) => {
         player.addEventListener("onStateChange", (e) => {
             console.log("state changed");
-            
-            if(e.data === window["YT"].PlayerState.BUFFERING){
+
+            if (e.data === window["YT"].PlayerState.BUFFERING) {
                 console.log(e.target.getDuration());
             }
 
-            if(paused){
+            if (paused) {
                 player.pauseVideo();
             } else {
                 player.playVideo();
@@ -111,8 +111,8 @@ export const getState = () => {
     const { video_id } = player.getVideoData();
 
     return {
-        duration : player.getDuration(),
-        songId : video_id,
-        time : player.getCurrentTime()
+        duration: player.getDuration(),
+        songId: video_id,
+        time: player.getCurrentTime()
     }
 }
