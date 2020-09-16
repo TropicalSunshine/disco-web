@@ -44,7 +44,7 @@ function Room({ musicRoom }) {
     (async () => {
       setIsLoading(true);
 
-      /*
+      
       const { room ,song ,djs, currentDj } = await join(roomId);
 
       const { members } = room;
@@ -66,9 +66,8 @@ function Room({ musicRoom }) {
       setRoom(room);
       
       bind();
-      */
 
-      //setIsLoading(false);
+      setIsLoading(false);
     })();
 
     return () => {
