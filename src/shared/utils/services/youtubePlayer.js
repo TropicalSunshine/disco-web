@@ -19,6 +19,9 @@ export const init = async (videoId = null, startSeconds = 0, paused = true) => {
                 const { target } = e;
                 target.seekTo(startSeconds);
 
+                target.setLoop(false);
+                target.setShuffle(false);
+
                 if (paused) {
                     console.log("paused loaded")
                     e.target.pauseVideo();
@@ -31,15 +34,16 @@ export const init = async (videoId = null, startSeconds = 0, paused = true) => {
                 //e.target.playVideo();
             },
             onStateChange: (e) => {
-                switch (e.data) {
+                const { data, target } = e;
+                switch (data) {
                     case window["YT"].PlayerState.PAUSED:
                         //console.log("pausing")
-
                         break;
                     case window["YT"].PlayerState.PLAYING:
                         //console.log("play")
-
                         break;
+                    case window["YT"].PlayerState.ENDED : 
+                        target.stopVideo();
                     default:
                         break;
                 }
@@ -47,6 +51,7 @@ export const init = async (videoId = null, startSeconds = 0, paused = true) => {
         }
 
         player = new window["YT"].Player("player", constructConfigs);
+        
 
     })
 }
@@ -61,9 +66,17 @@ export const loadVideo = (vidId, startSeconds = 0, paused = false) => {
         player.addEventListener("onStateChange", (e) => {
             console.log("state changed");
 
-            if (e.data === window["YT"].PlayerState.BUFFERING) {
-                console.log(e.target.getDuration());
+            const { target, data } = e;
+
+            switch(data) {
+                case window["YT"].PlayerState.ENDED : 
+                    target.stopVideo();
+                    break;
+                case window["YT"].PlayerState.BUFFERING:
+                    console.log(target.getDuration());
+                    break;
             }
+
 
             if (paused) {
                 player.pauseVideo();

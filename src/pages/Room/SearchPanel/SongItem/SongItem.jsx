@@ -38,11 +38,13 @@ function SongItem({ value, actions }){
                     </p>
                 </div>
                 {
-                    actions.map( a => {
+                    actions.map( (a, i) => {
                         var { Icon } = a;
                         
                         return (
-                            <div className={`box-row ${styles["result__desc__button"]}`}>
+                            <div 
+                            key={`song-item-action-${i}`}
+                            className={`box-row ${styles["result__desc__button"]}`}>
                                 <IconButton 
                                 onClick={a.onClick} 
                                 color="primary">
@@ -64,7 +66,7 @@ SongItem.propTypes = {
         songArtist : PropTypes.string.isRequired
     }).isRequired,
     actions : PropTypes.arrayOf(PropTypes.shape({
-        icon : PropTypes.elementType.isRequired,
+        Icon : PropTypes.elementType.isRequired,
         onClick : PropTypes.func.isRequired
     })).isRequired
 }
