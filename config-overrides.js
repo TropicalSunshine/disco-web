@@ -1,5 +1,5 @@
 const path = require("path");
-
+//react-rewired webpack overrides
 module.exports = function override(config, env){
 
     var { alias } = config.resolve;

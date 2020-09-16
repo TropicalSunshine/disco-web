@@ -12,6 +12,7 @@
 .loaderpage-center-box{
     width: 100vw;
     height: 100vh;
+    display: block;
 }
 
 .loaderpage-center-box h1{

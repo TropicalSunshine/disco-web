@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./styles.module.css";
 
 function SpinningVinyl({ mute, songImage }) {
-  console.log(songImage);
+
   return (
     <div
       className={styles["music-controls__vinyl__player-disk"]}

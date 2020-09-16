@@ -5,7 +5,7 @@ import styles from "./LoaderPage.module.css";
 function LoaderPage() {
     return (
         <div className={styles["loaderpage-container"]}>
-            <div className={styles["loaderpage-center-box box-center"]}>            
+            <div className={`box-center ${styles["loaderpage-center-box"]}`}>            
                 <CircularProgress/>
             </div>
         </div>
