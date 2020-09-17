@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { YoutubePlayer } from "shared/utils/services";
 import SpinningVinyl from "./SpinningVinyl";
+import VolumeSlider from "./VolumeSlider";
 
 import { textStyles } from "shared/styles";
 
@@ -87,8 +88,8 @@ function MusicControls({ song }) {
           <FastForwardIcon className={`${styles.icon}`} />
         </div>
       </div>
-      <div className={`${styles["music-controls__right"]}`}>
-        <i />
+      <div className={`box-center ${styles["music-controls__right"]}`}>
+        <VolumeSlider/>
       </div>
     </div>
   );

@@ -119,6 +119,14 @@ export const destroy = () => {
     player.destroy();
 }
 
+export const getVolume = () => {
+    return player.getVolume();
+}
+
+export const setVolume = (val) => {
+    player.setVolume(val);
+}
+
 export const getState = () => {
 
     const { video_id } = player.getVideoData();

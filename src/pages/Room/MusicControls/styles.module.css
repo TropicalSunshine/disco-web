@@ -87,3 +87,25 @@
         transform:rotate(360deg);
     }
 }
+
+
+
+
+.volume-slider{
+    width: 250px;
+}
+
+.volume-slider__input{
+    width: 80%;
+    margin: 7px 2px;
+}
+
+.volume-slider__icon{
+    margin: 10px 5px;
+    width: 10%;
+    color: var(--white);
+}
+
+.volume-slider__icon:hover{
+    cursor: pointer;
+}

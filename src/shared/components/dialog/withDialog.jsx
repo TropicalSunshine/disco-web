@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import { IconButton } from "shared/components";
@@ -6,7 +6,7 @@ import { ClearOutlined } from "@material-ui/icons";
 import styles from "./styles.module.css";
 
 
-const withDialog = Component => class extends PureComponent {
+const withDialog = Component => class extends Component {
 
     static propTypes = {
         show: PropTypes.bool.isRequired,
@@ -33,8 +33,8 @@ const withDialog = Component => class extends PureComponent {
                 {
                     this.props.show && (
                         <div 
-                        className={styles["dialogue-container"]}>
-                            <div className={styles["dialogue-box"]}>
+                        className={`${styles["dialogue-container"]}`}>
+                            <div className={`${styles["dialogue-box"]}`}>
                                 <IconButton
                                 onClick={() => {
                                     this.props.handleClose();
