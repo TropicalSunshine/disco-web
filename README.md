@@ -9,5 +9,5 @@ Disco allows users to listen to music together at the same time through Youtube 
 
 ![MusicRoom](https://i.imgur.com/DQZQtK4.png)
 
-###Potential Issues
+## Potential Issues
 - ```git core.ignorecase``` has been set to ```false```. Please becareful when renaming files.
