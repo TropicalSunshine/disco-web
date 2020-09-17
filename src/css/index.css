@@ -89,6 +89,6 @@ code {
     monospace;
 }
 
-#player{
+#player-root{
   display: none;
 }

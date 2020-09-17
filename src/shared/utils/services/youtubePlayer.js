@@ -38,7 +38,7 @@ export const init = async (videoId = null, startSeconds = 0) => {
             }
         }
 
-        player = new window["YT"].Player("player", constructConfigs);
+        player = new window["YT"].Player("player-root", constructConfigs);
         
 
     })
