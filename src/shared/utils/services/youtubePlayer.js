@@ -1,7 +1,7 @@
 var player = null;
 
 
-export const init = async (videoId = null, startSeconds = 0, paused = true) => {
+export const init = async (videoId = null, startSeconds = 0) => {
     var constructConfigs = {
         width: 0,
         height: 0,
@@ -11,24 +11,17 @@ export const init = async (videoId = null, startSeconds = 0, paused = true) => {
     if (videoId !== null) {
         constructConfigs["videoId"] = videoId;
     }
-
+    console.log("intializing player");
     await new Promise((res) => {
         constructConfigs.events = {
             "onReady": (e) => {
-                console.log(videoId, startSeconds, paused);
+                console.log(videoId, startSeconds);
                 const { target } = e;
                 target.seekTo(startSeconds);
 
                 target.setLoop(false);
                 target.setShuffle(false);
 
-                if (paused) {
-                    console.log("paused loaded")
-                    e.target.pauseVideo();
-                } else {
-                    console.log("play loaded")
-                    e.target.playVideo();
-                }
                 res();
 
                 //e.target.playVideo();
@@ -36,13 +29,8 @@ export const init = async (videoId = null, startSeconds = 0, paused = true) => {
             onStateChange: (e) => {
                 const { data, target } = e;
                 switch (data) {
-                    case window["YT"].PlayerState.PAUSED:
-                        //console.log("pausing")
-                        break;
-                    case window["YT"].PlayerState.PLAYING:
-                        //console.log("play")
-                        break;
                     case window["YT"].PlayerState.ENDED : 
+                        console.log("video ended");
                         target.stopVideo();
                     default:
                         break;
@@ -56,7 +44,8 @@ export const init = async (videoId = null, startSeconds = 0, paused = true) => {
     })
 }
 
-export const loadVideo = (vidId, startSeconds = 0, paused = false) => {
+export const loadVideo = (vidId = null, startSeconds = 0) => {
+    console.log("loading video");
     player.loadVideoById({
         videoId: vidId,
         startSeconds: startSeconds
@@ -64,28 +53,21 @@ export const loadVideo = (vidId, startSeconds = 0, paused = false) => {
 
     return new Promise((res) => {
         player.addEventListener("onStateChange", (e) => {
-            console.log("state changed");
-
+            
             const { target, data } = e;
-
+            
             switch(data) {
                 case window["YT"].PlayerState.ENDED : 
+                    console.log("video ended");
                     target.stopVideo();
-                    break;
+                    return;
                 case window["YT"].PlayerState.BUFFERING:
                     console.log(target.getDuration());
+                    res();
                     break;
             }
 
 
-            if (paused) {
-                player.pauseVideo();
-            } else {
-                player.playVideo();
-            }
-
-            player.removeEventListener("onStateChange");
-            res();
         })
     });
 }

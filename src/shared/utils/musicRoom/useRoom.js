@@ -45,8 +45,8 @@ function useRoom(setters){
             
             const roomData = await RoomApi.joinRoom(roomId);
 
-            if(!YoutubePlayer.isInitialized()) await YoutubePlayer.init(songId, time, false); //init player if not initialized already
-            await YoutubePlayer.loadVideo(songId, time, false);
+            if(!YoutubePlayer.isInitialized()) await YoutubePlayer.init(songId, time); //init player if not initialized already
+            else await YoutubePlayer.loadVideo(songId, time);
             
             setIsConnected(true);
     

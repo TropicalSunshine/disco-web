@@ -11,7 +11,7 @@ function useAttachListeners(setters) {
 
     const syncState = async (data) => {
         const { songId, time, currentDj } = data;
-        await YoutubePlayer.loadVideo(songId, time, false);
+        await YoutubePlayer.loadVideo(songId, time);
 
         const {
             thumbnails,
