@@ -6,9 +6,8 @@ import useSongQueueReducer, { ACTIONS } from "./hooks/useSongQueueReducer";
 import useAttachSearchPanelListeners from "./hooks/useAttachSearchPanelListeners";
 
 import {
-    searchVideoByKeyword,
-    getMostPopularVideos,
-} from "shared/utils/services/youtube";
+    youtube
+} from "shared/utils/services";
 import { Spinner } from "shared/components/index";
 
 import Input from "@material-ui/core/Input";
@@ -60,7 +59,7 @@ function SearchPanel() {
 
         searchInterval = setTimeout(async () => {
             console.log("searching");
-            const response = await searchVideoByKeyword(value);
+            const response = await youtube.searchVideoByKeyword(value);
 
             if (response) {
                 setSearchResults(response);
@@ -80,7 +79,7 @@ function SearchPanel() {
         bind();
         /*
             (async () => {
-                const response = await getMostPopularVideos();
+                const response = await youtube.getMostPopularVideos();
                 console.log(response);
                 setSearchResults(response);
             })();
