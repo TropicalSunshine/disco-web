@@ -4,6 +4,7 @@ import { createPortal } from "react-dom";
 function Modal({ children }) {
     //something to reference to remove when component dismounts
     const divRef = useRef(null);
+
     if(!divRef.current) {
         const div = document.createElement("div");
         divRef.current = div; 
@@ -16,7 +17,7 @@ function Modal({ children }) {
         return () => modalRoot.removeChild(divRef.current);
     }, []);
     
-    return createPortal((<>{children}</>), divRef.current);
+    return createPortal((<div>{children}</div>), divRef.current);
 }
 
 export default Modal;
