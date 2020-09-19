@@ -15,7 +15,7 @@ import styles from "./CenterPanel.module.css";
 function CenterPanel({ members, currentDj, initialDjs, room }) {
     const history = useHistory();
 
-    const [djs, setDjs] = useState(initialDjs || [1, 2, 3]);
+    const [djs, setDjs] = useState(initialDjs);
     const [isStepUp, setIsStepUp] = useState(false);
 
     const {

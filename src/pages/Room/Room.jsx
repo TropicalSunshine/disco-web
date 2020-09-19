@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { LoaderPage } from "shared/components/index";
 
 import { DEFAULT_SONG } from "./DEFAULTS";
-import useAttachRoomListeners from "./hooks/useAttachRoomListeners";
+import attachRoomListeners from "./hooks/attachRoomListeners";
 
 import MessagePanel from "./MessagePanel";
 import MusicControls from "./MusicControls";
@@ -36,7 +36,7 @@ function Room({ musicRoom }) {
   const {
     bind,
     unbind
-  } = useAttachRoomListeners(setters);
+  } = attachRoomListeners(setters);
 
   /* eslint-disable */
   useEffect(() => {

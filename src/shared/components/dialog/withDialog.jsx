@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 import { IconButton } from "shared/components";
@@ -8,7 +8,7 @@ import Modal from "./Modal";
 import styles from "./styles.module.css";
 
 
-const withDialog = Component => class extends Component {
+const withDialog = Component => class extends React.Component {
 
     static propTypes = {
         show: PropTypes.bool.isRequired,

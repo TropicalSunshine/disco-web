@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect } from "react";
 
 import PanelTabs from "./PanelTabs";
 import SongItem from "./SongItem";
 import useSongQueueReducer, { ACTIONS } from "./hooks/useSongQueueReducer";
-import useAttachSearchPanelListeners from "./hooks/useAttachSearchPanelListeners";
+import attachSearchPanelListeners from "./hooks/attachSearchPanelListeners";
 
 import {
     youtube
@@ -39,8 +39,7 @@ function SearchPanel() {
 
     const { songQueue, songQueueDispatch } = useSongQueueReducer();
 
-    const { bind, unbind } = useAttachSearchPanelListeners(
-        songQueue,
+    const { bind, unbind } = attachSearchPanelListeners(
         songQueueDispatch
     );
 
@@ -69,11 +68,7 @@ function SearchPanel() {
         }, SEARCH_WAIT_INTERVAL);
     };
 
-    useEffect(() => {
-        //need to rebind the sockets each time since
-        //songQueue is stored in a closure
-        bind();
-    }, [songQueue]);
+    /* eslint-disable */
 
     useEffect(() => {
         bind();
@@ -89,6 +84,7 @@ function SearchPanel() {
             unbind();
         };
     }, []);
+    /* eslint-enable */
 
     const handleTabSelect = (i) => {
         setTab(i);

@@ -32,6 +32,7 @@ export const init = async (videoId = null, startSeconds = 0) => {
                     case window["YT"].PlayerState.ENDED : 
                         console.log("video ended");
                         target.stopVideo();
+                        break;
                     default:
                         break;
                 }
@@ -60,10 +61,12 @@ export const loadVideo = (vidId = null, startSeconds = 0) => {
                 case window["YT"].PlayerState.ENDED : 
                     console.log("video ended");
                     target.stopVideo();
-                    return;
+                    break;
                 case window["YT"].PlayerState.BUFFERING:
                     console.log(target.getDuration());
                     res();
+                    break;
+                default:
                     break;
             }
 

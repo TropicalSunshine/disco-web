@@ -1,6 +1,6 @@
 import { DEFAULT_SONG } from "../DEFAULTS";
 
-import Api, { User as UserApi } from "shared/utils/api";
+import { User as UserApi } from "shared/utils/api";
 import { Controls } from "shared/utils/socket";
 import { youtube, YoutubePlayer } from "shared/utils/services";
 
@@ -65,7 +65,7 @@ function useAttachListeners(setters) {
                 [userId] : {}
             }));
 
-            Api.getUserInfo(userId).then( response => {
+            UserApi.getUserInfo(userId).then( response => {
                 const info = response.data.data.getUserInfo;
                 setMembersMap( prevMembers => {
                     if(prevMembers[userId] === undefined){

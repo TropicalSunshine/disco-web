@@ -1,4 +1,4 @@
-import { socket, roomId } from "./socket";
+import { socket } from "./socket";
 import constants from "./constants";
 
 

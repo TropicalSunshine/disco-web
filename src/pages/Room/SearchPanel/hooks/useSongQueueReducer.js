@@ -11,21 +11,21 @@ export const ACTIONS = {
 function songQueueReducer(songQueue, action) {
 
     const { payload } = action;
-
+    var copy;
     switch (action.type) {
         case ACTIONS.ADD_SONG:
             return [...songQueue, payload];
         case ACTIONS.REMOVE_SONG:
             return songQueue.filter(s => s.songId !== payload.songId);
         case ACTIONS.REMOVE_TOP:
-            var copy = [...songQueue];
+            copy = [...songQueue];
             copy.shift();
             return copy;
         case ACTIONS.REMOVE_TOP_AND_RESPOND:
             var song = (songQueue.length > 0) ? songQueue[0] : null;
             console.log("sending song", song);
             DjControls.emitResponse(song);
-            var copy = [...songQueue];
+            copy = [...songQueue];
             copy.shift();
             return copy;
         default:
