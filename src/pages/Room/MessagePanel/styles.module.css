@@ -32,7 +32,7 @@
     list-style-type: none;
     margin-top: 1rem;
 
-    padding : 7px 20px;
+    padding : 7px 10px;
 }
 
 .message-box--default{
@@ -49,4 +49,14 @@
 
 .message-box__timestamp--default{
     color: var(--text-muted);
+}
+
+.message-box__user_icon{
+    width: 10%;
+    margin: 0 auto;
+    padding: 0 5px;
+}
+
+.message-box__message-content{
+    width: 90%;
 }

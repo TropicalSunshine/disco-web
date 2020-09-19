@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 import { MessageInput, Spinner } from "shared/components";
 
-import { User as UserStorage } from "shared/utils/storage"; 
+import { useAuth } from "shared/utils/auth";
 import { Message as MessageSocket } from "shared/utils/socket";
 
 import useRoomMessage from "./hooks/useRoomMessage";
@@ -14,6 +14,7 @@ const DEFAULT_ID = '0';
 
 function MessagePanel() {
     const { roomId } = useParams();
+    const { userId } = useAuth();
 
     const [ lastId, setLastId ] = useState(DEFAULT_ID);
 
@@ -52,7 +53,7 @@ function MessagePanel() {
             ...prevMessages,
             {
                 _id : DEFAULT_ID,
-                sender : UserStorage.userId.get(),
+                sender : userId,
                 content : content,
                 time_created : (new Date(Date.now())).toISOString()
             }

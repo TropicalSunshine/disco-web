@@ -99,9 +99,7 @@ function Room({ musicRoom }) {
                 />
               </div>
               <div className={styles["room__room-right"]}>
-                <MessagePanel 
-                  members={membersMap}
-                />
+                <MessagePanel />
               </div>
             </div>
 
