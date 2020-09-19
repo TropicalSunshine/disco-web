@@ -29,7 +29,8 @@ function Room({ musicRoom }) {
   const setters = {
     setCurrentDj,
     setInitialDjs,
-    setSong
+    setSong,
+    setMembersMap
   };
 
   const {

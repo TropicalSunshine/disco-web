@@ -1,4 +1,6 @@
 import { DEFAULT_SONG } from "../DEFAULTS";
+
+import Api, { User as UserApi } from "shared/utils/api";
 import { Controls } from "shared/utils/socket";
 import { youtube, YoutubePlayer } from "shared/utils/services";
 
@@ -6,7 +8,8 @@ function useAttachListeners(setters) {
 
     const {
         setSong,
-        setCurrentDj
+        setCurrentDj,
+        setMembersMap
     } = setters;
 
     const syncState = async (data) => {
@@ -43,6 +46,46 @@ function useAttachListeners(setters) {
         Controls.addChangeSongListener(data => {
             console.log(`[socket event] : change song`);
             syncState(data);
+        });
+
+
+        //for user joining and leaving
+        //make a mock data holder for a member
+        //so when user leaves and joins consecutively it doesnt
+        //cause a race condition between removing the user and
+        //adding the user to members
+
+        //execution
+        // 1. add a mock data to member
+        // 2.  
+
+        Controls.addUserJoinRoomListener(({ userId }) => {
+            setMembersMap( prevMembers => ({
+                ...prevMembers,
+                [userId] : {}
+            }));
+
+            Api.getUserInfo(userId).then( response => {
+                const info = response.data.data.getUserInfo;
+                setMembersMap( prevMembers => {
+                    if(prevMembers[userId] === undefined){
+                        return prevMembers;
+                    }
+
+                    return {
+                        ...prevMembers,
+                        [userId] : info
+                    }
+                })
+            });
+        });
+
+        Controls.addUserLeaveRoomListener(({userId}) => {
+            setMembersMap( prevMembers => {
+                var copy = {...prevMembers}
+                delete copy[userId];
+                return copy;
+            })
         })
     }
 
@@ -51,6 +94,8 @@ function useAttachListeners(setters) {
     const unbind = () => {
         Controls.removeUpdateListener();
         Controls.removeChangeSongListener();
+        Controls.removeUserLeaveRoomListener();
+        Controls.removeUserLeaveRoomListener();
     }
 
     return {

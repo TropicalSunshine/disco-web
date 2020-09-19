@@ -22,4 +22,16 @@ export const register = (email, password, username) => api.post("", {
         }
     }`,
     variables : { email, password, username }
+});
+
+export const getUserInfo = (userId) => api.post("", {
+    query : `
+        query getUserInfo( $userId : String! ) {
+            getUserInfo( userId : $userId ){
+                _id
+                username
+            }
+        }
+    `,
+    variables : { userId }
 })
