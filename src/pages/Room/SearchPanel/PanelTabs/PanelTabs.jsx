@@ -4,14 +4,6 @@ import PropTypes from "prop-types";
 import { textStyles } from "shared/styles";
 import styles from "./PanelTabs.module.css";
 
-const OPTIONS = [
-  {
-    name: "Search",
-  },
-  {
-    name: "Queue",
-  },
-];
 
 function PanelTabs({ onChange, options, defaultTab }) {
   const [tab, setTab] = useState(defaultTab);

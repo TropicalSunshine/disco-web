@@ -83,7 +83,7 @@ function SearchPanel() {
         return () => {
             unbind();
         };
-    }, []);
+    }, [bind, unbind]);
     /* eslint-enable */
 
     const handleTabSelect = (i) => {

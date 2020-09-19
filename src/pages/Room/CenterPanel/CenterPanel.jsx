@@ -8,7 +8,7 @@ import { useAuth } from "shared/utils/auth";
 import { UserProfileIcon } from "shared/components";
 import { textStyles } from "shared/styles";
 
-import useCenterPanelListeners from "./hooks/useCenterPanelListeners";
+import attachCenterPanelListeners from "./hooks/attachCenterPanelListeners";
 
 import styles from "./CenterPanel.module.css";
 
@@ -32,8 +32,7 @@ function CenterPanel({ members, currentDj, initialDjs, room }) {
         unbind,
         emitStepDown,
         emitStepUp
-    } = useCenterPanelListeners(setters, userId);
-
+    } = attachCenterPanelListeners(setters, userId);
 
     useEffect(() => {
         bind();
@@ -41,7 +40,7 @@ function CenterPanel({ members, currentDj, initialDjs, room }) {
         return () => {
             unbind();
         }
-    }, []);
+    }, [bind, unbind]);
 
     const handleBackClick = () => {
         history.go(-1);
