@@ -1,8 +1,8 @@
 .music-player-container{
     padding-top: 2px;
-    min-height: 68px;
     position: relative;
     width: 100%;
+    height: 100%;
 }
 
 
@@ -19,13 +19,12 @@
     width: 25%;
 }
 
-.music-controls__vinyl__image{
+.music-controls__left__vinyl{
     min-width: 80px;
     width: 20%;
-    margin: auto;
 }
 
-.music-controls__vinyl__song-info{
+.music-controls__left__song-info{
     color : var(--white);
     margin: auto;
     width: 80%;

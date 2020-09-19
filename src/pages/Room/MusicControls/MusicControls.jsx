@@ -43,7 +43,7 @@ function MusicControls({ song }) {
   return (
     <div className={`${styles["music-player-container"]} box-row`}>
       <div className={`box-row ${styles["music-controls__left"]}`}>
-        <div className={`${styles["music-controls__vinyl__image"]}`}>
+        <div className={`${styles["music-controls__left__vinyl"]} box-center`}>
           <SpinningVinyl
             songImage={songImage}
             mute={mute}
@@ -51,7 +51,7 @@ function MusicControls({ song }) {
         </div>
         <div
           className={` 
-          ${styles["music-controls__vinyl__song-info"]}`}
+          ${styles["music-controls__left__song-info"]}`}
         >
           <p
             className={`${textStyles["text-ellipsis"]} 
