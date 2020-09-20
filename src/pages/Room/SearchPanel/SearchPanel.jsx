@@ -86,9 +86,8 @@ function SearchPanel() {
     }, [bind, unbind]);
     /* eslint-enable */
 
-    const handleTabSelect = (i) => {
-        setTab(i);
-    };
+    const handleTabSelect = (i) => setTab(i);
+
 
     return (
         <div className={`box-column ${styles["search-panel"]}`}>

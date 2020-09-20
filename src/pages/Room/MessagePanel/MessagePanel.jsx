@@ -90,9 +90,7 @@ function MessagePanel({ members }) {
         
     }, [messages.length]);
 
-    const handleTabSelect = (i) => {
-        setTab(i);
-    }
+    const handleTabSelect = (i) => setTab(i);
 
     return (
         <div className={`${styles["message-panel"]} box-column`}>
