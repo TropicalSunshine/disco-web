@@ -6,6 +6,7 @@ import NavbarRoute from "./NavbarRoute";
 import { Spinner } from "shared/components/index";
 import { MusicRoomProvider } from "shared/utils/musicRoom";
 import { AuthProvider } from "shared/utils/auth";
+import { ThemeProvider } from "shared/utils/theme";
 
 const Room = lazy(() => import("pages/Room"));
 const HomePage = lazy(() => import("pages/HomePage"));
@@ -19,14 +20,16 @@ function Router() {
       <Suspense fallback={<Spinner />}>
         <div>
           <AuthProvider>
-            <MusicRoomProvider>
-              <Switch>
-                <NavbarRoute exact path="/" component={HomePage} />
-                <NavbarRoute exact path="/explore" component={ExplorePage} />
-                <NavbarRoute exact path="/room/create" component={CreateRoomPage} />
-                <Route exact path="/room/:roomId" component={Room} />
-              </Switch>
-            </MusicRoomProvider>
+            <ThemeProvider>
+              <MusicRoomProvider>
+                <Switch>
+                  <NavbarRoute exact path="/" component={HomePage} />
+                  <NavbarRoute exact path="/explore" component={ExplorePage} />
+                  <NavbarRoute exact path="/room/create" component={CreateRoomPage} />
+                  <Route exact path="/room/:roomId" component={Room} />
+                </Switch>
+              </MusicRoomProvider>
+            </ThemeProvider>
           </AuthProvider>
         </div>
       </Suspense>
