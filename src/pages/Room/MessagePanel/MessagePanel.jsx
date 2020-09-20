@@ -30,7 +30,7 @@ const TAB_OPTIONS = [
     {
         name : "Members"
     }
-]
+];
 
 function MessagePanel({ members }) {
     const { roomId } = useParams();

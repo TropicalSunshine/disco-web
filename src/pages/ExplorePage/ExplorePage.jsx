@@ -8,17 +8,16 @@ import RoomsList from "./Rooms";
 import styles from "./styles.module.css";
 
 
-function ExplorePage (props){
-
-    const { history } = props;
+function ExplorePage ({ history }){
 
     return (
         
         <div className={`${styles["explore-container"]} box-column`}>
             <div className={`${styles["category-container"]}`}>
-                <Button onClick={() => {
-                    this.props.history.push("/room/create");
-                }} variant="contained" color="primary">
+                <Button 
+                onClick={() => history.push("/room/create")}
+                variant="contained" 
+                color="primary">
                     Create Room
                 </Button>
             </div>

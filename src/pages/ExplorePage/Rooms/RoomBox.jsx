@@ -12,9 +12,8 @@ const RoomBox = forwardRef((props, ref) => {
         <div 
         ref={ref} 
         className={`${styles["room-box"]}`}
-        onClick={() => {
-            history.push(`/room/${room._id}`)
-        }}
+        onClick={() => history.push(`/room/${room._id}`)
+        }
         style={{
             backgroundColor: colors.randomColorFromString(room.name)
         }}
