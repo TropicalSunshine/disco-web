@@ -13,7 +13,7 @@ const ExplorePage = lazy(() => import("pages/ExplorePage"));
 const CreateRoomPage = lazy(() => import("pages/CreateRoomPage"));
 
 
-function Router(props) {
+function Router() {
   return (
     <BrowserRouter>
       <Suspense fallback={<Spinner />}>

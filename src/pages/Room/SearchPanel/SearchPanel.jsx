@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import PanelTabs from "./PanelTabs";
+import PanelTabs from "../shared/PanelTabs";
 import SongItem from "./SongItem";
 import useSongQueueReducer, { ACTIONS } from "./hooks/useSongQueueReducer";
 import attachSearchPanelListeners from "./hooks/attachSearchPanelListeners";

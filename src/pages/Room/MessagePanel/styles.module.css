@@ -3,8 +3,12 @@
     height: 100%;
 }
 
+.message-panel__tabs{
+    height: 5%;
+}
+
 .message-panel__messages{
-    height: 92%;
+    height: 87%;
     overflow-x: hidden;
     overflow-y: auto;
 

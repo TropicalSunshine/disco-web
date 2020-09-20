@@ -62,7 +62,9 @@ function useAttachListeners(setters) {
         Controls.addUserJoinRoomListener(({ userId }) => {
             setMembersMap( prevMembers => ({
                 ...prevMembers,
-                [userId] : {}
+                [userId] : {
+                    username : "Loading..."
+                }
             }));
 
             UserApi.getUserInfo(userId).then( response => {

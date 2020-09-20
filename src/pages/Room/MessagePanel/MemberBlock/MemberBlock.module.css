@@ -1,0 +1,12 @@
+.member-block{
+    height: 60px;
+}
+
+.member-block__user-icon{
+    width: 30%;
+}
+
+.member-block__user-info{
+    width: 70%;
+    color: var(--white);
+}
