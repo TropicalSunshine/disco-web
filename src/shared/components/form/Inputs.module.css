@@ -1,0 +1,45 @@
+.input-outline{
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: 0.1s;
+}
+
+.input-outline--light:focus {
+    border-color: var(--white);
+}
+
+.input-outline--light{
+    border-color: var(--text-muted);
+}
+
+.input-outline--dark{
+    border-color: var(--black);
+}
+
+.input-box{
+    appearance: none;
+    -webkit-appearance: none;
+    height: 100%;
+
+    background-color: transparent;
+    outline: none;
+    border-width: 0;
+    font-size : 20px;
+}
+
+.input-label{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+
+
+.dark{
+    color: var(--black);
+}
+
+.light{
+    color: var(--white);
+}

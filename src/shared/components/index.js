@@ -8,6 +8,8 @@ import Spinner from "./loaders/Spinner";
 import TextArea from "./control/TextArea";
 import MessageInput from "./control/MessageInput";
 
+import TextInput from "./form/TextInput";
+
 import UserProfileIcon from "./utils/UserProfileIcon";
 
 export {
@@ -20,6 +22,8 @@ export {
 
     TextArea,
     MessageInput,
+    
+    TextInput,
 
     UserProfileIcon
 };

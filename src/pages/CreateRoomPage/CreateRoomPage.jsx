@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 
 import { TextField, Radio, 
     RadioGroup, FormControlLabel, } from "@material-ui/core";
-
-import { InputSubmit } from "shared/components";
+import { AssignmentIndRounded } from "@material-ui/icons";
+import { InputSubmit, TextInput } from "shared/components";
 
 import styles from "./styles.module.css";
 import { textStyles } from "shared/styles";
@@ -113,15 +113,11 @@ class CreateRoomPage extends Component {
                     onSubmit={this.handleSubmit}
                 >
                     <div className={`${styles["input-container"]}`}>
-                        <TextField
-                        color="primary"
-                        required={true}
-                        label="Name"
-                        variant="standard"
-                        fullWidth={true}
-                        name="name"
-                        type="text"
+                        <TextInput
                         onChange={this.handleInputChange}
+                        Icon={AssignmentIndRounded}
+                        label={"Name"}
+                        id={"create-room-name"}
                         />
                     </div>
                     <div className={`${styles["input-container"]}`}>
