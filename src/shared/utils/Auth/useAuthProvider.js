@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 
-import { User as userStore } from "../storage"; 
-import { User as userApi } from "../api";
+import { User as UserStore } from "../storage"; 
+import { User as UserApi } from "../api";
 import { setAuthHeader } from "shared/utils/api/Api";
 
 function useAuth(){
@@ -12,7 +12,7 @@ function useAuth(){
 
 
     const login = async (email, password) => {
-        const result = await userApi.login(email, password);
+        const result = await UserApi.login(email, password);
         const response = result.data.data.login;
 
         if(response.error !== null) {
@@ -25,10 +25,10 @@ function useAuth(){
             throw new Error(response.error);
         }
 
-        userStore.token.set(response.token);
+        UserStore.token.set(response.token);
         setToken(response.token);
         setAuthHeader(response.token);
-        userStore.userId.set(response.userId);
+        UserStore.userId.set(response.userId);
         setUserId(response.userId);
 
         setIsLoggedIn(true);
@@ -38,7 +38,7 @@ function useAuth(){
     }
 
     const register = async (email, password, username) => {
-        const result = await userApi.register(email, password, username);
+        const result = await UserApi.register(email, password, username);
         const response = result.data.data.register;
 
         if(response.error !== null) {
@@ -54,13 +54,19 @@ function useAuth(){
         return response;
     }
 
-    const logout = async () => null
+    const logout = async () => {
+        await UserApi.logout(UserStore.token.get());
+
+        UserStore.token.clear();
+        UserStore.userId.clear();
+
+    }
 
     const fetchState = () => {
         
-        const token = userStore.token.get();
+        const token = UserStore.token.get();
         setToken(token);
-        const userId = userStore.userId.get();
+        const userId = UserStore.userId.get();
         setUserId(userId);
 
         if(token && userId){

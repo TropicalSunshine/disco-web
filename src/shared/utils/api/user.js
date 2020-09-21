@@ -10,7 +10,20 @@ export const login = (email, password) => api.post("", {
         }
     }`,
     variables : {email, password}
-})
+});
+
+export const logout = (token) => api.post("", {
+    query : `
+    query logout ( $token : String! ) {
+        logout ( token : $token ) {
+            status
+            error
+            message
+        }
+    }
+    `,
+    variables : { token }
+});
 
 
 export const register = (email, password, username) => api.post("", {

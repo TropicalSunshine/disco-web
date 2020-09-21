@@ -97,12 +97,11 @@ class Navbar extends PureComponent{
                             {
                                 ( auth.isLoggedIn ) && (
                                     <React.Fragment>
-                                        <div  className={styles["navbar__menu-item"]}>
-                                            <div>
-                                                <Link to="/explore">
-                                                    Explore
-                                                </Link>
-                                            </div>
+                                        <div  
+                                        className={styles["navbar__menu-item"]}>    
+                                            <Link to="/explore">
+                                                Explore
+                                            </Link>
                                         </div>
                                         <div>
                                             <UserProfileIcon
