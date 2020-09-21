@@ -57,3 +57,12 @@
 .navbar__menu-item a:hover{
     color : var(--white);
 }
+
+
+.navbar__user-icon:hover{
+    cursor: pointer;
+}
+
+.navbar__user-icon-box{
+    position: relative;
+}

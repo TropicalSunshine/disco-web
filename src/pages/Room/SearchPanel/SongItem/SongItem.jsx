@@ -18,7 +18,7 @@ function SongItem({ value, actions }){
     const thumbnail = songImage.default; 
 
     return (
-        <li className={`box-row ${styles["result-block"]} ${styles["result"]}`}>
+        <li className={`box-row ${styles["result"]}`}>
             <div className={styles["result__img"]}
             >
                 <img

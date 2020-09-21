@@ -4,8 +4,11 @@ import { User as UserStore } from "../storage";
 import { User as UserApi } from "../api";
 import { setAuthHeader } from "shared/utils/api/Api";
 
+import { useHistory } from "react-router-dom";
+
 function useAuth(){
 
+    const history = useHistory();
     const [userId, setUserId] = useState(null);
     const [token, setToken] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -55,10 +58,15 @@ function useAuth(){
     }
 
     const logout = async () => {
+    
         await UserApi.logout(UserStore.token.get());
-
+        
+        history.push("/"); 
         UserStore.token.clear();
         UserStore.userId.clear();
+        setIsLoggedIn(false);
+        setToken(null);
+        setUserId(null);
 
     }
 
