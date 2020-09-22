@@ -47,6 +47,8 @@ export const init = async (videoId = null, startSeconds = 0) => {
 
 export const loadVideo = (vidId = null, startSeconds = 0) => {
     console.log("loading video");
+    if(!vidId) return;
+    
     player.loadVideoById({
         videoId: vidId,
         startSeconds: startSeconds
@@ -64,12 +66,12 @@ export const loadVideo = (vidId = null, startSeconds = 0) => {
                     break;
                 case window["YT"].PlayerState.BUFFERING:
                     console.log(target.getDuration());
-                    res();
                     break;
                 default:
                     break;
             }
 
+            res();
 
         })
     });
