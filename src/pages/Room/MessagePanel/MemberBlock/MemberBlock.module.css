@@ -1,5 +1,7 @@
 .member-block{
     height: 60px;
+    overflow: hidden;
+    margin: 5px 0;
 }
 
 .member-block__user-icon{

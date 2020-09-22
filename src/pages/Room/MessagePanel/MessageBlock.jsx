@@ -12,7 +12,13 @@ function MessageBlock ({ message }, ref) {
     }, [time_created]);
 
     return (
-        <li className={`${styles["message-box"]} ${styles["message-box--default"]} box-row`} ref={ref}>
+        <li 
+        className={`
+        ${styles["message-box"]} 
+        ${styles["message-box--default"]} 
+        box-row`
+        } 
+        ref={ref}>
             <div className={` ${styles["message-box__user_icon"]}`}>
                 <UserProfileIcon height={"30px"}/>
             </div>
@@ -25,7 +31,9 @@ function MessageBlock ({ message }, ref) {
                 ${textStyles["text-5"]}`}>
                     {`${messageDate.toLocaleDateString()} ${messageDate.toLocaleTimeString()}`}
                 </div>
-                <div className={`${styles["message-box__content"]} ${textStyles["text-5"]}`}>
+                <div 
+                className={`${styles["message-box__content"]} 
+                ${textStyles["text-5"]}`}>
                     {content}
                 </div>
             </div>

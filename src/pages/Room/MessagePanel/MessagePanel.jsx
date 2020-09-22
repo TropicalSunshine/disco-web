@@ -133,8 +133,9 @@ function MessagePanel({ members }) {
                 >
                 {
                     (tab === 1) &&
-                    (Object.keys(members).map( key => (
+                    (Object.keys(members).map( (key, i)=> (
                         <MemberBlock
+                            key={`room-member-${key}-${i}`}
                             user={members[key]}
                         />
                     )))
