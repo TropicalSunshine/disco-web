@@ -66,7 +66,7 @@ function useRoom(setters){
         try {
             Socket.disconnectSocket();
             setIsConnected(false);
-            YoutubePlayer.stop();
+            if(YoutubePlayer.isInitialized()) YoutubePlayer.stop();
             
             await RoomApi.leaveRoom(roomId);
         } catch (err) {

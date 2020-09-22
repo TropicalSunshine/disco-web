@@ -5,7 +5,7 @@ import { ACTIONS } from "./useSongQueueReducer";
 function useAttachSearchPanelListeners(songQueueDispatch) {
     const bind = () => {
         DjControls.addRequestListener(() => {
-            console.log("requesting song");
+            console.log(`[socket event] : requesting song `);
             songQueueDispatch({
                 type: ACTIONS.REMOVE_TOP_AND_RESPOND,
             });

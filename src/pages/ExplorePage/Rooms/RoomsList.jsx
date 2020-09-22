@@ -38,32 +38,34 @@ function RoomsList(props){
     }, [isLoading, hasMore, rooms])
     
     return (
-        <div className={`${styles["rooms-list"]}`}>
-            {
-                rooms.map((r, i) => {
-                    var key = `room-${i}`;
+        <>
+            <div className={`${styles["rooms-list"]}`}>
+                {
+                    rooms.map((r, i) => {
+                        var key = `room-${i}`;
 
-                    if(i === (rooms.length - 1)){
-                        return <RoomBox 
-                        history={history}
-                        key={key}
-                        ref={lastRoomElement} 
-                        room={r} />
-                    }
-                    
-                    return <RoomBox 
+                        if(i === (rooms.length - 1)){
+                            return <RoomBox 
                             history={history}
                             key={key}
+                            ref={lastRoomElement} 
                             room={r} />
-                })
-            }
+                        }
+                        
+                        return <RoomBox 
+                                history={history}
+                                key={key}
+                                room={r} />
+                    })
+                }
+            </div>
             {
                 (isLoading) && 
-                <div className={`${styles["spinner-container"]}`}>
+                <div className={`${styles["spinner-container"]} box-center`}>
                     <Spinner/>
                 </div>
             }
-        </div>
+        </>
     )
 }
 

@@ -9,6 +9,7 @@ import TextArea from "./control/TextArea";
 import MessageInput from "./control/MessageInput";
 
 import TextInput from "./form/TextInput";
+import TextInputArea from "./form/TextInputArea";
 
 import UserProfileIcon from "./utils/UserProfileIcon";
 
@@ -24,6 +25,7 @@ export {
     MessageInput,
     
     TextInput,
+    TextInputArea,
 
     UserProfileIcon
 };

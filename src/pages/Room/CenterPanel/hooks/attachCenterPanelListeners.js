@@ -9,6 +9,7 @@ function useCenterPanelListeners(setters, currentUserId) {
 
     const bind = () => {
         DjControls.addStepUpListener(({ userId }) => {
+            console.log(`[socket event] : step up ${userId}`)
             setDjs(prevDjs => {
                 prevDjs.push(userId);
                 return prevDjs;
@@ -16,7 +17,7 @@ function useCenterPanelListeners(setters, currentUserId) {
         });
 
         DjControls.addStepDownListener(({ userId }) => {
-            console.log("recieving step down");
+            console.log(`[socket event] : step down ${userId}`);
             if (userId === currentUserId) setIsStepUp(false);
             setDjs(prevDjs => {
                 return prevDjs.filter(id => id !== userId);

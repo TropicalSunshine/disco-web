@@ -1,3 +1,5 @@
+import { withAuthProvider } from "shared/utils/auth";
 import HomePage from "./HomePage";
 
-export default HomePage;
+
+export default withAuthProvider(HomePage);

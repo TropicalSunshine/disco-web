@@ -1,0 +1,22 @@
+
+
+
+.text-input-area textarea{
+    resize: none;
+    border: none;
+}
+
+.text-input-area__label{
+    text-align: left;
+    width: 100%;
+    display: block;
+    margin: 10px 0;
+}
+
+.text-input-area__container{
+    padding: 5px 10px;
+}
+
+.text-input-area__input{
+    width: 100%;
+}

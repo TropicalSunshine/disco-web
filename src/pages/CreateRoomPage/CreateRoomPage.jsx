@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { TextField, Radio, 
     RadioGroup, FormControlLabel, } from "@material-ui/core";
 import { AssignmentIndRounded } from "@material-ui/icons";
-import { InputSubmit, TextInput } from "shared/components";
+import { InputSubmit, TextInput, TextInputArea } from "shared/components";
 
 import styles from "./styles.module.css";
 import { textStyles } from "shared/styles";
@@ -74,7 +74,7 @@ class CreateRoomPage extends Component {
         e.stopPropagation();
 
         const { name, value } = e.target;
-        
+        console.log(name, value);
         this.setState({
             [name] : value
         });
@@ -114,23 +114,20 @@ class CreateRoomPage extends Component {
                 >
                     <div className={`${styles["input-container"]}`}>
                         <TextInput
+                        dark={false}
                         onChange={this.handleInputChange}
                         Icon={AssignmentIndRounded}
                         label={"Name"}
+                        name="name"
                         id={"create-room-name"}
                         />
                     </div>
                     <div className={`${styles["input-container"]}`}>
-                        <TextField
-                        color="primary"
-                        
+                        <TextInputArea
                         label="Description"
-                        variant="standard"
-                        fullWidth={true}
-                        multiline={true}
                         rows={3}
+                        id={"create-room-description-input"}
                         name="description"
-                        type="text"
                         onChange={this.handleInputChange}
                         />
                     </div>
