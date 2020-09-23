@@ -1,12 +1,8 @@
-import React, { useEffect, useRef } from 'react';
-
-import { useThemeContext } from "shared/utils/theme";
+import React from 'react';
 
 import styles from "./PopMenu.module.css";
 
 function PopMenu({ options }) {
-    
-    const { dark } = useThemeContext();
 
     return (
         <ul

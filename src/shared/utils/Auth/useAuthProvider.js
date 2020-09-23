@@ -87,7 +87,7 @@ function useAuth(){
 
     useEffect(fetchState, []);
 
-
+    /* eslint-disable */
     return useMemo(() => ({ 
         login,
         logout,
@@ -97,6 +97,7 @@ function useAuth(){
         token,
         isLoggedIn
     }), [userId, token, isLoggedIn]);
+    /* eslint-enable */
 
 }
 

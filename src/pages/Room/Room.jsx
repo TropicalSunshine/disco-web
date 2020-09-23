@@ -17,7 +17,7 @@ import styles from "./style.module.css";
 function Room({ musicRoom }) {
 
   const { roomId } = useParams();
-  const { join, leave, isConnected } = musicRoom;
+  const { join, leave } = musicRoom;
 
   const [isLoading, setIsLoading] = useState(true);
   const [membersMap, setMembersMap] = useState({});

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { TextField, Radio, 
+import { Radio, 
     RadioGroup, FormControlLabel, } from "@material-ui/core";
 import { AssignmentIndRounded } from "@material-ui/icons";
 import { InputSubmit, TextInput, TextInputArea } from "shared/components";
@@ -124,6 +124,7 @@ class CreateRoomPage extends Component {
                     </div>
                     <div className={`${styles["input-container"]}`}>
                         <TextInputArea
+                        dark={false}
                         label="Description"
                         rows={3}
                         id={"create-room-description-input"}

@@ -25,11 +25,13 @@ function Navbar({ auth, history }){
 
     const redirectToHome = () => history.push("/");
 
+    /* eslint-disable */
     useEffect(() => {
         return () => {
             document.removeEventListener("mousedown", closePopMenu);
         }
     }, []);
+    /* eslint-enable */
 
 
     const closePopMenu = () => {
