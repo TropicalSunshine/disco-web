@@ -1,5 +1,6 @@
 .loaderpage-container{
     position: absolute;
+    z-index: var(--below-dialog);
     background-color: var(--black);
     top: 0;
     bottom: 0;
@@ -13,6 +14,10 @@
     width: 100vw;
     height: 100vh;
     display: block;
+}
+
+.loaderpage-center-box__loader-container{
+    position: relative;
 }
 
 .loaderpage-center-box h1{

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from "prop-types";
 
-import styles from "./Text.module.css";
+import styles from "./TextInput.module.css";
 import inputStyles from "../Inputs.module.css";
 
 function TextInput({ label, id, dark, Icon, ...rest}) {

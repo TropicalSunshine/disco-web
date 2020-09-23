@@ -1,18 +1,22 @@
 .input-outline{
     border-style: solid;
     border-width: 1px;
+    border-color: transparent;
     border-radius: 5px;
     overflow: hidden;
-    transition: 0.1s;
 }
 
-.input-outline--light:focus {
-    border-color: var(--white);
-}
 
 .input-outline--light{
     border-color: var(--text-muted);
 }
+
+.input-outline--light:hover svg, .input-outline--light:hover{
+    color: white;
+    border-color: var(--white);
+    transition: 0.3s;
+}
+
 
 .input-outline--dark{
     border-color: var(--black);
@@ -26,12 +30,11 @@
     background-color: transparent;
     outline: none;
     border-width: 0;
-    font-size : 20px;
+    font-size : 18px;
 }
 
 .input-label{
-    font-weight: bold;
-    font-size: 20px;
+    font-size: 17px;
 }
 
 

@@ -74,7 +74,7 @@ class CreateRoomPage extends Component {
         e.stopPropagation();
 
         const { name, value } = e.target;
-        console.log(name, value);
+        
         this.setState({
             [name] : value
         });
