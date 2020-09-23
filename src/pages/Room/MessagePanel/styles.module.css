@@ -45,6 +45,11 @@
 
 .message-box__content{
     user-select: text;
+
+    word-break: break-word;
+
+    display: inline;
+    hyphens: auto;
 }
 
 .message-box__timestamp{
