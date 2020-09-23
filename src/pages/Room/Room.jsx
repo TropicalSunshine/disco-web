@@ -45,7 +45,7 @@ function Room({ musicRoom }) {
     (async () => {
       setIsLoading(true);
 
-      /*
+      
       const { room ,song ,djs, currentDj } = await join(roomId);
 
       const { members } = room;
@@ -69,7 +69,6 @@ function Room({ musicRoom }) {
       bind();
 
       setIsLoading(false);
-      */
     })();
 
     return () => {
@@ -83,7 +82,7 @@ function Room({ musicRoom }) {
 
   return (
     <React.Fragment>
-      {isLoading && <LoaderPage />}
+      {isLoading && <LoaderPage/>}
       {!isLoading && (
         <>
           <div className={`${styles["room"]}`}>
