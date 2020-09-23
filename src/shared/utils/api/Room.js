@@ -1,4 +1,4 @@
-import api from "./Api";
+import api from "./api";
 import { User as UserStorage } from "shared/utils/storage";
 
 

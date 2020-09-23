@@ -1,4 +1,4 @@
-import api from "./Api";
+import api from "./api";
 
 const DEFAULT_ROOM_ID = "0";
 const DEFAULT_LAST_ID = "0";

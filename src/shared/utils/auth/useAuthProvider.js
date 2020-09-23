@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 
 import { User as UserStore } from "../storage"; 
 import { User as UserApi } from "../api";
-import { setAuthHeader } from "shared/utils/api/Api";
+import { setAuthHeader } from "shared/utils/api/api";
 
 import { useHistory } from "react-router-dom";
 

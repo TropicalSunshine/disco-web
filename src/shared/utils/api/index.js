@@ -1,5 +1,5 @@
-import Api from "./Api";
-import * as User from "./User";
+import Api from "./api";
+import * as User from "./user";
 import * as Room from "./Room";
 import * as Message from "./Message";
 
