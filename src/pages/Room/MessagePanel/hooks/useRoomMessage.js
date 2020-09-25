@@ -48,7 +48,9 @@ function useRoomMessage(roomId, lastId){
                 ...prevMessages,
                 {
                     id : '0',
-                    sender : userId,
+                    sender : {
+                        _id : userId
+                    },
                     content : content,
                     time_created : (new Date(Date.now())).toISOString()
                 }

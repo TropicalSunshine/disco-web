@@ -10,13 +10,14 @@ import React, {
 import { useParams } from "react-router-dom";
 
 import { MessageInput, Spinner } from "shared/components";
+import PanelTabs from "../shared/PanelTabs";
+import MessageBlock from "./MessageBlock";
+import { DEFAULT_USER } from "../DEFAULTS";
 
+import useRoomMessage from "./hooks/useRoomMessage";
 import { useAuth } from "shared/utils/auth";
 import { Message as MessageSocket } from "shared/utils/socket";
 
-import useRoomMessage from "./hooks/useRoomMessage";
-import PanelTabs from "../shared/PanelTabs";
-import MessageBlock from "./MessageBlock";
 
 import styles from "./styles.module.css";
 
@@ -101,7 +102,9 @@ function MessagePanel({ members }) {
             ...prevMessages,
             {
                 _id : DEFAULT_ID,
-                sender : userId,
+                sender : {
+                    _id : userId
+                },
                 content : content,
                 time_created : (new Date(Date.now())).toISOString()
             }
@@ -150,8 +153,15 @@ function MessagePanel({ members }) {
                 {
                     (tab === 0) && 
                     (messages.map( (m, i) => {
+                        var user = (members[m.sender._id] === undefined) ? 
+                        {
+                            ...DEFAULT_USER,
+                            ...m.sender
+                        } : members[m.sender._id];
+                        
                         if(i === 0) return (
                             <MessageBlock
+                            user={user}
                             key={`${i}-${m._id}`}
                             message={m}
                             ref={lastMessageElement}
@@ -160,6 +170,7 @@ function MessagePanel({ members }) {
 
                         if(i === (messages.length - 1)) return (
                             <MessageBlock
+                            user={user}
                             key={`${i}-${m._id}`}
                             message={m}
                             ref={firstMessageElement}
@@ -168,6 +179,7 @@ function MessagePanel({ members }) {
 
                         return (
                             <MessageBlock
+                            user={user}
                             key={`${i}-${m._id}`}
                             message={m}
                             />
