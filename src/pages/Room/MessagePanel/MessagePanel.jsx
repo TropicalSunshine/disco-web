@@ -73,7 +73,7 @@ function MessagePanel({ members }) {
         
         if(element) lastMessageObserver.current.observe(element);
 
-    }, [ isLoading, hasMore, messages])
+    }, [ isLoading, hasMore, messages, setIsScrollOldMessages])
 
 
     //dont scroll down when user is not interesecting newest message
@@ -130,7 +130,7 @@ function MessagePanel({ members }) {
             current.scrollTop = current.clientHeight - 30;
         }
         
-    }, [messages.length, isScrollOldMessages]);
+    }, [messages.length, isScrollOldMessages, isScrollAtBottom]);
 
     const handleTabSelect = (i) => setTab(i);
 
