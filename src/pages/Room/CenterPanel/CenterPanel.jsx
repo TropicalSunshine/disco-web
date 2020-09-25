@@ -8,7 +8,7 @@ import { useAuth } from "shared/utils/auth";
 import { UserProfileIcon } from "shared/components";
 import { textStyles } from "shared/styles";
 
-import attachCenterPanelListeners from "./hooks/attachCenterPanelListeners";
+import attachCenterPanelListeners from "./attachCenterPanelListeners";
 
 import styles from "./CenterPanel.module.css";
 

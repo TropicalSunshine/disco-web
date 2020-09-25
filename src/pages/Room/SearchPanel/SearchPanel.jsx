@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import PanelTabs from "../shared/PanelTabs";
 import SongItem from "./SongItem";
 import useSongQueueReducer, { ACTIONS } from "./hooks/useSongQueueReducer";
-import attachSearchPanelListeners from "./hooks/attachSearchPanelListeners";
+import attachSearchPanelListeners from "./attachSearchPanelListeners";
 
 import {
     youtube
@@ -115,9 +115,14 @@ function SearchPanel() {
                                 }
                             />
                         </form>
-                        <div className={styles["search-results"]}>
-                            {isSearching && <Spinner />}
-                            {!isSearching && (
+                        <div 
+                        className={`
+                        ${styles["search-results"]}
+                        box-center
+                        `}
+                        >
+                            {true && <Spinner />}
+                            {!true && (
                                 <ul className={styles["search-result-list"]}>
                                     {searchResults.map((r, i) => {
                                         const { snippet, id } = r;
