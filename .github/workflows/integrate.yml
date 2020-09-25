@@ -1,0 +1,16 @@
+name : disco web CI
+
+on: 
+  pull_request:
+    branches:
+      - develop
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses : actions/setup-node@v1
+        with:
+          node-version : '14.4.0'
+      - run : npm ci
+      - run : npm run build #make sure it can be built

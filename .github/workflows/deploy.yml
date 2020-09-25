@@ -1,11 +1,8 @@
 name : disco web CD
 
 on: 
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
+  push: # merging is considered a push
+    branches: #run CD whenever pushes are made to master
       - master
 jobs:
   deploy:
