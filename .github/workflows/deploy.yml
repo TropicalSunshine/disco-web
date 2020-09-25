@@ -4,7 +4,6 @@ on:
   push: # merging is considered a push
     branches: #run CD whenever pushes are made to master
       - master
-
 jobs:
   deploy:
     runs-on: ubuntu-latest

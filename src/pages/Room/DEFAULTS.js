@@ -6,4 +6,9 @@ export const DEFAULT_SONG = {
     duration : 0,
     startTime : 0
 };
-  
+
+
+export const DEFAULT_USER = {
+    userId : "loading...",
+    username : "loading..."
+}

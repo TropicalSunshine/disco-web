@@ -3,6 +3,5 @@
 }
 
 .spinner-container{
-    margin-top: 40%;
-    display: inline-block;
+    position : relative;
 }

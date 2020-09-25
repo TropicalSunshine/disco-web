@@ -1,31 +1,14 @@
 import React from 'react'
 
-import { makeStyles } from "@material-ui/core/styles";
+import useSpinnerStyles from "../useSpinnerStyles";
+
 import CircularProgress from "@material-ui/core/CircularProgress"; 
 import styles from "./LoaderPage.module.css";
 
 
-// Inspired by the former Facebook spinners.
-const useStylesFacebook = makeStyles(() => ({
-    root: {
-      position: 'relative',
-    },
-    bottom: {
-      color: "var(--text-muted)",
-    },
-    top: {
-      color: 'var(--blue)',
-      animationDuration: '900ms',
-      position: 'absolute',
-      left : 0
-    },
-    circle: {
-      strokeLinecap: 'round',
-    },
-  }));
-
 function LoaderPage(props) {
-    const classes = useStylesFacebook();
+    const classes = useSpinnerStyles();
+    
     return (
         <div className={styles["loaderpage-container"]}>
             <div 
