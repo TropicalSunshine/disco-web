@@ -118,11 +118,10 @@ function SearchPanel() {
                         <div 
                         className={`
                         ${styles["search-results"]}
-                        box-center
-                        `}
-                        >
-                            {true && <Spinner />}
-                            {!true && (
+                        ${(isSearching) ? "box-center" : null}
+                        `}>
+                            {isSearching && <Spinner />}
+                            {!isSearching && (
                                 <ul className={styles["search-result-list"]}>
                                     {searchResults.map((r, i) => {
                                         const { snippet, id } = r;
