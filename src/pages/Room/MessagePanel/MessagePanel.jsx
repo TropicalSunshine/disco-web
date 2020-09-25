@@ -1,6 +1,6 @@
 import React, { 
     useState, 
-    useEffect, 
+    useLayoutEffect, 
     useRef, 
     useCallback, 
     Suspense,
@@ -36,20 +36,26 @@ function MessagePanel({ members }) {
     const { roomId } = useParams();
     const { userId } = useAuth();
 
+    
     const [ lastId, setLastId ] = useState(DEFAULT_ID);
     const [ tab, setTab ] = useState(0);
+
+    const [ isScrollAtBottom, setIsScrollAtBottom ] = useState(true);
 
     const {
         isLoading,
         hasMore,
         messages,
-        setMessages
+        isScrollOldMessages,
+        setMessages,
+        setIsScrollOldMessages
     } = useRoomMessage(roomId, lastId);
 
     const messageContainer = useRef(null);
     const lastMessageObserver = useRef(null);
+    const firstMessageObserver = useRef(null);
 
-    const lastRoomElement = useCallback(element => {
+    const lastMessageElement = useCallback(element => {
         if(isLoading) return;
 
         if(lastMessageObserver.current) lastMessageObserver.current.disconnect();
@@ -58,6 +64,7 @@ function MessagePanel({ members }) {
 
             if(entries[0].isIntersecting && hasMore){
                 setLastId(messages[0]._id);
+                setIsScrollOldMessages(true);
             }
         }, {
             threshold : 0.5
@@ -66,6 +73,26 @@ function MessagePanel({ members }) {
         if(element) lastMessageObserver.current.observe(element);
 
     }, [ isLoading, hasMore, messages])
+
+
+    //dont scroll down when user is not interesecting newest message
+    const firstMessageElement = useCallback(element => {
+        if(isLoading) return;
+        if(firstMessageObserver.current) firstMessageObserver.current.disconnect();
+
+        firstMessageObserver.current = new IntersectionObserver( entries => {
+            if(entries[0].isIntersecting){
+                setIsScrollAtBottom(true);
+            } else {
+                setIsScrollAtBottom(false);
+            }
+
+        }, {
+            threshold : 0.3
+        });
+
+        if(element) firstMessageObserver.current.observe(element);
+    }, [isLoading])
 
     const onMessageEnter = (content) => {
         
@@ -78,17 +105,29 @@ function MessagePanel({ members }) {
                 content : content,
                 time_created : (new Date(Date.now())).toISOString()
             }
-        ])
+        ]);
+        setIsScrollOldMessages(false);
+
 
         MessageSocket.sendMessage(content);
     }
 
-    useEffect(() => {
+
+    
+    useLayoutEffect(() => {
         //set the scroll bar to bottom whenever the message.length changes
         var { current } = messageContainer;
-        current.scrollTop = current.scrollHeight - current.clientHeight;
+        //only move scroll to bottom per new message
+        // if user is viewing the latest message
+        // otherwise scroll down a bit when user is viewing old messages
         
-    }, [messages.length]);
+        if(!isScrollOldMessages && isScrollAtBottom){
+            current.scrollTop = current.scrollHeight - current.clientHeight;
+        } else {
+            current.scrollTop = current.clientHeight - 30;
+        }
+        
+    }, [messages.length, isScrollOldMessages]);
 
     const handleTabSelect = (i) => setTab(i);
 
@@ -115,7 +154,15 @@ function MessagePanel({ members }) {
                             <MessageBlock
                             key={`${i}-${m._id}`}
                             message={m}
-                            ref={lastRoomElement}
+                            ref={lastMessageElement}
+                            />
+                        )
+
+                        if(i === (messages.length - 1)) return (
+                            <MessageBlock
+                            key={`${i}-${m._id}`}
+                            message={m}
+                            ref={firstMessageElement}
                             />
                         )
 

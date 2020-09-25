@@ -11,6 +11,7 @@ function useRoomMessage(roomId, lastId){
     const [ isLoading, setIsLoading ] = useState(true);
     const [ hasMore, setHasMore ] = useState(true);
     const [ hasError, setHasError ] = useState(false);
+    const [ isScrollOldMessages, setIsScrollOldMessages ] = useState(false);
 
     //keeps track of the intial load of messages in a room
     //used to check initial renders that are dependent on the intially
@@ -52,6 +53,9 @@ function useRoomMessage(roomId, lastId){
                     time_created : (new Date(Date.now())).toISOString()
                 }
             ]);
+            
+            setIsScrollOldMessages(false);
+
         })
 
         return MessageSocket.removeRecieveMessageListener;
@@ -61,13 +65,15 @@ function useRoomMessage(roomId, lastId){
     return {
         //variables
         isLoading,
+        isScrollOldMessages,
         hasMore,
         hasError,
         messages,
         initialLoad,
 
         //methods
-        setMessages
+        setMessages,
+        setIsScrollOldMessages
     }
 }
 
