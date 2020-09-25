@@ -83,13 +83,15 @@ function MessagePanel({ members }) {
 
         firstMessageObserver.current = new IntersectionObserver( entries => {
             if(entries[0].isIntersecting){
+                console.log("setting true");
                 setIsScrollAtBottom(true);
             } else {
+                console.log("setting false");
                 setIsScrollAtBottom(false);
             }
 
         }, {
-            threshold : 0.3
+            threshold : 0.75
         });
 
         if(element) firstMessageObserver.current.observe(element);
@@ -126,9 +128,10 @@ function MessagePanel({ members }) {
         
         if(!isScrollOldMessages && isScrollAtBottom){
             current.scrollTop = current.scrollHeight - current.clientHeight;
-        } else {
-            current.scrollTop = current.clientHeight - 30;
+        } else if (isScrollOldMessages) {
+            current.scrollTop = current.clientHeight;
         }
+        
         
     }, [messages.length, isScrollOldMessages, isScrollAtBottom]);
 
