@@ -28,6 +28,7 @@ function MessageBlock ({ message, user }, ref) {
                 <div>
                     <span className={`
                         ${textStyles["text-4"]}
+                        ${styles["message-box__username"]}
                     `}>
                         {user.username}
                     </span>

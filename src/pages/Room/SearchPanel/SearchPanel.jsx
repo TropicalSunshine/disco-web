@@ -72,13 +72,12 @@ function SearchPanel() {
 
     useEffect(() => {
         bind();
-        /*
-            (async () => {
-                const response = await youtube.getMostPopularVideos();
-                console.log(response);
-                setSearchResults(response);
-            })();
-            */
+        
+        (async () => {
+            const response = await youtube.getMostPopularVideos();
+            setSearchResults(response);
+        })();
+            
 
         return () => {
             unbind();
