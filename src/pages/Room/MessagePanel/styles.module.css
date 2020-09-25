@@ -54,6 +54,8 @@
 
 .message-box__timestamp{
     user-select: none;
+    margin-left: 5px;
+
 }
 
 .message-box__timestamp--default{

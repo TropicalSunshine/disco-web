@@ -3,7 +3,7 @@ import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import NavbarRoute from "./NavbarRoute";
-import { Spinner } from "shared/components/index";
+import { LoaderPage } from "shared/components/index";
 import { MusicRoomProvider } from "shared/utils/musicRoom";
 import { AuthProvider } from "shared/utils/auth";
 import { ThemeProvider } from "shared/utils/theme";
@@ -17,7 +17,7 @@ const CreateRoomPage = lazy(() => import("pages/CreateRoomPage"));
 function Router() {
   return (
     <BrowserRouter>
-      <Suspense fallback={<Spinner />}>
+      <Suspense fallback={<LoaderPage />}>
         <div>
           <AuthProvider>
             <ThemeProvider>

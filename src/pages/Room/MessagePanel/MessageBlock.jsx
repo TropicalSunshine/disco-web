@@ -4,7 +4,7 @@ import { UserProfileIcon } from "shared/components";
 import { textStyles } from "shared/styles";
 import styles from "./styles.module.css";
 
-function MessageBlock ({ message }, ref) {
+function MessageBlock ({ message, user }, ref) {
 
     const { content, time_created } = message;
     const messageDate = useMemo(() => {
@@ -25,11 +25,19 @@ function MessageBlock ({ message }, ref) {
             <div className={`
             ${styles["message-box__message-content"]}
             box-column`}>
-                <div className={`
-                ${styles["message-box__timestamp--default"]}
-                ${styles["message-box__timestamp"]} 
-                ${textStyles["text-5"]}`}>
-                    {`${messageDate.toLocaleDateString()} ${messageDate.toLocaleTimeString()}`}
+                <div>
+                    <span className={`
+                        ${textStyles["text-4"]}
+                    `}>
+                        {user.username}
+                    </span>
+                    <span className={`
+                        ${styles["message-box__timestamp--default"]}
+                        ${styles["message-box__timestamp"]}
+                        ${textStyles["text-5"]}
+                    `}>
+                        {`${messageDate.toLocaleDateString()} ${messageDate.toLocaleTimeString()}`}
+                    </span>
                 </div>
                 <div 
                 className={`${styles["message-box__content"]} 
