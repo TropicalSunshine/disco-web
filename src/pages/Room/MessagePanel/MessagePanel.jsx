@@ -83,10 +83,8 @@ function MessagePanel({ members }) {
 
         firstMessageObserver.current = new IntersectionObserver( entries => {
             if(entries[0].isIntersecting){
-                console.log("setting true");
                 setIsScrollAtBottom(true);
             } else {
-                console.log("setting false");
                 setIsScrollAtBottom(false);
             }
 

@@ -55,11 +55,14 @@
 .message-box__timestamp{
     user-select: none;
     margin-left: 5px;
-
 }
 
 .message-box__timestamp--default{
     color: var(--text-muted);
+}
+
+.message-box__username{
+    font-weight: bold;
 }
 
 .message-box__user_icon{
