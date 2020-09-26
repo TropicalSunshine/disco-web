@@ -1,4 +1,4 @@
-import { DEFAULT_SONG } from "../DEFAULTS";
+import { DEFAULT_SONG } from "./DEFAULTS";
 
 import { User as UserApi } from "shared/utils/api";
 import { Controls } from "shared/utils/socket";

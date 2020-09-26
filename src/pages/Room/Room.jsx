@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { LoaderPage } from "shared/components/index";
 
 import { DEFAULT_SONG } from "./DEFAULTS";
-import attachRoomListeners from "./hooks/attachRoomListeners";
+import attachRoomListeners from "./attachRoomListeners";
 
 import MessagePanel from "./MessagePanel";
 import MusicControls from "./MusicControls";

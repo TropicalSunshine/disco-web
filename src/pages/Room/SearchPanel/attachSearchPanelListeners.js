@@ -1,6 +1,6 @@
 
 import { DjControls } from "shared/utils/socket";
-import { ACTIONS } from "./useSongQueueReducer";
+import { ACTIONS } from "./hooks/useSongQueueReducer";
 
 function useAttachSearchPanelListeners(songQueueDispatch) {
     const bind = () => {

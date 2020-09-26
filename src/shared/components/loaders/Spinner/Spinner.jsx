@@ -1,6 +1,6 @@
 import React from 'react'
 
-import useSpinnerStyles from "../useSpinnerStyles";
+import useSpinnerStyles from "../shared/useSpinnerStyles";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 import styles from "./styles.module.css";
