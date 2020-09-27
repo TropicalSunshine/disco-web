@@ -20,8 +20,9 @@ import {
 
 import styles from "./styles.module.css";
 import { DEFAULT_SONG } from "../DEFAULTS";
+import { useRef } from "react";
 
-const SEARCH_WAIT_INTERVAL = 500;
+const SEARCH_WAIT_INTERVAL = 1000;
 
 const TAB_OPTIONS = [
     {
@@ -43,7 +44,20 @@ function SearchPanel() {
         songQueueDispatch
     );
 
-    var searchInterval = null;
+    var searchInterval = useRef(null);
+
+    const search = async (value) => {
+        console.log("searching", value);
+        setIsSearching(true);
+        const response = await youtube.searchVideoByKeyword(value);
+
+        if (response) {
+            setSearchResults(response);
+        }
+
+        setIsSearching(false);
+    }
+
 
     const onSearch = (e) => {
         e.preventDefault();
@@ -52,20 +66,8 @@ function SearchPanel() {
         const { value } = e.target;
 
         if (value === "") return;
-        if (searchInterval) clearTimeout(searchInterval);
-        console.log("[search interval] : ", searchInterval);
-        setIsSearching(true);
-
-        searchInterval = setTimeout(async () => {
-            console.log("searching");
-            const response = await youtube.searchVideoByKeyword(value);
-
-            if (response) {
-                setSearchResults(response);
-            }
-
-            setIsSearching(false);
-        }, SEARCH_WAIT_INTERVAL);
+        clearTimeout(searchInterval.current);
+        searchInterval.current = setTimeout( () => search(value) , SEARCH_WAIT_INTERVAL);
     };
 
     /* eslint-disable */
@@ -82,7 +84,7 @@ function SearchPanel() {
         return () => {
             unbind();
         };
-    }, [bind, unbind]);
+    }, []);
     /* eslint-enable */
 
     const handleTabSelect = (i) => setTab(i);
