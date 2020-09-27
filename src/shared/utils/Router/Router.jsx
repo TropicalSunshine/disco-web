@@ -4,15 +4,15 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import NavbarRoute from "./NavbarRoute";
 import { LoaderPage } from "shared/components/index";
-import { MusicRoomProvider } from "shared/utils/musicRoom";
-import { AuthProvider } from "shared/utils/auth";
-import { ThemeProvider } from "shared/utils/theme";
+import { MusicRoomProvider } from "shared/context/musicRoom";
+import { AuthProvider } from "shared/context/auth";
+import { ThemeProvider } from "shared/context/theme";
 
 const Room = lazy(() => import("pages/Room"));
 const HomePage = lazy(() => import("pages/HomePage"));
 const ExplorePage = lazy(() => import("pages/ExplorePage"));
 const CreateRoomPage = lazy(() => import("pages/CreateRoomPage"));
-
+const Profile = lazy(() => import("pages/Profile"));
 
 function Router() {
   return (
@@ -27,6 +27,7 @@ function Router() {
                   <NavbarRoute exact path="/explore" component={ExplorePage} />
                   <NavbarRoute exact path="/room/create" component={CreateRoomPage} />
                   <Route exact path="/room/:roomId" component={Room} />
+                  <NavbarRoute exact path="/u/:username" component={Profile} />
                 </Switch>
               </MusicRoomProvider>
             </ThemeProvider>

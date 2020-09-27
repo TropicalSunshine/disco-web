@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
-import { useAuth } from "shared/utils/auth";
+import { useAuth } from "shared/context/auth";
 import { UserProfileIcon } from "shared/components";
 import { textStyles } from "shared/styles";
 

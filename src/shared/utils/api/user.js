@@ -1,7 +1,7 @@
 import api from "./api";
 
 export const login = (email, password) => api.post("", {
-    query : `query login($email : String!, $password : String!){
+    query: `query login($email : String!, $password : String!){
         login(email : $email, password : $password){
             status
             token
@@ -9,11 +9,11 @@ export const login = (email, password) => api.post("", {
             error
         }
     }`,
-    variables : {email, password}
+    variables: { email, password }
 });
 
 export const logout = (token) => api.post("", {
-    query : `
+    query: `
     query logout ( $token : String! ) {
         logout ( token : $token ) {
             status
@@ -22,23 +22,23 @@ export const logout = (token) => api.post("", {
         }
     }
     `,
-    variables : { token }
+    variables: { token }
 });
 
 
 export const register = (email, password, username) => api.post("", {
-    query : `mutation register($email : String!, $password : String!, $username : String!){
+    query: `mutation register($email : String!, $password : String!, $username : String!){
         register (email : $email, password : $password, username : $username){
             message
             status
             error
         }
     }`,
-    variables : { email, password, username }
+    variables: { email, password, username }
 });
 
 export const getUserInfo = (userId) => api.post("", {
-    query : `
+    query: `
         query getUserInfo( $userId : String! ) {
             getUserInfo( userId : $userId ){
                 _id
@@ -46,5 +46,16 @@ export const getUserInfo = (userId) => api.post("", {
             }
         }
     `,
-    variables : { userId }
+    variables: { userId }
+})
+
+export const me = () => api.post("", {
+    query: `
+    query {
+        me {
+            _id
+            username
+        }
+    }
+    `
 })
