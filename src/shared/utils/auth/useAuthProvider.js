@@ -1,12 +1,12 @@
 import { useState, useEffect, useMemo } from "react";
 
-import { User as UserStore } from "../storage"; 
+import { User as UserStore } from "../storage";
 import { User as UserApi } from "../api";
 import { setAuthHeader } from "shared/utils/api/api";
 
 import { useHistory } from "react-router-dom";
 
-function useAuth(){
+function useAuth() {
 
     const history = useHistory();
     const [userId, setUserId] = useState(null);
@@ -18,12 +18,12 @@ function useAuth(){
         const result = await UserApi.login(email, password);
         const response = result.data.data.login;
 
-        if(response.error !== null) {
+        if (response.error !== null) {
             console.error(response.error);
             throw new Error(response.error);
-        } 
-        
-        if(response.status === 500 ){
+        }
+
+        if (response.status === 500) {
             console.error("server error");
             throw new Error(response.error);
         }
@@ -36,7 +36,7 @@ function useAuth(){
 
         setIsLoggedIn(true);
 
-        
+
         return response;
     }
 
@@ -44,12 +44,12 @@ function useAuth(){
         const result = await UserApi.register(email, password, username);
         const response = result.data.data.register;
 
-        if(response.error !== null) {
+        if (response.error !== null) {
             console.error(response.error);
             throw new Error(response.error);
         }
 
-        if(response.status === 500 ) {
+        if (response.status === 500) {
             console.error("server error");
             throw new Error(response.error);
         }
@@ -58,10 +58,10 @@ function useAuth(){
     }
 
     const logout = async () => {
-    
+
         await UserApi.logout(UserStore.token.get());
-        
-        history.push("/"); 
+
+        history.push("/");
         UserStore.token.clear();
         UserStore.userId.clear();
         setIsLoggedIn(false);
@@ -71,13 +71,13 @@ function useAuth(){
     }
 
     const fetchState = () => {
-        
+
         const token = UserStore.token.get();
         setToken(token);
         const userId = UserStore.userId.get();
         setUserId(userId);
 
-        if(token && userId){
+        if (token && userId) {
             setIsLoggedIn(true);
         }
 
@@ -88,7 +88,7 @@ function useAuth(){
     useEffect(fetchState, []);
 
     /* eslint-disable */
-    return useMemo(() => ({ 
+    return useMemo(() => ({
         login,
         logout,
         register,
