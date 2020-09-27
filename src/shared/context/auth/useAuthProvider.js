@@ -74,6 +74,7 @@ function useAuth() {
 
         const token = UserStore.token.get();
         setToken(token);
+        setAuthHeader(token);
         const userId = UserStore.userId.get();
         setUserId(userId);
 
