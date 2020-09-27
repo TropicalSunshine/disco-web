@@ -1,4 +1,4 @@
 import MusicControls from "./MusicControls";
-import { withMusicRoomProvider } from "shared/utils/musicRoom";
+import { withMusicRoomProvider } from "shared/context/musicRoom";
 
 export default withMusicRoomProvider(MusicControls);

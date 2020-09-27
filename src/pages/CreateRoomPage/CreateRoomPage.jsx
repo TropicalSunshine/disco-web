@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 
-import { Radio, 
-    RadioGroup, FormControlLabel, } from "@material-ui/core";
+import {
+    Radio,
+    RadioGroup, FormControlLabel,
+} from "@material-ui/core";
 import { AssignmentIndRounded } from "@material-ui/icons";
 import { InputSubmit, TextInput, TextInputArea } from "shared/components";
 
@@ -18,7 +20,7 @@ class CreateRoomPage extends Component {
         isPrivate: false,
         description: "",
         isSubmitting: false,
-        errorMsg : ""
+        errorMsg: ""
     }
 
     handleSubmit = async (e) => {
@@ -35,27 +37,27 @@ class CreateRoomPage extends Component {
             const { name, description, isPrivate } = this.state;
 
             var response = await RoomApi.createRoom({
-                name : name,
+                name: name,
                 isPrivate: isPrivate,
                 description: description,
-                creator : auth.userId
+                creator: auth.userId
             });
 
-            if(response.error === null){
+            if (response.error === null) {
                 throw new Error(response.error);
             }
 
 
             const roomId = response.data.data.createRoom.roomId;
 
-            if(!roomId){
+            if (!roomId) {
                 throw new Error("invalid room id");
             }
 
             history.push(`/room/${roomId}`);
-            
 
-        } catch (err){
+
+        } catch (err) {
             this.setState({
                 errorMsg: err.message
             });
@@ -74,9 +76,9 @@ class CreateRoomPage extends Component {
         e.stopPropagation();
 
         const { name, value } = e.target;
-        
+
         this.setState({
-            [name] : value
+            [name]: value
         });
     }
 
@@ -85,8 +87,8 @@ class CreateRoomPage extends Component {
         e.stopPropagation();
         const { value } = e.target;
 
-        if(value === "private") this.setState({ isPrivate : true});
-        if(value === "public") this.setState({ isPrivate: false});
+        if (value === "private") this.setState({ isPrivate: true });
+        if (value === "public") this.setState({ isPrivate: false });
     }
 
     render() {
@@ -102,9 +104,9 @@ class CreateRoomPage extends Component {
                     {
                         (this.state.errorMsg !== "") && (
                             <h3 className={`${textStyles["text-4"]} red`}>
-                            {
-                                this.state.errorMsg
-                            }
+                                {
+                                    this.state.errorMsg
+                                }
                             </h3>
                         )
                     }
@@ -114,36 +116,36 @@ class CreateRoomPage extends Component {
                 >
                     <div className={`${styles["input-container"]}`}>
                         <TextInput
-                        dark={false}
-                        onChange={this.handleInputChange}
-                        Icon={AssignmentIndRounded}
-                        label={"Name"}
-                        name="name"
-                        id={"create-room-name"}
+                            dark={false}
+                            onChange={this.handleInputChange}
+                            Icon={AssignmentIndRounded}
+                            label={"Name"}
+                            name="name"
+                            id={"create-room-name"}
                         />
                     </div>
                     <div className={`${styles["input-container"]}`}>
                         <TextInputArea
-                        dark={false}
-                        label="Description"
-                        rows={3}
-                        id={"create-room-description-input"}
-                        name="description"
-                        onChange={this.handleInputChange}
+                            dark={false}
+                            label="Description"
+                            rows={3}
+                            id={"create-room-description-input"}
+                            name="description"
+                            onChange={this.handleInputChange}
                         />
                     </div>
                     <div className={`${styles["input-container"]} box-center`}>
-                        <RadioGroup 
-                        row={true}
-                        required={true}
-                        defaultValue={"private"} 
-                        onChange={this.handleRadioChange}>
+                        <RadioGroup
+                            row={true}
+                            required={true}
+                            defaultValue={"private"}
+                            onChange={this.handleRadioChange}>
                             <FormControlLabel
                                 value="private"
                                 control={
                                     <Radio
-                                    disabled={isSubmitting} 
-                                    color="secondary"/>
+                                        disabled={isSubmitting}
+                                        color="secondary" />
                                 }
                                 label="Private"
                             />
@@ -151,8 +153,8 @@ class CreateRoomPage extends Component {
                                 value="public"
                                 control={
                                     <Radio
-                                    disabled={isSubmitting} 
-                                    color="secondary"/>
+                                        disabled={isSubmitting}
+                                        color="secondary" />
                                 }
                                 label="Public"
                             />
@@ -160,9 +162,9 @@ class CreateRoomPage extends Component {
                     </div>
                     <div className={`${styles["submit-container"]}`}>
                         <InputSubmit
-                        disabled={this.state.isSubmitting}
-                        value="Create"
-                        loading={isSubmitting}
+                            disabled={this.state.isSubmitting}
+                            value="Create"
+                            loading={isSubmitting}
                         />
                     </div>
                 </form>

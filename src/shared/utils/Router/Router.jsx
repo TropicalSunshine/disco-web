@@ -4,9 +4,9 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import NavbarRoute from "./NavbarRoute";
 import { LoaderPage } from "shared/components/index";
-import { MusicRoomProvider } from "shared/utils/musicRoom";
-import { AuthProvider } from "shared/utils/auth";
-import { ThemeProvider } from "shared/utils/theme";
+import { MusicRoomProvider } from "shared/context/musicRoom";
+import { AuthProvider } from "shared/context/auth";
+import { ThemeProvider } from "shared/context/theme";
 
 const Room = lazy(() => import("pages/Room"));
 const HomePage = lazy(() => import("pages/HomePage"));
