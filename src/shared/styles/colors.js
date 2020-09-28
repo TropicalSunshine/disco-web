@@ -7,8 +7,7 @@ const colors = [
     "var(--red)",
     "var(--yellow)",
     "var(--purple)",
-    "var(--green)",
-    "var(--pink)"
+    "var(--green)"
 ]
 
 export const randomColorFromString = (str) => {

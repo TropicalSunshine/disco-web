@@ -112,7 +112,7 @@ function Navbar({ auth, history }) {
                                             className={`${styles["navbar__user-icon"]}`}
                                             onMouseDown={openMenu}>
                                             <UserProfileIcon
-                                                label={user.username}
+                                                label={(user.username) ? (user.username) : ""}
                                                 height={"40px"}
                                             />
                                         </span>

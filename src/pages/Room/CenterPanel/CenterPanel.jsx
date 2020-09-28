@@ -5,6 +5,7 @@ import { Button } from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 import { useAuth } from "shared/context/auth";
+import { useUser } from "shared/context/user";
 import { UserProfileIcon } from "shared/components";
 import { textStyles } from "shared/styles";
 
@@ -18,9 +19,8 @@ function CenterPanel({ members, currentDj, initialDjs, room }) {
     const [djs, setDjs] = useState(initialDjs);
     const [isStepUp, setIsStepUp] = useState(false);
 
-    const {
-        userId
-    } = useAuth();
+    const { userId } = useAuth();
+    const { user } = useUser();
 
     const setters = {
         setDjs,
@@ -74,6 +74,7 @@ function CenterPanel({ members, currentDj, initialDjs, room }) {
                 box-center
                 ${styles["center-panel__navbar__user-icon"]}`}>
                     <UserProfileIcon
+                        label={(user.username) ? (user.username) : ""}
                         height={"40px"}
                     />
                 </div>
