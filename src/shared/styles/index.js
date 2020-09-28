@@ -1,7 +1,7 @@
 import textStyles from "./text.module.css";
-import * as colors from "./randomColors";
+import * as colors from "./colors";
 
 export {
-    colors, 
+    colors,
     textStyles
 }

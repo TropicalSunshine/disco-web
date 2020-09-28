@@ -7,7 +7,7 @@ import UserContext from "./UserContext";
 function UserProvider({ children }) {
 
     const { isLoggedIn } = useAuth();
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState({});
 
     const getUser = async () => {
         const response = await UserApi.me();
