@@ -12,6 +12,7 @@ function ToastContainer() {
             <ToastBox
                 className={textStyles["text-3"]}
                 autoClose={2000}
+                hideProgressBar
                 pauseOnHover={true}
                 position="top-center"
             />

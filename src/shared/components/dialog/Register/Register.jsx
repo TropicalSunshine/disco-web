@@ -3,7 +3,9 @@ import { PureComponent } from "react";
 
 import { InputSubmit } from "shared/components";
 import { TextField } from '@material-ui/core';
-import { HistoryPropTypes, AuthPropTypes } from "shared/types"; 
+import { toast } from "react-toastify";
+
+import { HistoryPropTypes, AuthPropTypes } from "shared/types";
 
 import styles from "./styles.module.css";
 import commonStyles from "../styles.module.css";
@@ -11,20 +13,19 @@ import commonStyles from "../styles.module.css";
 class Register extends PureComponent {
 
     state = {
-        username : "", //need to check for username available later on
-        password : "",
+        username: "", //need to check for username available later on
+        password: "",
         passwordConfirm: "",
-        email : "",
-        errorMessage : "",
+        email: "",
         isSubmitting: false
     }
 
-    
+
     handleInputChange = (e) => {
         var { name, value } = e.target;
-        
+
         this.setState({
-            [name] : value
+            [name]: value
         });
     }
 
@@ -38,23 +39,20 @@ class Register extends PureComponent {
         e.stopPropagation();
 
         const { auth } = this.props;
-        
 
-        try{
+
+        try {
             var { password, passwordConfirm, email, username } = this.state;
 
-            if(password !== passwordConfirm){
+            if (password !== passwordConfirm) {
                 throw new Error("Passwords do not match");
             }
 
             await auth.register(email, password, username);
-            
             this.props.handleClose();
 
-        } catch(err) {
-            this.setState({
-                errorMessage: err.message
-            });
+        } catch (err) {
+            toast.warning(err.message);
         }
 
         this.setState({
@@ -62,76 +60,69 @@ class Register extends PureComponent {
         });
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <React.Fragment>
                 <div className="box-center">
                     <h1>Register</h1>
                 </div>
-                <div className="box-center">
-                    {
-                        (this.state.errorMessage !== "") && (
-                        <h3 className="red">{this.state.errorMessage}</h3>
-                        )
-                    }
-                </div>
                 <form
-                className="box-center box-column"
-                onSubmit={this.handleSubmit}
+                    className="box-center box-column"
+                    onSubmit={this.handleSubmit}
                 >
                     <div className={`${commonStyles["input-container"]}`}>
                         <TextField
-                        onChange={this.handleInputChange}
-                        disabled={this.state.isSubmitting}
-                        variant="outlined"
-                        label="Username"
-                        fullWidth={true}
-                        name="username"
-                        type="text"
-                        required={true}
+                            onChange={this.handleInputChange}
+                            disabled={this.state.isSubmitting}
+                            variant="outlined"
+                            label="Username"
+                            fullWidth={true}
+                            name="username"
+                            type="text"
+                            required={true}
                         />
                     </div>
                     <div className={`${commonStyles["input-container"]}`}>
                         <TextField
-                        onChange={this.handleInputChange}
-                        disabled={this.state.isSubmitting}
-                        variant="outlined"
-                        label="Email"
-                        fullWidth={true}
-                        name="email"
-                        type="email"
-                        required={true}
+                            onChange={this.handleInputChange}
+                            disabled={this.state.isSubmitting}
+                            variant="outlined"
+                            label="Email"
+                            fullWidth={true}
+                            name="email"
+                            type="email"
+                            required={true}
                         />
                     </div>
                     <div className={`${commonStyles["input-container"]}`}>
                         <TextField
-                        onChange={this.handleInputChange}
-                        disabled={this.state.isSubmitting}
-                        variant="outlined"
-                        label="Password"
-                        fullWidth={true}
-                        name="password"
-                        type="text"
-                        required={true}
+                            onChange={this.handleInputChange}
+                            disabled={this.state.isSubmitting}
+                            variant="outlined"
+                            label="Password"
+                            fullWidth={true}
+                            name="password"
+                            type="text"
+                            required={true}
                         />
                     </div>
                     <div className={`${commonStyles["input-container"]}`}>
                         <TextField
-                        onChange={this.handleInputChange}
-                        disabled={this.state.isSubmitting}
-                        variant="outlined"
-                        label="Confirm Password"
-                        fullWidth={true}
-                        name="passwordConfirm"
-                        type="text"
-                        required={true}
+                            onChange={this.handleInputChange}
+                            disabled={this.state.isSubmitting}
+                            variant="outlined"
+                            label="Confirm Password"
+                            fullWidth={true}
+                            name="passwordConfirm"
+                            type="text"
+                            required={true}
                         />
                     </div>
                     <div className={styles["button-container"]}>
                         <InputSubmit
-                        disabled={this.state.isSubmitting}
-                        loading={this.state.isSubmitting}
-                        value="Sign Up"
+                            disabled={this.state.isSubmitting}
+                            loading={this.state.isSubmitting}
+                            value="Sign Up"
                         />
                     </div>
 

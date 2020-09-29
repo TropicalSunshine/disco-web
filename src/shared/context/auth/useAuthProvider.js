@@ -42,6 +42,7 @@ function useAuth() {
 
     const register = async (email, password, username) => {
         const result = await UserApi.register(email, password, username);
+
         const response = result.data.data.register;
 
         if (response.error !== null) {
