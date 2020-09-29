@@ -4,8 +4,6 @@ import { User as UserStore } from "shared/utils/storage";
 import { User as UserApi } from "shared/utils/api";
 import { setAuthHeader } from "shared/utils/api/api";
 
-import { useHistory } from "react-router-dom";
-
 function useAuth() {
 
     const [userId, setUserId] = useState(null);

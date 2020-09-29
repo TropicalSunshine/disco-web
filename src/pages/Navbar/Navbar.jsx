@@ -54,6 +54,7 @@ function Navbar({ auth, history }) {
         try {
             auth.logout();
             toast.success("Success");
+            history.push("/");
         } catch (err) {
             toast.warning(err.message);
         }
