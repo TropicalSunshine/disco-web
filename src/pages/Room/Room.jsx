@@ -21,11 +21,11 @@ function Room({ musicRoom }) {
 
   const [isLoading, setIsLoading] = useState(true);
   const [membersMap, setMembersMap] = useState({});
-  const [ song, setSong ] = useState({...DEFAULT_SONG});
-  const [ room, setRoom ] = useState({});
-  const [ initialDjs, setInitialDjs ] = useState([]);
-  const [ currentDj, setCurrentDj ] = useState(null);
-  
+  const [song, setSong] = useState({ ...DEFAULT_SONG });
+  const [room, setRoom] = useState({});
+  const [initialDjs, setInitialDjs] = useState([]);
+  const [currentDj, setCurrentDj] = useState(null);
+
   const setters = {
     setCurrentDj,
     setInitialDjs,
@@ -45,16 +45,16 @@ function Room({ musicRoom }) {
     (async () => {
       setIsLoading(true);
 
-      
-      const { room ,song ,djs, currentDj } = await join(roomId);
+
+      const { room, song, djs, currentDj } = await join(roomId);
 
       const { members } = room;
 
       var map = {};
-      for(var m of members){
+      for (var m of members) {
         map[m._id] = m;
       }
-      
+
       setInitialDjs(djs);
       setCurrentDj(currentDj);
       setMembersMap(map);
@@ -65,7 +65,7 @@ function Room({ musicRoom }) {
       });
 
       setRoom(room);
-      
+
       bind();
 
       setIsLoading(false);
@@ -82,7 +82,7 @@ function Room({ musicRoom }) {
 
   return (
     <React.Fragment>
-      {isLoading && <LoaderPage/>}
+      {isLoading && <LoaderPage />}
       {!isLoading && (
         <>
           <div className={`${styles["room"]}`}>
@@ -99,14 +99,14 @@ function Room({ musicRoom }) {
                 />
               </div>
               <div className={styles["room__room-right"]}>
-                <MessagePanel 
-                  members={membersMap}                  
+                <MessagePanel
+                  members={membersMap}
                 />
               </div>
             </div>
 
             <div className={styles["room__player-control-container"]}>
-              <MusicControls 
+              <MusicControls
                 song={song}
               />
             </div>
