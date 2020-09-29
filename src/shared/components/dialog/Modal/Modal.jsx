@@ -1,13 +1,15 @@
 import React, { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
+import ErrorBoundary from "shared/utils/ErrorBoundary";
+
 function Modal({ children }) {
     //something to reference to remove when component dismounts
     const divRef = useRef(null);
 
-    if(!divRef.current) {
+    if (!divRef.current) {
         const div = document.createElement("div");
-        divRef.current = div; 
+        divRef.current = div;
     }
 
     useEffect(() => {
@@ -16,8 +18,14 @@ function Modal({ children }) {
 
         return () => modalRoot.removeChild(divRef.current);
     }, []);
-    
-    return createPortal((<div>{children}</div>), divRef.current);
+
+    return createPortal((
+        <ErrorBoundary>
+            <div>
+                {children}
+            </div>
+        </ErrorBoundary>
+    ), divRef.current);
 }
 
 export default Modal;
