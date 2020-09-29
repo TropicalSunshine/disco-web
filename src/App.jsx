@@ -9,7 +9,7 @@ export default class App extends Component {
   render() {
     return (
       <React.StrictMode>
-        <ErrorBoudary>
+        <ErrorBoudary fallback={<h1>Something Went Wrong</h1>}>
           <ToastContainer />
           <Router />
         </ErrorBoudary>

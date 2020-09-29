@@ -1,8 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
-import ErrorBoundary from "shared/utils/ErrorBoundary";
-
 function Modal({ children }) {
     //something to reference to remove when component dismounts
     const divRef = useRef(null);

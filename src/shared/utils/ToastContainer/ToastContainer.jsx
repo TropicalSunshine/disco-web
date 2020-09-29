@@ -11,7 +11,7 @@ function ToastContainer() {
         <Modal>
             <ToastBox
                 className={textStyles["text-3"]}
-                autoClose={false}
+                autoClose={2000}
                 pauseOnHover={true}
                 position="top-center"
             />
