@@ -1,0 +1,9 @@
+.profile{
+    padding: 1rem 2rem;
+}
+
+.profile__text__username{
+    color: var(--white);
+    text-align: center;
+    margin: 0 auto;
+}

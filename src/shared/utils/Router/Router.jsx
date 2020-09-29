@@ -7,6 +7,7 @@ import { LoaderPage } from "shared/components/index";
 import { MusicRoomProvider } from "shared/context/musicRoom";
 import { AuthProvider } from "shared/context/auth";
 import { ThemeProvider } from "shared/context/theme";
+import { UserProvider } from "shared/context/user";
 
 const Room = lazy(() => import("pages/Room"));
 const HomePage = lazy(() => import("pages/HomePage"));
@@ -20,17 +21,19 @@ function Router() {
       <Suspense fallback={<LoaderPage />}>
         <div>
           <AuthProvider>
-            <ThemeProvider>
-              <MusicRoomProvider>
-                <Switch>
-                  <NavbarRoute exact path="/" component={HomePage} />
-                  <NavbarRoute exact path="/explore" component={ExplorePage} />
-                  <NavbarRoute exact path="/room/create" component={CreateRoomPage} />
-                  <Route exact path="/room/:roomId" component={Room} />
-                  <NavbarRoute exact path="/u/:username" component={Profile} />
-                </Switch>
-              </MusicRoomProvider>
-            </ThemeProvider>
+            <UserProvider>
+              <ThemeProvider>
+                <MusicRoomProvider>
+                  <Switch>
+                    <NavbarRoute exact path="/" component={HomePage} />
+                    <NavbarRoute exact path="/explore" component={ExplorePage} />
+                    <NavbarRoute exact path="/room/create" component={CreateRoomPage} />
+                    <NavbarRoute exact path="/u/:username" component={Profile} />
+                    <Route exact path="/room/:roomId" component={Room} />
+                  </Switch>
+                </MusicRoomProvider>
+              </ThemeProvider>
+            </UserProvider>
           </AuthProvider>
         </div>
       </Suspense>

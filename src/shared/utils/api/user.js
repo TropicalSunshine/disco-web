@@ -47,6 +47,18 @@ export const getUserInfo = (userId) => api.post("", {
         }
     `,
     variables: { userId }
+});
+
+export const getUserByUsername = username => api.post("", {
+    query: `
+        query getUserByUsername ( $username : String! ) {
+            getUserByUsername( username : $username ){
+                _id
+                username
+            }
+        }
+    `,
+    variables: { username }
 })
 
 export const me = () => api.post("", {
@@ -58,4 +70,4 @@ export const me = () => api.post("", {
         }
     }
     `
-})
+});

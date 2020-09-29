@@ -67,19 +67,19 @@ function SearchPanel() {
 
         if (value === "") return;
         clearTimeout(searchInterval.current);
-        searchInterval.current = setTimeout( () => search(value) , SEARCH_WAIT_INTERVAL);
+        searchInterval.current = setTimeout(() => search(value), SEARCH_WAIT_INTERVAL);
     };
 
     /* eslint-disable */
 
     useEffect(() => {
         bind();
-        
+
         (async () => {
             const response = await youtube.getMostPopularVideos();
             setSearchResults(response);
         })();
-            
+
 
         return () => {
             unbind();
@@ -117,8 +117,8 @@ function SearchPanel() {
                                 }
                             />
                         </form>
-                        <div 
-                        className={`
+                        <div
+                            className={`
                         ${styles["search-results"]}
                         ${(isSearching) ? "box-center" : null}
                         `}>
@@ -128,9 +128,10 @@ function SearchPanel() {
                                     {searchResults.map((r, i) => {
                                         const { snippet, id } = r;
 
+
                                         var value = {
                                             ...DEFAULT_SONG,
-                                            songId: id.videoId,
+                                            songId: (id.videoId) ? id.videoId : id,
                                             songImage: snippet.thumbnails,
                                             songTitle: snippet.title,
                                             songArtist: snippet.channelTitle,

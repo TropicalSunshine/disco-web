@@ -1,10 +1,10 @@
-import React, { forwardRef, useMemo} from "react";
+import React, { forwardRef, useMemo } from "react";
 
 import { UserProfileIcon } from "shared/components";
 import { textStyles } from "shared/styles";
 import styles from "./styles.module.css";
 
-function MessageBlock ({ message, user }, ref) {
+function MessageBlock({ message, user }, ref) {
 
     const { content, time_created } = message;
     const messageDate = useMemo(() => {
@@ -12,15 +12,17 @@ function MessageBlock ({ message, user }, ref) {
     }, [time_created]);
 
     return (
-        <li 
-        className={`
+        <li
+            className={`
         ${styles["message-box"]} 
         ${styles["message-box--default"]} 
         box-row`
-        } 
-        ref={ref}>
+            }
+            ref={ref}>
             <div className={` ${styles["message-box__user_icon"]}`}>
-                <UserProfileIcon height={"30px"}/>
+                <UserProfileIcon
+                    label={user.username}
+                    height={"30px"} />
             </div>
             <div className={`
             ${styles["message-box__message-content"]}
@@ -40,8 +42,8 @@ function MessageBlock ({ message, user }, ref) {
                         {`${messageDate.toLocaleDateString()} ${messageDate.toLocaleTimeString()}`}
                     </span>
                 </div>
-                <div 
-                className={`${styles["message-box__content"]} 
+                <div
+                    className={`${styles["message-box__content"]} 
                 ${textStyles["text-5"]}`}>
                     {content}
                 </div>
