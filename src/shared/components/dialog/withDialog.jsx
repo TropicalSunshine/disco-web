@@ -12,40 +12,40 @@ const withDialog = Component => class extends React.Component {
 
     static propTypes = {
         show: PropTypes.bool.isRequired,
-        handleClose : PropTypes.func.isRequired
+        handleClose: PropTypes.func.isRequired
     }
 
-    componentDidMount(){
+    componentDidMount() {
         document.addEventListener("keyup", this.handleEscape);
     }
 
     handleEscape = (e) => {
-        if(e.key === "Escape"){
+        if (e.key === "Escape") {
             this.props.handleClose();
         }
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         document.removeEventListener("keyup", this.handleEscape);
     }
 
-    render(){
+    render() {
         return (
             <React.Fragment>
                 {
                     this.props.show && (
                         <Modal>
-                            <div 
-                            className={`${styles["dialogue-container"]}`}>
+                            <div
+                                className={`box-center ${styles["dialogue-container"]}`}>
                                 <div className={`${styles["dialogue-box"]}`}>
                                     <IconButton
-                                    onClick={() => {
-                                        this.props.handleClose();
-                                    }}
+                                        onClick={() => {
+                                            this.props.handleClose();
+                                        }}
                                     >
-                                        <ClearOutlined/>
+                                        <ClearOutlined />
                                     </IconButton>
-                                    <Component {...this.props}/>
+                                    <Component {...this.props} />
                                 </div>
                             </div>
                         </Modal>

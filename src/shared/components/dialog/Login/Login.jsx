@@ -43,6 +43,7 @@ class Login extends PureComponent {
             await auth.login(email, password);
 
             this.props.handleClose();
+            toast.success("Success");
             this.props.history.push("/explore");
 
         } catch (err) {
@@ -57,7 +58,6 @@ class Login extends PureComponent {
 
 
     render() {
-
         return (
             <React.Fragment>
                 <div>
