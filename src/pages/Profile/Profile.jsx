@@ -10,7 +10,7 @@ import styles from "./Profile.module.css";
 
 /* eslint-disable */
 
-function Profile(props) {
+function Profile() {
 
     const { user } = useUser();
     const { username } = useParams();
@@ -28,6 +28,7 @@ function Profile(props) {
         if (!user) return;
         if (username === user.username) {
             setUserProfile(user);
+            setIsLoading(false);
         } else {
             loadProfile();
         }

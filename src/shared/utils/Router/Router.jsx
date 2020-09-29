@@ -28,8 +28,8 @@ function Router() {
                     <NavbarRoute exact path="/" component={HomePage} />
                     <NavbarRoute exact path="/explore" component={ExplorePage} />
                     <NavbarRoute exact path="/room/create" component={CreateRoomPage} />
-                    <Route exact path="/room/:roomId" component={Room} />
                     <NavbarRoute exact path="/u/:username" component={Profile} />
+                    <Route exact path="/room/:roomId" component={Room} />
                   </Switch>
                 </MusicRoomProvider>
               </ThemeProvider>

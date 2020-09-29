@@ -107,6 +107,12 @@ function Navbar({ auth, history }) {
                                             Explore
                                         </Link>
                                     </div>
+                                    <div
+                                        className={styles["navbar__menu-item"]}>
+                                        <Link to={`/u/${(user.username) ? (user.username) : ""}`}>
+                                            {"Profile"}
+                                        </Link>
+                                    </div>
                                     <div className={`${styles["navbar__user-icon-box"]}`}>
                                         <span
                                             className={`${styles["navbar__user-icon"]}`}
