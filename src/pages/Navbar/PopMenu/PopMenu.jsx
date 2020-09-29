@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import { useUser } from "shared/context/user";
 import styles from "./PopMenu.module.css";

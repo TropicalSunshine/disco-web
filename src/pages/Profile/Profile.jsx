@@ -8,7 +8,6 @@ import { User as UserApi } from "shared/utils/api";
 import { textStyles } from "shared/styles";
 import styles from "./Profile.module.css";
 
-/* eslint-disable */
 
 function Profile() {
 
@@ -24,6 +23,7 @@ function Profile() {
         setIsLoading(false);
     }
 
+    /* eslint-disable */
     useEffect(() => {
         if (!user) return;
         if (username === user.username) {
@@ -34,6 +34,7 @@ function Profile() {
         }
 
     }, [user]);
+    /* eslint-enable */
 
     return (
         <div className={`box-center ${styles["profile"]}`}>
@@ -61,6 +62,5 @@ function Profile() {
         </div>
     )
 }
-/* eslint-enable */
 
 export default Profile;
