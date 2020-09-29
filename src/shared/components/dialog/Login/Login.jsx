@@ -42,8 +42,8 @@ class Login extends PureComponent {
 
             await auth.login(email, password);
 
-            this.props.handleClose();
             toast.success("Success");
+            this.props.handleClose();
             this.props.history.push("/explore");
 
         } catch (err) {
