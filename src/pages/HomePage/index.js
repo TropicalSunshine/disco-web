@@ -1,4 +1,4 @@
-import { withAuthProvider } from "shared/utils/auth";
+import { withAuthProvider } from "shared/context/auth";
 import HomePage from "./HomePage";
 
 

@@ -8,20 +8,20 @@ import RoomsList from "./Rooms";
 import styles from "./styles.module.css";
 
 
-function ExplorePage ({ history }){
+function ExplorePage({ history }) {
 
     return (
-        
+
         <div className={`${styles["explore-container"]} box-column`}>
-            <div className={`${styles["category-container"]}`}>
-                <Button 
-                onClick={() => history.push("/room/create")}
-                variant="contained" 
-                color="primary">
+            <div>
+                <Button
+                    onClick={() => history.push("/room/create")}
+                    variant="contained"
+                    color="primary">
                     Create Room
                 </Button>
             </div>
-            <div className={`${styles["room-container"]}`}>
+            <div className={`${styles["rooms-container"]}`}>
                 <RoomsList history={history} />
             </div>
         </div>

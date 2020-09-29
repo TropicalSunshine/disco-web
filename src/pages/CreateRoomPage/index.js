@@ -1,6 +1,6 @@
 import CreateRoomPage from "./CreateRoomPage";
 import { HistoryPropTypes } from "shared/types";
-import { withAuthCheck, withAuthProvider } from "shared/utils/auth";
+import { withAuthCheck, withAuthProvider } from "shared/context/auth";
 
 CreateRoomPage.propTypes = {
     ...HistoryPropTypes

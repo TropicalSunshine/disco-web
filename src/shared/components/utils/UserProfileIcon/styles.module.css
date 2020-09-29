@@ -6,7 +6,10 @@
     height: 100%;
     width: 100%;
     overflow: hidden;
+    border-radius: 50%;
+    border-radius: 50%;
+}
+
+.user-profile__circle--default{
     background-color: var(--purple);
-    border-radius: 50%;
-    border-radius: 50%;
 }
