@@ -66,6 +66,8 @@ function MessagePanel({ members }) {
             if (entries[0].isIntersecting && hasMore) {
                 setLastId(messages[0]._id);
                 setIsScrollOldMessages(true);
+            } else {
+                setIsScrollOldMessages(false);
             }
         }, {
             threshold: 0.5
@@ -81,8 +83,8 @@ function MessagePanel({ members }) {
         if (isLoading) return;
         if (firstMessageObserver.current) firstMessageObserver.current.disconnect();
 
-        firstMessageObserver.current = new IntersectionObserver( entries => {
-            if(entries[0].isIntersecting){
+        firstMessageObserver.current = new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting) {
                 setIsScrollAtBottom(true);
             } else {
                 setIsScrollAtBottom(false);
@@ -126,7 +128,7 @@ function MessagePanel({ members }) {
 
         if (!isScrollOldMessages && isScrollAtBottom) {
             current.scrollTop = current.scrollHeight - current.clientHeight;
-        } else if (isScrollOldMessages) {
+        } else if (isScrollOldMessages && !isScrollAtBottom) {
             current.scrollTop = current.clientHeight;
         }
 
