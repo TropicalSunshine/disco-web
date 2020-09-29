@@ -20,11 +20,9 @@ function Modal({ children }) {
     }, []);
 
     return createPortal((
-        <ErrorBoundary>
-            <div>
-                {children}
-            </div>
-        </ErrorBoundary>
+        <div>
+            {children}
+        </div>
     ), divRef.current);
 }
 

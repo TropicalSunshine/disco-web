@@ -1,9 +1,8 @@
 import React, { PureComponent } from 'react'
-
 import { TextField } from '@material-ui/core';
+import { toast } from "react-toastify";
 
 import { HistoryPropTypes, AuthPropTypes } from "shared/types";
-
 import { InputSubmit } from "shared/components";
 
 
@@ -16,8 +15,7 @@ class Login extends PureComponent {
         email: "",
         password: "",
         isSubmitting: false,
-        isError: false,
-        errorMessage: ""
+        isError: false
     }
 
     handleInputChange = (e) => {
@@ -35,7 +33,7 @@ class Login extends PureComponent {
 
         this.setState({
             isSubmitting: true
-        })
+        });
 
         const { auth } = this.props;
 
@@ -48,11 +46,7 @@ class Login extends PureComponent {
             this.props.history.push("/explore");
 
         } catch (err) {
-
-
-            this.setState({
-                errorMessage: err.message
-            });
+            toast.warning(err.message);
         }
 
         this.setState({
@@ -69,13 +63,6 @@ class Login extends PureComponent {
                 <div>
                     <div className="box-center">
                         <h1>Login</h1>
-                    </div>
-                    <div className="box-center">
-                        {
-                            (this.state.errorMessage !== "") && (
-                                <h4 className="red">{this.state.errorMessage}</h4>
-                            )
-                        }
                     </div>
                     <form
                         className="box-center box-column"
