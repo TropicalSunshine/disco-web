@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import { Button } from "@material-ui/core";
 
 import {
@@ -49,7 +50,15 @@ function Navbar({ auth, history }) {
 
     }
 
-    const handleLogout = () => auth.logout();
+    const handleLogout = () => {
+        try {
+            auth.logout();
+            toast.success("Success");
+            history.push("/");
+        } catch (err) {
+            toast.warning(err.message);
+        }
+    }
 
     return (
         <React.Fragment>
