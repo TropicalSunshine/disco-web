@@ -1,0 +1,24 @@
+
+/* display-toast */
+.Toastify__toast { 
+    border-radius: var(--border-radius);
+}
+
+.Toastify__toast-body{
+    text-align: center;
+}
+
+.Toastify__toast--warning {
+    color: var(--red);
+    background-color : var(--red-secondary);
+}
+
+.Toastify__toast--success {
+    color: var(--green);
+    background-color : var(--green-secondary);
+}
+
+.Toastify__toast--success > .Toastify__close-button{
+    color: var(--grey-primary);
+}
+

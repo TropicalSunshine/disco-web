@@ -1,9 +1,8 @@
 import React, { PureComponent } from 'react'
-
 import { TextField } from '@material-ui/core';
+import { toast } from "react-toastify";
 
-import { HistoryPropTypes, AuthPropTypes } from "shared/types"; 
-
+import { HistoryPropTypes, AuthPropTypes } from "shared/types";
 import { InputSubmit } from "shared/components";
 
 
@@ -14,45 +13,41 @@ class Login extends PureComponent {
 
     state = {
         email: "",
-        password : "",
+        password: "",
         isSubmitting: false,
-        isError : false,
-        errorMessage : ""
-    }   
+        isError: false
+    }
 
     handleInputChange = (e) => {
         const { name, value } = e.target;
-        
+
         this.setState({
-            [name] : value
+            [name]: value
         });
     }
 
     handleSubmit = async (e) => {
-        
+
         e.preventDefault();
         e.stopPropagation();
 
         this.setState({
             isSubmitting: true
-        })
+        });
 
         const { auth } = this.props;
-        
-        try{
-            const { email, password } = this.state;
-            
-            await auth.login(email, password);    
 
+        try {
+            const { email, password } = this.state;
+
+            await auth.login(email, password);
+
+            toast.success("Success");
             this.props.handleClose();
             this.props.history.push("/explore");
 
-        } catch(err) {
-
-            
-            this.setState({
-                errorMessage: err.message
-            });
+        } catch (err) {
+            toast.warning(err.message);
         }
 
         this.setState({
@@ -63,56 +58,48 @@ class Login extends PureComponent {
 
 
     render() {
-        
         return (
             <React.Fragment>
                 <div>
                     <div className="box-center">
                         <h1>Login</h1>
                     </div>
-                    <div className="box-center">
-                        {
-                            (this.state.errorMessage !== "") && (
-                            <h4 className="red">{this.state.errorMessage}</h4>
-                            )
-                        }
-                    </div>
-                    <form 
-                    className="box-center box-column" 
-                    autoComplete="on" 
-                    onSubmit={this.handleSubmit}>    
+                    <form
+                        className="box-center box-column"
+                        autoComplete="on"
+                        onSubmit={this.handleSubmit}>
                         <div className={commonStyles["input-container"]}>
                             <TextField
-                            onChange={this.handleInputChange}
-                            disabled={this.state.isSubmitting}
-                            variant="outlined"
-                            label="Email"
-                            
-                            fullWidth={true}
-                            name="email"
-                            type="email"
-                            required={true}
+                                onChange={this.handleInputChange}
+                                disabled={this.state.isSubmitting}
+                                variant="outlined"
+                                label="Email"
+
+                                fullWidth={true}
+                                name="email"
+                                type="email"
+                                required={true}
                             />
                         </div>
                         <div className={commonStyles["input-container"]}>
                             <TextField
-                            onChange={this.handleInputChange}
-                            disabled={this.state.isSubmitting}
-                            variant="outlined"
-                            label="Password"
-                            
-                            fullWidth={true}
-                            name="password"
-                            type="password"
-                            required={true}
+                                onChange={this.handleInputChange}
+                                disabled={this.state.isSubmitting}
+                                variant="outlined"
+                                label="Password"
+
+                                fullWidth={true}
+                                name="password"
+                                type="password"
+                                required={true}
                             />
-                        </div>                        
+                        </div>
                         <div className={styles["button-container"]}>
-                            
+
                             <InputSubmit
-                            disabled={this.state.isSubmitting}
-                            loading={this.state.isSubmitting}
-                            value="Login"
+                                disabled={this.state.isSubmitting}
+                                loading={this.state.isSubmitting}
+                                value="Login"
                             />
                         </div>
                     </form>
