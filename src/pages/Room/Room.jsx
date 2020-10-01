@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 import { LoaderPage } from "shared/components/index";
@@ -73,7 +73,7 @@ function Room({ musicRoom }) {
   }
 
   /* eslint-disable */
-  useEffect(() => {
+  useLayoutEffect(() => {
 
     connect();
 

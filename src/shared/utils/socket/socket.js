@@ -15,6 +15,8 @@ export var socket = io(socketUrl, {
     }
 });
 
+var joinRoom = false;
+
 export var roomId;
 
 var defaultData = {
@@ -24,7 +26,13 @@ var defaultData = {
 };
 
 const DEFAULT_ROOM_ID = '0';
+
+/**
+ * connect socket to the room instance
+ * 
+ */
 export const connectSocket = (rId = DEFAULT_ROOM_ID) => {
+
 
     console.log(`[ROOM ID] : ${rId}`);
     roomId = rId;
@@ -36,30 +44,37 @@ export const connectSocket = (rId = DEFAULT_ROOM_ID) => {
         if (!token) throw new Error("User not signed in can't connect to room");
         socket.io.opts.query.token = token;
 
-
-        socket.on("connect_error", err => {
-            toast.warning(err.message);
-        })
-
-        socket.on("connect_failed", err => {
-            toast.warning(err.message);
-        });
-
-        socket.on("error", err => {
-            toast.warning(err.message);
-        })
-
         socket.on("connect", () => {
+            console.log("connected");
 
-            socket.emit(constants.USERJOINROOM, {
-                roomId: roomId,
-                userId: UserStorage.userId.get()
-            });
+            if (!joinRoom) {
+                console.log("emitting join room");
+                socket.emit(constants.USERJOINROOM, {
+                    roomId: roomId,
+                    userId: UserStorage.userId.get()
+                });
+                joinRoom = true;
+            }
+
         });
 
         socket.connect();
 
 
+        socket.on("connect_error", err => {
+            toast.warning(err.message);
+            rej(err.message);
+        })
+
+        socket.on("connect_failed", err => {
+            toast.warning(err.message);
+            rej(err.message);
+        });
+
+        socket.on("error", err => {
+            toast.warning(err.message);
+            rej(err.message);
+        })
 
         socket.on(constants.JOINSUCCESS, (data) => {
             res({
@@ -72,6 +87,7 @@ export const connectSocket = (rId = DEFAULT_ROOM_ID) => {
 
 export const disconnectSocket = () => {
     socket.disconnect();
+    joinRoom = false;
 }
 
 
