@@ -4,7 +4,7 @@ import AuthContext from "./AuthContext";
 const withAuthProvider = Component => class extends React.Component {
 
     render() {
-        
+
         return (
             <AuthContext.Consumer>
                 {
@@ -12,15 +12,15 @@ const withAuthProvider = Component => class extends React.Component {
 
                         var props = {
                             ...this.props,
-                            auth: auth
+                            auth
                         };
 
                         return <Component {...props} />;
                     }
                 }
             </AuthContext.Consumer>
-        ) 
-    }   
+        )
+    }
 }
 
 export default withAuthProvider;

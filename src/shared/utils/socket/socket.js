@@ -45,7 +45,7 @@ export const connectSocket = (rId = DEFAULT_ROOM_ID) => {
         socket.io.opts.query.token = token;
 
         socket.on("connect", () => {
-            console.log("connected");
+
 
             if (!joinRoom) {
                 console.log("emitting join room");
