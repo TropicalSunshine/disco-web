@@ -10,9 +10,9 @@ export const ACTIONS = {
 
 function songQueueReducer(songQueue, action) {
 
-    const { payload } = action;
+    const { payload, type, callback } = action;
     var copy;
-    switch (action.type) {
+    switch (type) {
         case ACTIONS.ADD_SONG:
             return [...songQueue, payload];
         case ACTIONS.REMOVE_SONG:
@@ -23,6 +23,7 @@ function songQueueReducer(songQueue, action) {
             return copy;
         case ACTIONS.REMOVE_TOP_AND_RESPOND:
             var song = (songQueue.length > 0) ? songQueue[0] : null;
+            callback(song);
             console.log("sending song", song);
             DjControls.emitResponse(song);
             copy = [...songQueue];
