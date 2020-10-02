@@ -8,7 +8,11 @@ function useAttachSearchPanelListeners(songQueueDispatch, addedSongIdMap) {
             console.log(`[socket event] : requesting song `);
             songQueueDispatch({
                 type: ACTIONS.REMOVE_TOP_AND_RESPOND,
-                callback: (song) => addedSongIdMap.current.delete(song.songId)
+                callback: (song) => {
+                    if (song) {
+                        addedSongIdMap.current.delete(song.songId);
+                    }
+                }
             });
         });
     };
