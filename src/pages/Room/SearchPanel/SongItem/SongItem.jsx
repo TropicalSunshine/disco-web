@@ -82,8 +82,7 @@ SongItem.propTypes = {
             onClick: PropTypes.func.isRequired,
             clicked: PropTypes.bool.isRequired,
         })
-    ).isRequired,
-    clicked: PropTypes.bool.isRequired,
+    ).isRequired
 };
 
 export default SongItem;

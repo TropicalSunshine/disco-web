@@ -151,7 +151,7 @@ function SearchPanel() {
                                                                 payload: value,
                                                             });
                                                         },
-                                                        clicked: addedSongIdMap.current.has(value.songId),
+                                                        clicked: addedSongIdMap.current.has(value.songId)
                                                     },
                                                 ]}
                                             />
@@ -180,7 +180,7 @@ function SearchPanel() {
                                                         payload: v,
                                                     });
                                                 },
-                                                clicked: false,
+                                                clicked: false
                                             },
                                         ]}
                                     />
