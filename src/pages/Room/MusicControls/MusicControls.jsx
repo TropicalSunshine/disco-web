@@ -8,8 +8,8 @@ import { textStyles } from "shared/styles";
 
 import VolumeUpIcon from "@material-ui/icons/VolumeUpRounded";
 import VolumeOffIcon from "@material-ui/icons/VolumeOffRounded";
-import FastForwardIcon from "@material-ui/icons/FastForwardSharp";
-import FastRewindIcon from "@material-ui/icons/FastRewindSharp";
+import ThumbDownIcon from "@material-ui/icons/ThumbDownRounded";
+import ThumbUpIcon from "@material-ui/icons/ThumbUpRounded";
 
 import styles from "./styles.module.css";
 /*
@@ -72,7 +72,7 @@ function MusicControls({ song }) {
           className={`${styles["music-player-control-button"]} 
           ${styles["rewind-button"]}`}
         >
-          <FastRewindIcon className={`${styles.icon}`} />
+          <ThumbDownIcon className={`${styles.icon}`} />
         </div>
         <div
           className={`${styles["music-player-control-button"]} 
@@ -85,11 +85,11 @@ function MusicControls({ song }) {
         <div
           className={`${styles["music-player-control-button"]} ${styles["rewind-button"]}`}
         >
-          <FastForwardIcon className={`${styles.icon}`} />
+          <ThumbUpIcon className={`${styles.icon}`} />
         </div>
       </div>
       <div className={`box-center ${styles["music-controls__right"]}`}>
-        <VolumeSlider/>
+        <VolumeSlider />
       </div>
     </div>
   );
