@@ -35,12 +35,13 @@ class Login extends PureComponent {
             isSubmitting: true
         });
 
-        const { auth } = this.props;
+        const { auth, user } = this.props;
 
         try {
             const { email, password } = this.state;
 
             await auth.login(email, password);
+            await user.getUser();
 
             toast.success("Success");
             this.props.handleClose();

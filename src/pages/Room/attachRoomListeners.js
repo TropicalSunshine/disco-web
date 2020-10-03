@@ -36,6 +36,22 @@ function useAttachListeners(setters) {
         setCurrentDj(currentDj);
     }
 
+    const getUserInfo = async (userId) => {
+        const response = await UserApi.getUserInfo(userId);
+        console.log("hereasdasdasd");
+        const info = response.data.data.getUserInfo;
+        setMembersMap(prevMembers => {
+            if (prevMembers[userId] === undefined) {
+                return prevMembers;
+            }
+
+            return {
+                ...prevMembers,
+                [userId]: info
+            }
+        });
+    }
+
     const bind = () => {
         Controls.addUpdateListener(data => {
             console.log(`[socket event] : update`);
@@ -60,34 +76,21 @@ function useAttachListeners(setters) {
         // 2.  
 
         Controls.addUserJoinRoomListener(({ userId }) => {
-            setMembersMap( prevMembers => ({
+            setMembersMap(prevMembers => ({
                 ...prevMembers,
-                [userId] : {
-                    username : "Loading..."
+                [userId]: {
+                    username: "Loading..."
                 }
             }));
-
-            UserApi.getUserInfo(userId).then( response => {
-                const info = response.data.data.getUserInfo;
-                setMembersMap( prevMembers => {
-                    if(prevMembers[userId] === undefined){
-                        return prevMembers;
-                    }
-
-                    return {
-                        ...prevMembers,
-                        [userId] : info
-                    }
-                })
-            });
+            getUserInfo(userId);
         });
 
-        Controls.addUserLeaveRoomListener(({userId}) => {
-            setMembersMap( prevMembers => {
-                var copy = {...prevMembers}
+        Controls.addUserLeaveRoomListener(({ userId }) => {
+            setMembersMap(prevMembers => {
+                var copy = { ...prevMembers }
                 delete copy[userId];
                 return copy;
-            })
+            });
         })
     }
 

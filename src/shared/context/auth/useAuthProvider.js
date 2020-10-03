@@ -1,5 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 
+import * as check from "./registrationChecks";
+
 import { User as UserStore } from "shared/utils/storage";
 import { User as UserApi } from "shared/utils/api";
 import { setAuthHeader } from "shared/utils/api/api";
@@ -38,6 +40,11 @@ function useAuth() {
     }
 
     const register = async (email, password, username) => {
+
+        check.checkEmail(email);
+        check.checkPassword(password);
+        check.checkUsername(username);
+
         const result = await UserApi.register(email, password, username);
 
         const response = result.data.data.register;

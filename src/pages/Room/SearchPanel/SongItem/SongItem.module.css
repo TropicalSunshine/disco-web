@@ -42,3 +42,7 @@
 .result__desc__button{
     width: 20%;
 }
+
+.result__desc__done{
+    color: var(--green);
+}

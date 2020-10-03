@@ -5,19 +5,19 @@ import { Message as MessageApi } from "shared/utils/api";
 
 const MESSAGE_LIMIT = 20;
 
-function useRoomMessage(roomId, lastId){
+function useRoomMessage(roomId, lastId) {
 
-    const [ messages, setMessages ] = useState([]);
-    const [ isLoading, setIsLoading ] = useState(true);
-    const [ hasMore, setHasMore ] = useState(true);
-    const [ hasError, setHasError ] = useState(false);
-    const [ isScrollOldMessages, setIsScrollOldMessages ] = useState(false);
+    const [messages, setMessages] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [hasMore, setHasMore] = useState(true);
+    const [hasError, setHasError] = useState(false);
+    const [isScrollOldMessages, setIsScrollOldMessages] = useState(false);
 
     //keeps track of the intial load of messages in a room
     //used to check initial renders that are dependent on the intially
     //loaded messages in a room
-    const [ initialLoad, setInitialLoad ] = useState(false);
-    
+    const [initialLoad, setInitialLoad] = useState(false);
+
     /* eslint-disable */
     useEffect(() => {
         (async () => {
@@ -26,11 +26,11 @@ function useRoomMessage(roomId, lastId){
 
                 const response = await MessageApi.getRoomMessage(roomId, lastId, MESSAGE_LIMIT);
                 setHasMore(response.length > 0);
-                setMessages( prevMessages => [
+                setMessages(prevMessages => [
                     ...(response.reverse()),
                     ...prevMessages
                 ]);
-                if(!initialLoad) setInitialLoad(true);
+                if (!initialLoad) setInitialLoad(true);
                 setIsLoading(false);
             } catch (err) {
                 setHasError(true)
@@ -42,20 +42,21 @@ function useRoomMessage(roomId, lastId){
     useEffect(() => {
 
         MessageSocket.addRecieveMessageListener((data) => {
-            const { content, userId } = data;
+            const { content, sender } = data;
 
-            setMessages( prevMessages => [
+
+            setMessages(prevMessages => [
                 ...prevMessages,
                 {
-                    id : '0',
-                    sender : {
-                        _id : userId
+                    id: '0',
+                    sender: {
+                        _id: sender
                     },
-                    content : content,
-                    time_created : (new Date(Date.now())).toISOString()
+                    content: content,
+                    time_created: (new Date(Date.now())).toISOString()
                 }
             ]);
-            
+
             setIsScrollOldMessages(false);
 
         })

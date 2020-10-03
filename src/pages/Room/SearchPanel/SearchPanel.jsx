@@ -5,9 +5,7 @@ import SongItem from "./SongItem";
 import useSongQueueReducer, { ACTIONS } from "./hooks/useSongQueueReducer";
 import attachSearchPanelListeners from "./attachSearchPanelListeners";
 
-import {
-    youtube
-} from "shared/utils/services";
+import { youtube } from "shared/utils/services";
 import { Spinner } from "shared/components/index";
 
 import Input from "@material-ui/core/Input";
@@ -34,15 +32,15 @@ const TAB_OPTIONS = [
 ];
 
 function SearchPanel() {
+    const addedSongIdMap = useRef(new Map());
+
     const [isSearching, setIsSearching] = useState(false);
     const [searchResults, setSearchResults] = useState([]);
     const [tab, setTab] = useState(0);
 
     const { songQueue, songQueueDispatch } = useSongQueueReducer();
 
-    const { bind, unbind } = attachSearchPanelListeners(
-        songQueueDispatch
-    );
+    const { bind, unbind } = attachSearchPanelListeners(songQueueDispatch, addedSongIdMap);
 
     var searchInterval = useRef(null);
 
@@ -56,8 +54,7 @@ function SearchPanel() {
         }
 
         setIsSearching(false);
-    }
-
+    };
 
     const onSearch = (e) => {
         e.preventDefault();
@@ -67,7 +64,15 @@ function SearchPanel() {
 
         if (value === "") return;
         clearTimeout(searchInterval.current);
-        searchInterval.current = setTimeout(() => search(value), SEARCH_WAIT_INTERVAL);
+        searchInterval.current = setTimeout(
+            () => search(value),
+            SEARCH_WAIT_INTERVAL
+        );
+    };
+
+    const getPopularVideos = async () => {
+        const response = await youtube.getMostPopularVideos();
+        setSearchResults(response);
     };
 
     /* eslint-disable */
@@ -75,11 +80,7 @@ function SearchPanel() {
     useEffect(() => {
         bind();
 
-        (async () => {
-            const response = await youtube.getMostPopularVideos();
-            setSearchResults(response);
-        })();
-
+        getPopularVideos();
 
         return () => {
             unbind();
@@ -88,7 +89,6 @@ function SearchPanel() {
     /* eslint-enable */
 
     const handleTabSelect = (i) => setTab(i);
-
 
     return (
         <div className={`box-column ${styles["search-panel"]}`}>
@@ -120,18 +120,18 @@ function SearchPanel() {
                         <div
                             className={`
                         ${styles["search-results"]}
-                        ${(isSearching) ? "box-center" : null}
-                        `}>
+                        ${isSearching ? "box-center" : null}
+                        `}
+                        >
                             {isSearching && <Spinner />}
                             {!isSearching && (
                                 <ul className={styles["search-result-list"]}>
                                     {searchResults.map((r, i) => {
                                         const { snippet, id } = r;
 
-
                                         var value = {
                                             ...DEFAULT_SONG,
-                                            songId: (id.videoId) ? id.videoId : id,
+                                            songId: id.videoId ? id.videoId : id,
                                             songImage: snippet.thumbnails,
                                             songTitle: snippet.title,
                                             songArtist: snippet.channelTitle,
@@ -145,11 +145,13 @@ function SearchPanel() {
                                                     {
                                                         Icon: AddIcon,
                                                         onClick: () => {
+                                                            addedSongIdMap.current.set(value.songId, true);
                                                             songQueueDispatch({
                                                                 type: ACTIONS.ADD_SONG,
                                                                 payload: value,
                                                             });
                                                         },
+                                                        clicked: addedSongIdMap.current.has(value.songId)
                                                     },
                                                 ]}
                                             />
@@ -172,11 +174,13 @@ function SearchPanel() {
                                             {
                                                 Icon: DeleteIcon,
                                                 onClick: () => {
+                                                    addedSongIdMap.current.delete(v.songId);
                                                     songQueueDispatch({
                                                         type: ACTIONS.REMOVE_SONG,
                                                         payload: v,
                                                     });
                                                 },
+                                                clicked: false
                                             },
                                         ]}
                                     />

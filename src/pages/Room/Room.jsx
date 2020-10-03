@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 import { LoaderPage } from "shared/components/index";
 
@@ -38,14 +39,10 @@ function Room({ musicRoom }) {
     unbind
   } = attachRoomListeners(setters);
 
-  /* eslint-disable */
-  useEffect(() => {
+  const connect = async () => {
+    setIsLoading(true);
 
-
-    (async () => {
-      setIsLoading(true);
-
-
+    try {
       const { room, song, djs, currentDj } = await join(roomId);
 
       const { members } = room;
@@ -57,6 +54,7 @@ function Room({ musicRoom }) {
 
       setInitialDjs(djs);
       setCurrentDj(currentDj);
+
       setMembersMap(map);
 
       setSong({
@@ -69,7 +67,16 @@ function Room({ musicRoom }) {
       bind();
 
       setIsLoading(false);
-    })();
+
+    } catch (err) {
+      toast.warning(err.message);
+    }
+  }
+
+  /* eslint-disable */
+  useLayoutEffect(() => {
+
+    connect();
 
     return () => {
       unbind();
