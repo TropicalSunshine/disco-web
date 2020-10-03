@@ -1,0 +1,13 @@
+.not-found {
+  color: white;
+  height: 80vh;
+  text-align: center;
+}
+
+.not-found > h1 {
+  font-weight: normal;
+}
+
+.not-found > img {
+  display: inline;
+}

@@ -13,7 +13,8 @@ const Room = lazy(() => import("pages/Room"));
 const HomePage = lazy(() => import("pages/HomePage"));
 const ExplorePage = lazy(() => import("pages/ExplorePage"));
 const CreateRoomPage = lazy(() => import("pages/CreateRoomPage"));
-const Profile = lazy(() => import("pages/Profile"));
+const ProfilePage = lazy(() => import("pages/ProfilePage"));
+const NotFoundPage = lazy(() => import("pages/NotFoundPage"));
 
 function Router() {
   return (
@@ -28,8 +29,9 @@ function Router() {
                     <NavbarRoute exact path="/" component={HomePage} />
                     <NavbarRoute exact path="/explore" component={ExplorePage} />
                     <NavbarRoute exact path="/room/create" component={CreateRoomPage} />
-                    <NavbarRoute exact path="/u/:username" component={Profile} />
+                    <NavbarRoute exact path="/u/:username" component={ProfilePage} />
                     <Route exact path="/room/:roomId" component={Room} />
+                    <NavbarRoute path="*" component={NotFoundPage} />
                   </Switch>
                 </MusicRoomProvider>
               </ThemeProvider>
