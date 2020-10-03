@@ -54,6 +54,7 @@ function Room({ musicRoom }) {
 
       setInitialDjs(djs);
       setCurrentDj(currentDj);
+
       setMembersMap(map);
 
       setSong({
