@@ -9,6 +9,7 @@ import { useUser } from "shared/context/user";
 import { UserProfileIcon } from "shared/components";
 import { textStyles } from "shared/styles";
 
+import { DEFAULT_USER } from "../DEFAULTS";
 import attachCenterPanelListeners from "./attachCenterPanelListeners";
 
 import styles from "./CenterPanel.module.css";
@@ -94,6 +95,8 @@ function CenterPanel({ members, currentDj, initialDjs, room }) {
                                 key={dj}
                             >
                                 <UserProfileIcon
+                                    label={(members[dj] === undefined) ?
+                                        DEFAULT_USER.username : members[dj].username}
                                     height={"100px"}
                                 />
                             </div>
