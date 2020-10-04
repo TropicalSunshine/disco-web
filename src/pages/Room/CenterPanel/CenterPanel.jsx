@@ -92,11 +92,11 @@ function CenterPanel({ members, currentDj, initialDjs, room }) {
                             <div className={`
                             ${(dj === currentDj) ? styles["center-panel__dj-booth__dj-icon--playing"] : ""}
                             ${styles["center-panel__dj-booth__dj-icon"]}`}
-                                key={dj}
+                                key={`dj-booth-${dj}`}
                             >
                                 <UserProfileIcon
-                                    label={(members[dj] === undefined) ?
-                                        DEFAULT_USER.username : members[dj].username}
+                                    label={(members.get(dj) === undefined) ?
+                                        DEFAULT_USER.username : members.get(dj).username}
                                     height={"100px"}
                                 />
                             </div>

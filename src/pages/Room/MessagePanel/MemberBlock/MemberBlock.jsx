@@ -11,6 +11,7 @@ function MemberBlock({ user }) {
             <div className={`box-center ${styles["member-block__user-icon"]}`}>
                 <UserProfileIcon
                     height="40px"
+
                 />
             </div>
             <div className={`box-center 
@@ -23,7 +24,7 @@ function MemberBlock({ user }) {
 }
 
 MemberBlock.propTypes = {
-    user : PropTypes.object.isRequired
+    user: PropTypes.object.isRequired
 };
 
 export default MemberBlock;

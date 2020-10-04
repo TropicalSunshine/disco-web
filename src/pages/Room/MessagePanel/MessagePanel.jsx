@@ -156,11 +156,11 @@ function MessagePanel({ members }) {
                 {
                     (tab === 0) &&
                     (messages.map((m, i) => {
-                        var user = (members[m.sender._id] === undefined) ?
+                        var user = (members.get(m.sender._id) === undefined) ?
                             {
                                 ...DEFAULT_USER,
                                 ...m.sender
-                            } : members[m.sender._id];
+                            } : members.get(m.sender._id);
 
                         if (i === 0) return (
                             <MessageBlock
@@ -195,10 +195,10 @@ function MessagePanel({ members }) {
                 >
                     {
                         (tab === 1) &&
-                        (Object.keys(members).map((key, i) => (
+                        ([...members.keys()].map((key, i) => (
                             <MemberBlock
                                 key={`room-member-${key}-${i}`}
-                                user={members[key]}
+                                user={members.get(key)}
                             />
                         )))
                     }
