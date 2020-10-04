@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { AllHtmlEntities } from "html-entities";
 
 import PanelTabs from "../shared/PanelTabs";
 import SongItem from "./SongItem";
@@ -41,6 +42,7 @@ function SearchPanel() {
     const { songQueue, songQueueDispatch } = useSongQueueReducer();
 
     const { bind, unbind } = attachSearchPanelListeners(songQueueDispatch, addedSongIdMap);
+
 
     var searchInterval = useRef(null);
 
@@ -129,12 +131,13 @@ function SearchPanel() {
                                     {searchResults.map((r, i) => {
                                         const { snippet, id } = r;
 
+
                                         var value = {
                                             ...DEFAULT_SONG,
                                             songId: id.videoId ? id.videoId : id,
                                             songImage: snippet.thumbnails,
-                                            songTitle: snippet.title,
-                                            songArtist: snippet.channelTitle,
+                                            songTitle: AllHtmlEntities.decode(snippet.title),
+                                            songArtist: AllHtmlEntities.decode(snippet.channelTitle)
                                         };
 
                                         return (
