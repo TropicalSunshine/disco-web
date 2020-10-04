@@ -11,7 +11,7 @@ function MemberBlock({ user }) {
             <div className={`box-center ${styles["member-block__user-icon"]}`}>
                 <UserProfileIcon
                     height="40px"
-
+                    label={user.username}
                 />
             </div>
             <div className={`box-center 
