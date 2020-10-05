@@ -13,6 +13,7 @@ function NotFoundPage() {
                     There seems to be nothing here.
                 </h1>
                 <img
+                    alt="Not Found"
                     src="https://media.giphy.com/media/a93jwI0wkWTQs/giphy.gif"
                 />
             </div>
