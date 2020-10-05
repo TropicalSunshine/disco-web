@@ -20,6 +20,7 @@ function CenterPanel({ members, currentDj, initialDjs, room }) {
     const [djs, setDjs] = useState(initialDjs);
     const [isStepUp, setIsStepUp] = useState(false);
 
+
     const { userId } = useAuth();
     const { user } = useUser();
 

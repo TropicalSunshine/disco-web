@@ -10,8 +10,7 @@ function useCenterPanelListeners(setters, currentUserId) {
         DjControls.addStepUpListener(({ userId }) => {
             console.log(`[socket event] : step up ${userId}`)
             setDjs(prevDjs => {
-                prevDjs.push(userId);
-                return prevDjs;
+                return [...prevDjs, userId];
             });
         });
 
