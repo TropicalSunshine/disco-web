@@ -21,7 +21,7 @@ function Room({ musicRoom }) {
   const { join, leave } = musicRoom;
 
   const [isLoading, setIsLoading] = useState(true);
-  const [membersMap, setMembersMap] = useState({});
+  const [membersMap, setMembersMap] = useState(new Map());
   const [song, setSong] = useState({ ...DEFAULT_SONG });
   const [room, setRoom] = useState({});
   const [initialDjs, setInitialDjs] = useState([]);
@@ -47,9 +47,9 @@ function Room({ musicRoom }) {
 
       const { members } = room;
 
-      var map = {};
+      var map = new Map();
       for (var m of members) {
-        map[m._id] = m;
+        map.set(m._id, m);
       }
 
       setInitialDjs(djs);

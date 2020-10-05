@@ -9,6 +9,7 @@ import { useUser } from "shared/context/user";
 import { UserProfileIcon } from "shared/components";
 import { textStyles } from "shared/styles";
 
+import { DEFAULT_USER } from "../DEFAULTS";
 import attachCenterPanelListeners from "./attachCenterPanelListeners";
 
 import styles from "./CenterPanel.module.css";
@@ -18,6 +19,7 @@ function CenterPanel({ members, currentDj, initialDjs, room }) {
 
     const [djs, setDjs] = useState(initialDjs);
     const [isStepUp, setIsStepUp] = useState(false);
+
 
     const { userId } = useAuth();
     const { user } = useUser();
@@ -91,9 +93,11 @@ function CenterPanel({ members, currentDj, initialDjs, room }) {
                             <div className={`
                             ${(dj === currentDj) ? styles["center-panel__dj-booth__dj-icon--playing"] : ""}
                             ${styles["center-panel__dj-booth__dj-icon"]}`}
-                                key={dj}
+                                key={`dj-booth-${dj}`}
                             >
                                 <UserProfileIcon
+                                    label={(members.get(dj) === undefined) ?
+                                        DEFAULT_USER.username : members.get(dj).username}
                                     height={"100px"}
                                 />
                             </div>

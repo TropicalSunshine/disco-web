@@ -29,7 +29,7 @@ export const init = async (videoId = null, startSeconds = 0) => {
             onStateChange: (e) => {
                 const { data, target } = e;
                 switch (data) {
-                    case window["YT"].PlayerState.ENDED : 
+                    case window["YT"].PlayerState.ENDED:
                         console.log("video ended");
                         target.stopVideo();
                         break;
@@ -40,15 +40,15 @@ export const init = async (videoId = null, startSeconds = 0) => {
         }
 
         player = new window["YT"].Player("player-root", constructConfigs);
-        
+
 
     })
 }
 
 export const loadVideo = (vidId = null, startSeconds = 0) => {
     console.log("loading video");
-    if(!vidId) return;
-    
+    if (!vidId) return;
+
     player.loadVideoById({
         videoId: vidId,
         startSeconds: startSeconds
@@ -56,11 +56,11 @@ export const loadVideo = (vidId = null, startSeconds = 0) => {
 
     return new Promise((res) => {
         player.addEventListener("onStateChange", (e) => {
-            
+
             const { target, data } = e;
-            
-            switch(data) {
-                case window["YT"].PlayerState.ENDED : 
+
+            switch (data) {
+                case window["YT"].PlayerState.ENDED:
                     console.log("video ended");
                     target.stopVideo();
                     break;
