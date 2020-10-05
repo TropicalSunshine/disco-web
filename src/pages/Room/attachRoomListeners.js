@@ -37,17 +37,15 @@ function useAttachListeners(setters) {
     }
 
     const getUserInfo = async (userId) => {
+        console.log("getting user info");
         const response = await UserApi.getUserInfo(userId);
 
         const info = response.data.data.getUserInfo;
         setMembersMap(prevMembers => {
-            if (prevMembers[userId] === undefined) {
-                return prevMembers;
-            }
 
             var newMap = new Map(prevMembers);
             newMap.set(userId, info);
-            return newMap();
+            return newMap;
 
         });
     }
@@ -76,6 +74,7 @@ function useAttachListeners(setters) {
         // 2.  
 
         Controls.addUserJoinRoomListener(({ userId }) => {
+            console.log(`[socket event] user joined room`);
             setMembersMap(prevMembers => {
                 var newMap = new Map(prevMembers);
                 newMap.set(userId, {
@@ -87,6 +86,7 @@ function useAttachListeners(setters) {
         });
 
         Controls.addUserLeaveRoomListener(({ userId }) => {
+            console.log(`[socket event] user leave room`);
             setMembersMap(prevMembers => {
                 var newMap = new Map(prevMembers);
                 newMap.delete(userId);
