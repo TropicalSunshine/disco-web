@@ -63,10 +63,12 @@ function Navbar({ auth, history }) {
     return (
         <React.Fragment>
             <LoginDialog
+                redirect={"/explore"}
                 show={showLogin}
                 handleClose={() => setShowLogin(false)}
             />
             <RegisterDialog
+                redirect={"/explore"}
                 show={showRegister}
                 handleClose={() => setShowRegister(false)}
             />

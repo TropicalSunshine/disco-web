@@ -1,5 +1,6 @@
 import React from "react";
 import { PureComponent } from "react";
+import PropTypes from "prop-types";
 
 import { TextField } from '@material-ui/core';
 import { toast } from "react-toastify";
@@ -38,7 +39,7 @@ class Register extends PureComponent {
         e.preventDefault();
         e.stopPropagation();
 
-        const { auth, user } = this.props;
+        const { auth, user, redirect } = this.props;
 
 
         try {
@@ -54,7 +55,7 @@ class Register extends PureComponent {
 
             toast.success("Registration Success");
             this.props.handleClose();
-            this.props.history.push("/explore");
+            this.props.history.push(redirect);
 
         } catch (err) {
             toast.warning(err.message);
@@ -139,7 +140,8 @@ class Register extends PureComponent {
 
 Register.propTypes = {
     ...HistoryPropTypes,
-    ...AuthPropTypes
+    ...AuthPropTypes,
+    redirect: PropTypes.string.isRequired
 };
 
 
