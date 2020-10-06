@@ -38,7 +38,7 @@ class Register extends PureComponent {
         e.preventDefault();
         e.stopPropagation();
 
-        const { auth } = this.props;
+        const { auth, user } = this.props;
 
 
         try {
@@ -49,8 +49,12 @@ class Register extends PureComponent {
             }
 
             await auth.register(email, password, username);
+            await auth.login(email, password);
+            await user.getUser();
+
             toast.success("Registration Success");
             this.props.handleClose();
+            this.props.history.push("/explore");
 
         } catch (err) {
             toast.warning(err.message);
