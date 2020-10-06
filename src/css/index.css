@@ -1,62 +1,60 @@
-@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Caption&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans+Caption&display=swap");
 
-
-:root{
-
+:root {
   --black: black;
   --white: white;
   --grey-primary: rgb(47, 47, 47);
   --grey-secondary: rgb(77, 76, 76);
   --text-muted: #72767d;
 
-  --red:#e01626;
+  --red: #e01626;
   --red-secondary: #ebb8bd;
-  --yellow : #fac02d;
+  --yellow: #fac02d;
   --dark-blue: #14213d;
   --purple: #9b5de5;
-  --pink : #e02d76;
+  --pink: #e02d76;
   --green: #8ac926;
   --green-secondary: #d0f88e;
-  --aqua : #00f5d4;
+  --aqua: #00f5d4;
 
-  --b1 : #1d1f23;
-  --b2 : #121218;
-  --b3 : #0d1436;
-  --b4 : #2d2e33;
+  --b1: #1d1f23;
+  --b2: #121218;
+  --b3: #0d1436;
+  --b4: #2d2e33;
 
-  --blue : #005bd1;
+  --blue: #005bd1;
   --light-blue: #009ace;
-  --box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
-  --font-family : 'PT Sans Caption', sans-serif !important;
+  --box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px,
+    rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
+  --font-family: "PT Sans Caption", sans-serif !important;
   --border-radius: 8px;
   --dialog-z: 10;
-  --below-dialog : 5;
+  --below-dialog: 5;
 }
 
-.red{
+.red {
   color: var(--red);
 }
 
-.yellow{ 
+.yellow {
   color: var(--yellow);
 }
 
-.purple{
+.purple {
   color: var(--purple);
 }
 
-.pink{
+.pink {
   color: var(--pink);
 }
 
-.light-blue{
+.light-blue {
   color: var(--light-blue);
 }
 
-.aqua{
+.aqua {
   color: var(--aqua);
 }
-
 
 ::-webkit-scrollbar {
   display: none;
@@ -66,11 +64,10 @@
   background: transparent;
 }
 
-
 body {
   scrollbar-width: none;
   margin: 0;
-  font-family: 'PT Sans Caption', sans-serif !important;
+  font-family: "PT Sans Caption", sans-serif !important;
   -ms-overflow-style: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -78,20 +75,20 @@ body {
   background-color: var(--b2);
 }
 
-a{
+a {
   text-decoration: none;
 }
 
-.content-container{
+.content-container {
   height: 100%;
   width: 100%;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-#player-root{
+#player-root {
   display: none;
 }

@@ -1,9 +1,9 @@
 import React from "react";
 import { PureComponent } from "react";
 
-import { InputSubmit } from "shared/components";
 import { TextField } from '@material-ui/core';
 import { toast } from "react-toastify";
+import { InputSubmit } from "shared/components";
 
 import { HistoryPropTypes, AuthPropTypes } from "shared/types";
 
@@ -49,6 +49,7 @@ class Register extends PureComponent {
             }
 
             await auth.register(email, password, username);
+            toast.success("Registration Success");
             this.props.handleClose();
 
         } catch (err) {
