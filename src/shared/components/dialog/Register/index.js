@@ -5,8 +5,6 @@ import { withUserProvider } from "shared/context/user";
 import { withAuthProvider } from "shared/context/auth";
 import { withRouter } from "react-router-dom";
 
-console.log(typeof (withAuthProvider));
-
 const RegisterWithoutDialog = withRouter(
     withUserProvider(
         withAuthProvider(Register)
