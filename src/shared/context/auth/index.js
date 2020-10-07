@@ -1,4 +1,4 @@
-import withAuthProvider from "./withAuthProvider";
+import withAuthProvider from "./withAuthProvider.jsx";
 import withAuthCheck from "./withAuthCheck";
 import AuthContext from "./AuthContext";
 import useAuth from "./useAuth";
