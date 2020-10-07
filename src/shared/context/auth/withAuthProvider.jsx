@@ -1,5 +1,5 @@
 import React from "react";
-import AuthContext from "./AuthContext.js";
+import AuthContext from "./AuthContext";
 
 const withAuthProvider = Component => class extends React.Component {
 
