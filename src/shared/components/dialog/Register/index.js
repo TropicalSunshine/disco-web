@@ -8,8 +8,8 @@ import { withRouter } from "react-router-dom";
 console.log(typeof (withAuthProvider));
 
 export const RegisterWithoutDialog = withRouter(
-    withAuthProvider(
-        withUserProvider(Register)
+    withUserProvider(
+        withAuthProvider(Register)
     )
 );
 
