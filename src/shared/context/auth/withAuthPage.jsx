@@ -8,12 +8,11 @@ import useAuth from "./useAuth";
 const withAuthPage = Component => function () {
 
     const { isLoggedIn } = useAuth();
-    const location = useLocation();
+    const { pathname } = useLocation();
 
-    console.log(location);
     if (isLoggedIn) return <Component />;
 
-    return <AuthPage redirect={location} />
+    return <AuthPage redirect={pathname} />
 
 }
 

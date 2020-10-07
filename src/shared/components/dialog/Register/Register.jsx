@@ -54,7 +54,6 @@ class Register extends PureComponent {
             await user.getUser();
 
             toast.success("Registration Success");
-            this.props.handleClose();
             this.props.history.push(redirect);
 
         } catch (err) {

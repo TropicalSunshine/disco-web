@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import PropTypes from "prop-types";
 import { LoginWithoutDialog } from "shared/components/dialog/Login";
 import { RegisterWithoutDialog } from "shared/components/dialog/Register";
 
@@ -16,10 +16,10 @@ function AuthPage({ redirect }) {
             <div className={`${styles["auth-page__dialog-box"]}`}>
                 <div className={`${styles["auth-page__dialog-box__content"]}`}>
                     {
-                        (!isSignUp) && <LoginWithoutDialog />
+                        (!isSignUp) && <LoginWithoutDialog redirect={redirect} />
                     }
                     {
-                        (isSignUp) && <RegisterWithoutDialog />
+                        (isSignUp) && <RegisterWithoutDialog redirect={redirect} />
                     }
                 </div>
                 <div className={`${styles["auth-page__message"]}`}>
@@ -44,5 +44,14 @@ function AuthPage({ redirect }) {
         </div>
     )
 }
+
+AuthPage.propTypes = {
+    redirect: PropTypes.string
+};
+
+AuthPage.defaultProps = {
+    redirect: "/explore"
+};
+
 
 export default AuthPage;

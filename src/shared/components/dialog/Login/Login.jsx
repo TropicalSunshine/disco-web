@@ -45,7 +45,6 @@ class Login extends PureComponent {
             await user.getUser();
 
             toast.success("Success");
-            this.props.handleClose();
             this.props.history.push(redirect);
 
         } catch (err) {
