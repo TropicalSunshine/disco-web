@@ -9,7 +9,7 @@ console.log(typeof (withAuthProvider));
 
 const RegisterWithoutDialog = withRouter(
     withUserProvider(
-        withAuthProvider(withDialog(Register))
+        Register
     )
 );
 
