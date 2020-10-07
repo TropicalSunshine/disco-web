@@ -1,5 +1,5 @@
 import Room from "./Room";
 import { withMusicRoomProvider } from "shared/context/musicRoom";
-import { withAuthPage } from "shared/context/auth";
+import { withAuthCheck } from "shared/context/auth";
 
-export default withAuthPage(withMusicRoomProvider(Room));
+export default withAuthCheck(withMusicRoomProvider(Room));
