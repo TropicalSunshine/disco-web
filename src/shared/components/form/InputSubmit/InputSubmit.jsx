@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import PropType from "prop-types";
 
-import CircularProgress from "@material-ui/core/CircularProgress";
+import { Spinner } from "shared/components";
 import styles from "./styles.module.css";
 
-function InputSubmit({loading, value, disabled}){
-    
+function InputSubmit({ loading, value, disabled }) {
+
 
     const defaultDisabled = disabled || false;
 
     const [isLoading, setIsLoading] = useState(loading);
-    const [isDisabled, setDisabled ] = useState(defaultDisabled);
+    const [isDisabled, setDisabled] = useState(defaultDisabled);
 
     useEffect(() => {
 
@@ -22,24 +22,24 @@ function InputSubmit({loading, value, disabled}){
     return (
         <React.Fragment>
             <button
-            disabled={isDisabled}
-            className={`${styles.input}`}
-            type="submit"
+                disabled={isDisabled}
+                className={`${styles.input}`}
+                type="submit"
             >
                 {
                     (!isLoading) && value
                 }
                 {
-                    (isLoading) && <CircularProgress disableShrink={true}/>
+                    (isLoading) && <Spinner />
                 }
             </button>
         </React.Fragment>
     )
-    
+
 }
 
 InputSubmit.propTypes = {
-    value : PropType.string.isRequired,
+    value: PropType.string.isRequired,
     loading: PropType.bool.isRequired
 };
 

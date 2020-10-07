@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from "prop-types";
 import { TextField } from '@material-ui/core';
 import { toast } from "react-toastify";
 
@@ -35,7 +36,7 @@ class Login extends PureComponent {
             isSubmitting: true
         });
 
-        const { auth, user } = this.props;
+        const { auth, user, redirect } = this.props;
 
         try {
             const { email, password } = this.state;
@@ -44,8 +45,8 @@ class Login extends PureComponent {
             await user.getUser();
 
             toast.success("Success");
-            this.props.handleClose();
-            this.props.history.push("/explore");
+            if (this.props.handleClose) this.props.handleClose();
+            this.props.history.push(redirect);
 
         } catch (err) {
             toast.warning(err.message);
@@ -114,7 +115,8 @@ class Login extends PureComponent {
 
 Login.propTypes = {
     ...HistoryPropTypes,
-    ...AuthPropTypes
+    ...AuthPropTypes,
+    redirect: PropTypes.string.isRequired
 }
 
 
