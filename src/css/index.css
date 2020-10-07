@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
 
 :root {
   --black: black;
@@ -26,7 +26,7 @@
   --light-blue: #009ace;
   --box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px,
     rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
-  --font-family: "Noto Sans JP", sans-serif !important;
+  --font-family: "Nunito", sans-serif !important;
   --border-radius: 8px;
   --dialog-z: 10;
   --below-dialog: 5;
@@ -67,7 +67,7 @@
 body {
   scrollbar-width: none;
   margin: 0;
-  font-family: "PT Sans Caption", sans-serif !important;
+  font-family: "Nunito", sans-serif !important;
   -ms-overflow-style: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
