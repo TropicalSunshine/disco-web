@@ -1,11 +1,8 @@
 import React from 'react';
 
-import { useUser } from "shared/context/user";
 import styles from "./PopMenu.module.css";
 
 function PopMenu({ options }) {
-    const { user } = useUser();
-    console.log(user.username);
     return (
         <ul
             className={`
