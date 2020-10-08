@@ -15,10 +15,6 @@
     height: 100vh;
 }
 
-.loaderpage-center-box__loader-container{
-    position: relative;
-}
-
 .loaderpage-center-box h1{
     color: var(--white);
 }

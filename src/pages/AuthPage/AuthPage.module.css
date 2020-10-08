@@ -1,28 +1,28 @@
-.auth-page {
+.authPage {
   height: 100vh;
 }
 
-.auth-page__dialog-box {
+.authPageDialogBox {
   width: 500px;
 }
 
-.auth-page__dialog-box__content {
+.authPageDialogBoxContent {
   padding: 15px 10px;
   border-radius: var(--border-radius);
   background-color: var(--white);
 }
 
-.auth-page__message > p {
+.authPageMessage > p {
   color: var(--text-muted);
   text-align: center;
 }
 
-.auth-page__message span {
+.authPageMessage span {
   margin-left: 5px;
   color: var(--blue);
   cursor: pointer;
 }
 
-.auth-page__message span:hover {
+.authPageMessage span:hover {
   text-decoration: underline;
 }

@@ -1,9 +1,25 @@
 import React from 'react'
-
-import useSpinnerStyles from "../shared/useSpinnerStyles";
+import { makeStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 import styles from "./styles.module.css";
+
+
+const useSpinnerStyles = makeStyles(() => ({
+    bottom: {
+        color: "var(--white)",
+      },
+      top: {
+        color: 'var(--blue)',
+        animationDuration: '750ms',
+        position: 'absolute',
+        left : 0
+      },
+      circle: {
+        strokeLinecap: 'round',
+        strokeDasharray: "30 200"
+      }
+}));
 
 
 function Spinner(props) {

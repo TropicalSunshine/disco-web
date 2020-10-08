@@ -12,9 +12,9 @@ function AuthPage({ redirect }) {
     const toggle = () => setIsSignUp(!isSignUp);
 
     return (
-        <div className={`box-center ${styles["auth-page"]}`}>
-            <div className={`${styles["auth-page__dialog-box"]}`}>
-                <div className={`${styles["auth-page__dialog-box__content"]}`}>
+        <div className={`box-center ${styles.authPage}`}>
+            <div className={`${styles.authPageDialogBox}`}>
+                <div className={`${styles.authPageDialogBoxContent}`}>
                     {
                         (!isSignUp) && <LoginWithoutDialog redirect={redirect} />
                     }
@@ -22,7 +22,7 @@ function AuthPage({ redirect }) {
                         (isSignUp) && <RegisterWithoutDialog redirect={redirect} />
                     }
                 </div>
-                <div className={`${styles["auth-page__message"]}`}>
+                <div className={`${styles.authPageMessage}`}>
                     <p>
                         {
                             (!isSignUp) && ("Need an account?")
