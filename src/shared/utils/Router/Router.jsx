@@ -15,7 +15,6 @@ const ExplorePage = lazy(() => import("pages/ExplorePage"));
 const CreateRoomPage = lazy(() => import("pages/CreateRoomPage"));
 const ProfilePage = lazy(() => import("pages/ProfilePage"));
 const NotFoundPage = lazy(() => import("pages/NotFoundPage"));
-const AuthPage = lazy(() => import("pages/AuthPage"));
 
 function Router() {
   return (
@@ -27,7 +26,6 @@ function Router() {
               <ThemeProvider>
                 <MusicRoomProvider>
                   <Switch>
-                    <Route exact path="/login" component={AuthPage} />
                     <NavbarRoute exact path="/" component={HomePage} />
                     <NavbarRoute exact path="/explore" component={ExplorePage} />
                     <NavbarRoute exact path="/room/create" component={CreateRoomPage} />
