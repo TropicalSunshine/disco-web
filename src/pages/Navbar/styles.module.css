@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@700&display=swap');
+
 
 .container{
     width: 100%;
@@ -17,18 +17,10 @@
 }
 
 .logo{
-    position: absolute;
-    left: 20px;
-    height: 100%;
-    user-select: none;
-    font-family: 'Sora', sans-serif !important;
-    text-transform: uppercase;
-    margin: 5px 0 0 0;
-    
-}
-
-.logo:hover {
     cursor: pointer;
+    position: absolute;
+    left : 20px;
+    top : 5px;
 }
 
 .navbar__item-container{

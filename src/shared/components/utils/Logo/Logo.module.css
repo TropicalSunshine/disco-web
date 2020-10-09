@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@700&display=swap');
+
+.logo{
+    height: 100%;
+    user-select: none;
+    font-family: 'Sora', sans-serif !important;
+    text-transform: uppercase;
+
+    margin: 0;
+}
