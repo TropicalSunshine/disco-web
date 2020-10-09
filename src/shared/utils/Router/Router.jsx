@@ -28,9 +28,9 @@ function Router() {
                   <Switch>
                     <NavbarRoute exact path="/" component={HomePage} />
                     <NavbarRoute exact path="/explore" component={ExplorePage} />
-                    <NavbarRoute exact path="/room/create" component={CreateRoomPage} />
+                    <NavbarRoute exact path="/r/create" component={CreateRoomPage} />
                     <NavbarRoute exact path="/u/:username" component={ProfilePage} />
-                    <Route exact path="/room/:roomId" component={Room} />
+                    <Route exact path="/r/:roomId" component={Room} />
                     <NavbarRoute path="*" component={NotFoundPage} />
                   </Switch>
                 </MusicRoomProvider>

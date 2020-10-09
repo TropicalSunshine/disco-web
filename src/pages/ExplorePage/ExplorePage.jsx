@@ -15,7 +15,7 @@ function ExplorePage({ history }) {
         <div className={`${styles["explore-container"]} box-column`}>
             <div>
                 <Button
-                    onClick={() => history.push("/room/create")}
+                    onClick={() => history.push("/r/create")}
                     variant="contained"
                     color="primary">
                     Create Room
