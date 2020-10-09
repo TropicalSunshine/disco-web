@@ -9,7 +9,8 @@ function useAttachListeners(setters) {
     const {
         setSong,
         setCurrentDj,
-        setMembersMap
+        setMembersMap,
+        setShowKickedDialog
     } = setters;
 
     const syncState = async (data) => {
@@ -96,8 +97,7 @@ function useAttachListeners(setters) {
 
         Controls.addUserDupListener(() => {
             console.log(`[socket event]: user dup`);
-            
-            
+            setShowKickedDialog(true);
         })
     }
 
@@ -107,7 +107,7 @@ function useAttachListeners(setters) {
         Controls.removeUpdateListener();
         Controls.removeChangeSongListener();
         Controls.removeUserLeaveRoomListener();
-        Controls.removeUserLeaveRoomListener();
+        Controls.removeUserDupListener();
     }
 
     return {

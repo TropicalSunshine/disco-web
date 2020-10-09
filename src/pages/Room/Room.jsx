@@ -1,7 +1,9 @@
 import React, { useLayoutEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { useHistory, useParams } from "react-router-dom";
 
 import { LoaderPage } from "shared/components/index";
+import { Message as MessageDialog } from "shared/components/dialog";
 
 import { DEFAULT_SONG } from "./DEFAULTS";
 import attachRoomListeners from "./attachRoomListeners";
@@ -11,12 +13,11 @@ import MusicControls from "./MusicControls";
 import SearchPanel from "./SearchPanel";
 import CenterPanel from "./CenterPanel";
 
-import { useParams } from "react-router-dom";
-
 import styles from "./style.module.css";
 
 function Room({ musicRoom }) {
 
+  const history = useHistory();
   const { roomId } = useParams();
   const { join, leave } = musicRoom;
 
@@ -27,11 +28,14 @@ function Room({ musicRoom }) {
   const [initialDjs, setInitialDjs] = useState([]);
   const [currentDj, setCurrentDj] = useState(null);
 
+  const [ showKickedDialog, setShowKickedDialog ] = useState(false);
+
   const setters = {
     setCurrentDj,
     setInitialDjs,
     setSong,
-    setMembersMap
+    setMembersMap,
+    setShowKickedDialog
   };
 
   const {
@@ -87,8 +91,20 @@ function Room({ musicRoom }) {
   }, []);
   /* eslint-enable */
 
+  const handleMessageDialogClose = () => {
+    setShowKickedDialog(false);
+    unbind();
+    leave();
+    history.push("/explore");
+  }
+
   return (
     <React.Fragment>
+      {showKickedDialog && (<MessageDialog
+        show={true}
+        handleClose={handleMessageDialogClose}
+        message={"Sign in from another device detected"}
+      />)}
       {isLoading && <LoaderPage />}
       {!isLoading && (
         <>
