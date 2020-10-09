@@ -92,6 +92,12 @@ function useAttachListeners(setters) {
                 newMap.delete(userId);
                 return newMap;
             });
+        });
+
+        Controls.addUserDupListener(() => {
+            console.log(`[socket event]: user dup`);
+            
+            
         })
     }
 
