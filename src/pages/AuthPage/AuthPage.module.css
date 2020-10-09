@@ -1,28 +1,33 @@
-.authPage {
+.auth-page {
   height: 100vh;
 }
 
-.authPageDialogBox {
+.auth-page__logo{
+  margin: 20px 0;
+  cursor: pointer;
+}
+
+.auth-page__dialog-box {
   width: 500px;
 }
 
-.authPageDialogBoxContent {
+.auth-page__dialog-box-content {
   padding: 15px 10px;
   border-radius: var(--border-radius);
   background-color: var(--white);
 }
 
-.authPageMessage > p {
+.auth-page__message > p {
   color: var(--text-muted);
   text-align: center;
 }
 
-.authPageMessage span {
+.auth-page__message span {
   margin-left: 5px;
   color: var(--blue);
   cursor: pointer;
 }
 
-.authPageMessage span:hover {
+.auth-page__message span:hover {
   text-decoration: underline;
 }

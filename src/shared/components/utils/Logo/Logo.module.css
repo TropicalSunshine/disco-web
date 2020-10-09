@@ -5,6 +5,7 @@
     user-select: none;
     font-family: 'Sora', sans-serif !important;
     text-transform: uppercase;
-
+    text-align: center;
+    width: 110px;
     margin: 0;
 }
