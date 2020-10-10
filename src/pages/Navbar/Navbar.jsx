@@ -8,7 +8,7 @@ import {
     Register as RegisterDialog
 } from "shared/components/dialog";
 
-import { UserProfileIcon } from "shared/components";
+import { UserProfileIcon, Logo } from "shared/components";
 import { useUser } from "shared/context/user";
 
 import PopMenu from "./PopMenu";
@@ -74,16 +74,11 @@ function Navbar({ auth, history }) {
             />
             <div className={`${styles.container}`}>
                 <header className={`box-row ${styles["navbar"]}`}>
-                    <div>
-                        <h1
-                            onClick={redirectToHome}
-                            className={styles.logo}>
-                            <span className="light-blue">d</span>
-                            <span className="purple">i</span>
-                            <span className="pink">s</span>
-                            <span className="yellow">c</span>
-                            <span className="aqua">o</span>
-                        </h1>
+                    <div
+                    onClick={redirectToHome}
+                    className={styles.logo}
+                    >
+                        <Logo/>
                     </div>
                     <div className={`box-row ${styles["navbar__item-container"]}`}>
                         {

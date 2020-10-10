@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from "prop-types";
+import { useHistory } from "react-router-dom";
+
+import { Logo } from "shared/components";
 import { LoginWithoutDialog } from "shared/components/dialog/Login";
 import { RegisterWithoutDialog } from "shared/components/dialog/Register";
 
@@ -9,12 +12,20 @@ function AuthPage({ redirect }) {
 
     const [isSignUp, setIsSignUp] = useState(false);
 
+    const history = useHistory();
     const toggle = () => setIsSignUp(!isSignUp);
 
+    const redirectToHome = () => history.push("/");
+
     return (
-        <div className={`box-center ${styles.authPage}`}>
-            <div className={`${styles.authPageDialogBox}`}>
-                <div className={`${styles.authPageDialogBoxContent}`}>
+        <div className={`box-center ${styles["auth-page"]}`}>
+            <div className={`${styles["auth-page__dialog-box"]}`}>
+                <div
+                onClick={redirectToHome} 
+                className={`box-center ${styles["auth-page__logo"]}`}>
+                    <Logo/>
+                </div>
+                <div className={`${styles["auth-page__dialog-box-content"]}`}>
                     {
                         (!isSignUp) && <LoginWithoutDialog redirect={redirect} />
                     }
@@ -22,7 +33,7 @@ function AuthPage({ redirect }) {
                         (isSignUp) && <RegisterWithoutDialog redirect={redirect} />
                     }
                 </div>
-                <div className={`${styles.authPageMessage}`}>
+                <div className={`${styles["auth-page__message"]}`}>
                     <p>
                         {
                             (!isSignUp) && ("Need an account?")

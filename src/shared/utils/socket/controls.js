@@ -2,34 +2,30 @@ import { socket } from "./socket";
 import constants from "./constants";
 
 
-export const addUpdateListener = fn => {
-    socket.on(constants.UPDATE, fn);
-}
+const addUpdateListener = fn => socket.on(constants.UPDATE, fn);
+const removeUpdateListener = () => socket.off(constants.UPDATE);
 
-export const removeUpdateListener = () => {
-    socket.off(constants.UPDATE);
-}
+const addChangeSongListener = (fn) => socket.on(constants.USERCHANGESONG, fn);
+const removeChangeSongListener = () => socket.off(constants.USERCHANGESONG);
 
-export const addChangeSongListener = (fn) => {
-    socket.on(constants.USERCHANGESONG, fn);
-}
+const addUserJoinRoomListener = fn => socket.on(constants.USERJOINROOM, fn);
+const removeUserJoinRoomListener = () => socket.off(constants.USERJOINROOM);
 
-export const removeChangeSongListener = () => {
-    socket.off(constants.USERCHANGESONG);
-}
+const addUserLeaveRoomListener = fn => socket.on(constants.USERLEAVEROOM, fn);
+const removeUserLeaveRoomListener = () => socket.off(constants.USERLEAVEROOM);
 
-export const addUserJoinRoomListener = fn => {
-    socket.on(constants.USERJOINROOM, fn);
-}
+const addUserDupListener = fn => socket.on(constants.USER_DUP, fn);
+const removeUserDupListener = () => socket.off(constants.USER_DUP);
 
-export const removeUserJoinRoomListener = () => {
-    socket.off(constants.USERJOINROOM);
-}
-
-export const addUserLeaveRoomListener = fn => {
-    socket.on(constants.USERLEAVEROOM, fn);
-}
-
-export const removeUserLeaveRoomListener = () => {
-    socket.off(constants.USERLEAVEROOM);
+export {
+    addUpdateListener,
+    removeUpdateListener,
+    addChangeSongListener,
+    removeChangeSongListener,
+    addUserJoinRoomListener,
+    removeUserJoinRoomListener,
+    addUserLeaveRoomListener,
+    removeUserLeaveRoomListener,
+    addUserDupListener,
+    removeUserDupListener
 }

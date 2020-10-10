@@ -44,9 +44,8 @@ function CenterPanel({ members, currentDj, initialDjs, room }) {
         }
     }, [bind, unbind]);
 
-    const handleBackClick = () => {
-        history.go(-1);
-    }
+    const handleBackClick = () => history.push("/explore");
+
 
     const handleStepUp = () => {
         emitStepUp();
@@ -70,7 +69,7 @@ function CenterPanel({ members, currentDj, initialDjs, room }) {
                     onClick={handleBackClick}
                 >
                     <p><ArrowBackIcon /></p>
-                    <p>Back</p>
+                    <p>Leave</p>
                 </div>
                 <div className={`
                 box-center

@@ -89,9 +89,3 @@ export const disconnectSocket = () => {
     socket.disconnect();
     joinRoom = false;
 }
-
-
-export default {
-    constants,
-    socket
-}
