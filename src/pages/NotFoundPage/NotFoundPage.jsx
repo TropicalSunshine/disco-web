@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from "react-helmet";
 
 import { textStyles } from "shared/styles";
 import styles from "./NotFoundPage.module.css";
@@ -6,6 +7,9 @@ import styles from "./NotFoundPage.module.css";
 function NotFoundPage() {
     return (
         <div className={`box-center ${styles["not-found"]}`}>
+            <Helmet>
+                <title>Nothing Here</title>
+            </Helmet>
             <div>
                 <h1
                     className={`${textStyles["text-main"]}`}

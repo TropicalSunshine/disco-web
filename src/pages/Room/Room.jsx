@@ -1,6 +1,7 @@
 import React, { useLayoutEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useHistory, useParams } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 import { LoaderPage } from "shared/components/index";
 import { Message as MessageDialog } from "shared/components/dialog";
@@ -108,6 +109,9 @@ function Room({ musicRoom }) {
       {isLoading && <LoaderPage />}
       {!isLoading && (
         <>
+          <Helmet>
+            <title>Disco - {room.name}</title>
+          </Helmet>
           <div className={`${styles["room"]}`}>
             <div className={`box-row ${styles["room__room-main"]}`}>
               <div className={styles["room__room-left"]}>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet"
 import { Button } from "@material-ui/core";
 
 import { HistoryPropTypes } from "shared/types";
@@ -13,6 +14,9 @@ function ExplorePage({ history }) {
     return (
 
         <div className={`${styles["explore-container"]} box-column`}>
+            <Helmet>
+                <title>Explore Rooms</title>
+            </Helmet>
             <div>
                 <Button
                     onClick={() => history.push("/r/create")}

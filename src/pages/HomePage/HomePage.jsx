@@ -1,4 +1,6 @@
 import React from "react";
+import { Helmet } from "react-helmet"; 
+
 import { HistoryPropTypes } from "shared/types";
 import { Button } from "@material-ui/core";
 
@@ -8,9 +10,11 @@ import discoImage from "static/images/discoball.png";
 
 function HomePage({ auth }){
 
-    
     return (
         <div className={styles["main-container"]}>
+            <Helmet>
+                <title>Disco</title>
+            </Helmet>
             <section className={`${styles["title-section"]} box-row`}>
                 <div className={`${styles["title-message"]}`}>
                     <span>Jam to </span>
