@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Helmet } from "react-helmet";
+
 import { Spinner, UserProfileIcon } from "shared/components";
 
 import { useUser } from "shared/context/user";
@@ -42,6 +44,9 @@ function Profile() {
             {
                 (!isLoading) && (
                     <div className="box-column">
+                        <Helmet>
+                            <title>@{userProfile.username}</title>
+                        </Helmet>
                         <div>
                             <UserProfileIcon
                                 height="200px"

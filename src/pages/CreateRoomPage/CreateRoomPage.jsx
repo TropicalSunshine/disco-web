@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Helmet } from "react-helmet";
 
 import {
     Radio,
@@ -97,6 +98,9 @@ class CreateRoomPage extends Component {
 
         return (
             <div className={`${styles["create-room-container"]} box-center box-column`}>
+                <Helmet>
+                    <title>Create a Room</title>
+                </Helmet>
                 <div>
                     <h1 className={`${textStyles["text-main"]}`}>Create a Room</h1>
                 </div>
