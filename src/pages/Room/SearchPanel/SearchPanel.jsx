@@ -81,7 +81,7 @@ function SearchPanel() {
     const handleOnKeyPress = (e) => {
         const { value } = e.target;
         
-        if(e.key === "Enter" && value !== prevSearchVal){
+        if(e.key === "Enter" && value !== prevSearchVal && !isSearching){
             search(value)
         }
     }
