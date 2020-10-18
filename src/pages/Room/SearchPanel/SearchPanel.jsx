@@ -21,7 +21,7 @@ import styles from "./styles.module.css";
 import { DEFAULT_SONG } from "../DEFAULTS";
 import { useRef } from "react";
 
-const SEARCH_WAIT_INTERVAL = 1000;
+//const SEARCH_WAIT_INTERVAL = 1000;
 
 const TAB_OPTIONS = [
     {
@@ -39,25 +39,30 @@ function SearchPanel() {
     const [searchResults, setSearchResults] = useState([]);
     const [tab, setTab] = useState(0);
 
+    const [prevSearchVal, setPrevSearchVal] = useState("");
+
     const { songQueue, songQueueDispatch } = useSongQueueReducer();
 
     const { bind, unbind } = attachSearchPanelListeners(songQueueDispatch, addedSongIdMap);
 
 
-    var searchInterval = useRef(null);
+    //var searchInterval = useRef(null);
 
     const search = async (value) => {
+        
+
         console.log("searching", value);
         setIsSearching(true);
         const response = await youtube.searchVideoByKeyword(value);
 
+        setPrevSearchVal(value)
         if (response) {
             setSearchResults(response);
         }
 
         setIsSearching(false);
     };
-
+    /*
     const onSearch = (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -71,6 +76,15 @@ function SearchPanel() {
             SEARCH_WAIT_INTERVAL
         );
     };
+    */
+
+    const handleOnKeyPress = (e) => {
+        const { value } = e.target;
+        
+        if(e.key === "Enter" && value !== prevSearchVal){
+            search(value)
+        }
+    }
 
     const getPopularVideos = async () => {
         const response = await youtube.getMostPopularVideos();
@@ -111,7 +125,7 @@ function SearchPanel() {
                                 className={styles["search-area__input"]}
                                 fullWidth={true}
                                 placeholder="Search"
-                                onChange={onSearch}
+                                onKeyPress={handleOnKeyPress}
                                 startAdornment={
                                     <InputAdornment position="start">
                                         <SearchIcon />
