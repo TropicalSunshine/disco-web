@@ -55,7 +55,7 @@ class CreateRoomPage extends Component {
                 throw new Error("invalid room id");
             }
 
-            history.push(`/room/${roomId}`);
+            history.push(`/r/${roomId}`);
 
 
         } catch (err) {
