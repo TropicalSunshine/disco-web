@@ -23,5 +23,4 @@ export const checkUsername = username => {
     if (username.length < 2) throw new Error("Username to short");
     if (username.length > 32) throw new Error("Username too long");
     if (usernameCheckInvalidChars.test(username)) throw new Error("Username contains invalid characters @#:");
-    if (usernameCheckSpaces.test(username)) throw new Error("Username contains spaces");
 }
