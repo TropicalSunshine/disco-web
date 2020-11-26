@@ -1,5 +1,4 @@
-
-const storage = window.sessionStorage;
+const storage = window.localStorage;
 
 const clearStorage = () => {
     storage.clear();

@@ -1,16 +1,16 @@
-import sessionStorage from "./sessionStorage";
+import localStorage from "./localStorage";
 
 const tokenKey = "token";
 const userIdKey = "userId";
 
 export const token = {
-    get : () => sessionStorage.getItem(tokenKey),
-    set : token => sessionStorage.setItem(tokenKey, token),
-    clear : () => sessionStorage.removeItem(tokenKey)
+    get : () => localStorage.getItem(tokenKey),
+    set : token => localStorage.setItem(tokenKey, token),
+    clear : () => localStorage.removeItem(tokenKey)
 }
 
 export const userId = {
-    get : () => sessionStorage.getItem(userIdKey),
-    set : userId => sessionStorage.setItem(userIdKey, userId),
-    clear : () => sessionStorage.removeItem(userIdKey)
+    get : () => localStorage.getItem(userIdKey),
+    set : userId => localStorage.setItem(userIdKey, userId),
+    clear : () => localStorage.removeItem(userIdKey)
 }
