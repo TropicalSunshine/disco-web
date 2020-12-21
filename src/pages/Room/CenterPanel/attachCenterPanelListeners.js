@@ -3,7 +3,8 @@ import { DjControls } from "shared/utils/socket";
 function useCenterPanelListeners(setters, currentUserId) {
 
     const {
-        setDjs
+        setDjs,
+        setIsStepUp
     } = setters;
 
     const bind = () => {
@@ -16,6 +17,10 @@ function useCenterPanelListeners(setters, currentUserId) {
 
         DjControls.addStepDownListener(({ userId }) => {
             console.log(`[socket event] : step down ${userId}`);
+            
+            if(userId === currentUserId){
+                setIsStepUp(false);
+            }
 
             setDjs(prevDjs => {
                 return prevDjs.filter(id => id !== userId);
