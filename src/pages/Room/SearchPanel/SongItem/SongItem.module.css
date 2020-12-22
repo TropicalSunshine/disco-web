@@ -19,6 +19,9 @@
 .result__desc__text{
     min-width: 120px;
     width: 80%;
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
 }
 
 .result__desc__text__title{
@@ -31,12 +34,6 @@
 .result__desc__text__channel-name{
     font-size: 6.5pt;
     margin-top: 5px;
-}
-
-.result__desc__text p{
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
 }
 
 .result__desc__button{
