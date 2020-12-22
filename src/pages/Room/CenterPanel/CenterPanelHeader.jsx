@@ -1,12 +1,13 @@
 import React from 'react';
 import { useHistory } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
-import { toast } from "react-toastify";
+
 
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import PersonAddIcon from "@material-ui/icons/PersonAddRounded";
 import IconButton from "@material-ui/core/IconButton";
 
+import { clipboard } from "shared/utils/navigator";
 import { useUser } from "shared/context/user";
 import { UserProfileIcon } from "shared/components";
 
@@ -31,8 +32,7 @@ function CenterPanelHeader() {
 
     const copyRoomInvite = async () => {
         const { href } = window.location;
-        await navigator.clipboard.writeText(href);
-        toast.success("Copied");
+        await clipboard.write(href);
     }
 
     return (
