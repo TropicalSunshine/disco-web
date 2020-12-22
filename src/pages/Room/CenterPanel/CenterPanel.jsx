@@ -1,28 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
 
 import { Button } from "@material-ui/core";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 import { useAuth } from "shared/context/auth";
-import { useUser } from "shared/context/user";
 import { UserProfileIcon } from "shared/components";
-import { textStyles } from "shared/styles";
 
 import { DEFAULT_USER } from "../DEFAULTS";
+import CenterPanelHeader from "./CenterPanelHeader";
 import attachCenterPanelListeners from "./attachCenterPanelListeners";
 
 import styles from "./CenterPanel.module.css";
 
 function CenterPanel({ members, currentDj, initialDjs, room }) {
-    const history = useHistory();
 
     const [djs, setDjs] = useState(initialDjs);
     const [isStepUp, setIsStepUp] = useState(false);
 
 
     const { userId } = useAuth();
-    const { user } = useUser();
 
     const setters = {
         setDjs,
@@ -44,8 +39,6 @@ function CenterPanel({ members, currentDj, initialDjs, room }) {
         }
     }, [bind, unbind]);
 
-    const handleBackClick = () => history.push("/explore");
-
 
     const handleStepUp = () => {
         emitStepUp();
@@ -61,25 +54,7 @@ function CenterPanel({ members, currentDj, initialDjs, room }) {
 
     return (
         <div className={`${styles["center-panel"]} box-column`}>
-            <header className={`${styles["center-panel__navbar"]} box-row`}>
-                <div
-                    className={`box-row 
-                ${styles["center-panel__navbar__back-button"]}
-                ${textStyles["text-4"]}`}
-                    onClick={handleBackClick}
-                >
-                    <p><ArrowBackIcon /></p>
-                    <p>Leave</p>
-                </div>
-                <div className={`
-                box-center
-                ${styles["center-panel__navbar__user-icon"]}`}>
-                    <UserProfileIcon
-                        label={(user.username) ? (user.username) : ""}
-                        height={"40px"}
-                    />
-                </div>
-            </header>
+            <CenterPanelHeader/>
             <div className={`box-center
             ${styles["center-panel__navbar__room-info"]}`}>
                 <h1>{room.name}</h1>

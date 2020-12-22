@@ -11,7 +11,7 @@
 .center-panel__navbar__back-button{
     color: var(--text-muted);
     transition: 0.2s;
-    width: 90%;
+    width: 80%;
 }
 
 .center-panel__navbar__back-button:hover{
@@ -19,8 +19,13 @@
     cursor: pointer;
 }
 
-.center-panel__navbar__user-icon{
+.center-panel__navbar__icon{
     width: 10%;
+}
+
+.center-panel__navbar__icon .MuiIcon-root{
+    color: var(--white);
+    background-color: var(--white);
 }
 
 

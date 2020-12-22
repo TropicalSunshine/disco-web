@@ -8,17 +8,17 @@ import styles from "./styles.module.css";
 const useSpinnerStyles = makeStyles(() => ({
     bottom: {
         color: "var(--white)",
-      },
-      top: {
+    },
+    top: {
         color: 'var(--blue)',
         animationDuration: '750ms',
         position: 'absolute',
         left : 0
-      },
-      circle: {
+    },
+    circle: {
         strokeLinecap: 'round',
         strokeDasharray: "30 200"
-      }
+    }
 }));
 
 
