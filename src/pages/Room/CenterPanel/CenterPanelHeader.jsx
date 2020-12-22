@@ -1,6 +1,8 @@
 import React from 'react';
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
+import { toast } from "react-toastify";
+
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import PersonAddIcon from "@material-ui/icons/PersonAddRounded";
 import IconButton from "@material-ui/core/IconButton";
@@ -20,7 +22,6 @@ const useIconStyles = makeStyles(() => ({
 
 function CenterPanelHeader() {
 
-    const location = useLocation();
     const history = useHistory();
     const { user } = useUser();
 
@@ -28,10 +29,10 @@ function CenterPanelHeader() {
 
     const handleBackClick = () => history.push("/explore");
 
-    const copyRoomInvite = () => {
-        const { pathname } = location;
-        console.log(pathname);
-        console.log(location);
+    const copyRoomInvite = async () => {
+        const { href } = window.location;
+        await navigator.clipboard.writeText(href);
+        toast.success("Copied");
     }
 
     return (
