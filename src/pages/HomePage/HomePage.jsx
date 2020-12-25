@@ -20,7 +20,7 @@ function HomePage({ auth }){
                     <span>Jam to </span>
                     <span>music together</span>
                     <Button variant="contained" color="primary">
-                        Start Jamming
+                        Start Jamming (doesnt do anything)
                     </Button>
                 </div>
                 <div className={styles["title-img"]}>
