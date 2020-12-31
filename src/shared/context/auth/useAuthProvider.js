@@ -4,7 +4,7 @@ import * as check from "./registrationChecks";
 
 import { User as UserStore } from "shared/utils/storage";
 import { User as UserApi } from "shared/utils/api";
-import { setAuthHeader } from "shared/utils/api/api";
+import { setAuthToken } from "shared/utils/api/api";
 
 function useAuth() {
 
@@ -29,7 +29,7 @@ function useAuth() {
 
         UserStore.token.set(response.token);
         setToken(response.token);
-        setAuthHeader(response.token);
+        setAuthToken(response.token);
         UserStore.userId.set(response.userId);
         setUserId(response.userId);
 
@@ -78,7 +78,7 @@ function useAuth() {
 
         const token = UserStore.token.get();
         setToken(token);
-        setAuthHeader(token);
+        setAuthToken(token);
         const userId = UserStore.userId.get();
         setUserId(userId);
 

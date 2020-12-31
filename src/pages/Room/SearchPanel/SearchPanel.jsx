@@ -49,9 +49,6 @@ function SearchPanel() {
     //var searchInterval = useRef(null);
 
     const search = async (value) => {
-        
-
-        console.log("searching", value);
         setIsSearching(true);
         const response = await youtube.searchVideoByKeyword(value);
 
