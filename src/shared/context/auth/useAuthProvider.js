@@ -35,7 +35,7 @@ function useAuth() {
 
         //does not need a state, will only change during login/logout
         UserStore.rt.set(response.rt);
-
+        UserStore.lastRt.set(String(Date.now()));
         setIsLoggedIn(true);
 
 
@@ -72,6 +72,7 @@ function useAuth() {
         UserStore.token.clear();
         UserStore.userId.clear();
         UserStore.rt.clear();
+        UserStore.lastRt.clear();
 
         setIsLoggedIn(false);
         setToken(null);
@@ -101,6 +102,7 @@ function useAuth() {
         UserStore.token.set(response.token);
         setToken(response.token);
         setAuthToken(token);
+        UserStore.lastRt.set(String(Date.now()));
     }
 
     useEffect(fetchState, []);
