@@ -34,6 +34,9 @@ function useAuth() {
         UserStore.userId.set(response.userId);
         setUserId(response.userId);
 
+        //does not need a state, will only change during login/logout
+        UserStore.rt.set(response.rt);
+
         setIsLoggedIn(true);
 
 
@@ -69,6 +72,8 @@ function useAuth() {
 
         UserStore.token.clear();
         UserStore.userId.clear();
+        UserStore.rt.clear();
+
         setIsLoggedIn(false);
         setToken(null);
         setUserId(null);
@@ -90,7 +95,12 @@ function useAuth() {
     }
 
     const refreshToken = async () => {
+        const rt = UserStore.rt.get();
+        const result = await UserApi.refreshToken(token, rt);
+        const response = result.data.data.refreshToken;
         
+        UserStore.token.set(response.token);
+        setToken(response.token);
     }
 
     useEffect(fetchState, []);
@@ -100,6 +110,7 @@ function useAuth() {
         login,
         logout,
         register,
+        refreshToken,
 
         userId,
         token,

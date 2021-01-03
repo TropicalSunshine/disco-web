@@ -8,7 +8,7 @@ const EXPIRATION_TIME = 5 * 60 * 60 * 1000; //5hrs
 
 function useUserProvider() {
 
-    const { isLoggedIn } = useAuth();
+    const { isLoggedIn, token } = useAuth();
     const [user, setUser] = useState({});
     const [isUserLoading, setIsUserLoading] = useState(false)
 
@@ -22,12 +22,9 @@ function useUserProvider() {
 
 
     const checkToken = () => {
-        var currentTime
+        var currentTime = new Date(Date.now());
     }
 
-    const refreshToken = async () => {
-
-    }
 
     useEffect(() => {
         checkToken();
