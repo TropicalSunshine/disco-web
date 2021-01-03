@@ -33,7 +33,7 @@ function useUserProvider() {
         }
     }
 
-
+    /* eslint-disable */
     useEffect(() => {
         
         if (isLoggedIn) {
@@ -45,6 +45,7 @@ function useUserProvider() {
         }
         return;
     }, [isLoggedIn])
+    /* eslint-enable */
 
     return {
         user,
