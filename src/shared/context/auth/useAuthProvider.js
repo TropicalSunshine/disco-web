@@ -5,6 +5,7 @@ import * as check from "./registrationChecks";
 import { User as UserStore } from "shared/utils/storage";
 import { User as UserApi } from "shared/utils/api";
 import { setAuthToken } from "shared/utils/api/api";
+import { refreshToken } from "shared/utils/api/user";
 
 function useAuth() {
 
@@ -88,7 +89,9 @@ function useAuth() {
 
     }
 
-
+    const refreshToken = async () => {
+        
+    }
 
     useEffect(fetchState, []);
 

@@ -2,24 +2,38 @@ import { useState, useEffect } from "react";
 import { User as UserApi } from "shared/utils/api";
 import { useAuth } from "shared/context/auth";
 
+
+const EXPIRATION_TIME = 5 * 60 * 60 * 1000; //5hrs
+
+
 function useUserProvider() {
 
     const { isLoggedIn } = useAuth();
     const [user, setUser] = useState({});
-    const [isUserLoaded, setIsUserLoaded] = useState(false)
+    const [isUserLoading, setIsUserLoading] = useState(false)
 
     const getUser = async () => {
         const response = await UserApi.me();
         const userProfile = response.data.data.me;
-        setIsUserLoaded(true);
+        setIsUserLoading(true);
 
         setUser(userProfile);
     }
 
+
+    const checkToken = () => {
+        var currentTime
+    }
+
+    const refreshToken = async () => {
+
+    }
+
     useEffect(() => {
+        checkToken();
         if (isLoggedIn) getUser();
         else {
-            setIsUserLoaded(true);
+            setIsUserLoading(true);
         }
         return;
     }, [isLoggedIn])
@@ -27,7 +41,7 @@ function useUserProvider() {
     return {
         user,
         getUser,
-        isUserLoaded
+        isUserLoading
     }
 }
 

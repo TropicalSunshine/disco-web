@@ -20,5 +20,5 @@ export const userId = {
 export const rt = {
     get : () => localStorage.getItem(rtKey),
     set : rt => localStorage.setItem(rtKey, rt),
-    clear : () => localStorage.removeItem(rtkey)
+    clear : () => localStorage.removeItem(rtKey)
 }
