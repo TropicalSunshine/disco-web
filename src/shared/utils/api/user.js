@@ -7,6 +7,8 @@ export const login = (email, password) => api.post("", {
             token
             userId
             error
+            rt
+            message
         }
     }`,
     variables: { email, password }
