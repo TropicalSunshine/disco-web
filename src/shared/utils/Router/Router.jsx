@@ -33,8 +33,8 @@ function Router() {
                     <NavbarRoute exact path="/explore" component={ExplorePage} />
                     <NavbarRoute exact path="/r/create" component={CreateRoomPage} />
                     <NavbarRoute exact path="/u/:username" component={ProfilePage} />
-                    <NavbarRoute path="*" component={NotFoundPage} />
                     <BaseRoute exact path="/r/:roomId" component={Room} />
+                    <NavbarRoute path="*" component={NotFoundPage} />
                   </Switch>
                 </MusicRoomProvider>
               </ThemeProvider>
