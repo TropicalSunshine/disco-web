@@ -4,7 +4,7 @@ import * as check from "./registrationChecks";
 
 import { User as UserStore } from "shared/utils/storage";
 import { User as UserApi } from "shared/utils/api";
-import { setAuthHeader } from "shared/utils/api/api";
+import { setAuthToken } from "shared/utils/api/api";
 
 function useAuth() {
 
@@ -29,10 +29,13 @@ function useAuth() {
 
         UserStore.token.set(response.token);
         setToken(response.token);
-        setAuthHeader(response.token);
+        setAuthToken(response.token);
         UserStore.userId.set(response.userId);
         setUserId(response.userId);
 
+        //does not need a state, will only change during login/logout
+        UserStore.rt.set(response.rt);
+        UserStore.lastRt.set(String(Date.now()));
         setIsLoggedIn(true);
 
 
@@ -68,6 +71,9 @@ function useAuth() {
 
         UserStore.token.clear();
         UserStore.userId.clear();
+        UserStore.rt.clear();
+        UserStore.lastRt.clear();
+
         setIsLoggedIn(false);
         setToken(null);
         setUserId(null);
@@ -78,7 +84,7 @@ function useAuth() {
 
         const token = UserStore.token.get();
         setToken(token);
-        setAuthHeader(token);
+        setAuthToken(token);
         const userId = UserStore.userId.get();
         setUserId(userId);
 
@@ -88,7 +94,16 @@ function useAuth() {
 
     }
 
-
+    const refreshToken = async () => {
+        const rt = UserStore.rt.get();
+        const result = await UserApi.refreshToken(token, rt);
+        const response = result.data.data.refreshToken;
+        
+        UserStore.token.set(response.token);
+        setToken(response.token);
+        setAuthToken(token);
+        UserStore.lastRt.set(String(Date.now()));
+    }
 
     useEffect(fetchState, []);
 
@@ -97,6 +112,7 @@ function useAuth() {
         login,
         logout,
         register,
+        refreshToken,
 
         userId,
         token,

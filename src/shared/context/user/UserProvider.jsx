@@ -15,10 +15,10 @@ function UserProvider({ children }) {
             ...userProvider
         }}>
             {
-                (!userProvider.isUserLoaded) && <LoaderPage/>
+                (!userProvider.isUserLoading) && <LoaderPage/>
             }
             {
-                (userProvider.isUserLoaded) && (children)
+                (userProvider.isUserLoading) && (children)
             }
         </UserContext.Provider>
     )

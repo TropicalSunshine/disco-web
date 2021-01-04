@@ -1,8 +1,10 @@
 import React, { Suspense, lazy } from "react";
 
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Switch } from "react-router-dom";
 
 import NavbarRoute from "./NavbarRoute";
+import BaseRoute from "./BaseRoute";
+
 import { LoaderPage } from "shared/components/index";
 import { MusicRoomProvider } from "shared/context/musicRoom";
 import { AuthProvider } from "shared/context/auth";
@@ -17,6 +19,7 @@ const ProfilePage = lazy(() => import("pages/ProfilePage"));
 const NotFoundPage = lazy(() => import("pages/NotFoundPage"));
 
 function Router() {
+
   return (
     <BrowserRouter>
       <Suspense fallback={<LoaderPage />}>
@@ -30,8 +33,8 @@ function Router() {
                     <NavbarRoute exact path="/explore" component={ExplorePage} />
                     <NavbarRoute exact path="/r/create" component={CreateRoomPage} />
                     <NavbarRoute exact path="/u/:username" component={ProfilePage} />
-                    <Route exact path="/r/:roomId" component={Room} />
                     <NavbarRoute path="*" component={NotFoundPage} />
+                    <BaseRoute exact path="/r/:roomId" component={Room} />
                   </Switch>
                 </MusicRoomProvider>
               </ThemeProvider>

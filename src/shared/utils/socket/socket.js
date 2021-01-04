@@ -32,9 +32,6 @@ const DEFAULT_ROOM_ID = '0';
  * 
  */
 export const connectSocket = (rId = DEFAULT_ROOM_ID) => {
-
-
-    console.log(`[ROOM ID] : ${rId}`);
     roomId = rId;
 
     return new Promise((res, rej) => {
@@ -45,10 +42,7 @@ export const connectSocket = (rId = DEFAULT_ROOM_ID) => {
         socket.io.opts.query.token = token;
 
         socket.on("connect", () => {
-
-
             if (!joinRoom) {
-                console.log("emitting join room");
                 socket.emit(constants.USERJOINROOM, {
                     roomId: roomId,
                     userId: UserStorage.userId.get()
@@ -59,7 +53,6 @@ export const connectSocket = (rId = DEFAULT_ROOM_ID) => {
         });
 
         socket.connect();
-
 
         socket.on("connect_error", err => {
             toast.warning(err.message);
