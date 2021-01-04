@@ -23,7 +23,9 @@ function useUserProvider() {
 
 
     const checkToken = async () => {
-        var lastRt = Number(UserStore.lastRt.get());
+        var storedLastRt = UserStore.lastRt.get();
+        if (!storedLastRt) return;
+        var lastRt = Number(storedLastRt);
 
         //add expiration time to last refreshed time    
         if((lastRt + EXPIRATION_TIME) <= Date.now()){
@@ -50,6 +52,7 @@ function useUserProvider() {
     return {
         user,
         getUser,
+        checkToken,
         
         isUserLoading
     }
