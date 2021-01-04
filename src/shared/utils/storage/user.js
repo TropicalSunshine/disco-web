@@ -25,7 +25,7 @@ export const rt = {
 
 //time of last refresh
 export const lastRt = {
-    get : () => localStorage.getItem(),
+    get : () => localStorage.getItem(lastRtKey),
     set : last_rt => localStorage.setItem(lastRtKey, last_rt),
     clear : () => localStorage.removeItem(lastRtKey)
 }

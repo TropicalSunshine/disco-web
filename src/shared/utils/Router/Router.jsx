@@ -17,6 +17,7 @@ const ProfilePage = lazy(() => import("pages/ProfilePage"));
 const NotFoundPage = lazy(() => import("pages/NotFoundPage"));
 
 function Router() {
+
   return (
     <BrowserRouter>
       <Suspense fallback={<LoaderPage />}>

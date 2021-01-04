@@ -1,6 +1,8 @@
 import React from "react";
 import { Route } from "react-router-dom";
+
 import Navbar from "pages/Navbar";
+import { withRTCheck } from "shared/context/user";
 
 function NavbarRoute({ component: Component, ...rest }) {
 
@@ -17,4 +19,4 @@ function NavbarRoute({ component: Component, ...rest }) {
     )
 };
 
-export default NavbarRoute;
+export default withRTCheck(NavbarRoute);
