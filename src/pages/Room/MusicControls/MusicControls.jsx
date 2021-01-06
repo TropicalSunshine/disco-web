@@ -79,8 +79,8 @@ function MusicControls({ song }) {
                 ${styles["play-button"]}`}
           onClick={handleMute}
         >
-          {mute && <VolumeUpIcon className={`${styles.icon}`} />}
-          {!mute && <VolumeOffIcon className={`${styles.icon}`} />}
+          {mute &&  <VolumeOffIcon className={`${styles.icon}`} />}
+          {!mute && <VolumeUpIcon className={`${styles.icon}`} />}
         </div>
         <div
           className={`${styles["music-player-control-button"]} ${styles["rewind-button"]}`}
