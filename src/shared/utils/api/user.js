@@ -76,7 +76,7 @@ export const me = () => api.post("", {
 
 export const refreshToken = (token, rt) => api.post("", {
     query: `
-    query refreshToken( $rt : String, $token : String ) {
+    query refreshToken( $rt : String!, $token : String! ) {
         refreshToken( rt : $rt, token : $token ) {
             message
             status

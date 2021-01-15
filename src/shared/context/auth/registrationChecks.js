@@ -6,12 +6,13 @@ const spaceCheck = /^.*[\s].*$/
 const emailReg = /^.*@.*$/;
 const usernameCheckInvalidChars = /^[@#:]+$/;
 
-export const checkPassword = pass => {
-    if (pass.length < 8) throw new Error("Password too short");
-    if (spaceCheck.test(pass)) throw new Error("Password cannot contain spaces");
-    if (!passwordNumberCheck.test(pass)) throw new Error("Password must contain a number");
-    if (!passwordLowerCaseCheck.test(pass)) throw new Error("Password must contain a lower case letter");
-    if (!passwordUpperCaseCheck.test(pass)) throw new Error("Password must contain a upper case letter");
+export const checkPassword = password => {
+    
+    if (password.length < 8) throw new Error("Password too short");
+    if (spaceCheck.test(password)) throw new Error("Password cannot contain spaces");
+    if (!passwordNumberCheck.test(password)) throw new Error("Password must contain a number");
+    if (!passwordLowerCaseCheck.test(password)) throw new Error("Password must contain a lower case letter");
+    if (!passwordUpperCaseCheck.test(password)) throw new Error("Password must contain a upper case letter");
 }
 
 export const checkEmail = email => {
